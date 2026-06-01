@@ -25,7 +25,10 @@ jobs:
 
       - name: 安裝富邦 Neo SDK
         run: |
-          pip install fubon-neo requests
+          wget -q "https://www.fbs.com.tw/TradeAPI_SDK/fubon_binary/fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.zip" -O fubon_neo.zip
+          unzip -q fubon_neo.zip
+          pip install fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+          pip install requests
 
       - name: 抓取市場資料
         env:
