@@ -1,46 +1,200 @@
 {
-  "date": "尚未更新",
-  "updated": "1970-01-01T00:00:00+08:00",
+  "date": "2026-06-02",
+  "updated": "2026-06-02T17:10:20.384537+08:00",
   "source": "fallback",
   "indices": {
-    "TSM":  {"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0},
-    "TWII": {"name":"台股 TAIEX","symbol":"t00","price":0,"change":0,"changePercent":0,"prev":0}
+    "TWII": {
+      "name": "台股 TAIEX",
+      "symbol": "t00",
+      "price": 0,
+      "change": 0,
+      "changePercent": 0,
+      "prev": 0
+    },
+    "TSM": {
+      "name": "台積電",
+      "symbol": "2330",
+      "price": 0,
+      "change": 0,
+      "changePercent": 0,
+      "prev": 0
+    }
   },
   "sectors": [
-    {"name":"半導體","stocks":[
-      {"symbol":"2330","name":"台積電","price":0,"changePercent":0},
-      {"symbol":"2454","name":"聯發科","price":0,"changePercent":0},
-      {"symbol":"2303","name":"聯電","price":0,"changePercent":0},
-      {"symbol":"2379","name":"瑞昱","price":0,"changePercent":0},
-      {"symbol":"3711","name":"日月光","price":0,"changePercent":0}
-    ]},
-    {"name":"電子","stocks":[
-      {"symbol":"2317","name":"鴻海","price":0,"changePercent":0},
-      {"symbol":"2382","name":"廣達","price":0,"changePercent":0},
-      {"symbol":"2308","name":"台達電","price":0,"changePercent":0},
-      {"symbol":"2354","name":"鴻準","price":0,"changePercent":0},
-      {"symbol":"2357","name":"華碩","price":0,"changePercent":0}
-    ]},
-    {"name":"金融","stocks":[
-      {"symbol":"2881","name":"富邦金","price":0,"changePercent":0},
-      {"symbol":"2882","name":"國泰金","price":0,"changePercent":0},
-      {"symbol":"2891","name":"中信金","price":0,"changePercent":0},
-      {"symbol":"2886","name":"兆豐金","price":0,"changePercent":0},
-      {"symbol":"2884","name":"玉山金","price":0,"changePercent":0}
-    ]},
-    {"name":"光電","stocks":[
-      {"symbol":"2409","name":"友達","price":0,"changePercent":0},
-      {"symbol":"3481","name":"群創","price":0,"changePercent":0},
-      {"symbol":"6669","name":"緯穎","price":0,"changePercent":0},
-      {"symbol":"2498","name":"宏達電","price":0,"changePercent":0},
-      {"symbol":"3673","name":"TPK","price":0,"changePercent":0}
-    ]},
-    {"name":"生技","stocks":[
-      {"symbol":"4763","name":"台灣神隆","price":0,"changePercent":0},
-      {"symbol":"6547","name":"聯合骨科","price":0,"changePercent":0},
-      {"symbol":"4726","name":"永日","price":0,"changePercent":0},
-      {"symbol":"3707","name":"漢磊","price":0,"changePercent":0},
-      {"symbol":"1795","name":"美時","price":0,"changePercent":0}
-    ]}
+    {
+      "name": "半導體",
+      "stocks": [
+        {
+          "symbol": "2330",
+          "name": "台積電",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2454",
+          "name": "聯發科",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2303",
+          "name": "聯電",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2379",
+          "name": "瑞昱",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "3711",
+          "name": "日月光",
+          "price": 0,
+          "changePercent": 0
+        }
+      ]
+    },
+    {
+      "name": "電子",
+      "stocks": [
+        {
+          "symbol": "2317",
+          "name": "鴻海",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2354",
+          "name": "鴻準",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2382",
+          "name": "廣達",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2308",
+          "name": "台達電",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2357",
+          "name": "華碩",
+          "price": 0,
+          "changePercent": 0
+        }
+      ]
+    },
+    {
+      "name": "金融",
+      "stocks": [
+        {
+          "symbol": "2881",
+          "name": "富邦金",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2882",
+          "name": "國泰金",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2891",
+          "name": "中信金",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2886",
+          "name": "兆豐金",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2884",
+          "name": "玉山金",
+          "price": 0,
+          "changePercent": 0
+        }
+      ]
+    },
+    {
+      "name": "光電",
+      "stocks": [
+        {
+          "symbol": "2409",
+          "name": "友達",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "3481",
+          "name": "群創",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "6669",
+          "name": "緯穎",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2498",
+          "name": "宏達電",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "3673",
+          "name": "TPK",
+          "price": 0,
+          "changePercent": 0
+        }
+      ]
+    },
+    {
+      "name": "生技",
+      "stocks": [
+        {
+          "symbol": "4763",
+          "name": "台灣神隆",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "6547",
+          "name": "聯合骨科",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "4726",
+          "name": "永日",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "3707",
+          "name": "漢磊",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "1795",
+          "name": "美時",
+          "price": 0,
+          "changePercent": 0
+        }
+      ]
+    }
   ]
 }
