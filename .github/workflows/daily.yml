@@ -1,53 +1,40 @@
-name: 每日市場資料更新
-
+name: market-update
 on:
   schedule:
-    # 台灣時間 08:00 = UTC 00:00
-    - cron: '0 0 * * 1-5'   # 週一到週五（交易日）
-  workflow_dispatch:          # 允許手動觸發（測試用）
-
+    - cron: '0 0 * * 1-5'
+  workflow_dispatch:
 permissions:
   contents: write
   pages: write
   id-token: write
-
 jobs:
-  fetch-and-deploy:
+  run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: 設定 Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: 安裝富邦 Neo SDK
+      - name: install-sdk
         run: |
-          wget -q "https://www.fbs.com.tw/TradeAPI_SDK/fubon_binary/fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.zip" -O fubon_neo.zip
-          unzip -q fubon_neo.zip
-          pip install fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-          pip install requests
-
-      - name: 抓取市場資料
+          wget -q "https://www.fbs.com.tw/TradeAPI_SDK/fubon_binary/fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.zip" -O sdk.zip
+          unzip -q sdk.zip
+          pip install fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl requests
+      - name: fetch
         env:
-          FUBON_ID:       ${{ secrets.FUBON_ID }}
+          FUBON_ID: ${{ secrets.FUBON_ID }}
           FUBON_PASSWORD: ${{ secrets.FUBON_PASSWORD }}
-          FUBON_CERT_PW:  ${{ secrets.FUBON_CERT_PW }}
+          FUBON_CERT_PW: ${{ secrets.FUBON_CERT_PW }}
         run: python fetch_market.py
-
-      - name: 提交 data.json 到 repo
+      - name: commit
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/data.json
-          git diff --staged --quiet || git commit -m "chore: 每日市場資料 $(date +'%Y-%m-%d %H:%M') UTC"
+          git diff --staged --quiet || git commit -m "data update"
           git push
-
-      - name: 部署到 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir:  ./public
-          keep_files:   true
+          publish_dir: ./public
+          keep_files: true
