@@ -1,19 +1,19 @@
 {
-  "date": "2026-06-02",
-  "updated": "2026-06-02T20:59:55.329428+08:00",
+  "date": "2026-06-09",
+  "updated": "2026-06-09T01:35:59.507762+08:00",
   "source": "fallback",
   "indices": {
-    "TWII": {
-      "name": "台股 TAIEX",
-      "symbol": "t00",
+    "TSM": {
+      "name": "台積電",
+      "symbol": "2330",
       "price": 0,
       "change": 0,
       "changePercent": 0,
       "prev": 0
     },
-    "TSM": {
-      "name": "台積電",
-      "symbol": "2330",
+    "TWII": {
+      "name": "台股 TAIEX",
+      "symbol": "t00",
       "price": 0,
       "change": 0,
       "changePercent": 0,
@@ -66,12 +66,6 @@
           "changePercent": 0
         },
         {
-          "symbol": "2354",
-          "name": "鴻準",
-          "price": 0,
-          "changePercent": 0
-        },
-        {
           "symbol": "2382",
           "name": "廣達",
           "price": 0,
@@ -80,6 +74,12 @@
         {
           "symbol": "2308",
           "name": "台達電",
+          "price": 0,
+          "changePercent": 0
+        },
+        {
+          "symbol": "2354",
+          "name": "鴻準",
           "price": 0,
           "changePercent": 0
         },
