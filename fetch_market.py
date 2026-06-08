@@ -33,7 +33,6 @@ SECTORS = [
 def fetch():
     from fubon_neo.sdk import FubonSDK
 
-    # 修正 Base64 補位問題
     cert_b64 = os.environ["FUBON_CERT_B64"]
     cert_b64 += "=" * (4 - len(cert_b64) % 4)
     cert_data = base64.b64decode(cert_b64)
@@ -58,12 +57,14 @@ def fetch():
 
     indices = {}
     for sym, key, name, is_index in [
-        ("2330","TSM","台積電", False),
-        ("t00","TWII","台股 TAIEX", True)
+        ("2330", "TSM",  "台積電",    False),
+        ("t00",  "TWII", "台股 TAIEX", True)
     ]:
         try:
-            d = rest.intraday.quote({"symbol":sym,"type":"INDEX"}) if is_index \
-                else rest.intraday.quote({"symbol":sym})
+            if is_index:
+                d = rest.intraday.quote(symbol=sym, type="INDEX")
+            else:
+                d = rest.intraday.quote(symbol=sym)
             indices[key] = {
                 "name": name, "symbol": sym,
                 "price": d.get("closePrice") or d.get("lastPrice") or 0,
@@ -81,7 +82,7 @@ def fetch():
         stocks = []
         for s in sec["stocks"]:
             try:
-                d = rest.intraday.quote({"symbol": s["symbol"]})
+                d = rest.intraday.quote(symbol=s["symbol"])
                 stocks.append({
                     "symbol": s["symbol"], "name": s["name"],
                     "price": d.get("closePrice") or d.get("lastPrice") or 0,
