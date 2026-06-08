@@ -23,7 +23,9 @@ jobs:
       - name: fetch
         env:
           FUBON_ID: ${{ secrets.FUBON_ID }}
-          FUBON_PASSWORD: ${{ secrets.FUBON_PASSWORD }}
+          FUBON_API_KEY: ${{ secrets.FUBON_API_KEY }}
+          FUBON_SECRET_KEY: ${{ secrets.FUBON_SECRET_KEY }}
+          FUBON_CERT_B64: ${{ secrets.FUBON_CERT_B64 }}
           FUBON_CERT_PW: ${{ secrets.FUBON_CERT_PW }}
         run: python fetch_market.py
       - name: commit
