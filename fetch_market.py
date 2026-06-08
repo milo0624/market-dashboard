@@ -33,7 +33,9 @@ SECTORS = [
 def fetch():
     from fubon_neo.sdk import FubonSDK
 
+    # 修正 Base64 補位問題
     cert_b64 = os.environ["FUBON_CERT_B64"]
+    cert_b64 += "=" * (4 - len(cert_b64) % 4)
     cert_data = base64.b64decode(cert_b64)
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pfx")
     tmp.write(cert_data)
@@ -98,4 +100,23 @@ try:
     source = "fubon_neo"
 except Exception as e:
     print(f"⚠️ 富邦 SDK 失敗，使用占位資料: {e}")
-    sour
+    source = "fallback"
+    indices = {
+        "TSM":  {"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0},
+        "TWII": {"name":"台股 TAIEX","symbol":"t00","price":0,"change":0,"changePercent":0,"prev":0},
+    }
+    sectors = [{"name":sec["name"],"stocks":[
+        {"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0}
+        for s in sec["stocks"]]} for sec in SECTORS]
+
+payload = {
+    "date": today, "updated": now.isoformat(),
+    "source": source, "indices": indices, "sectors": sectors
+}
+
+os.makedirs("public", exist_ok=True)
+with open("public/data.json","w",encoding="utf-8") as f:
+    json.dump(payload, f, ensure_ascii=False, indent=2)
+
+print(f"\n✅ 寫入 public/data.json（來源：{source}）")
+print(json.dumps(indices, ensure_ascii=False, indent=2))
