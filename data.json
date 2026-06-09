@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "updated": "2026-06-09T17:27:26.743744+08:00",
+  "updated": "2026-06-09T18:14:50.381985+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -61,6 +61,12 @@
           "changePercent": 9.95
         },
         {
+          "symbol": "3711",
+          "name": "日月光",
+          "price": 569,
+          "changePercent": 5.37
+        },
+        {
           "symbol": "2303",
           "name": "聯電",
           "price": 127.5,
@@ -71,12 +77,6 @@
           "name": "瑞昱",
           "price": 651,
           "changePercent": 9.23
-        },
-        {
-          "symbol": "3711",
-          "name": "日月光",
-          "price": 569,
-          "changePercent": 5.37
         }
       ]
     },
@@ -90,28 +90,28 @@
           "changePercent": 2.97
         },
         {
-          "symbol": "2382",
-          "name": "廣達",
-          "price": 375,
-          "changePercent": -0.4
-        },
-        {
           "symbol": "2308",
           "name": "台達電",
           "price": 2415,
           "changePercent": 7.1
         },
         {
-          "symbol": "2354",
-          "name": "鴻準",
-          "price": 58.8,
-          "changePercent": 4.26
+          "symbol": "2382",
+          "name": "廣達",
+          "price": 375,
+          "changePercent": -0.4
         },
         {
           "symbol": "2357",
           "name": "華碩",
           "price": 850,
           "changePercent": 0.71
+        },
+        {
+          "symbol": "2354",
+          "name": "鴻準",
+          "price": 58.8,
+          "changePercent": 4.26
         }
       ]
     },
@@ -151,41 +151,6 @@
       ]
     },
     {
-      "name": "光電",
-      "stocks": [
-        {
-          "symbol": "2409",
-          "name": "友達",
-          "price": 24,
-          "changePercent": -1.64
-        },
-        {
-          "symbol": "3481",
-          "name": "群創",
-          "price": 49.1,
-          "changePercent": 1.55
-        },
-        {
-          "symbol": "6669",
-          "name": "緯穎",
-          "price": 5300,
-          "changePercent": 0.47
-        },
-        {
-          "symbol": "2498",
-          "name": "宏達電",
-          "price": 43.2,
-          "changePercent": 1.41
-        },
-        {
-          "symbol": "3673",
-          "name": "TPK",
-          "price": 86.9,
-          "changePercent": 4.95
-        }
-      ]
-    },
-    {
       "name": "生技",
       "stocks": [
         {
@@ -219,6 +184,41 @@
           "changePercent": -3.29
         }
       ]
+    },
+    {
+      "name": "光電",
+      "stocks": [
+        {
+          "symbol": "6669",
+          "name": "緯穎",
+          "price": 5300,
+          "changePercent": 0.47
+        },
+        {
+          "symbol": "2409",
+          "name": "友達",
+          "price": 24,
+          "changePercent": -1.64
+        },
+        {
+          "symbol": "3481",
+          "name": "群創",
+          "price": 49.1,
+          "changePercent": 1.55
+        },
+        {
+          "symbol": "3673",
+          "name": "TPK",
+          "price": 86.9,
+          "changePercent": 4.95
+        },
+        {
+          "symbol": "2498",
+          "name": "宏達電",
+          "price": 43.2,
+          "changePercent": 1.41
+        }
+      ]
     }
   ],
   "sox_sectors": [
@@ -230,6 +230,12 @@
           "name": "輝達",
           "price": 208.64,
           "changePercent": -4.58
+        },
+        {
+          "symbol": "AVGO",
+          "name": "博通",
+          "price": 396.6,
+          "changePercent": -5.33
         },
         {
           "symbol": "AMD",
@@ -244,12 +250,6 @@
           "changePercent": -10.22
         },
         {
-          "symbol": "AVGO",
-          "name": "博通",
-          "price": 396.6,
-          "changePercent": -5.33
-        },
-        {
           "symbol": "MRVL",
           "name": "邁威爾",
           "price": 288.85,
@@ -258,78 +258,14 @@
       ]
     },
     {
-      "name": "晶圓代工",
-      "stocks": [
-        {
-          "symbol": "INTC",
-          "name": "英特爾",
-          "price": 110.27,
-          "changePercent": -1.35
-        },
-        {
-          "symbol": "GFS",
-          "name": "格芯",
-          "price": 77.31,
-          "changePercent": -8.72
-        },
-        {
-          "symbol": "UMC",
-          "name": "聯電ADR",
-          "price": 20.0,
-          "changePercent": -3.8
-        },
-        {
-          "symbol": "ASX",
-          "name": "台積ADR",
-          "price": 35.52,
-          "changePercent": -7.5
-        },
-        {
-          "symbol": "IFNNY",
-          "name": "英飛凌",
-          "price": 90.08,
-          "changePercent": -9.09
-        }
-      ]
-    },
-    {
-      "name": "記憶體",
-      "stocks": [
-        {
-          "symbol": "MU",
-          "name": "美光",
-          "price": 949.28,
-          "changePercent": -4.69
-        },
-        {
-          "symbol": "WDC",
-          "name": "威騰",
-          "price": 526.93,
-          "changePercent": -8.44
-        },
-        {
-          "symbol": "NXPI",
-          "name": "恩智浦",
-          "price": 301.14,
-          "changePercent": -6.54
-        },
-        {
-          "symbol": "ON",
-          "name": "安森美",
-          "price": 120.9,
-          "changePercent": -8.28
-        },
-        {
-          "symbol": "STM",
-          "name": "意法半導",
-          "price": 75.01,
-          "changePercent": -4.28
-        }
-      ]
-    },
-    {
       "name": "設備材料",
       "stocks": [
+        {
+          "symbol": "ASML",
+          "name": "艾司摩爾",
+          "price": 1749.04,
+          "changePercent": -0.48
+        },
         {
           "symbol": "AMAT",
           "name": "應用材料",
@@ -347,12 +283,6 @@
           "name": "科磊",
           "price": 2108.06,
           "changePercent": -1.08
-        },
-        {
-          "symbol": "ASML",
-          "name": "艾司摩爾",
-          "price": 1749.04,
-          "changePercent": -0.48
         },
         {
           "symbol": "TER",
@@ -394,6 +324,76 @@
           "name": "思佳訊",
           "price": 75.37,
           "changePercent": -5.7
+        }
+      ]
+    },
+    {
+      "name": "記憶體",
+      "stocks": [
+        {
+          "symbol": "MU",
+          "name": "美光",
+          "price": 949.28,
+          "changePercent": -4.69
+        },
+        {
+          "symbol": "NXPI",
+          "name": "恩智浦",
+          "price": 301.14,
+          "changePercent": -6.54
+        },
+        {
+          "symbol": "ON",
+          "name": "安森美",
+          "price": 120.9,
+          "changePercent": -8.28
+        },
+        {
+          "symbol": "WDC",
+          "name": "威騰",
+          "price": 526.93,
+          "changePercent": -8.44
+        },
+        {
+          "symbol": "STM",
+          "name": "意法半導",
+          "price": 75.01,
+          "changePercent": -4.28
+        }
+      ]
+    },
+    {
+      "name": "晶圓代工",
+      "stocks": [
+        {
+          "symbol": "INTC",
+          "name": "英特爾",
+          "price": 110.27,
+          "changePercent": -1.35
+        },
+        {
+          "symbol": "GFS",
+          "name": "格芯",
+          "price": 77.31,
+          "changePercent": -8.72
+        },
+        {
+          "symbol": "UMC",
+          "name": "聯電ADR",
+          "price": 20.0,
+          "changePercent": -3.8
+        },
+        {
+          "symbol": "ASX",
+          "name": "台積ADR",
+          "price": 35.52,
+          "changePercent": -7.5
+        },
+        {
+          "symbol": "IFNNY",
+          "name": "英飛凌",
+          "price": 90.08,
+          "changePercent": -9.09
         }
       ]
     }
