@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "updated": "2026-06-09T14:13:31.345922+08:00",
+  "updated": "2026-06-09T16:18:36.649075+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -14,9 +14,9 @@
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 65313.67,
-      "change": 1289.07,
-      "changePercent": 2.01,
+      "price": 65416.63,
+      "change": 1392.03,
+      "changePercent": 2.17,
       "prev": 64024.6
     },
     "TSM_ADR": {
@@ -27,6 +27,14 @@
       "changePercent": -4.07,
       "prev": 444.92
     },
+    "TWII": {
+      "name": "台股 TAIEX",
+      "symbol": "^TWII",
+      "price": 44704.44,
+      "change": 1201.66,
+      "changePercent": 2.76,
+      "prev": 43502.78
+    },
     "TSM": {
       "name": "台積電",
       "symbol": "2330",
@@ -34,14 +42,6 @@
       "change": 10,
       "changePercent": 0.44,
       "prev": 2295
-    },
-    "TWII": {
-      "name": "台股 TAIEX",
-      "symbol": "t00",
-      "price": 0,
-      "change": 0,
-      "changePercent": 0,
-      "prev": 0
     }
   },
   "sectors": [
@@ -189,34 +189,34 @@
       "name": "生技",
       "stocks": [
         {
-          "symbol": "4763",
-          "name": "台灣神隆",
-          "price": 45.35,
-          "changePercent": 7.08
-        },
-        {
-          "symbol": "6547",
-          "name": "聯合骨科",
-          "price": 47.1,
-          "changePercent": -3.29
-        },
-        {
-          "symbol": "4726",
-          "name": "永日",
-          "price": 27.1,
-          "changePercent": 1.88
-        },
-        {
-          "symbol": "3707",
-          "name": "漢磊",
-          "price": 75.3,
-          "changePercent": 6.66
-        },
-        {
           "symbol": "1795",
           "name": "美時",
           "price": 201,
           "changePercent": 2.81
+        },
+        {
+          "symbol": "6472",
+          "name": "保瑞",
+          "price": 390,
+          "changePercent": -0.26
+        },
+        {
+          "symbol": "6446",
+          "name": "藥華藥",
+          "price": 990,
+          "changePercent": 6.91
+        },
+        {
+          "symbol": "4726",
+          "name": "永昕",
+          "price": 27.1,
+          "changePercent": 1.88
+        },
+        {
+          "symbol": "6547",
+          "name": "聯合再生",
+          "price": 47.1,
+          "changePercent": -3.29
         }
       ]
     }
