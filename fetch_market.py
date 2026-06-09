@@ -66,8 +66,7 @@ def yahoo_quote(symbol):
     return {"price": round(price,2), "change": change,
             "changePercent": change_pct, "prev": round(prev,2)}
 
-def yahoo_history(symbol, days=30):
-    """抓近1個月每日收盤價，回傳標準化百分比序列（以第一天為基準）"""
+def yahoo_history(symbol):
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1mo"
     req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=10) as r:
@@ -78,21 +77,17 @@ def yahoo_history(symbol, days=30):
     base = closes[0]
     return [round((c - base) / base * 100, 2) for c in closes]
 
-def sector_trend(stocks_symbols):
-    """計算板塊綜合走勢：各股標準化後取平均"""
+def sector_trend(symbols):
     all_series = []
-    for sym in stocks_symbols:
+    for sym in symbols:
         try:
             s = yahoo_history(sym)
             if s: all_series.append(s)
         except: pass
     if not all_series: return []
     min_len = min(len(s) for s in all_series)
-    result = []
-    for i in range(min_len):
-        avg = round(sum(s[i] for s in all_series) / len(all_series), 2)
-        result.append(avg)
-    return result
+    return [round(sum(s[i] for s in all_series) / len(all_series), 2)
+            for i in range(min_len)]
 
 def fetch_global():
     targets = [
@@ -131,9 +126,12 @@ def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
                 print(f"  ⚠️ {s['name']} 失敗: {e}")
                 stocks.append({"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0})
 
-        # 板塊綜合走勢（用 Yahoo Finance 歷史資料）
         print(f"  計算 {sec['name']} 板塊走勢...")
-        trend = sector_trend([s["symbol"] for s in sec["stocks"]])
+        if use_yahoo:
+            trend_syms = [s["symbol"] for s in sec["stocks"]]
+        else:
+            trend_syms = [s["symbol"]+".TW" for s in sec["stocks"]]
+        trend = sector_trend(trend_syms)
 
         result.append({"name":sec["name"],"stocks":stocks,"trend":trend})
         print(f"  {sec['name']} 完成（走勢{len(trend)}點）")
@@ -148,8 +146,12 @@ def fetch_tw():
     tmp.write(cert_data); tmp.close()
 
     sdk = FubonSDK()
-    res = sdk.apikey_login(os.environ["FUBON_ID"], os.environ["FUBON_API_KEY"],
-                           tmp.name, os.environ["FUBON_CERT_PW"])
+    res = sdk.apikey_login(
+        os.environ["FUBON_ID"],
+        os.environ["FUBON_API_KEY"],
+        tmp.name,
+        os.environ["FUBON_CERT_PW"]
+    )
     if not res.is_success:
         raise RuntimeError(f"富邦登入失敗: {res.message}")
     print("✅ 富邦登入成功")
