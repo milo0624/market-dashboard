@@ -7,7 +7,7 @@ now = datetime.now(TW)
 today = now.strftime('%Y-%m-%d')
 print(f"執行時間：{now.strftime('%Y-%m-%d %H:%M:%S')} (台灣時間)")
 
-SECTORS = [
+TW_SECTORS = [
     {"name":"半導體","stocks":[
         {"symbol":"2330","name":"台積電"},{"symbol":"2454","name":"聯發科"},
         {"symbol":"2303","name":"聯電"},{"symbol":"2379","name":"瑞昱"},
@@ -28,6 +28,29 @@ SECTORS = [
         {"symbol":"1795","name":"美時"},{"symbol":"6472","name":"保瑞"},
         {"symbol":"6446","name":"藥華藥"},{"symbol":"4726","name":"永昕"},
         {"symbol":"6547","name":"聯合再生"}]},
+]
+
+SOX_SECTORS = [
+    {"name":"晶片設計","stocks":[
+        {"symbol":"NVDA","name":"輝達"},{"symbol":"AMD","name":"超微"},
+        {"symbol":"QCOM","name":"高通"},{"symbol":"AVGO","name":"博通"},
+        {"symbol":"MRVL","name":"邁威爾"}]},
+    {"name":"晶圓代工","stocks":[
+        {"symbol":"INTC","name":"英特爾"},{"symbol":"GFS","name":"格芯"},
+        {"symbol":"UMC","name":"聯電ADR"},{"symbol":"ASX","name":"台積ADR"},
+        {"symbol":"IFNNY","name":"英飛凌"}]},
+    {"name":"記憶體","stocks":[
+        {"symbol":"MU","name":"美光"},{"symbol":"WDC","name":"威騰"},
+        {"symbol":"NXPI","name":"恩智浦"},{"symbol":"ON","name":"安森美"},
+        {"symbol":"STM","name":"意法半導"}]},
+    {"name":"設備材料","stocks":[
+        {"symbol":"AMAT","name":"應用材料"},{"symbol":"LRCX","name":"拉姆研究"},
+        {"symbol":"KLAC","name":"科磊"},{"symbol":"ASML","name":"艾司摩爾"},
+        {"symbol":"TER","name":"泰瑞達"}]},
+    {"name":"類比IC","stocks":[
+        {"symbol":"TXN","name":"德州儀器"},{"symbol":"ADI","name":"亞德諾"},
+        {"symbol":"MCHP","name":"微芯科技"},{"symbol":"MPWR","name":"單體電源"},
+        {"symbol":"SWKS","name":"思佳訊"}]},
 ]
 
 def yahoo_quote(symbol):
@@ -59,6 +82,22 @@ def fetch_global():
         except Exception as e:
             print(f"  ⚠️ {name} 失敗: {e}")
             result[key] = {"name":name,"symbol":symbol,"price":0,"change":0,"changePercent":0,"prev":0}
+    return result
+
+def fetch_sox_sectors():
+    result = []
+    for sec in SOX_SECTORS:
+        stocks = []
+        for s in sec["stocks"]:
+            try:
+                q = yahoo_quote(s["symbol"])
+                stocks.append({"symbol":s["symbol"],"name":s["name"],
+                    "price":q["price"],"changePercent":q["changePercent"]})
+            except Exception as e:
+                print(f"  ⚠️ {s['name']} 失敗: {e}")
+                stocks.append({"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0})
+        result.append({"name":sec["name"],"stocks":stocks})
+        print(f"  SOX板塊 {sec['name']} 完成")
     return result
 
 def fetch_tw():
@@ -102,8 +141,8 @@ def fetch_tw():
             print(f"  ⚠️ {name} 失敗: {e}")
             tw_indices[key] = {"name":name,"symbol":sym,"price":0,"change":0,"changePercent":0,"prev":0}
 
-    sectors = []
-    for sec in SECTORS:
+    tw_sectors = []
+    for sec in TW_SECTORS:
         stocks = []
         for s in sec["stocks"]:
             try:
@@ -116,17 +155,21 @@ def fetch_tw():
             except Exception as e:
                 print(f"  ⚠️ {s['name']} 失敗: {e}")
                 stocks.append({"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0})
-        sectors.append({"name":sec["name"],"stocks":stocks})
-        print(f"  板塊 {sec['name']} 完成")
+        tw_sectors.append({"name":sec["name"],"stocks":stocks})
+        print(f"  台股板塊 {sec['name']} 完成")
 
-    return tw_indices, sectors
+    return tw_indices, tw_sectors
 
+# ── 主流程 ──
 print("\n📡 抓取全球指數（Yahoo Finance）...")
 global_indices = fetch_global()
 
+print("\n📡 抓取 SOX 個股（Yahoo Finance）...")
+sox_sectors = fetch_sox_sectors()
+
 print("\n📡 抓取台股（富邦 Neo API）...")
 try:
-    tw_indices, sectors = fetch_tw()
+    tw_indices, tw_sectors = fetch_tw()
     tw_source = "fubon_neo"
 except Exception as e:
     print(f"⚠️ 富邦 SDK 失敗: {e}")
@@ -134,15 +177,18 @@ except Exception as e:
     tw_indices = {
         "TSM": {"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0},
     }
-    sectors = [{"name":sec["name"],"stocks":[
+    tw_sectors = [{"name":sec["name"],"stocks":[
         {"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0}
-        for s in sec["stocks"]]} for sec in SECTORS]
+        for s in sec["stocks"]]} for sec in TW_SECTORS]
 
 indices = {**global_indices, **tw_indices}
 
 payload = {
     "date": today, "updated": now.isoformat(),
-    "source": tw_source, "indices": indices, "sectors": sectors
+    "source": tw_source,
+    "indices": indices,
+    "tw_sectors": tw_sectors,
+    "sox_sectors": sox_sectors,
 }
 
 os.makedirs("public", exist_ok=True)
