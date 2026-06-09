@@ -8,49 +8,69 @@ today = now.strftime('%Y-%m-%d')
 print(f"執行時間：{now.strftime('%Y-%m-%d %H:%M:%S')} (台灣時間)")
 
 TW_SECTORS = [
-    {"name":"半導體","stocks":[
-        {"symbol":"2330","name":"台積電"},{"symbol":"2454","name":"聯發科"},
-        {"symbol":"2303","name":"聯電"},{"symbol":"2379","name":"瑞昱"},
-        {"symbol":"3711","name":"日月光"}]},
-    {"name":"電子","stocks":[
-        {"symbol":"2317","name":"鴻海"},{"symbol":"2382","name":"廣達"},
-        {"symbol":"2308","name":"台達電"},{"symbol":"2354","name":"鴻準"},
-        {"symbol":"2357","name":"華碩"}]},
-    {"name":"金融","stocks":[
-        {"symbol":"2881","name":"富邦金"},{"symbol":"2882","name":"國泰金"},
-        {"symbol":"2891","name":"中信金"},{"symbol":"2886","name":"兆豐金"},
+    {"name":"半導體","stocks":[          # 台積電市值佔比 40%+，絕對第一
+        {"symbol":"2330","name":"台積電"},
+        {"symbol":"2454","name":"聯發科"},
+        {"symbol":"3711","name":"日月光"},
+        {"symbol":"2303","name":"聯電"},
+        {"symbol":"2379","name":"瑞昱"}]},
+    {"name":"電子","stocks":[            # 鴻海、台達電、廣達為前段班
+        {"symbol":"2317","name":"鴻海"},
+        {"symbol":"2308","name":"台達電"},
+        {"symbol":"2382","name":"廣達"},
+        {"symbol":"2357","name":"華碩"},
+        {"symbol":"2354","name":"鴻準"}]},
+    {"name":"金融","stocks":[            # 富邦金、國泰金市值最大
+        {"symbol":"2881","name":"富邦金"},
+        {"symbol":"2882","name":"國泰金"},
+        {"symbol":"2891","name":"中信金"},
+        {"symbol":"2886","name":"兆豐金"},
         {"symbol":"2884","name":"玉山金"}]},
-    {"name":"光電","stocks":[
-        {"symbol":"2409","name":"友達"},{"symbol":"3481","name":"群創"},
-        {"symbol":"6669","name":"緯穎"},{"symbol":"2498","name":"宏達電"},
-        {"symbol":"3673","name":"TPK"}]},
-    {"name":"生技","stocks":[
-        {"symbol":"1795","name":"美時"},{"symbol":"6472","name":"保瑞"},
-        {"symbol":"6446","name":"藥華藥"},{"symbol":"4726","name":"永昕"},
+    {"name":"生技","stocks":[            # 美時、保瑞營收最大
+        {"symbol":"1795","name":"美時"},
+        {"symbol":"6472","name":"保瑞"},
+        {"symbol":"6446","name":"藥華藥"},
+        {"symbol":"4726","name":"永昕"},
         {"symbol":"6547","name":"聯合再生"}]},
+    {"name":"光電","stocks":[            # 緯穎市值最高，其次友達
+        {"symbol":"6669","name":"緯穎"},
+        {"symbol":"2409","name":"友達"},
+        {"symbol":"3481","name":"群創"},
+        {"symbol":"3673","name":"TPK"},
+        {"symbol":"2498","name":"宏達電"}]},
 ]
 
 SOX_SECTORS = [
-    {"name":"晶片設計","stocks":[
-        {"symbol":"NVDA","name":"輝達"},{"symbol":"AMD","name":"超微"},
-        {"symbol":"QCOM","name":"高通"},{"symbol":"AVGO","name":"博通"},
+    {"name":"晶片設計","stocks":[        # 輝達市值全球前三
+        {"symbol":"NVDA","name":"輝達"},
+        {"symbol":"AVGO","name":"博通"},
+        {"symbol":"AMD","name":"超微"},
+        {"symbol":"QCOM","name":"高通"},
         {"symbol":"MRVL","name":"邁威爾"}]},
-    {"name":"晶圓代工","stocks":[
-        {"symbol":"INTC","name":"英特爾"},{"symbol":"GFS","name":"格芯"},
-        {"symbol":"UMC","name":"聯電ADR"},{"symbol":"ASX","name":"台積ADR"},
-        {"symbol":"IFNNY","name":"英飛凌"}]},
-    {"name":"記憶體","stocks":[
-        {"symbol":"MU","name":"美光"},{"symbol":"WDC","name":"威騰"},
-        {"symbol":"NXPI","name":"恩智浦"},{"symbol":"ON","name":"安森美"},
-        {"symbol":"STM","name":"意法半導"}]},
-    {"name":"設備材料","stocks":[
-        {"symbol":"AMAT","name":"應用材料"},{"symbol":"LRCX","name":"拉姆研究"},
-        {"symbol":"KLAC","name":"科磊"},{"symbol":"ASML","name":"艾司摩爾"},
+    {"name":"設備材料","stocks":[        # ASML 市值最高
+        {"symbol":"ASML","name":"艾司摩爾"},
+        {"symbol":"AMAT","name":"應用材料"},
+        {"symbol":"LRCX","name":"拉姆研究"},
+        {"symbol":"KLAC","name":"科磊"},
         {"symbol":"TER","name":"泰瑞達"}]},
-    {"name":"類比IC","stocks":[
-        {"symbol":"TXN","name":"德州儀器"},{"symbol":"ADI","name":"亞德諾"},
-        {"symbol":"MCHP","name":"微芯科技"},{"symbol":"MPWR","name":"單體電源"},
+    {"name":"類比IC","stocks":[          # 德州儀器市值最大
+        {"symbol":"TXN","name":"德州儀器"},
+        {"symbol":"ADI","name":"亞德諾"},
+        {"symbol":"MCHP","name":"微芯科技"},
+        {"symbol":"MPWR","name":"單體電源"},
         {"symbol":"SWKS","name":"思佳訊"}]},
+    {"name":"記憶體","stocks":[          # 美光市值最大
+        {"symbol":"MU","name":"美光"},
+        {"symbol":"NXPI","name":"恩智浦"},
+        {"symbol":"ON","name":"安森美"},
+        {"symbol":"WDC","name":"威騰"},
+        {"symbol":"STM","name":"意法半導"}]},
+    {"name":"晶圓代工","stocks":[        # 英特爾市值最大
+        {"symbol":"INTC","name":"英特爾"},
+        {"symbol":"GFS","name":"格芯"},
+        {"symbol":"UMC","name":"聯電ADR"},
+        {"symbol":"ASX","name":"台積ADR"},
+        {"symbol":"IFNNY","name":"英飛凌"}]},
 ]
 
 def yahoo_quote(symbol):
@@ -160,7 +180,6 @@ def fetch_tw():
 
     return tw_indices, tw_sectors
 
-# ── 主流程 ──
 print("\n📡 抓取全球指數（Yahoo Finance）...")
 global_indices = fetch_global()
 
