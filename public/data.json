@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "updated": "2026-06-09T16:18:36.649075+08:00",
+  "updated": "2026-06-09T17:20:56.631849+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -44,7 +44,7 @@
       "prev": 2295
     }
   },
-  "sectors": [
+  "tw_sectors": [
     {
       "name": "半導體",
       "stocks": [
@@ -217,6 +217,183 @@
           "name": "聯合再生",
           "price": 47.1,
           "changePercent": -3.29
+        }
+      ]
+    }
+  ],
+  "sox_sectors": [
+    {
+      "name": "晶片設計",
+      "stocks": [
+        {
+          "symbol": "NVDA",
+          "name": "輝達",
+          "price": 208.64,
+          "changePercent": -4.58
+        },
+        {
+          "symbol": "AMD",
+          "name": "超微",
+          "price": 490.33,
+          "changePercent": -6.28
+        },
+        {
+          "symbol": "QCOM",
+          "name": "高通",
+          "price": 217.77,
+          "changePercent": -10.22
+        },
+        {
+          "symbol": "AVGO",
+          "name": "博通",
+          "price": 396.6,
+          "changePercent": -5.33
+        },
+        {
+          "symbol": "MRVL",
+          "name": "邁威爾",
+          "price": 288.85,
+          "changePercent": -8.72
+        }
+      ]
+    },
+    {
+      "name": "晶圓代工",
+      "stocks": [
+        {
+          "symbol": "INTC",
+          "name": "英特爾",
+          "price": 110.27,
+          "changePercent": -1.35
+        },
+        {
+          "symbol": "GFS",
+          "name": "格芯",
+          "price": 77.31,
+          "changePercent": -8.72
+        },
+        {
+          "symbol": "UMC",
+          "name": "聯電ADR",
+          "price": 20.0,
+          "changePercent": -3.8
+        },
+        {
+          "symbol": "ASX",
+          "name": "台積ADR",
+          "price": 35.52,
+          "changePercent": -7.5
+        },
+        {
+          "symbol": "IFNNY",
+          "name": "英飛凌",
+          "price": 90.08,
+          "changePercent": -9.09
+        }
+      ]
+    },
+    {
+      "name": "記憶體",
+      "stocks": [
+        {
+          "symbol": "MU",
+          "name": "美光",
+          "price": 949.28,
+          "changePercent": -4.69
+        },
+        {
+          "symbol": "WDC",
+          "name": "威騰",
+          "price": 526.93,
+          "changePercent": -8.44
+        },
+        {
+          "symbol": "NXPI",
+          "name": "恩智浦",
+          "price": 301.14,
+          "changePercent": -6.54
+        },
+        {
+          "symbol": "ON",
+          "name": "安森美",
+          "price": 120.9,
+          "changePercent": -8.28
+        },
+        {
+          "symbol": "STM",
+          "name": "意法半導",
+          "price": 75.01,
+          "changePercent": -4.28
+        }
+      ]
+    },
+    {
+      "name": "設備材料",
+      "stocks": [
+        {
+          "symbol": "AMAT",
+          "name": "應用材料",
+          "price": 492.17,
+          "changePercent": -1.9
+        },
+        {
+          "symbol": "LRCX",
+          "name": "拉姆研究",
+          "price": 324.45,
+          "changePercent": -3.56
+        },
+        {
+          "symbol": "KLAC",
+          "name": "科磊",
+          "price": 2108.06,
+          "changePercent": -1.08
+        },
+        {
+          "symbol": "ASML",
+          "name": "艾司摩爾",
+          "price": 1749.04,
+          "changePercent": -0.48
+        },
+        {
+          "symbol": "TER",
+          "name": "泰瑞達",
+          "price": 374.69,
+          "changePercent": -7.91
+        }
+      ]
+    },
+    {
+      "name": "類比IC",
+      "stocks": [
+        {
+          "symbol": "TXN",
+          "name": "德州儀器",
+          "price": 290.9,
+          "changePercent": -4.74
+        },
+        {
+          "symbol": "ADI",
+          "name": "亞德諾",
+          "price": 403.89,
+          "changePercent": -5.8
+        },
+        {
+          "symbol": "MCHP",
+          "name": "微芯科技",
+          "price": 91.37,
+          "changePercent": -5.12
+        },
+        {
+          "symbol": "MPWR",
+          "name": "單體電源",
+          "price": 1559.18,
+          "changePercent": -5.65
+        },
+        {
+          "symbol": "SWKS",
+          "name": "思佳訊",
+          "price": 75.37,
+          "changePercent": -5.7
         }
       ]
     }
