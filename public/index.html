@@ -3,97 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#0C447C">
+<meta name="theme-color" content="#1a56db">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="市場早報">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>市場早報</title>
 <style>
 :root{
-  --bg:#f5f5f0;--card:#fff;--bdr:rgba(0,0,0,.08);
-  --tx:#18180e;--mu:#6b6b60;--hi:#9b9b8e;
-  --G:#3B6D11;--Gbg:#EAF3DE;--Gm:#639922;
-  --R:#A32D2D;--Rbg:#FCEBEB;--Rm:#E24B4A;
-  --B:#0C447C;--Bbg:#E6F1FB;--Bm:#378ADD;
-  --r:14px;--rs:10px;
-}
-@media(prefers-color-scheme:dark){
-  :root{--bg:#141410;--card:#1e1e1a;--bdr:rgba(255,255,255,.08);--tx:#eeeee4;--mu:#909088;--hi:#5a5a52;--G:#C0DD97;--Gbg:#1a3306;--Gm:#97C459;--R:#F7C1C1;--Rbg:#3d1010;--Rm:#E24B4A;--B:#B5D4F4;--Bbg:#0a1e38;--Bm:#378ADD;}
+  --bg:#f0f4f8;--card:#fff;--bdr:#e2e8f0;
+  --tx:#1a202c;--mu:#718096;--hi:#a0aec0;
+  --G:#276749;--Gbg:#f0fff4;--Gm:#38a169;
+  --R:#9b2335;--Rbg:#fff5f5;--Rm:#e53e3e;
+  --B:#1a56db;--Bbg:#ebf8ff;--Bm:#3182ce;
+  --r:16px;--rs:10px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--tx);display:flex;flex-direction:column}
-.topbar{background:var(--B);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
-.topbar h1{font-size:17px;font-weight:700}
-.topbar p{font-size:11px;opacity:.7;margin-top:1px}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(env(safe-area-inset-bottom,0px)+20px)}
 
-.signal{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;border:1px solid transparent}
-.signal.up{background:var(--Gbg);border-color:var(--Gm)}
-.signal.dn{background:var(--Rbg);border-color:var(--Rm)}
-.signal.fl{background:var(--card);border-color:var(--bdr)}
-.sig-ic{font-size:26px;flex-shrink:0}
+.topbar{background:var(--B);color:#fff;padding:calc(env(safe-area-inset-top,0px)+14px) 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(26,86,219,.3)}
+.topbar-left h1{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.topbar-left p{font-size:11px;opacity:.75;margin-top:2px}
+.upd-btn{font-size:12px;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;cursor:pointer;font-family:inherit;font-weight:500}
+
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(env(safe-area-inset-bottom,0px)+20px)}
+
+/* 領先訊號 */
+.signal{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.signal.up{background:var(--Gbg);border:1.5px solid #9ae6b4}
+.signal.dn{background:var(--Rbg);border:1.5px solid #feb2b2}
+.signal.fl{background:var(--card);border:1px solid var(--bdr)}
+.sig-ic{font-size:28px;flex-shrink:0}
 .sig-bd{flex:1;min-width:0}
 .sig-t{font-size:13px;font-weight:700}
 .sig-t.up{color:var(--G)}.sig-t.dn{color:var(--R)}.sig-t.fl{color:var(--tx)}
-.sig-d{font-size:12px;margin-top:2px;line-height:1.4}
-.sig-d.up{color:var(--Gm)}.sig-d.dn{color:var(--Rm)}.sig-d.fl{color:var(--mu)}
-.sig-a{font-size:10px;color:var(--hi);margin-top:3px}
+.sig-d{font-size:12px;margin-top:3px;line-height:1.45}
+.sig-d.up{color:#2f855a}.sig-d.dn{color:#c53030}.sig-d.fl{color:var(--mu)}
+.sig-a{font-size:10px;color:var(--hi);margin-top:4px}
 .sig-v{flex-shrink:0;text-align:right}
-.sig-v .big{font-size:20px;font-weight:800}
+.sig-v .big{font-size:22px;font-weight:800;letter-spacing:-.02em}
 .sig-v .big.up{color:var(--G)}.sig-v .big.dn{color:var(--R)}.sig-v .big.fl{color:var(--tx)}
-.sig-v .sm{font-size:10px;color:var(--hi);margin-top:2px}
+.sig-v .sm{font-size:10px;color:var(--hi);margin-top:3px}
 
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.ic{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
-.ic.hl{border-color:var(--Gm);border-width:2px}
-.ic-l{font-size:11px;color:var(--mu);margin-bottom:2px;display:flex;align-items:center;gap:4px}
-.lead-tag{font-size:9px;background:var(--Gbg);color:var(--G);padding:1px 5px;border-radius:4px;font-weight:700}
-.ic-v{font-size:20px;font-weight:800;letter-spacing:-.02em}
-.badge{display:inline-flex;align-items:center;font-size:11px;padding:3px 8px;border-radius:6px;margin-top:5px;font-weight:600}
-.badge.up{background:var(--Gbg);color:var(--G)}
-.badge.dn{background:var(--Rbg);color:var(--R)}
-.badge.fl{background:var(--bg);color:var(--mu)}
-.ic-p{font-size:10px;color:var(--hi);margin-top:3px}
+/* 指數卡片區 */
+.ig-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ig-label{font-size:12px;color:var(--mu);font-weight:500}
+.ig-hint{font-size:10px;color:var(--hi)}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.ic{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 15px;box-shadow:var(--shadow);cursor:grab;transition:transform .15s,box-shadow .15s;user-select:none}
+.ic:active{cursor:grabbing}
+.ic.dragging{opacity:.5;transform:scale(.97)}
+.ic.drag-over{box-shadow:0 0 0 2px var(--B),var(--shadow)}
+.ic.hl{border:2px solid var(--Gm);background:linear-gradient(135deg,#f0fff4 0%,#fff 100%)}
+.ic-l{font-size:11px;color:var(--mu);margin-bottom:3px;display:flex;align-items:center;gap:5px;font-weight:500}
+.lead-tag{font-size:9px;background:var(--Gm);color:#fff;padding:1px 6px;border-radius:4px;font-weight:700}
+.ic-v{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
+.badge{display:inline-flex;align-items:center;font-size:11px;padding:3px 9px;border-radius:6px;margin-top:6px;font-weight:700}
+.badge.up{background:#c6f6d5;color:var(--G)}
+.badge.dn{background:#fed7d7;color:var(--R)}
+.badge.fl{background:#edf2f7;color:var(--mu)}
+.ic-p{font-size:10px;color:var(--hi);margin-top:4px}
+.drag-hint{font-size:10px;color:var(--hi);text-align:center;margin-bottom:10px}
 
-.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:14px;margin-bottom:12px}
-.c-title{font-size:13px;font-weight:700;margin-bottom:2px}
-.c-sub{font-size:11px;color:var(--mu);margin-bottom:10px;line-height:1.45}
+/* 熱力圖卡片 */
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.c-title{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.c-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
 
-/* 市場切換（台股/SOX） */
-.mkt-seg{display:flex;border:1px solid var(--bdr);border-radius:var(--rs);overflow:hidden;margin-bottom:10px}
-.mkt-btn{flex:1;font-size:13px;padding:9px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
-.mkt-btn:last-child{border-right:none}
-.mkt-btn.a{background:var(--B);color:#fff;font-weight:700}
+.mkt-seg{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--B);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.mkt-btn{font-size:13px;padding:10px 4px;text-align:center;background:transparent;border:none;color:var(--B);cursor:pointer;font-family:inherit;font-weight:600}
+.mkt-btn.a{background:var(--B);color:#fff}
 
-/* 板塊切換 */
-.seg{display:flex;border:1px solid var(--bdr);border-radius:var(--rs);overflow:hidden;margin-bottom:10px;flex-wrap:wrap}
-.sb{flex:1;min-width:60px;font-size:11px;padding:8px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
+.seg{display:flex;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:12px;flex-wrap:wrap}
+.sb{flex:1;min-width:58px;font-size:11px;padding:9px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
 .sb:last-child{border-right:none}
 .sb.a{background:var(--Bbg);color:var(--B);font-weight:700}
 
-.hr{display:flex;align-items:center;gap:5px;margin-bottom:4px}
-.hn{font-size:10px;color:var(--mu);width:44px;flex-shrink:0;text-align:right}
-.hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;flex:1}
-.hcell{border-radius:4px;padding:5px 2px;text-align:center;font-size:9px;font-weight:700;line-height:1.3}
+/* 走勢圖 */
+.trend-card{background:#f7fafc;border-radius:10px;padding:10px 12px;margin-bottom:10px;border:1px solid var(--bdr)}
+.trend-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.trend-name{font-size:12px;font-weight:600;color:var(--tx)}
+.trend-pct{font-size:12px;font-weight:700}
+.trend-pct.up{color:var(--Gm)}.trend-pct.dn{color:var(--Rm)}.trend-pct.fl{color:var(--mu)}
+.trend-sub{font-size:10px;color:var(--hi)}
 
-.status{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+/* 熱力格 */
+.hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.hcell{border-radius:6px;padding:7px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.35;cursor:default}
+.hcell:active{opacity:.8}
+
+.status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
-.dot.busy{background:#BA7517}
-.dot.err{background:var(--Rm)}
+.dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
 .stxt{font-size:11px;color:var(--hi);flex:1}
 .lupd{font-size:10px;color:var(--hi);text-align:center;padding-bottom:4px}
 </style>
 </head>
 <body>
 <div class="topbar">
-  <div>
+  <div class="topbar-left">
     <h1>市場早報</h1>
     <p id="topSub">每日 08:00 自動更新</p>
   </div>
-  <button onclick="loadData()" style="font-size:12px;padding:6px 12px;border-radius:20px;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;cursor:pointer;font-family:inherit">↻ 更新</button>
+  <button class="upd-btn" onclick="loadData()">↻ 更新</button>
 </div>
 
 <div class="scroll">
@@ -102,173 +117,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <span class="stxt" id="stxt">載入中...</span>
   </div>
   <div id="banner"></div>
+
+  <div class="ig-header">
+    <span class="ig-label">指數總覽</span>
+    <span class="ig-hint">☰ 長按卡片可拖拉排序</span>
+  </div>
   <div class="ig" id="idxGrid"></div>
 
   <div class="card">
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
-    <!-- 市場切換 -->
     <div class="mkt-seg">
       <button class="mkt-btn a" id="mkt0" onclick="setMkt(0)">🇹🇼 台股</button>
       <button class="mkt-btn"   id="mkt1" onclick="setMkt(1)">🇺🇸 SOX 費半</button>
     </div>
-    <!-- 板塊切換 -->
     <div class="seg" id="seg"></div>
-    <div id="hg"></div>
-  </div>
-  <div class="lupd" id="lupd"></div>
-</div>
-
-<script>
-const DATA_URL = './data.json';
-let data = null;
-let mkt = 0;     // 0=台股 1=SOX
-let subTab = 0;  // 板塊 index
-
-const s = v => v >= 0 ? '+' : '';
-const f = (v, d=2) => (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
-function hc(v){
-  if(v>2)    return{bg:'#3B6D11',fg:'#C0DD97'};
-  if(v>0.8)  return{bg:'#639922',fg:'#EAF3DE'};
-  if(v>0.2)  return{bg:'#97C459',fg:'#27500A'};
-  if(v>-0.2) return{bg:'#888780',fg:'#F1EFE8'};
-  if(v>-0.8) return{bg:'#E24B4A',fg:'#FCEBEB'};
-  if(v>-2)   return{bg:'#A32D2D',fg:'#F7C1C1'};
-  return      {bg:'#501313',fg:'#F0ABAB'};
-}
-
-function currentSectors(){
-  if(!data) return [];
-  return mkt === 0
-    ? (data.tw_sectors || data.sectors || [])
-    : (data.sox_sectors || []);
-}
-
-function renderBanner(){
-  const tsm = data.indices.TSM;
-  if(!tsm || !tsm.price) return;
-  const c = tsm.changePercent;
-  const dir = c > 0.3 ? 'up' : c < -0.3 ? 'dn' : 'fl';
-  const strength = Math.abs(c) > 2 ? '強烈' : Math.abs(c) > 1 ? '明顯' : '溫和';
-  const ico = dir==='up' ? '📈' : dir==='dn' ? '📉' : '📊';
-  const sig = dir==='up' ? `${strength}看多訊號 — 台股半導體預期開高`
-            : dir==='dn' ? `${strength}看空訊號 — 台股半導體預期開低`
-            : '訊號偏中性 — 方向待觀察';
-  document.getElementById('banner').innerHTML = `
-    <div class="signal ${dir}">
-      <div class="sig-ic">${ico}</div>
-      <div class="sig-bd">
-        <div class="sig-t ${dir}">TSM ADR 領先訊號</div>
-        <div class="sig-d ${dir}">${sig}</div>
-        <div class="sig-a">昨收 $${f(tsm.price)} · 來源：富邦即時</div>
-      </div>
-      <div class="sig-v">
-        <div class="big ${dir}">${s(c)}${c.toFixed(2)}%</div>
-        <div class="sm">前 $${f(tsm.prev)}</div>
-      </div>
-    </div>`;
-}
-
-function renderIdx(){
-  const order = [
-    {key:'TSM',   label:'台積電',     lead:true,  dollar:true},
-    {key:'TWII',  label:'台股 TAIEX', lead:false, dollar:false},
-    {key:'SOX',   label:'費半 SOX',   lead:false, dollar:false},
-    {key:'N225',  label:'日經 225',   lead:false, dollar:false},
-  ];
-  document.getElementById('idxGrid').innerHTML = order.map(e => {
-    const d = data.indices[e.key];
-    if(!d || !d.price) return '';
-    const c = d.changePercent;
-    const dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
-    return `<div class="ic${e.lead?' hl':''}">
-      <div class="ic-l">${e.label}${e.lead?'<span class="lead-tag">領先</span>':''}</div>
-      <div class="ic-v">${e.dollar?'$':''}${f(d.price, e.dollar?2:0)}</div>
-      <div class="badge ${dir}">${c>=0?'▲':'▼'} ${Math.abs(c).toFixed(2)}%</div>
-      <div class="ic-p">前 ${e.dollar?'$':''}${f(d.prev, e.dollar?2:0)}</div>
-    </div>`;
-  }).join('');
-}
-
-function renderHeat(){
-  const sectors = currentSectors();
-  if(!sectors.length){ document.getElementById('hg').innerHTML='<div style="font-size:12px;color:var(--mu);padding:8px">暫無資料</div>'; return; }
-
-  // 市場按鈕
-  document.getElementById('mkt0').className = 'mkt-btn' + (mkt===0?' a':'');
-  document.getElementById('mkt1').className = 'mkt-btn' + (mkt===1?' a':'');
-
-  // 板塊按鈕
-  document.getElementById('seg').innerHTML = sectors.map((sec, i) =>
-    `<button class="sb${subTab===i?' a':''}" onclick="setSubTab(${i})">${sec.name}</button>`
-  ).join('');
-
-  // 副標題
-  document.getElementById('heatSub').textContent =
-    mkt===0 ? '台股板塊 — 富邦即時資料' : 'SOX 費半板塊 — Yahoo Finance';
-
-  // 熱力格
-  const sec = sectors[subTab] || sectors[0];
-  document.getElementById('hg').innerHTML = sec ? sec.stocks.map(st => {
-    const col = hc(st.changePercent);
-    return `<div class="hr">
-      <div class="hn" style="width:52px">${sec.name}</div>
-      <div class="hc-wrap">
-        <div class="hcell" style="background:${col.bg};color:${col.fg};grid-column:span 1"
-          title="${st.name} ${s(st.changePercent)}${st.changePercent.toFixed(2)}%">
-          ${st.name.substring(0,4)}<br>${s(st.changePercent)}${st.changePercent.toFixed(1)}%
-        </div>
-      </div>
-    </div>`;
-  }).join('') : '';
-
-  // 重新渲染成正確的一行多格格式
-  document.getElementById('hg').innerHTML = `
-    <div class="hr">
-      <div class="hn">${sec.name}</div>
-      <div class="hc-wrap">
-        ${sec.stocks.map(st => {
-          const col = hc(st.changePercent);
-          return `<div class="hcell" style="background:${col.bg};color:${col.fg}"
-            title="${st.name} ${s(st.changePercent)}${st.changePercent.toFixed(2)}%">
-            ${st.name.substring(0,4)}<br>${s(st.changePercent)}${st.changePercent.toFixed(1)}%
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-}
-
-function setMkt(m){ mkt = m; subTab = 0; renderHeat(); }
-function setSubTab(i){ subTab = i; renderHeat(); }
-
-function renderAll(){
-  renderBanner();
-  renderIdx();
-  renderHeat();
-  const upd = new Date(data.updated);
-  document.getElementById('lupd').textContent = `資料時間：${upd.toLocaleString('zh-TW')}`;
-  document.getElementById('topSub').textContent = `${data.date} 更新`;
-}
-
-async function loadData(){
-  const dot = document.getElementById('dot');
-  const stxt = document.getElementById('stxt');
-  dot.className = 'dot busy';
-  stxt.textContent = '抓取資料中...';
-  try {
-    const res = await fetch(`${DATA_URL}?t=${Date.now()}`);
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    data = await res.json();
-    dot.className = 'dot';
-    stxt.textContent = data.source === 'fubon_neo' ? '富邦即時 + Yahoo Finance' : '資料載入完成';
-    renderAll();
-  } catch(e) {
-    dot.className = 'dot err';
-    stxt.textContent = `載入失敗：${e.message}`;
-  }
-}
-
-loadData();
-</script>
-</body>
-</html>
+    <div class="trend-card">
+      <div class="trend-top">
+        <span class="trend-name" id="trendName">板塊走勢</span>
+        <span class="trend-pct" id="trendPct"></span>
