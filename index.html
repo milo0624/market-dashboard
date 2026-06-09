@@ -30,7 +30,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .topbar p{font-size:11px;opacity:.7;margin-top:1px}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(env(safe-area-inset-bottom,0px)+20px)}
 
-/* signal banner */
 .signal{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;border:1px solid transparent}
 .signal.up{background:var(--Gbg);border-color:var(--Gm)}
 .signal.dn{background:var(--Rbg);border-color:var(--Rm)}
@@ -47,7 +46,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .sig-v .big.up{color:var(--G)}.sig-v .big.dn{color:var(--R)}.sig-v .big.fl{color:var(--tx)}
 .sig-v .sm{font-size:10px;color:var(--hi);margin-top:2px}
 
-/* index grid */
 .ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .ic{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
 .ic.hl{border-color:var(--Gm);border-width:2px}
@@ -60,14 +58,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .badge.fl{background:var(--bg);color:var(--mu)}
 .ic-p{font-size:10px;color:var(--hi);margin-top:3px}
 
-/* heatmap */
 .card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:14px;margin-bottom:12px}
 .c-title{font-size:13px;font-weight:700;margin-bottom:2px}
 .c-sub{font-size:11px;color:var(--mu);margin-bottom:10px;line-height:1.45}
-.seg{display:flex;border:1px solid var(--bdr);border-radius:var(--rs);overflow:hidden;margin-bottom:10px}
-.sb{flex:1;font-size:12px;padding:9px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
+
+/* 市場切換（台股/SOX） */
+.mkt-seg{display:flex;border:1px solid var(--bdr);border-radius:var(--rs);overflow:hidden;margin-bottom:10px}
+.mkt-btn{flex:1;font-size:13px;padding:9px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
+.mkt-btn:last-child{border-right:none}
+.mkt-btn.a{background:var(--B);color:#fff;font-weight:700}
+
+/* 板塊切換 */
+.seg{display:flex;border:1px solid var(--bdr);border-radius:var(--rs);overflow:hidden;margin-bottom:10px;flex-wrap:wrap}
+.sb{flex:1;min-width:60px;font-size:11px;padding:8px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
 .sb:last-child{border-right:none}
 .sb.a{background:var(--Bbg);color:var(--B);font-weight:700}
+
 .hr{display:flex;align-items:center;gap:5px;margin-bottom:4px}
 .hn{font-size:10px;color:var(--mu);width:44px;flex-shrink:0;text-align:right}
 .hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;flex:1}
@@ -79,13 +85,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .dot.err{background:var(--Rm)}
 .stxt{font-size:11px;color:var(--hi);flex:1}
 .lupd{font-size:10px;color:var(--hi);text-align:center;padding-bottom:4px}
-
-.skeleton{background:var(--bdr);border-radius:4px;animation:pulse 1.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.9}}
 </style>
 </head>
 <body>
-
 <div class="topbar">
   <div>
     <h1>市場早報</h1>
@@ -100,15 +102,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <span class="stxt" id="stxt">載入中...</span>
   </div>
   <div id="banner"></div>
-  <div class="ig" id="idxGrid">
-    <div class="ic skeleton" style="height:90px"></div>
-    <div class="ic skeleton" style="height:90px"></div>
-    <div class="ic skeleton" style="height:90px"></div>
-    <div class="ic skeleton" style="height:90px"></div>
-  </div>
+  <div class="ig" id="idxGrid"></div>
+
   <div class="card">
     <div class="c-title">板塊熱力圖</div>
-    <div class="c-sub">深綠強漲 · 深紅重跌（富邦即時資料）</div>
+    <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
+    <!-- 市場切換 -->
+    <div class="mkt-seg">
+      <button class="mkt-btn a" id="mkt0" onclick="setMkt(0)">🇹🇼 台股</button>
+      <button class="mkt-btn"   id="mkt1" onclick="setMkt(1)">🇺🇸 SOX 費半</button>
+    </div>
+    <!-- 板塊切換 -->
     <div class="seg" id="seg"></div>
     <div id="hg"></div>
   </div>
@@ -116,11 +120,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 </div>
 
 <script>
-// 這個網址由 GitHub Pages 自動提供，與 index.html 同目錄
 const DATA_URL = './data.json';
-
 let data = null;
-let tab = 0;  // 板塊 index
+let mkt = 0;     // 0=台股 1=SOX
+let subTab = 0;  // 板塊 index
 
 const s = v => v >= 0 ? '+' : '';
 const f = (v, d=2) => (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
@@ -134,9 +137,16 @@ function hc(v){
   return      {bg:'#501313',fg:'#F0ABAB'};
 }
 
+function currentSectors(){
+  if(!data) return [];
+  return mkt === 0
+    ? (data.tw_sectors || data.sectors || [])
+    : (data.sox_sectors || []);
+}
+
 function renderBanner(){
   const tsm = data.indices.TSM;
-  if(!tsm) return;
+  if(!tsm || !tsm.price) return;
   const c = tsm.changePercent;
   const dir = c > 0.3 ? 'up' : c < -0.3 ? 'dn' : 'fl';
   const strength = Math.abs(c) > 2 ? '強烈' : Math.abs(c) > 1 ? '明顯' : '溫和';
@@ -148,9 +158,9 @@ function renderBanner(){
     <div class="signal ${dir}">
       <div class="sig-ic">${ico}</div>
       <div class="sig-bd">
-        <div class="sig-t ${dir}">台積電 ADR 領先訊號</div>
+        <div class="sig-t ${dir}">TSM ADR 領先訊號</div>
         <div class="sig-d ${dir}">${sig}</div>
-        <div class="sig-a">昨收 $${f(tsm.price)} · 來源：富邦即時資料</div>
+        <div class="sig-a">昨收 $${f(tsm.price)} · 來源：富邦即時</div>
       </div>
       <div class="sig-v">
         <div class="big ${dir}">${s(c)}${c.toFixed(2)}%</div>
@@ -160,31 +170,60 @@ function renderBanner(){
 }
 
 function renderIdx(){
-  const entries = [
-    {key:'TSM',  label:'台積電',      lead:true,  dollar:true},
-    {key:'TWII', label:'台股 TAIEX',  lead:false, dollar:false},
+  const order = [
+    {key:'TSM',   label:'台積電',     lead:true,  dollar:true},
+    {key:'TWII',  label:'台股 TAIEX', lead:false, dollar:false},
+    {key:'SOX',   label:'費半 SOX',   lead:false, dollar:false},
+    {key:'N225',  label:'日經 225',   lead:false, dollar:false},
   ];
-  document.getElementById('idxGrid').innerHTML = entries.map(e => {
+  document.getElementById('idxGrid').innerHTML = order.map(e => {
     const d = data.indices[e.key];
-    if(!d) return '';
+    if(!d || !d.price) return '';
     const c = d.changePercent;
     const dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
     return `<div class="ic${e.lead?' hl':''}">
       <div class="ic-l">${e.label}${e.lead?'<span class="lead-tag">領先</span>':''}</div>
-      <div class="ic-v">${e.dollar?'$':''}${f(d.price, e.dollar?2:1)}</div>
+      <div class="ic-v">${e.dollar?'$':''}${f(d.price, e.dollar?2:0)}</div>
       <div class="badge ${dir}">${c>=0?'▲':'▼'} ${Math.abs(c).toFixed(2)}%</div>
-      <div class="ic-p">前 ${e.dollar?'$':''}${f(d.prev, e.dollar?2:1)}</div>
+      <div class="ic-p">前 ${e.dollar?'$':''}${f(d.prev, e.dollar?2:0)}</div>
     </div>`;
   }).join('');
 }
 
 function renderHeat(){
-  const sectors = data.sectors;
+  const sectors = currentSectors();
+  if(!sectors.length){ document.getElementById('hg').innerHTML='<div style="font-size:12px;color:var(--mu);padding:8px">暫無資料</div>'; return; }
+
+  // 市場按鈕
+  document.getElementById('mkt0').className = 'mkt-btn' + (mkt===0?' a':'');
+  document.getElementById('mkt1').className = 'mkt-btn' + (mkt===1?' a':'');
+
+  // 板塊按鈕
   document.getElementById('seg').innerHTML = sectors.map((sec, i) =>
-    `<button class="sb${tab===i?' a':''}" onclick="setTab(${i})">${sec.name}</button>`
+    `<button class="sb${subTab===i?' a':''}" onclick="setSubTab(${i})">${sec.name}</button>`
   ).join('');
-  const sec = sectors[tab];
-  document.getElementById('hg').innerHTML = sec ? `
+
+  // 副標題
+  document.getElementById('heatSub').textContent =
+    mkt===0 ? '台股板塊 — 富邦即時資料' : 'SOX 費半板塊 — Yahoo Finance';
+
+  // 熱力格
+  const sec = sectors[subTab] || sectors[0];
+  document.getElementById('hg').innerHTML = sec ? sec.stocks.map(st => {
+    const col = hc(st.changePercent);
+    return `<div class="hr">
+      <div class="hn" style="width:52px">${sec.name}</div>
+      <div class="hc-wrap">
+        <div class="hcell" style="background:${col.bg};color:${col.fg};grid-column:span 1"
+          title="${st.name} ${s(st.changePercent)}${st.changePercent.toFixed(2)}%">
+          ${st.name.substring(0,4)}<br>${s(st.changePercent)}${st.changePercent.toFixed(1)}%
+        </div>
+      </div>
+    </div>`;
+  }).join('') : '';
+
+  // 重新渲染成正確的一行多格格式
+  document.getElementById('hg').innerHTML = `
     <div class="hr">
       <div class="hn">${sec.name}</div>
       <div class="hc-wrap">
@@ -192,21 +231,22 @@ function renderHeat(){
           const col = hc(st.changePercent);
           return `<div class="hcell" style="background:${col.bg};color:${col.fg}"
             title="${st.name} ${s(st.changePercent)}${st.changePercent.toFixed(2)}%">
-            ${st.name.substring(0,3)}<br>${s(st.changePercent)}${st.changePercent.toFixed(1)}%
+            ${st.name.substring(0,4)}<br>${s(st.changePercent)}${st.changePercent.toFixed(1)}%
           </div>`;
         }).join('')}
       </div>
-    </div>` : '';
+    </div>`;
 }
 
-function setTab(i){ tab = i; renderHeat(); }
+function setMkt(m){ mkt = m; subTab = 0; renderHeat(); }
+function setSubTab(i){ subTab = i; renderHeat(); }
 
 function renderAll(){
   renderBanner();
   renderIdx();
   renderHeat();
   const upd = new Date(data.updated);
-  document.getElementById('lupd').textContent = `資料時間：${upd.toLocaleString('zh-TW')}（${data.source === 'fubon_neo' ? '富邦即時' : '占位資料'}）`;
+  document.getElementById('lupd').textContent = `資料時間：${upd.toLocaleString('zh-TW')}`;
   document.getElementById('topSub').textContent = `${data.date} 更新`;
 }
 
@@ -216,12 +256,11 @@ async function loadData(){
   dot.className = 'dot busy';
   stxt.textContent = '抓取資料中...';
   try {
-    // 加上時間戳避免快取
     const res = await fetch(`${DATA_URL}?t=${Date.now()}`);
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     data = await res.json();
     dot.className = 'dot';
-    stxt.textContent = data.source === 'fubon_neo' ? '富邦即時資料' : '占位資料';
+    stxt.textContent = data.source === 'fubon_neo' ? '富邦即時 + Yahoo Finance' : '資料載入完成';
     renderAll();
   } catch(e) {
     dot.className = 'dot err';
