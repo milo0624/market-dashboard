@@ -182,3 +182,189 @@ function renderBanner(){
         <div class="sig-d ${dir}">${sig}</div>
         <div class="sig-a">美東昨收 $${fm(tsm.price)} · Yahoo Finance</div>
       </div>
+      <div class="sig-v">
+        <div class="big ${dir}">${sg(c)}${c.toFixed(2)}%</div>
+        <div class="sm">前 $${fm(tsm.prev)}</div>
+      </div>
+    </div>`;
+}
+
+function renderIdx(){
+  const grid = document.getElementById('idxGrid');
+  grid.innerHTML = idxOrder.map(key => {
+    const d = data.indices[key];
+    const m = IDX_META[key];
+    if(!d||!d.price||!m) return '';
+    const c = d.changePercent, dir = c>0?'up':c<0?'dn':'fl';
+    return`<div class="ic${m.lead?' hl':''}" draggable="true" data-key="${key}"
+        ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
+        ondrop="onDrop(event)" ondragend="onDragEnd(event)"
+        ontouchstart="onTouchStart(event)" ontouchmove="onTouchMove(event)" ontouchend="onTouchEnd(event)">
+      <div class="ic-l">${m.label}${m.lead?'<span class="lead-tag">領先</span>':''}</div>
+      <div class="ic-v">${m.dollar?'$':''}${fm(d.price,m.dollar?2:0)}</div>
+      <div class="badge ${dir}">${c>=0?'▲':'▼'} ${Math.abs(c).toFixed(2)}%</div>
+      <div class="ic-p">前 ${m.dollar?'$':''}${fm(d.prev,m.dollar?2:0)}</div>
+    </div>`;
+  }).join('');
+}
+
+let dragKey = null;
+function onDragStart(e){
+  dragKey = e.currentTarget.dataset.key;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed='move';
+}
+function onDragOver(e){
+  e.preventDefault();
+  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
+  e.currentTarget.classList.add('drag-over');
+}
+function onDrop(e){
+  e.preventDefault();
+  const targetKey = e.currentTarget.dataset.key;
+  if(dragKey && dragKey !== targetKey){
+    const fi = idxOrder.indexOf(dragKey), ti = idxOrder.indexOf(targetKey);
+    if(fi>-1&&ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,dragKey); }
+    localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
+    renderIdx();
+  }
+}
+function onDragEnd(e){
+  e.currentTarget.classList.remove('dragging');
+  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
+  dragKey = null;
+}
+
+let touchKey=null, touchStartX=0, touchStartY=0, touchClone=null;
+function onTouchStart(e){
+  const el=e.currentTarget;
+  touchKey=el.dataset.key;
+  const t=e.touches[0];
+  touchStartX=t.clientX; touchStartY=t.clientY;
+  touchClone=el.cloneNode(true);
+  touchClone.style.cssText=`position:fixed;opacity:.8;pointer-events:none;z-index:999;width:${el.offsetWidth}px;left:${el.getBoundingClientRect().left}px;top:${el.getBoundingClientRect().top}px;`;
+  document.body.appendChild(touchClone);
+  el.classList.add('dragging');
+}
+function onTouchMove(e){
+  if(!touchClone) return;
+  e.preventDefault();
+  const t=e.touches[0];
+  touchClone.style.left=(t.clientX-touchStartX+parseFloat(touchClone.style.left))+'px';
+  touchClone.style.top=(t.clientY-touchStartY+parseFloat(touchClone.style.top))+'px';
+  touchStartX=t.clientX; touchStartY=t.clientY;
+  const els=document.elementsFromPoint(t.clientX,t.clientY);
+  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
+  const target=els.find(el=>el.classList.contains('ic')&&el.dataset.key!==touchKey);
+  if(target) target.classList.add('drag-over');
+}
+function onTouchEnd(e){
+  if(touchClone){ document.body.removeChild(touchClone); touchClone=null; }
+  document.querySelectorAll('.ic').forEach(el=>{
+    el.classList.remove('dragging','drag-over');
+  });
+  const t=e.changedTouches[0];
+  const els=document.elementsFromPoint(t.clientX,t.clientY);
+  const target=els.find(el=>el.classList&&el.classList.contains('ic')&&el.dataset&&el.dataset.key!==touchKey);
+  if(target&&touchKey){
+    const fi=idxOrder.indexOf(touchKey), ti=idxOrder.indexOf(target.dataset.key);
+    if(fi>-1&&ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,touchKey); }
+    localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
+    renderIdx();
+  }
+  touchKey=null;
+}
+
+function renderTrend(sec){
+  const trend = sec.trend||[];
+  if(trendChart){ trendChart.destroy(); trendChart=null; }
+  const last = trend.length ? trend[trend.length-1] : 0;
+  const dir = last>0?'up':last<0?'dn':'fl';
+  document.getElementById('trendName').textContent = `${sec.name} 板塊`;
+  document.getElementById('trendPct').textContent = trend.length ? `${sg(last)}${last.toFixed(2)}%` : '—';
+  document.getElementById('trendPct').className = `trend-pct ${dir}`;
+  document.getElementById('trendSub').textContent = `近1個月綜合走勢（${trend.length}個交易日）`;
+  if(!trend.length) return;
+  const color = last>=0?'#38a169':'#e53e3e';
+  const bgColor = last>=0?'rgba(56,161,105,.12)':'rgba(229,62,62,.12)';
+  const ctx = document.getElementById('trendChart');
+  trendChart = new Chart(ctx,{
+    type:'line',
+    data:{
+      labels: trend.map((_,i)=>i),
+      datasets:[{
+        data:trend, borderColor:color, borderWidth:2,
+        pointRadius:0, tension:.35, fill:true, backgroundColor:bgColor
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{
+        callbacks:{label:c=>`${sg(c.parsed.y)}${c.parsed.y.toFixed(2)}%`}
+      }},
+      scales:{
+        x:{display:false},
+        y:{display:true,position:'right',
+           ticks:{font:{size:9},callback:v=>v.toFixed(1)+'%',maxTicksLimit:4},
+           grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+      }
+    }
+  });
+}
+
+function renderHeat(){
+  const sectors = currentSectors();
+  if(!sectors.length){ document.getElementById('hg').innerHTML=''; return; }
+  document.getElementById('mkt0').className='mkt-btn'+(mkt===0?' a':'');
+  document.getElementById('mkt1').className='mkt-btn'+(mkt===1?' a':'');
+  document.getElementById('heatSub').textContent =
+    mkt===0?'台股板塊 — 富邦即時':'SOX 費半 — Yahoo Finance';
+  document.getElementById('seg').innerHTML = sectors.map((sec,i)=>
+    `<button class="sb${subTab===i?' a':''}" onclick="setSubTab(${i})">${sec.name}</button>`
+  ).join('');
+  const sec = sectors[subTab]||sectors[0];
+  renderTrend(sec);
+  document.getElementById('hg').innerHTML = sec.stocks.map(st=>{
+    const col=hc(st.changePercent);
+    return`<div class="hcell" style="background:${col.bg};color:${col.fg}"
+      title="${st.name} ${sg(st.changePercent)}${st.changePercent.toFixed(2)}%">
+      ${st.name.substring(0,4)}<br>${sg(st.changePercent)}${st.changePercent.toFixed(1)}%
+    </div>`;
+  }).join('');
+}
+
+function setMkt(m){ mkt=m; subTab=0; renderHeat(); }
+function setSubTab(i){ subTab=i; renderHeat(); }
+
+function renderAll(){
+  renderBanner();
+  renderIdx();
+  renderHeat();
+  const upd=new Date(data.updated);
+  document.getElementById('lupd').textContent=`資料時間：${upd.toLocaleString('zh-TW')}`;
+  document.getElementById('topSub').textContent=`${data.date} 更新`;
+}
+
+async function loadData(){
+  const dot=document.getElementById('dot');
+  const stxt=document.getElementById('stxt');
+  dot.className='dot busy'; stxt.textContent='抓取資料中...';
+  try{
+    const res=await fetch(`${DATA_URL}?t=${Date.now()}`);
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    data=await res.json();
+    const allKeys=Object.keys(IDX_META);
+    allKeys.forEach(k=>{ if(!idxOrder.includes(k)) idxOrder.push(k); });
+    dot.className='dot';
+    stxt.textContent=data.source==='fubon_neo'?'富邦即時 + Yahoo Finance':'資料載入完成';
+    renderAll();
+  }catch(e){
+    dot.className='dot err';
+    stxt.textContent=`載入失敗：${e.message}`;
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
