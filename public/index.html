@@ -129,6 +129,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
   </div>
   <div class="lupd" id="lupd"></div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const DATA_URL = './data.json';
@@ -137,18 +138,21 @@ let data = null, mkt = 0, subTab = 0, trendChart = null;
 const DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225'];
 let idxOrder = (() => {
   try { return JSON.parse(localStorage.getItem('idxOrder')) || DEFAULT_ORDER; }
-  catch { return DEFAULT_ORDER; }
+  catch (e) { return DEFAULT_ORDER; }
 })();
 
 const IDX_META = {
   TSM_ADR: {label:'TSM ADR',   lead:true,  dollar:true},
   TWII:    {label:'台股 TAIEX',lead:false, dollar:false},
   SOX:     {label:'費半 SOX',  lead:false, dollar:false},
-  N225:    {label:'日經 225',  lead:false, dollar:false},
+  N225:    {label:'日經 225',  lead:false, dollar:false}
 };
 
-const sg = v => v >= 0 ? '+' : '';
-const fm = (v, d=2) => (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
+function sg(v){ return v >= 0 ? '+' : ''; }
+function fm(v, d){
+  d = (d===undefined)?2:d;
+  return (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
+}
 function hc(v){
   if(v>2)    return{bg:'#276749',fg:'#c6f6d5'};
   if(v>0.8)  return{bg:'#38a169',fg:'#f0fff4'};
@@ -165,50 +169,53 @@ function currentSectors(){
 }
 
 function renderBanner(){
-  const tsm = data.indices.TSM_ADR || data.indices.TSM;
+  var tsm = data.indices.TSM_ADR || data.indices.TSM;
   if(!tsm||!tsm.price) return;
-  const c = tsm.changePercent;
-  const dir = c>0.3?'up':c<-0.3?'dn':'fl';
-  const strength = Math.abs(c)>2?'強烈':Math.abs(c)>1?'明顯':'溫和';
-  const ico = dir==='up'?'📈':dir==='dn'?'📉':'📊';
-  const sig = dir==='up'?`${strength}看多訊號 — 台股半導體預期開高`
-            : dir==='dn'?`${strength}看空訊號 — 台股半導體預期開低`
+  var c = tsm.changePercent;
+  var dir = c>0.3?'up':c<-0.3?'dn':'fl';
+  var strength = Math.abs(c)>2?'強烈':Math.abs(c)>1?'明顯':'溫和';
+  var ico = dir==='up'?'📈':dir==='dn'?'📉':'📊';
+  var sig = dir==='up'?(strength+'看多訊號 — 台股半導體預期開高')
+            : dir==='dn'?(strength+'看空訊號 — 台股半導體預期開低')
             : '訊號偏中性 — 方向待觀察';
-  document.getElementById('banner').innerHTML=`
-    <div class="signal ${dir}">
-      <div class="sig-ic">${ico}</div>
-      <div class="sig-bd">
-        <div class="sig-t ${dir}">TSM ADR 領先訊號</div>
-        <div class="sig-d ${dir}">${sig}</div>
-        <div class="sig-a">美東昨收 $${fm(tsm.price)} · Yahoo Finance</div>
-      </div>
-      <div class="sig-v">
-        <div class="big ${dir}">${sg(c)}${c.toFixed(2)}%</div>
-        <div class="sm">前 $${fm(tsm.prev)}</div>
-      </div>
-    </div>`;
+  document.getElementById('banner').innerHTML =
+    '<div class="signal '+dir+'">' +
+      '<div class="sig-ic">'+ico+'</div>' +
+      '<div class="sig-bd">' +
+        '<div class="sig-t '+dir+'">TSM ADR 領先訊號</div>' +
+        '<div class="sig-d '+dir+'">'+sig+'</div>' +
+        '<div class="sig-a">美東昨收 $'+fm(tsm.price)+' · Yahoo Finance</div>' +
+      '</div>' +
+      '<div class="sig-v">' +
+        '<div class="big '+dir+'">'+sg(c)+c.toFixed(2)+'%</div>' +
+        '<div class="sm">前 $'+fm(tsm.prev)+'</div>' +
+      '</div>' +
+    '</div>';
 }
 
 function renderIdx(){
-  const grid = document.getElementById('idxGrid');
-  grid.innerHTML = idxOrder.map(key => {
-    const d = data.indices[key];
-    const m = IDX_META[key];
-    if(!d||!d.price||!m) return '';
-    const c = d.changePercent, dir = c>0?'up':c<0?'dn':'fl';
-    return`<div class="ic${m.lead?' hl':''}" draggable="true" data-key="${key}"
-        ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
-        ondrop="onDrop(event)" ondragend="onDragEnd(event)"
-        ontouchstart="onTouchStart(event)" ontouchmove="onTouchMove(event)" ontouchend="onTouchEnd(event)">
-      <div class="ic-l">${m.label}${m.lead?'<span class="lead-tag">領先</span>':''}</div>
-      <div class="ic-v">${m.dollar?'$':''}${fm(d.price,m.dollar?2:0)}</div>
-      <div class="badge ${dir}">${c>=0?'▲':'▼'} ${Math.abs(c).toFixed(2)}%</div>
-      <div class="ic-p">前 ${m.dollar?'$':''}${fm(d.prev,m.dollar?2:0)}</div>
-    </div>`;
-  }).join('');
+  var grid = document.getElementById('idxGrid');
+  var html = '';
+  for(var k=0;k<idxOrder.length;k++){
+    var key = idxOrder[k];
+    var d = data.indices[key];
+    var m = IDX_META[key];
+    if(!d||!d.price||!m) continue;
+    var c = d.changePercent, dir = c>0?'up':c<0?'dn':'fl';
+    html += '<div class="ic'+(m.lead?' hl':'')+'" draggable="true" data-key="'+key+'"' +
+        ' ondragstart="onDragStart(event)" ondragover="onDragOver(event)"' +
+        ' ondrop="onDrop(event)" ondragend="onDragEnd(event)"' +
+        ' ontouchstart="onTouchStart(event)" ontouchmove="onTouchMove(event)" ontouchend="onTouchEnd(event)">' +
+      '<div class="ic-l">'+m.label+(m.lead?'<span class="lead-tag">領先</span>':'')+'</div>' +
+      '<div class="ic-v">'+(m.dollar?'$':'')+fm(d.price,m.dollar?2:0)+'</div>' +
+      '<div class="badge '+dir+'">'+(c>=0?'▲':'▼')+' '+Math.abs(c).toFixed(2)+'%</div>' +
+      '<div class="ic-p">前 '+(m.dollar?'$':'')+fm(d.prev,m.dollar?2:0)+'</div>' +
+    '</div>';
+  }
+  grid.innerHTML = html;
 }
 
-let dragKey = null;
+var dragKey = null;
 function onDragStart(e){
   dragKey = e.currentTarget.dataset.key;
   e.currentTarget.classList.add('dragging');
@@ -216,59 +223,71 @@ function onDragStart(e){
 }
 function onDragOver(e){
   e.preventDefault();
-  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
+  var all = document.querySelectorAll('.ic');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
   e.currentTarget.classList.add('drag-over');
 }
 function onDrop(e){
   e.preventDefault();
-  const targetKey = e.currentTarget.dataset.key;
+  var targetKey = e.currentTarget.dataset.key;
   if(dragKey && dragKey !== targetKey){
-    const fi = idxOrder.indexOf(dragKey), ti = idxOrder.indexOf(targetKey);
-    if(fi>-1&&ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,dragKey); }
+    var fi = idxOrder.indexOf(dragKey), ti = idxOrder.indexOf(targetKey);
+    if(fi>-1 && ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,dragKey); }
     localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
     renderIdx();
   }
 }
 function onDragEnd(e){
   e.currentTarget.classList.remove('dragging');
-  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
+  var all = document.querySelectorAll('.ic');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
   dragKey = null;
 }
 
-let touchKey=null, touchStartX=0, touchStartY=0, touchClone=null;
+var touchKey=null, touchStartX=0, touchStartY=0, touchClone=null;
 function onTouchStart(e){
-  const el=e.currentTarget;
+  var el=e.currentTarget;
   touchKey=el.dataset.key;
-  const t=e.touches[0];
+  var t=e.touches[0];
   touchStartX=t.clientX; touchStartY=t.clientY;
   touchClone=el.cloneNode(true);
-  touchClone.style.cssText=`position:fixed;opacity:.8;pointer-events:none;z-index:999;width:${el.offsetWidth}px;left:${el.getBoundingClientRect().left}px;top:${el.getBoundingClientRect().top}px;`;
+  var rect = el.getBoundingClientRect();
+  touchClone.style.cssText='position:fixed;opacity:.8;pointer-events:none;z-index:999;width:'+el.offsetWidth+'px;left:'+rect.left+'px;top:'+rect.top+'px;';
   document.body.appendChild(touchClone);
   el.classList.add('dragging');
 }
 function onTouchMove(e){
   if(!touchClone) return;
   e.preventDefault();
-  const t=e.touches[0];
+  var t=e.touches[0];
   touchClone.style.left=(t.clientX-touchStartX+parseFloat(touchClone.style.left))+'px';
   touchClone.style.top=(t.clientY-touchStartY+parseFloat(touchClone.style.top))+'px';
   touchStartX=t.clientX; touchStartY=t.clientY;
-  const els=document.elementsFromPoint(t.clientX,t.clientY);
-  document.querySelectorAll('.ic').forEach(el=>el.classList.remove('drag-over'));
-  const target=els.find(el=>el.classList.contains('ic')&&el.dataset.key!==touchKey);
-  if(target) target.classList.add('drag-over');
+  var els=document.elementsFromPoint(t.clientX,t.clientY);
+  var all = document.querySelectorAll('.ic');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
+  for(var j=0;j<els.length;j++){
+    if(els[j].classList && els[j].classList.contains('ic') && els[j].dataset.key!==touchKey){
+      els[j].classList.add('drag-over');
+      break;
+    }
+  }
 }
 function onTouchEnd(e){
   if(touchClone){ document.body.removeChild(touchClone); touchClone=null; }
-  document.querySelectorAll('.ic').forEach(el=>{
-    el.classList.remove('dragging','drag-over');
-  });
-  const t=e.changedTouches[0];
-  const els=document.elementsFromPoint(t.clientX,t.clientY);
-  const target=els.find(el=>el.classList&&el.classList.contains('ic')&&el.dataset&&el.dataset.key!==touchKey);
-  if(target&&touchKey){
-    const fi=idxOrder.indexOf(touchKey), ti=idxOrder.indexOf(target.dataset.key);
-    if(fi>-1&&ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,touchKey); }
+  var all = document.querySelectorAll('.ic');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('dragging','drag-over');
+  var t=e.changedTouches[0];
+  var els=document.elementsFromPoint(t.clientX,t.clientY);
+  var target=null;
+  for(var j=0;j<els.length;j++){
+    if(els[j].classList && els[j].classList.contains('ic') && els[j].dataset && els[j].dataset.key!==touchKey){
+      target = els[j]; break;
+    }
+  }
+  if(target && touchKey){
+    var fi=idxOrder.indexOf(touchKey), ti=idxOrder.indexOf(target.dataset.key);
+    if(fi>-1 && ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,touchKey); }
     localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
     renderIdx();
   }
@@ -276,22 +295,22 @@ function onTouchEnd(e){
 }
 
 function renderTrend(sec){
-  const trend = sec.trend||[];
+  var trend = sec.trend||[];
   if(trendChart){ trendChart.destroy(); trendChart=null; }
-  const last = trend.length ? trend[trend.length-1] : 0;
-  const dir = last>0?'up':last<0?'dn':'fl';
-  document.getElementById('trendName').textContent = `${sec.name} 板塊`;
-  document.getElementById('trendPct').textContent = trend.length ? `${sg(last)}${last.toFixed(2)}%` : '—';
-  document.getElementById('trendPct').className = `trend-pct ${dir}`;
-  document.getElementById('trendSub').textContent = `近1個月綜合走勢（${trend.length}個交易日）`;
+  var last = trend.length ? trend[trend.length-1] : 0;
+  var dir = last>0?'up':last<0?'dn':'fl';
+  document.getElementById('trendName').textContent = sec.name+' 板塊';
+  document.getElementById('trendPct').textContent = trend.length ? (sg(last)+last.toFixed(2)+'%') : '—';
+  document.getElementById('trendPct').className = 'trend-pct '+dir;
+  document.getElementById('trendSub').textContent = '近1個月綜合走勢（'+trend.length+'個交易日）';
   if(!trend.length) return;
-  const color = last>=0?'#38a169':'#e53e3e';
-  const bgColor = last>=0?'rgba(56,161,105,.12)':'rgba(229,62,62,.12)';
-  const ctx = document.getElementById('trendChart');
+  var color = last>=0?'#38a169':'#e53e3e';
+  var bgColor = last>=0?'rgba(56,161,105,.12)':'rgba(229,62,62,.12)';
+  var ctx = document.getElementById('trendChart');
   trendChart = new Chart(ctx,{
     type:'line',
     data:{
-      labels: trend.map((_,i)=>i),
+      labels: trend.map(function(_,i){return i;}),
       datasets:[{
         data:trend, borderColor:color, borderWidth:2,
         pointRadius:0, tension:.35, fill:true, backgroundColor:bgColor
@@ -300,12 +319,12 @@ function renderTrend(sec){
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{
-        callbacks:{label:c=>`${sg(c.parsed.y)}${c.parsed.y.toFixed(2)}%`}
+        callbacks:{label:function(c){return sg(c.parsed.y)+c.parsed.y.toFixed(2)+'%';}}
       }},
       scales:{
         x:{display:false},
         y:{display:true,position:'right',
-           ticks:{font:{size:9},callback:v=>v.toFixed(1)+'%',maxTicksLimit:4},
+           ticks:{font:{size:9},callback:function(v){return v.toFixed(1)+'%';},maxTicksLimit:4},
            grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
       }
     }
@@ -313,24 +332,29 @@ function renderTrend(sec){
 }
 
 function renderHeat(){
-  const sectors = currentSectors();
+  var sectors = currentSectors();
   if(!sectors.length){ document.getElementById('hg').innerHTML=''; return; }
   document.getElementById('mkt0').className='mkt-btn'+(mkt===0?' a':'');
   document.getElementById('mkt1').className='mkt-btn'+(mkt===1?' a':'');
   document.getElementById('heatSub').textContent =
     mkt===0?'台股板塊 — 富邦即時':'SOX 費半 — Yahoo Finance';
-  document.getElementById('seg').innerHTML = sectors.map((sec,i)=>
-    `<button class="sb${subTab===i?' a':''}" onclick="setSubTab(${i})">${sec.name}</button>`
-  ).join('');
-  const sec = sectors[subTab]||sectors[0];
+  var segHtml = '';
+  for(var i=0;i<sectors.length;i++){
+    segHtml += '<button class="sb'+(subTab===i?' a':'')+'" onclick="setSubTab('+i+')">'+sectors[i].name+'</button>';
+  }
+  document.getElementById('seg').innerHTML = segHtml;
+  var sec = sectors[subTab]||sectors[0];
   renderTrend(sec);
-  document.getElementById('hg').innerHTML = sec.stocks.map(st=>{
-    const col=hc(st.changePercent);
-    return`<div class="hcell" style="background:${col.bg};color:${col.fg}"
-      title="${st.name} ${sg(st.changePercent)}${st.changePercent.toFixed(2)}%">
-      ${st.name.substring(0,4)}<br>${sg(st.changePercent)}${st.changePercent.toFixed(1)}%
-    </div>`;
-  }).join('');
+  var hgHtml = '';
+  for(var s=0;s<sec.stocks.length;s++){
+    var st = sec.stocks[s];
+    var col=hc(st.changePercent);
+    hgHtml += '<div class="hcell" style="background:'+col.bg+';color:'+col.fg+'"' +
+      ' title="'+st.name+' '+sg(st.changePercent)+st.changePercent.toFixed(2)+'%">' +
+      st.name.substring(0,4)+'<br>'+sg(st.changePercent)+st.changePercent.toFixed(1)+'%' +
+    '</div>';
+  }
+  document.getElementById('hg').innerHTML = hgHtml;
 }
 
 function setMkt(m){ mkt=m; subTab=0; renderHeat(); }
@@ -340,28 +364,34 @@ function renderAll(){
   renderBanner();
   renderIdx();
   renderHeat();
-  const upd=new Date(data.updated);
-  document.getElementById('lupd').textContent=`資料時間：${upd.toLocaleString('zh-TW')}`;
-  document.getElementById('topSub').textContent=`${data.date} 更新`;
+  var upd=new Date(data.updated);
+  document.getElementById('lupd').textContent='資料時間：'+upd.toLocaleString('zh-TW');
+  document.getElementById('topSub').textContent=data.date+' 更新';
 }
 
-async function loadData(){
-  const dot=document.getElementById('dot');
-  const stxt=document.getElementById('stxt');
+function loadData(){
+  var dot=document.getElementById('dot');
+  var stxt=document.getElementById('stxt');
   dot.className='dot busy'; stxt.textContent='抓取資料中...';
-  try{
-    const res=await fetch(`${DATA_URL}?t=${Date.now()}`);
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    data=await res.json();
-    const allKeys=Object.keys(IDX_META);
-    allKeys.forEach(k=>{ if(!idxOrder.includes(k)) idxOrder.push(k); });
-    dot.className='dot';
-    stxt.textContent=data.source==='fubon_neo'?'富邦即時 + Yahoo Finance':'資料載入完成';
-    renderAll();
-  }catch(e){
-    dot.className='dot err';
-    stxt.textContent=`載入失敗：${e.message}`;
-  }
+  fetch(DATA_URL+'?t='+Date.now())
+    .then(function(res){
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return res.json();
+    })
+    .then(function(json){
+      data=json;
+      var allKeys=Object.keys(IDX_META);
+      for(var i=0;i<allKeys.length;i++){
+        if(idxOrder.indexOf(allKeys[i])===-1) idxOrder.push(allKeys[i]);
+      }
+      dot.className='dot';
+      stxt.textContent=(data.source==='fubon_neo')?'富邦即時 + Yahoo Finance':'資料載入完成';
+      renderAll();
+    })
+    .catch(function(e){
+      dot.className='dot err';
+      stxt.textContent='載入失敗：'+e.message;
+    });
 }
 
 loadData();
