@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#1a56db">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="市場早報">
@@ -23,15 +24,11 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--tx);display:flex;flex-direction:column}
-
 .topbar{background:var(--B);color:#fff;padding:calc(env(safe-area-inset-top,0px)+14px) 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(26,86,219,.3)}
 .topbar-left h1{font-size:18px;font-weight:700;letter-spacing:-.02em}
 .topbar-left p{font-size:11px;opacity:.75;margin-top:2px}
 .upd-btn{font-size:12px;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;cursor:pointer;font-family:inherit;font-weight:500}
-
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(env(safe-area-inset-bottom,0px)+20px)}
-
-/* 領先訊號 */
 .signal{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
 .signal.up{background:var(--Gbg);border:1.5px solid #9ae6b4}
 .signal.dn{background:var(--Rbg);border:1.5px solid #feb2b2}
@@ -47,8 +44,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .sig-v .big{font-size:22px;font-weight:800;letter-spacing:-.02em}
 .sig-v .big.up{color:var(--G)}.sig-v .big.dn{color:var(--R)}.sig-v .big.fl{color:var(--tx)}
 .sig-v .sm{font-size:10px;color:var(--hi);margin-top:3px}
-
-/* 指數卡片區 */
 .ig-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .ig-label{font-size:12px;color:var(--mu);font-weight:500}
 .ig-hint{font-size:10px;color:var(--hi)}
@@ -67,34 +62,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .badge.fl{background:#edf2f7;color:var(--mu)}
 .ic-p{font-size:10px;color:var(--hi);margin-top:4px}
 .drag-hint{font-size:10px;color:var(--hi);text-align:center;margin-bottom:10px}
-
-/* 熱力圖卡片 */
 .card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .c-title{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:2px}
 .c-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
-
 .mkt-seg{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--B);border-radius:10px;overflow:hidden;margin-bottom:12px}
 .mkt-btn{font-size:13px;padding:10px 4px;text-align:center;background:transparent;border:none;color:var(--B);cursor:pointer;font-family:inherit;font-weight:600}
 .mkt-btn.a{background:var(--B);color:#fff}
-
 .seg{display:flex;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:12px;flex-wrap:wrap}
 .sb{flex:1;min-width:58px;font-size:11px;padding:9px 4px;text-align:center;background:transparent;border:none;color:var(--mu);cursor:pointer;font-family:inherit;font-weight:500;border-right:1px solid var(--bdr)}
 .sb:last-child{border-right:none}
 .sb.a{background:var(--Bbg);color:var(--B);font-weight:700}
-
-/* 走勢圖 */
 .trend-card{background:#f7fafc;border-radius:10px;padding:10px 12px;margin-bottom:10px;border:1px solid var(--bdr)}
 .trend-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .trend-name{font-size:12px;font-weight:600;color:var(--tx)}
 .trend-pct{font-size:12px;font-weight:700}
 .trend-pct.up{color:var(--Gm)}.trend-pct.dn{color:var(--Rm)}.trend-pct.fl{color:var(--mu)}
 .trend-sub{font-size:10px;color:var(--hi)}
-
-/* 熱力格 */
 .hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
 .hcell{border-radius:6px;padding:7px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.35;cursor:default}
 .hcell:active{opacity:.8}
-
 .status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
@@ -110,20 +96,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
   </div>
   <button class="upd-btn" onclick="loadData()">↻ 更新</button>
 </div>
-
 <div class="scroll">
   <div class="status">
     <span class="dot" id="dot"></span>
     <span class="stxt" id="stxt">載入中...</span>
   </div>
   <div id="banner"></div>
-
   <div class="ig-header">
     <span class="ig-label">指數總覽</span>
     <span class="ig-hint">☰ 長按卡片可拖拉排序</span>
   </div>
   <div class="ig" id="idxGrid"></div>
-
   <div class="card">
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
@@ -136,3 +119,66 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
       <div class="trend-top">
         <span class="trend-name" id="trendName">板塊走勢</span>
         <span class="trend-pct" id="trendPct"></span>
+      </div>
+      <div class="trend-sub" id="trendSub">近1個月綜合走勢</div>
+      <div style="position:relative;height:80px;margin-top:8px">
+        <canvas id="trendChart" role="img" aria-label="板塊近1個月走勢圖"></canvas>
+      </div>
+    </div>
+    <div class="hc-wrap" id="hg"></div>
+  </div>
+  <div class="lupd" id="lupd"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const DATA_URL = './data.json';
+let data = null, mkt = 0, subTab = 0, trendChart = null;
+
+const DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225'];
+let idxOrder = (() => {
+  try { return JSON.parse(localStorage.getItem('idxOrder')) || DEFAULT_ORDER; }
+  catch { return DEFAULT_ORDER; }
+})();
+
+const IDX_META = {
+  TSM_ADR: {label:'TSM ADR',   lead:true,  dollar:true},
+  TWII:    {label:'台股 TAIEX',lead:false, dollar:false},
+  SOX:     {label:'費半 SOX',  lead:false, dollar:false},
+  N225:    {label:'日經 225',  lead:false, dollar:false},
+};
+
+const sg = v => v >= 0 ? '+' : '';
+const fm = (v, d=2) => (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
+function hc(v){
+  if(v>2)    return{bg:'#276749',fg:'#c6f6d5'};
+  if(v>0.8)  return{bg:'#38a169',fg:'#f0fff4'};
+  if(v>0.2)  return{bg:'#68d391',fg:'#1c4532'};
+  if(v>-0.2) return{bg:'#e2e8f0',fg:'#4a5568'};
+  if(v>-0.8) return{bg:'#fc8181',fg:'#742a2a'};
+  if(v>-2)   return{bg:'#e53e3e',fg:'#fff5f5'};
+  return      {bg:'#9b2335',fg:'#fed7d7'};
+}
+
+function currentSectors(){
+  if(!data) return [];
+  return mkt===0 ? (data.tw_sectors||[]) : (data.sox_sectors||[]);
+}
+
+function renderBanner(){
+  const tsm = data.indices.TSM_ADR || data.indices.TSM;
+  if(!tsm||!tsm.price) return;
+  const c = tsm.changePercent;
+  const dir = c>0.3?'up':c<-0.3?'dn':'fl';
+  const strength = Math.abs(c)>2?'強烈':Math.abs(c)>1?'明顯':'溫和';
+  const ico = dir==='up'?'📈':dir==='dn'?'📉':'📊';
+  const sig = dir==='up'?`${strength}看多訊號 — 台股半導體預期開高`
+            : dir==='dn'?`${strength}看空訊號 — 台股半導體預期開低`
+            : '訊號偏中性 — 方向待觀察';
+  document.getElementById('banner').innerHTML=`
+    <div class="signal ${dir}">
+      <div class="sig-ic">${ico}</div>
+      <div class="sig-bd">
+        <div class="sig-t ${dir}">TSM ADR 領先訊號</div>
+        <div class="sig-d ${dir}">${sig}</div>
+        <div class="sig-a">美東昨收 $${fm(tsm.price)} · Yahoo Finance</div>
+      </div>
