@@ -1,7 +1,7 @@
 name: market-update
 on:
   schedule:
-    - cron: '0 0 * * 1-5'
+    - cron: '30 22 * * 0-4'
   workflow_dispatch:
 permissions:
   contents: write
