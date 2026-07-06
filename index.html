@@ -475,5 +475,7 @@ function waitForComplete(){
   });
 }
 
-document.querySelector('.upd-btn').onclick = function(){ triggerUpdate(); };
+window.addEventListener('DOMContentLoaded', function(){
+  document.querySelector('.upd-btn').onclick = function(){ triggerUpdate(); };
+});
 loadData();
