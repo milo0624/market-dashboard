@@ -369,10 +369,12 @@ function renderAll(){
   document.getElementById('topSub').textContent=data.date+' 更新';
 }
 
+var WORKER_URL = 'https://market-trigger.milo0624.workers.dev';
+
 function loadData(){
   var dot=document.getElementById('dot');
   var stxt=document.getElementById('stxt');
-  dot.className='dot busy'; stxt.textContent='抓取資料中...';
+  dot.className='dot busy'; stxt.textContent='載入資料中...';
   fetch(DATA_URL+'?t='+Date.now())
     .then(function(res){
       if(!res.ok) throw new Error('HTTP '+res.status);
@@ -394,7 +396,84 @@ function loadData(){
     });
 }
 
+function triggerUpdate(){
+  var dot=document.getElementById('dot');
+  var stxt=document.getElementById('stxt');
+  var btn=document.querySelector('.upd-btn');
+  dot.className='dot busy';
+  stxt.textContent='觸發更新中...';
+  btn.disabled=true;
+  btn.textContent='更新中...';
+  fetch(WORKER_URL+'/trigger', {method:'POST'})
+    .then(function(res){ return res.json(); })
+    .then(function(json){
+      if(!json.ok) throw new Error(json.error||'觸發失敗');
+      stxt.textContent='已觸發，等待資料更新（約30秒）...';
+      return waitForComplete();
+    })
+    .then(function(){
+      return fetch(DATA_URL+'?t='+Date.now());
+    })
+    .then(function(res){
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return res.json();
+    })
+    .then(function(json){
+      data=json;
+      var allKeys=Object.keys(IDX_META);
+      for(var i=0;i<allKeys.length;i++){
+        if(idxOrder.indexOf(allKeys[i])===-1) idxOrder.push(allKeys[i]);
+      }
+      dot.className='dot';
+      stxt.textContent='已更新（富邦即時 + Yahoo Finance）';
+      btn.disabled=false;
+      btn.textContent='↻ 更新';
+      renderAll();
+    })
+    .catch(function(e){
+      dot.className='dot err';
+      stxt.textContent='更新失敗：'+e.message;
+      btn.disabled=false;
+      btn.textContent='↻ 更新';
+    });
+}
+
+function waitForComplete(){
+  return new Promise(function(resolve, reject){
+    var maxTries = 20;
+    var tried = 0;
+    var lastUpdated = null;
+    fetch(WORKER_URL+'/status')
+      .then(function(r){ return r.json(); })
+      .then(function(s){ lastUpdated = s.updated_at; poll(); })
+      .catch(function(){ poll(); });
+    function poll(){
+      setTimeout(function(){
+        tried++;
+        fetch(WORKER_URL+'/status')
+          .then(function(r){ return r.json(); })
+          .then(function(s){
+            var stxt=document.getElementById('stxt');
+            var elapsed = tried * 3;
+            stxt.textContent='等待資料更新中... （'+elapsed+'秒）';
+            if(s.updated_at !== lastUpdated &&
+               (s.status==='completed') &&
+               s.conclusion==='success'){
+              resolve();
+            } else if(tried >= maxTries){
+              reject(new Error('等待逾時，請稍後手動重新整理'));
+            } else {
+              poll();
+            }
+          })
+          .catch(function(){
+            if(tried >= maxTries) reject(new Error('無法查詢狀態'));
+            else poll();
+          });
+      }, 3000);
+    }
+  });
+}
+
+document.querySelector('.upd-btn').onclick = function(){ triggerUpdate(); };
 loadData();
-</script>
-</body>
-</html>
