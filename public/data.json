@@ -1,6 +1,6 @@
 {
   "date": "2026-07-06",
-  "updated": "2026-07-06T14:26:53.445987+08:00",
+  "updated": "2026-07-06T14:54:39.018407+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -14,9 +14,9 @@
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 69517.47,
-      "change": -226.6,
-      "changePercent": -0.32,
+      "price": 69737.69,
+      "change": -6.38,
+      "changePercent": -0.01,
       "prev": 69744.07
     },
     "TSM_ADR": {
