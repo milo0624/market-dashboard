@@ -69,7 +69,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .trend-pct.up{color:var(--Gm)}.trend-pct.dn{color:var(--Rm)}.trend-pct.fl{color:var(--mu)}
 .trend-sub{font-size:10px;color:var(--hi)}
 .hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
-.hcell{border-radius:6px;padding:7px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.35;cursor:default}
+.hcell{border-radius:6px;padding:6px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.4;cursor:default}
 .status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
@@ -304,7 +304,9 @@ function renderHeat() {
     var st = sec.stocks[h];
     var col = hc(st.changePercent);
     hgHtml += '<div class="hcell" style="background:' + col.bg + ';color:' + col.fg + '" title="' + st.name + ' ' + sg(st.changePercent) + st.changePercent.toFixed(2) + '%">' +
-      st.name.substring(0, 4) + '<br>' + sg(st.changePercent) + st.changePercent.toFixed(1) + '%</div>';
+      st.name.substring(0, 4) + '<br>' +
+      '<span style="font-size:8px;opacity:.85">' + fm(st.price, st.price >= 100 ? 0 : 1) + '</span><br>' +
+      sg(st.changePercent) + st.changePercent.toFixed(1) + '%</div>';
   }
   document.getElementById('hg').innerHTML = hgHtml;
 }
