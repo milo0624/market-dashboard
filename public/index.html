@@ -75,6 +75,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
 .stxt{font-size:11px;color:var(--hi);flex:1}
 .lupd{font-size:10px;color:var(--hi);text-align:center;padding-bottom:4px}
+.fut-section{margin-bottom:14px}
+.fut-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.fut-label{font-size:12px;color:var(--mu);font-weight:500}
+.fut-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fut-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:11px 14px;box-shadow:var(--shadow)}
+.fut-l{font-size:11px;color:var(--mu);margin-bottom:3px;font-weight:500}
+.fut-v{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
+.fut-p{font-size:10px;color:var(--hi);margin-top:3px}
 </style>
 </head>
 <body>
@@ -96,6 +104,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <span class="ig-hint">☰ 長按卡片可拖拉排序</span>
   </div>
   <div class="ig" id="idxGrid"></div>
+  <div class="fut-section">
+    <div class="fut-header">
+      <span class="fut-label">期貨市場</span>
+      <span style="font-size:10px;color:var(--hi)">S&amp;P · 那斯達克 · 日經 · 台指</span>
+    </div>
+    <div class="fut-grid" id="futGrid"></div>
+  </div>
+
   <div class="card">
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
@@ -157,6 +173,31 @@ function hc(v) {
 function currentSectors() {
   if (!data) return [];
   return mkt === 0 ? (data.tw_sectors || []) : (data.sox_sectors || []);
+}
+
+function renderFutures() {
+  var fut = data.futures || {};
+  var order = [
+    {key:'ES',  label:'S&P 500 期貨', dollar:true},
+    {key:'NQ',  label:'那斯達克期貨', dollar:true},
+    {key:'NKD', label:'日經期貨',     dollar:false},
+    {key:'TWN', label:'台指期',       dollar:false},
+  ];
+  var html = '';
+  for (var i = 0; i < order.length; i++) {
+    var o = order[i];
+    var d = fut[o.key];
+    if (!d || !d.price) continue;
+    var c = d.changePercent;
+    var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    html += '<div class="fut-card">' +
+      '<div class="fut-l">' + o.label + '</div>' +
+      '<div class="fut-v">' + (o.dollar ? '' : '') + fm(d.price, d.price >= 1000 ? 0 : d.price >= 100 ? 1 : 2) + '</div>' +
+      '<div class="badge ' + dir + '" style="margin-top:5px">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</div>' +
+      '<div class="fut-p">前 ' + fm(d.prev, d.prev >= 1000 ? 0 : d.prev >= 100 ? 1 : 2) + '</div>' +
+    '</div>';
+  }
+  document.getElementById('futGrid').innerHTML = html || '<div style="font-size:12px;color:var(--mu);padding:8px">期貨資料待更新</div>';
 }
 
 function renderBanner() {
@@ -316,6 +357,7 @@ function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
 function renderAll() {
   renderBanner();
   renderIdx();
+  renderFutures();
   renderHeat();
   var upd = new Date(data.updated);
   document.getElementById('lupd').textContent = '資料時間：' + upd.toLocaleString('zh-TW');
