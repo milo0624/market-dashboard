@@ -12,23 +12,15 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>市場早報</title>
 <style>
-:root{
-  --bg:#f0f4f8;--card:#fff;--bdr:#e2e8f0;
-  --tx:#1a202c;--mu:#718096;--hi:#a0aec0;
-  --G:#276749;--Gbg:#f0fff4;--Gm:#38a169;
-  --R:#9b2335;--Rbg:#fff5f5;--Rm:#e53e3e;
-  --B:#1a56db;--Bbg:#ebf8ff;--Bm:#3182ce;
-  --r:16px;--rs:10px;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
-}
+:root{--bg:#f0f4f8;--card:#fff;--bdr:#e2e8f0;--tx:#1a202c;--mu:#718096;--hi:#a0aec0;--G:#276749;--Gbg:#f0fff4;--Gm:#38a169;--R:#9b2335;--Rbg:#fff5f5;--Rm:#e53e3e;--B:#1a56db;--Bbg:#ebf8ff;--Bm:#3182ce;--r:16px;--rs:10px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--tx);display:flex;flex-direction:column}
-.topbar{background:var(--B);color:#fff;padding:calc(env(safe-area-inset-top,0px)+14px) 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(26,86,219,.3)}
+.topbar{background:var(--B);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(26,86,219,.3)}
 .topbar-left h1{font-size:18px;font-weight:700;letter-spacing:-.02em}
 .topbar-left p{font-size:11px;opacity:.75;margin-top:2px}
 .upd-btn{font-size:12px;padding:7px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff;cursor:pointer;font-family:inherit;font-weight:500}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(env(safe-area-inset-bottom,0px)+20px)}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(env(safe-area-inset-bottom,0px) + 20px)}
 .signal{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
 .signal.up{background:var(--Gbg);border:1.5px solid #9ae6b4}
 .signal.dn{background:var(--Rbg);border:1.5px solid #feb2b2}
@@ -48,11 +40,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .ig-label{font-size:12px;color:var(--mu);font-weight:500}
 .ig-hint{font-size:10px;color:var(--hi)}
 .ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.ic{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 15px;box-shadow:var(--shadow);cursor:grab;transition:transform .15s,box-shadow .15s;user-select:none}
-.ic:active{cursor:grabbing}
-.ic.dragging{opacity:.5;transform:scale(.97)}
-.ic.drag-over{box-shadow:0 0 0 2px var(--B),var(--shadow)}
-.ic.hl{border:2px solid var(--Gm);background:linear-gradient(135deg,#f0fff4 0%,#fff 100%)}
+.ic{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 15px;box-shadow:var(--shadow);cursor:grab;user-select:none}
+.ic.dragging{opacity:.5}
+.ic.drag-over{box-shadow:0 0 0 2px var(--B)}
+.ic.hl{border:2px solid var(--Gm);background:linear-gradient(135deg,#f0fff4,#fff)}
 .ic-l{font-size:11px;color:var(--mu);margin-bottom:3px;display:flex;align-items:center;gap:5px;font-weight:500}
 .lead-tag{font-size:9px;background:var(--Gm);color:#fff;padding:1px 6px;border-radius:4px;font-weight:700}
 .ic-v{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
@@ -61,11 +52,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .badge.dn{background:#fed7d7;color:var(--R)}
 .badge.fl{background:#edf2f7;color:var(--mu)}
 .ic-p{font-size:10px;color:var(--hi);margin-top:4px}
-.drag-hint{font-size:10px;color:var(--hi);text-align:center;margin-bottom:10px}
 .card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .c-title{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:2px}
 .c-sub{font-size:11px;color:var(--mu);margin-bottom:12px}
-.mkt-seg{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--B);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.mkt-seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--B);border-radius:10px;overflow:hidden;margin-bottom:12px}
 .mkt-btn{font-size:13px;padding:10px 4px;text-align:center;background:transparent;border:none;color:var(--B);cursor:pointer;font-family:inherit;font-weight:600}
 .mkt-btn.a{background:var(--B);color:#fff}
 .seg{display:flex;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:12px;flex-wrap:wrap}
@@ -80,7 +70,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .trend-sub{font-size:10px;color:var(--hi)}
 .hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
 .hcell{border-radius:6px;padding:7px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.35;cursor:default}
-.hcell:active{opacity:.8}
 .status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
@@ -94,7 +83,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <h1>市場早報</h1>
     <p id="topSub">每日 08:00 自動更新</p>
   </div>
-  <button class="upd-btn" onclick="loadData()">↻ 更新</button>
+  <button class="upd-btn" id="updBtn">↻ 更新</button>
 </div>
 <div class="scroll">
   <div class="status">
@@ -111,8 +100,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
     <div class="mkt-seg">
-      <button class="mkt-btn a" id="mkt0" onclick="setMkt(0)">🇹🇼 台股</button>
-      <button class="mkt-btn"   id="mkt1" onclick="setMkt(1)">🇺🇸 SOX 費半</button>
+      <button class="mkt-btn a" id="mkt0">🇹🇼 台股</button>
+      <button class="mkt-btn" id="mkt1">🇺🇸 SOX 費半</button>
     </div>
     <div class="seg" id="seg"></div>
     <div class="trend-card">
@@ -122,352 +111,267 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
       </div>
       <div class="trend-sub" id="trendSub">近1個月綜合走勢</div>
       <div style="position:relative;height:80px;margin-top:8px">
-        <canvas id="trendChart" role="img" aria-label="板塊近1個月走勢圖"></canvas>
+        <canvas id="trendChart"></canvas>
       </div>
     </div>
     <div class="hc-wrap" id="hg"></div>
   </div>
   <div class="lupd" id="lupd"></div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const DATA_URL = './data.json';
-let data = null, mkt = 0, subTab = 0, trendChart = null;
+var DATA_URL = './data.json';
+var WORKER_URL = 'https://market-trigger.milo0624.workers.dev';
+var data = null;
+var mkt = 0;
+var subTab = 0;
+var trendChart = null;
+var DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225'];
+var idxOrder = DEFAULT_ORDER.slice();
+try {
+  var saved = localStorage.getItem('idxOrder');
+  if (saved) idxOrder = JSON.parse(saved);
+} catch(e) {}
 
-const DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225'];
-let idxOrder = (() => {
-  try { return JSON.parse(localStorage.getItem('idxOrder')) || DEFAULT_ORDER; }
-  catch (e) { return DEFAULT_ORDER; }
-})();
-
-const IDX_META = {
-  TSM_ADR: {label:'TSM ADR',   lead:true,  dollar:true},
-  TWII:    {label:'台股 TAIEX',lead:false, dollar:false},
-  SOX:     {label:'費半 SOX',  lead:false, dollar:false},
-  N225:    {label:'日經 225',  lead:false, dollar:false}
+var IDX_META = {
+  TSM_ADR: {label:'TSM ADR', lead:true, dollar:true},
+  TWII: {label:'台股 TAIEX', lead:false, dollar:false},
+  SOX: {label:'費半 SOX', lead:false, dollar:false},
+  N225: {label:'日經 225', lead:false, dollar:false}
 };
 
-function sg(v){ return v >= 0 ? '+' : ''; }
-function fm(v, d){
-  d = (d===undefined)?2:d;
-  return (+v||0).toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
+function sg(v) { return v >= 0 ? '+' : ''; }
+function fm(v, d) {
+  if (d === undefined) d = 2;
+  return (+v||0).toLocaleString('zh-TW', {minimumFractionDigits:d, maximumFractionDigits:d});
 }
-function hc(v){
-  if(v>2)    return{bg:'#276749',fg:'#c6f6d5'};
-  if(v>0.8)  return{bg:'#38a169',fg:'#f0fff4'};
-  if(v>0.2)  return{bg:'#68d391',fg:'#1c4532'};
-  if(v>-0.2) return{bg:'#e2e8f0',fg:'#4a5568'};
-  if(v>-0.8) return{bg:'#fc8181',fg:'#742a2a'};
-  if(v>-2)   return{bg:'#e53e3e',fg:'#fff5f5'};
-  return      {bg:'#9b2335',fg:'#fed7d7'};
+function hc(v) {
+  if (v > 2)    return {bg:'#276749', fg:'#c6f6d5'};
+  if (v > 0.8)  return {bg:'#38a169', fg:'#f0fff4'};
+  if (v > 0.2)  return {bg:'#68d391', fg:'#1c4532'};
+  if (v > -0.2) return {bg:'#e2e8f0', fg:'#4a5568'};
+  if (v > -0.8) return {bg:'#fc8181', fg:'#742a2a'};
+  if (v > -2)   return {bg:'#e53e3e', fg:'#fff5f5'};
+  return {bg:'#9b2335', fg:'#fed7d7'};
+}
+function currentSectors() {
+  if (!data) return [];
+  return mkt === 0 ? (data.tw_sectors || []) : (data.sox_sectors || []);
 }
 
-function currentSectors(){
-  if(!data) return [];
-  return mkt===0 ? (data.tw_sectors||[]) : (data.sox_sectors||[]);
-}
-
-function renderBanner(){
+function renderBanner() {
   var tsm = data.indices.TSM_ADR || data.indices.TSM;
-  if(!tsm||!tsm.price) return;
+  if (!tsm || !tsm.price) return;
   var c = tsm.changePercent;
-  var dir = c>0.3?'up':c<-0.3?'dn':'fl';
-  var strength = Math.abs(c)>2?'強烈':Math.abs(c)>1?'明顯':'溫和';
-  var ico = dir==='up'?'📈':dir==='dn'?'📉':'📊';
-  var sig = dir==='up'?(strength+'看多訊號 — 台股半導體預期開高')
-            : dir==='dn'?(strength+'看空訊號 — 台股半導體預期開低')
-            : '訊號偏中性 — 方向待觀察';
+  var dir = c > 0.3 ? 'up' : c < -0.3 ? 'dn' : 'fl';
+  var strength = Math.abs(c) > 2 ? '強烈' : Math.abs(c) > 1 ? '明顯' : '溫和';
+  var ico = dir === 'up' ? '📈' : dir === 'dn' ? '📉' : '📊';
+  var sig = dir === 'up' ? (strength + '看多訊號 — 台股半導體預期開高') :
+            dir === 'dn' ? (strength + '看空訊號 — 台股半導體預期開低') :
+            '訊號偏中性 — 方向待觀察';
   document.getElementById('banner').innerHTML =
-    '<div class="signal '+dir+'">' +
-      '<div class="sig-ic">'+ico+'</div>' +
+    '<div class="signal ' + dir + '">' +
+      '<div class="sig-ic">' + ico + '</div>' +
       '<div class="sig-bd">' +
-        '<div class="sig-t '+dir+'">TSM ADR 領先訊號</div>' +
-        '<div class="sig-d '+dir+'">'+sig+'</div>' +
-        '<div class="sig-a">美東昨收 $'+fm(tsm.price)+' · Yahoo Finance</div>' +
+        '<div class="sig-t ' + dir + '">TSM ADR 領先訊號</div>' +
+        '<div class="sig-d ' + dir + '">' + sig + '</div>' +
+        '<div class="sig-a">美東昨收 $' + fm(tsm.price) + ' · Yahoo Finance</div>' +
       '</div>' +
       '<div class="sig-v">' +
-        '<div class="big '+dir+'">'+sg(c)+c.toFixed(2)+'%</div>' +
-        '<div class="sm">前 $'+fm(tsm.prev)+'</div>' +
+        '<div class="big ' + dir + '">' + sg(c) + c.toFixed(2) + '%</div>' +
+        '<div class="sm">前 $' + fm(tsm.prev) + '</div>' +
       '</div>' +
     '</div>';
 }
 
-function renderIdx(){
-  var grid = document.getElementById('idxGrid');
+function renderIdx() {
   var html = '';
-  for(var k=0;k<idxOrder.length;k++){
+  for (var k = 0; k < idxOrder.length; k++) {
     var key = idxOrder[k];
     var d = data.indices[key];
     var m = IDX_META[key];
-    if(!d||!d.price||!m) continue;
-    var c = d.changePercent, dir = c>0?'up':c<0?'dn':'fl';
-    html += '<div class="ic'+(m.lead?' hl':'')+'" draggable="true" data-key="'+key+'"' +
-        ' ondragstart="onDragStart(event)" ondragover="onDragOver(event)"' +
-        ' ondrop="onDrop(event)" ondragend="onDragEnd(event)"' +
-        ' ontouchstart="onTouchStart(event)" ontouchmove="onTouchMove(event)" ontouchend="onTouchEnd(event)">' +
-      '<div class="ic-l">'+m.label+(m.lead?'<span class="lead-tag">領先</span>':'')+'</div>' +
-      '<div class="ic-v">'+(m.dollar?'$':'')+fm(d.price,m.dollar?2:0)+'</div>' +
-      '<div class="badge '+dir+'">'+(c>=0?'▲':'▼')+' '+Math.abs(c).toFixed(2)+'%</div>' +
-      '<div class="ic-p">前 '+(m.dollar?'$':'')+fm(d.prev,m.dollar?2:0)+'</div>' +
+    if (!d || !d.price || !m) continue;
+    var c = d.changePercent;
+    var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    html += '<div class="ic' + (m.lead ? ' hl' : '') + '" draggable="true" data-key="' + key + '">' +
+      '<div class="ic-l">' + m.label + (m.lead ? '<span class="lead-tag">領先</span>' : '') + '</div>' +
+      '<div class="ic-v">' + (m.dollar ? '$' : '') + fm(d.price, m.dollar ? 2 : 0) + '</div>' +
+      '<div class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</div>' +
+      '<div class="ic-p">前 ' + (m.dollar ? '$' : '') + fm(d.prev, m.dollar ? 2 : 0) + '</div>' +
     '</div>';
   }
-  grid.innerHTML = html;
+  document.getElementById('idxGrid').innerHTML = html;
+  setupDrag();
 }
 
-var dragKey = null;
-function onDragStart(e){
-  dragKey = e.currentTarget.dataset.key;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed='move';
-}
-function onDragOver(e){
-  e.preventDefault();
-  var all = document.querySelectorAll('.ic');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
-  e.currentTarget.classList.add('drag-over');
-}
-function onDrop(e){
-  e.preventDefault();
-  var targetKey = e.currentTarget.dataset.key;
-  if(dragKey && dragKey !== targetKey){
-    var fi = idxOrder.indexOf(dragKey), ti = idxOrder.indexOf(targetKey);
-    if(fi>-1 && ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,dragKey); }
-    localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
-    renderIdx();
+function setupDrag() {
+  var cards = document.querySelectorAll('.ic');
+  var dragKey = null;
+  for (var i = 0; i < cards.length; i++) {
+    (function(card) {
+      card.addEventListener('dragstart', function(e) {
+        dragKey = card.dataset.key;
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      card.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        var all = document.querySelectorAll('.ic');
+        for (var j = 0; j < all.length; j++) all[j].classList.remove('drag-over');
+        card.classList.add('drag-over');
+      });
+      card.addEventListener('drop', function(e) {
+        e.preventDefault();
+        var targetKey = card.dataset.key;
+        if (dragKey && dragKey !== targetKey) {
+          var fi = idxOrder.indexOf(dragKey), ti = idxOrder.indexOf(targetKey);
+          if (fi > -1 && ti > -1) { idxOrder.splice(fi, 1); idxOrder.splice(ti, 0, dragKey); }
+          try { localStorage.setItem('idxOrder', JSON.stringify(idxOrder)); } catch(e) {}
+          renderIdx();
+        }
+      });
+      card.addEventListener('dragend', function() {
+        card.classList.remove('dragging');
+        var all = document.querySelectorAll('.ic');
+        for (var j = 0; j < all.length; j++) all[j].classList.remove('drag-over');
+        dragKey = null;
+      });
+    })(cards[i]);
   }
-}
-function onDragEnd(e){
-  e.currentTarget.classList.remove('dragging');
-  var all = document.querySelectorAll('.ic');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
-  dragKey = null;
 }
 
-var touchKey=null, touchStartX=0, touchStartY=0, touchClone=null;
-function onTouchStart(e){
-  var el=e.currentTarget;
-  touchKey=el.dataset.key;
-  var t=e.touches[0];
-  touchStartX=t.clientX; touchStartY=t.clientY;
-  touchClone=el.cloneNode(true);
-  var rect = el.getBoundingClientRect();
-  touchClone.style.cssText='position:fixed;opacity:.8;pointer-events:none;z-index:999;width:'+el.offsetWidth+'px;left:'+rect.left+'px;top:'+rect.top+'px;';
-  document.body.appendChild(touchClone);
-  el.classList.add('dragging');
-}
-function onTouchMove(e){
-  if(!touchClone) return;
-  e.preventDefault();
-  var t=e.touches[0];
-  touchClone.style.left=(t.clientX-touchStartX+parseFloat(touchClone.style.left))+'px';
-  touchClone.style.top=(t.clientY-touchStartY+parseFloat(touchClone.style.top))+'px';
-  touchStartX=t.clientX; touchStartY=t.clientY;
-  var els=document.elementsFromPoint(t.clientX,t.clientY);
-  var all = document.querySelectorAll('.ic');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('drag-over');
-  for(var j=0;j<els.length;j++){
-    if(els[j].classList && els[j].classList.contains('ic') && els[j].dataset.key!==touchKey){
-      els[j].classList.add('drag-over');
-      break;
-    }
-  }
-}
-function onTouchEnd(e){
-  if(touchClone){ document.body.removeChild(touchClone); touchClone=null; }
-  var all = document.querySelectorAll('.ic');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('dragging','drag-over');
-  var t=e.changedTouches[0];
-  var els=document.elementsFromPoint(t.clientX,t.clientY);
-  var target=null;
-  for(var j=0;j<els.length;j++){
-    if(els[j].classList && els[j].classList.contains('ic') && els[j].dataset && els[j].dataset.key!==touchKey){
-      target = els[j]; break;
-    }
-  }
-  if(target && touchKey){
-    var fi=idxOrder.indexOf(touchKey), ti=idxOrder.indexOf(target.dataset.key);
-    if(fi>-1 && ti>-1){ idxOrder.splice(fi,1); idxOrder.splice(ti,0,touchKey); }
-    localStorage.setItem('idxOrder', JSON.stringify(idxOrder));
-    renderIdx();
-  }
-  touchKey=null;
-}
-
-function renderTrend(sec){
-  var trend = sec.trend||[];
-  if(trendChart){ trendChart.destroy(); trendChart=null; }
-  var last = trend.length ? trend[trend.length-1] : 0;
-  var dir = last>0?'up':last<0?'dn':'fl';
-  document.getElementById('trendName').textContent = sec.name+' 板塊';
-  document.getElementById('trendPct').textContent = trend.length ? (sg(last)+last.toFixed(2)+'%') : '—';
-  document.getElementById('trendPct').className = 'trend-pct '+dir;
-  document.getElementById('trendSub').textContent = '近1個月綜合走勢（'+trend.length+'個交易日）';
-  if(!trend.length) return;
-  var color = last>=0?'#38a169':'#e53e3e';
-  var bgColor = last>=0?'rgba(56,161,105,.12)':'rgba(229,62,62,.12)';
-  var ctx = document.getElementById('trendChart');
-  trendChart = new Chart(ctx,{
-    type:'line',
-    data:{
-      labels: trend.map(function(_,i){return i;}),
-      datasets:[{
-        data:trend, borderColor:color, borderWidth:2,
-        pointRadius:0, tension:.35, fill:true, backgroundColor:bgColor
+function renderTrend(sec) {
+  var trend = sec.trend || [];
+  if (trendChart) { trendChart.destroy(); trendChart = null; }
+  var last = trend.length ? trend[trend.length - 1] : 0;
+  var dir = last > 0 ? 'up' : last < 0 ? 'dn' : 'fl';
+  document.getElementById('trendName').textContent = sec.name + ' 板塊';
+  document.getElementById('trendPct').textContent = trend.length ? (sg(last) + last.toFixed(2) + '%') : '—';
+  document.getElementById('trendPct').className = 'trend-pct ' + dir;
+  document.getElementById('trendSub').textContent = '近1個月綜合走勢（' + trend.length + '個交易日）';
+  if (!trend.length) return;
+  var color = last >= 0 ? '#38a169' : '#e53e3e';
+  var bgColor = last >= 0 ? 'rgba(56,161,105,.12)' : 'rgba(229,62,62,.12)';
+  trendChart = new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels: trend.map(function(_, i) { return i; }),
+      datasets: [{
+        data: trend, borderColor: color, borderWidth: 2,
+        pointRadius: 0, tension: .35, fill: true, backgroundColor: bgColor
       }]
     },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{
-        callbacks:{label:function(c){return sg(c.parsed.y)+c.parsed.y.toFixed(2)+'%';}}
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: function(c) { return sg(c.parsed.y) + c.parsed.y.toFixed(2) + '%'; } }
       }},
-      scales:{
-        x:{display:false},
-        y:{display:true,position:'right',
-           ticks:{font:{size:9},callback:function(v){return v.toFixed(1)+'%';},maxTicksLimit:4},
-           grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+      scales: {
+        x: { display: false },
+        y: { display: true, position: 'right',
+          ticks: { font: { size: 9 }, callback: function(v) { return v.toFixed(1) + '%'; }, maxTicksLimit: 4 },
+          grid: { color: 'rgba(0,0,0,.04)' }, border: { display: false }
+        }
       }
     }
   });
 }
 
-function renderHeat(){
+function renderHeat() {
   var sectors = currentSectors();
-  if(!sectors.length){ document.getElementById('hg').innerHTML=''; return; }
-  document.getElementById('mkt0').className='mkt-btn'+(mkt===0?' a':'');
-  document.getElementById('mkt1').className='mkt-btn'+(mkt===1?' a':'');
-  document.getElementById('heatSub').textContent =
-    mkt===0?'台股板塊 — 富邦即時':'SOX 費半 — Yahoo Finance';
+  if (!sectors.length) { document.getElementById('hg').innerHTML = ''; return; }
+  document.getElementById('mkt0').className = 'mkt-btn' + (mkt === 0 ? ' a' : '');
+  document.getElementById('mkt1').className = 'mkt-btn' + (mkt === 1 ? ' a' : '');
+  document.getElementById('heatSub').textContent = mkt === 0 ? '台股板塊 — 富邦即時' : 'SOX 費半 — Yahoo Finance';
   var segHtml = '';
-  for(var i=0;i<sectors.length;i++){
-    segHtml += '<button class="sb'+(subTab===i?' a':'')+'" onclick="setSubTab('+i+')">'+sectors[i].name+'</button>';
+  for (var i = 0; i < sectors.length; i++) {
+    segHtml += '<button class="sb' + (subTab === i ? ' a' : '') + '" data-idx="' + i + '">' + sectors[i].name + '</button>';
   }
   document.getElementById('seg').innerHTML = segHtml;
-  var sec = sectors[subTab]||sectors[0];
+  var segBtns = document.querySelectorAll('.sb');
+  for (var s = 0; s < segBtns.length; s++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        subTab = parseInt(btn.dataset.idx);
+        renderHeat();
+      });
+    })(segBtns[s]);
+  }
+  var sec = sectors[subTab] || sectors[0];
   renderTrend(sec);
   var hgHtml = '';
-  for(var s=0;s<sec.stocks.length;s++){
-    var st = sec.stocks[s];
-    var col=hc(st.changePercent);
-    hgHtml += '<div class="hcell" style="background:'+col.bg+';color:'+col.fg+'"' +
-      ' title="'+st.name+' '+sg(st.changePercent)+st.changePercent.toFixed(2)+'%">' +
-      st.name.substring(0,4)+'<br>'+sg(st.changePercent)+st.changePercent.toFixed(1)+'%' +
-    '</div>';
+  for (var h = 0; h < sec.stocks.length; h++) {
+    var st = sec.stocks[h];
+    var col = hc(st.changePercent);
+    hgHtml += '<div class="hcell" style="background:' + col.bg + ';color:' + col.fg + '" title="' + st.name + ' ' + sg(st.changePercent) + st.changePercent.toFixed(2) + '%">' +
+      st.name.substring(0, 4) + '<br>' + sg(st.changePercent) + st.changePercent.toFixed(1) + '%</div>';
   }
   document.getElementById('hg').innerHTML = hgHtml;
 }
 
-function setMkt(m){ mkt=m; subTab=0; renderHeat(); }
-function setSubTab(i){ subTab=i; renderHeat(); }
+function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
 
-function renderAll(){
+function renderAll() {
   renderBanner();
   renderIdx();
   renderHeat();
-  var upd=new Date(data.updated);
-  document.getElementById('lupd').textContent='資料時間：'+upd.toLocaleString('zh-TW');
-  document.getElementById('topSub').textContent=data.date+' 更新';
+  var upd = new Date(data.updated);
+  document.getElementById('lupd').textContent = '資料時間：' + upd.toLocaleString('zh-TW');
+  document.getElementById('topSub').textContent = data.date + ' 更新';
 }
 
-var WORKER_URL = 'https://market-trigger.milo0624.workers.dev';
-
-function loadData(){
-  var dot=document.getElementById('dot');
-  var stxt=document.getElementById('stxt');
-  dot.className='dot busy'; stxt.textContent='載入資料中...';
-  fetch(DATA_URL+'?t='+Date.now())
-    .then(function(res){
-      if(!res.ok) throw new Error('HTTP '+res.status);
+function loadData() {
+  var dot = document.getElementById('dot');
+  var stxt = document.getElementById('stxt');
+  dot.className = 'dot busy';
+  stxt.textContent = '載入資料中...';
+  fetch(DATA_URL + '?t=' + Date.now())
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     })
-    .then(function(json){
-      data=json;
-      var allKeys=Object.keys(IDX_META);
-      for(var i=0;i<allKeys.length;i++){
-        if(idxOrder.indexOf(allKeys[i])===-1) idxOrder.push(allKeys[i]);
+    .then(function(json) {
+      data = json;
+      var allKeys = Object.keys(IDX_META);
+      for (var i = 0; i < allKeys.length; i++) {
+        if (idxOrder.indexOf(allKeys[i]) === -1) idxOrder.push(allKeys[i]);
       }
-      dot.className='dot';
-      stxt.textContent=(data.source==='fubon_neo')?'富邦即時 + Yahoo Finance':'資料載入完成';
+      dot.className = 'dot';
+      stxt.textContent = data.source === 'fubon_neo' ? '富邦即時 + Yahoo Finance' : '資料載入完成';
       renderAll();
     })
-    .catch(function(e){
-      dot.className='dot err';
-      stxt.textContent='載入失敗：'+e.message;
+    .catch(function(e) {
+      dot.className = 'dot err';
+      stxt.textContent = '載入失敗：' + e.message;
     });
 }
 
-function triggerUpdate(){
-  var dot=document.getElementById('dot');
-  var stxt=document.getElementById('stxt');
-  var btn=document.querySelector('.upd-btn');
-  dot.className='dot busy';
-  stxt.textContent='觸發更新中...';
-  btn.disabled=true;
-  btn.textContent='更新中...';
-  fetch(WORKER_URL+'/trigger', {method:'POST'})
-    .then(function(res){ return res.json(); })
-    .then(function(json){
-      if(!json.ok) throw new Error(json.error||'觸發失敗');
-      stxt.textContent='已觸發，等待資料更新（約30秒）...';
-      return waitForComplete();
-    })
-    .then(function(){
-      return fetch(DATA_URL+'?t='+Date.now());
-    })
-    .then(function(res){
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      return res.json();
-    })
-    .then(function(json){
-      data=json;
-      var allKeys=Object.keys(IDX_META);
-      for(var i=0;i<allKeys.length;i++){
-        if(idxOrder.indexOf(allKeys[i])===-1) idxOrder.push(allKeys[i]);
-      }
-      dot.className='dot';
-      stxt.textContent='已更新（富邦即時 + Yahoo Finance）';
-      btn.disabled=false;
-      btn.textContent='↻ 更新';
-      renderAll();
-    })
-    .catch(function(e){
-      dot.className='dot err';
-      stxt.textContent='更新失敗：'+e.message;
-      btn.disabled=false;
-      btn.textContent='↻ 更新';
-    });
-}
-
-function waitForComplete(){
-  return new Promise(function(resolve, reject){
+function waitForComplete() {
+  return new Promise(function(resolve, reject) {
     var maxTries = 20;
     var tried = 0;
     var lastUpdated = null;
-    fetch(WORKER_URL+'/status')
-      .then(function(r){ return r.json(); })
-      .then(function(s){ lastUpdated = s.updated_at; poll(); })
-      .catch(function(){ poll(); });
-    function poll(){
-      setTimeout(function(){
+    fetch(WORKER_URL + '/status')
+      .then(function(r) { return r.json(); })
+      .then(function(s) { lastUpdated = s.updated_at; poll(); })
+      .catch(function() { poll(); });
+    function poll() {
+      setTimeout(function() {
         tried++;
-        fetch(WORKER_URL+'/status')
-          .then(function(r){ return r.json(); })
-          .then(function(s){
-            var stxt=document.getElementById('stxt');
-            var elapsed = tried * 3;
-            stxt.textContent='等待資料更新中... （'+elapsed+'秒）';
-            if(s.updated_at !== lastUpdated &&
-               (s.status==='completed') &&
-               s.conclusion==='success'){
+        fetch(WORKER_URL + '/status')
+          .then(function(r) { return r.json(); })
+          .then(function(s) {
+            document.getElementById('stxt').textContent = '等待資料更新中...（' + (tried * 3) + '秒）';
+            if (s.updated_at !== lastUpdated && s.status === 'completed' && s.conclusion === 'success') {
               resolve();
-            } else if(tried >= maxTries){
+            } else if (tried >= maxTries) {
               reject(new Error('等待逾時，請稍後手動重新整理'));
             } else {
               poll();
             }
           })
-          .catch(function(){
-            if(tried >= maxTries) reject(new Error('無法查詢狀態'));
+          .catch(function() {
+            if (tried >= maxTries) reject(new Error('無法查詢狀態'));
             else poll();
           });
       }, 3000);
@@ -475,5 +379,49 @@ function waitForComplete(){
   });
 }
 
-document.querySelector('.upd-btn').onclick = function(){ triggerUpdate(); };
+function triggerUpdate() {
+  var dot = document.getElementById('dot');
+  var stxt = document.getElementById('stxt');
+  var btn = document.getElementById('updBtn');
+  dot.className = 'dot busy';
+  stxt.textContent = '觸發更新中...';
+  btn.disabled = true;
+  btn.textContent = '更新中...';
+  fetch(WORKER_URL + '/trigger', { method: 'POST' })
+    .then(function(res) { return res.json(); })
+    .then(function(json) {
+      if (!json.ok) throw new Error(json.error || '觸發失敗');
+      stxt.textContent = '已觸發，等待資料更新（約30秒）...';
+      return waitForComplete();
+    })
+    .then(function() {
+      return fetch(DATA_URL + '?t=' + Date.now());
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(json) {
+      data = json;
+      dot.className = 'dot';
+      stxt.textContent = '已更新（富邦即時 + Yahoo Finance）';
+      btn.disabled = false;
+      btn.textContent = '↻ 更新';
+      renderAll();
+    })
+    .catch(function(e) {
+      dot.className = 'dot err';
+      stxt.textContent = '更新失敗：' + e.message;
+      btn.disabled = false;
+      btn.textContent = '↻ 更新';
+    });
+}
+
+document.getElementById('updBtn').addEventListener('click', function() { triggerUpdate(); });
+document.getElementById('mkt0').addEventListener('click', function() { setMkt(0); });
+document.getElementById('mkt1').addEventListener('click', function() { setMkt(1); });
+
 loadData();
+</script>
+</body>
+</html>
