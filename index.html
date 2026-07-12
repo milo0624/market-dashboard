@@ -112,6 +112,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <div class="fut-grid" id="futGrid"></div>
   </div>
 
+  <div class="card" id="stratCard">
+    <div class="c-title">策略推薦</div>
+    <div class="c-sub">TSM ADR × S&P期貨 × 台指期 合併判斷</div>
+    <div id="stratContent"></div>
+  </div>
+
   <div class="card">
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
@@ -198,6 +204,124 @@ function renderFutures() {
     '</div>';
   }
   document.getElementById('futGrid').innerHTML = html || '<div style="font-size:12px;color:var(--mu);padding:8px">期貨資料待更新</div>';
+}
+
+function renderStrategy() {
+  var tsm = data.indices.TSM_ADR || data.indices.TSM || {};
+  var sox = data.indices.SOX || {};
+  var sp  = (data.futures && data.futures.ES)  || {};
+  var twn = (data.futures && data.futures.TWN) || {};
+
+  var tsmC = tsm.changePercent || 0;
+  var soxC = sox.changePercent || 0;
+  var spC  = sp.changePercent  || 0;
+  var twnC = twn.changePercent || 0;
+
+  // 方向判斷（對應 MA 趨勢）
+  var tsmDir = tsmC >  0.3 ? 1 : tsmC < -0.3 ? -1 : 0;
+  var soxDir = soxC >  0.3 ? 1 : soxC < -0.3 ? -1 : 0;
+  var spDir  = spC  >  0.3 ? 1 : spC  < -0.3 ? -1 : 0;
+  var twnDir = twnC >  0.3 ? 1 : twnC < -0.3 ? -1 : 0;
+
+  // 突破強度（對應箱頂/箱底突破）
+  var tsmBreakout = Math.abs(tsmC) >= 1.5;
+
+  // 成交量替代：SOX 與 TSM 同向視為量能確認
+  var volConfirm = (tsmDir > 0 && soxDir > 0) || (tsmDir < 0 && soxDir < 0);
+
+  // K線型態替代：S&P + 台指期同向
+  var patternConfirm = (tsmDir > 0 && spDir > 0 && twnDir > 0) ||
+                       (tsmDir < 0 && spDir < 0 && twnDir < 0);
+
+  // 嚴格模式：對應原策略 longConfirm_strict
+  var strictLong  = tsmBreakout && tsmDir > 0 && volConfirm && patternConfirm;
+  var strictShort = tsmBreakout && tsmDir < 0 && volConfirm && patternConfirm;
+
+  // 寬鬆模式：對應原策略 longConfirm_loose
+  var looseLong  = tsmDir > 0 && (volConfirm || patternConfirm);
+  var looseShort = tsmDir < 0 && (volConfirm || patternConfirm);
+
+  // 確認數量（0~4）
+  var bullScore = (tsmDir > 0 ? 1 : 0) + (soxDir > 0 ? 1 : 0) +
+                  (spDir > 0 ? 1 : 0) + (twnDir > 0 ? 1 : 0);
+  var bearScore = (tsmDir < 0 ? 1 : 0) + (soxDir < 0 ? 1 : 0) +
+                  (spDir < 0 ? 1 : 0) + (twnDir < 0 ? 1 : 0);
+
+  var signal, mode, color, border, advice, sl, tp, entryNote;
+
+  if (strictLong) {
+    signal = '🔵 強勢多頭（嚴格確認）';
+    mode = '嚴格';
+    color = '#ebf8ff'; border = '#90cdf4';
+    advice = 'TSM ADR 強勢突破（' + tsmC.toFixed(2) + '%），SOX 量能確認，S&P+台指期三向同多，符合嚴格做多條件。';
+    sl = '止損：進場價 × 97%（-3%）';
+    tp = '止盈：進場價 × 106%（+6%）';
+    entryNote = '可考慮台指期多單或 S&P 多單，建議開盤確認後進場。';
+  } else if (strictShort) {
+    signal = '🔴 強勢空頭（嚴格確認）';
+    mode = '嚴格';
+    color = '#fff5f5'; border = '#feb2b2';
+    advice = 'TSM ADR 強勢下破（' + tsmC.toFixed(2) + '%），SOX 量能確認，S&P+台指期三向同空，符合嚴格做空條件。';
+    sl = '止損：進場價 × 103%（+3%）';
+    tp = '止盈：進場價 × 94%（-6%）';
+    entryNote = '可考慮台指期空單或 S&P 空單，建議開盤確認後進場。';
+  } else if (looseLong && bullScore >= 3) {
+    signal = '🟢 偏多（寬鬆確認）';
+    mode = '寬鬆';
+    color = '#f0fff4'; border = '#9ae6b4';
+    advice = 'TSM ADR 看多（' + tsmC.toFixed(2) + '%），' + bullScore + '/4 指標同向，量能或型態其一確認，符合寬鬆做多條件。';
+    sl = '止損：進場價 × 97%（-3%）';
+    tp = '止盈：進場價 × 106%（+6%）';
+    entryNote = '訊號強度中等，建議倉位 50% 以下，等待更多確認。';
+  } else if (looseShort && bearScore >= 3) {
+    signal = '🟠 偏空（寬鬆確認）';
+    mode = '寬鬆';
+    color = '#fffaf0'; border = '#fbd38d';
+    advice = 'TSM ADR 看空（' + tsmC.toFixed(2) + '%），' + bearScore + '/4 指標同向，量能或型態其一確認，符合寬鬆做空條件。';
+    sl = '止損：進場價 × 103%（+3%）';
+    tp = '止盈：進場價 × 94%（-6%）';
+    entryNote = '訊號強度中等，建議倉位 50% 以下，等待更多確認。';
+  } else {
+    signal = '⚪ 訊號不明，觀望';
+    mode = '無';
+    color = '#f7fafc'; border = '#e2e8f0';
+    advice = '各指標方向不一致（多：' + bullScore + '/4，空：' + bearScore + '/4），未達進場條件。';
+    sl = '—';
+    tp = '—';
+    entryNote = '依原策略紀律，訊號未確認前不進場。';
+  }
+
+  var indicators = [
+    {label:'TSM ADR（突破主訊號）', val:tsmC, dir:tsmDir, extra: tsmBreakout ? '✓ 突破閾值' : ''},
+    {label:'SOX（量能確認）',       val:soxC, dir:soxDir, extra: volConfirm ? '✓ 量能同向' : ''},
+    {label:'S&P 期貨（型態確認）',  val:spC,  dir:spDir,  extra:''},
+    {label:'台指期（型態確認）',    val:twnC, dir:twnDir, extra: patternConfirm ? '✓ 型態確認' : ''},
+  ];
+
+  var rowHtml = indicators.map(function(r) {
+    var cls = r.dir > 0 ? 'up' : r.dir < 0 ? 'dn' : 'fl';
+    var ico = r.dir > 0 ? '▲' : r.dir < 0 ? '▼' : '—';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr)">' +
+      '<div>' +
+        '<div style="font-size:11px;color:var(--mu)">' + r.label + '</div>' +
+        (r.extra ? '<div style="font-size:10px;color:var(--Gm)">' + r.extra + '</div>' : '') +
+      '</div>' +
+      '<span class="badge ' + cls + '">' + ico + ' ' + Math.abs(r.val).toFixed(2) + '%</span>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('stratContent').innerHTML =
+    '<div style="background:' + color + ';border:1.5px solid ' + border + ';border-radius:10px;padding:12px 14px;margin-bottom:10px">' +
+      '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + signal + '</div>' +
+      '<div style="font-size:12px;color:var(--tx);margin-bottom:8px;line-height:1.6">' + advice + '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">' +
+        '<div style="background:rgba(229,62,62,.08);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--R)">' + sl + '</div>' +
+        '<div style="background:rgba(56,161,105,.08);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--G)">' + tp + '</div>' +
+      '</div>' +
+      '<div style="font-size:11px;color:var(--mu);border-top:1px solid rgba(0,0,0,.06);padding-top:6px">' + entryNote + '</div>' +
+    '</div>' +
+    rowHtml +
+    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法簡化版 · 僅供參考，不構成投資建議</div>';
 }
 
 function renderBanner() {
@@ -358,6 +482,7 @@ function renderAll() {
   renderBanner();
   renderIdx();
   renderFutures();
+  renderStrategy();
   renderHeat();
   var upd = new Date(data.updated);
   document.getElementById('lupd').textContent = '資料時間：' + upd.toLocaleString('zh-TW');
