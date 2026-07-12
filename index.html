@@ -148,7 +148,7 @@ var data = null;
 var mkt = 0;
 var subTab = 0;
 var trendChart = null;
-var DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225'];
+var DEFAULT_ORDER = ['TSM_ADR','TWII','SOX','N225','NVDA','VIX'];
 var idxOrder = DEFAULT_ORDER.slice();
 try {
   var saved = localStorage.getItem('idxOrder');
@@ -156,10 +156,12 @@ try {
 } catch(e) {}
 
 var IDX_META = {
-  TSM_ADR: {label:'TSM ADR', lead:true, dollar:true},
-  TWII: {label:'台股 TAIEX', lead:false, dollar:false},
-  SOX: {label:'費半 SOX', lead:false, dollar:false},
-  N225: {label:'日經 225', lead:false, dollar:false}
+  TSM_ADR: {label:'TSM ADR',   lead:true,  dollar:true},
+  TWII:    {label:'台股 TAIEX',lead:false, dollar:false},
+  SOX:     {label:'費半 SOX',  lead:false, dollar:false},
+  N225:    {label:'日經 225',  lead:false, dollar:false},
+  NVDA:    {label:'輝達 NVDA', lead:false, dollar:true},
+  VIX:     {label:'VIX 恐慌', lead:false, dollar:false},
 };
 
 function sg(v) { return v >= 0 ? '+' : ''; }
@@ -184,10 +186,10 @@ function currentSectors() {
 function renderFutures() {
   var fut = data.futures || {};
   var order = [
-    {key:'ES',  label:'S&P 500 期貨', dollar:true},
-    {key:'NQ',  label:'那斯達克期貨', dollar:true},
-    {key:'NKD', label:'日經期貨',     dollar:false},
-    {key:'TWN', label:'台指期',       dollar:false},
+    {key:'ES',  label:'S&P 500'},
+    {key:'NQ',  label:'那斯達克'},
+    {key:'NKD', label:'日經'},
+    {key:'TWN', label:'台指期'},
   ];
   var html = '';
   for (var i = 0; i < order.length; i++) {
@@ -195,12 +197,19 @@ function renderFutures() {
     var d = fut[o.key];
     if (!d || !d.price) continue;
     var c = d.changePercent;
+    var chg = d.change || 0;
     var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    var dec = d.price >= 1000 ? 0 : d.price >= 100 ? 1 : 2;
     html += '<div class="fut-card">' +
-      '<div class="fut-l">' + o.label + '</div>' +
-      '<div class="fut-v">' + (o.dollar ? '' : '') + fm(d.price, d.price >= 1000 ? 0 : d.price >= 100 ? 1 : 2) + '</div>' +
-      '<div class="badge ' + dir + '" style="margin-top:5px">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</div>' +
-      '<div class="fut-p">前 ' + fm(d.prev, d.prev >= 1000 ? 0 : d.prev >= 100 ? 1 : 2) + '</div>' +
+      '<div class="fut-l">' + o.label +
+        '<span style="font-size:9px;background:#378ADD;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px">期貨</span>' +
+      '</div>' +
+      '<div class="fut-v">' + fm(d.price, dec) + '</div>' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-top:5px">' +
+        '<span class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</span>' +
+        '<span style="font-size:10px;color:var(--mu)">' + (chg >= 0 ? '+' : '') + fm(chg, dec) + '</span>' +
+      '</div>' +
+      '<div class="fut-p">前 ' + fm(d.prev, dec) + '</div>' +
     '</div>';
   }
   document.getElementById('futGrid').innerHTML = html || '<div style="font-size:12px;color:var(--mu);padding:8px">期貨資料待更新</div>';
@@ -357,12 +366,20 @@ function renderIdx() {
     var m = IDX_META[key];
     if (!d || !d.price || !m) continue;
     var c = d.changePercent;
+    var chg = d.change || 0;
     var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    var extraTag = '';
+    if (key === 'VIX')  extraTag = '<span style="font-size:9px;background:#9b2335;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px">恐慌</span>';
+    if (key === 'NVDA') extraTag = '<span style="font-size:9px;background:#76b900;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px">AI</span>';
+    var dec = m.dollar ? 2 : (key === 'VIX' ? 2 : 0);
     html += '<div class="ic' + (m.lead ? ' hl' : '') + '" draggable="true" data-key="' + key + '">' +
-      '<div class="ic-l">' + m.label + (m.lead ? '<span class="lead-tag">領先</span>' : '') + '</div>' +
-      '<div class="ic-v">' + (m.dollar ? '$' : '') + fm(d.price, m.dollar ? 2 : 0) + '</div>' +
-      '<div class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</div>' +
-      '<div class="ic-p">前 ' + (m.dollar ? '$' : '') + fm(d.prev, m.dollar ? 2 : 0) + '</div>' +
+      '<div class="ic-l">' + m.label + (m.lead ? '<span class="lead-tag">領先</span>' : '') + extraTag + '</div>' +
+      '<div class="ic-v">' + (m.dollar ? '$' : '') + fm(d.price, dec) + '</div>' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-top:5px">' +
+        '<span class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</span>' +
+        '<span style="font-size:10px;color:var(--mu)">' + (chg >= 0 ? '+' : '') + fm(chg, m.dollar || key === 'VIX' ? 2 : 1) + '</span>' +
+      '</div>' +
+      '<div class="ic-p">前 ' + (m.dollar ? '$' : '') + fm(d.prev, dec) + '</div>' +
     '</div>';
   }
   document.getElementById('idxGrid').innerHTML = html;
@@ -485,7 +502,10 @@ function renderAll() {
   renderStrategy();
   renderHeat();
   var upd = new Date(data.updated);
-  document.getElementById('lupd').textContent = '資料時間：' + upd.toLocaleString('zh-TW');
+  var upd = new Date(data.updated);
+  var h = upd.getHours(), mi = upd.getMinutes();
+  var timeStr = (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
+  document.getElementById('lupd').textContent = '資料更新於 ' + data.date + ' ' + timeStr + '（富邦即時 + Yahoo Finance）';
   document.getElementById('topSub').textContent = data.date + ' 更新';
 }
 
