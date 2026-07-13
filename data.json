@@ -1,6 +1,6 @@
 {
   "date": "2026-07-14",
-  "updated": "2026-07-14T07:11:33.901005+08:00",
+  "updated": "2026-07-14T07:25:47.919023+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7551.0,
-      "change": -12.0,
-      "changePercent": -0.16,
+      "price": 7547.25,
+      "change": -15.75,
+      "changePercent": -0.21,
       "prev": 7563.0
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 29396.25,
-      "change": -79.5,
-      "changePercent": -0.27,
+      "price": 29375.75,
+      "change": -100.0,
+      "changePercent": -0.34,
       "prev": 29475.75
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 67045.0,
-      "change": -385.0,
-      "changePercent": -0.57,
+      "price": 67055.0,
+      "change": -375.0,
+      "changePercent": -0.56,
       "prev": 67430.0
     },
     "TWN": {
