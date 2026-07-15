@@ -131,6 +131,23 @@ def fetch_global():
 
     return indices, futures
 
+def fetch_metals():
+    metals_targets = [
+        ("GC=F", "GOLD", "黃金"),
+        ("SI=F", "SILVER", "白銀"),
+    ]
+    metals = {}
+    print("  [貴金屬]")
+    for symbol, key, name in metals_targets:
+        try:
+            q = yahoo_quote(symbol)
+            metals[key] = {"name": name, "symbol": symbol, **q}
+            print(f"    {name}: {q['price']} ({q['changePercent']:+.2f}%)")
+        except Exception as e:
+            print(f"    ⚠️ {name} 失敗: {e}")
+            metals[key] = {"name":name,"symbol":symbol,"price":0,"change":0,"changePercent":0,"prev":0}
+    return metals
+
 def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
     result = []
     for sec in sector_list:
@@ -200,6 +217,9 @@ def fetch_tw():
 print("\n📡 抓取全球指數 + 期貨（Yahoo Finance）...")
 global_indices, futures = fetch_global()
 
+print("\n📡 抓取貴金屬（Yahoo Finance）...")
+metals = fetch_metals()
+
 print("\n📡 抓取 SOX 個股 + 走勢（Yahoo Finance）...")
 sox_sectors = fetch_sectors_with_trend(SOX_SECTORS, use_yahoo=True)
 
@@ -219,6 +239,7 @@ payload = {
     "date": today, "updated": now.isoformat(), "source": tw_source,
     "indices": indices,
     "futures": futures,
+    "metals": metals,
     "tw_sectors": tw_sectors,
     "sox_sectors": sox_sectors,
 }
