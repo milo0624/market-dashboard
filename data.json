@@ -1,6 +1,6 @@
 {
   "date": "2026-07-22",
-  "updated": "2026-07-22T15:44:41.193850+08:00",
+  "updated": "2026-07-22T15:48:21.825239+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -46,9 +46,9 @@
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 17.37,
-      "change": 0.32,
-      "changePercent": 1.88,
+      "price": 17.44,
+      "change": 0.39,
+      "changePercent": 2.29,
       "prev": 17.05
     },
     "TSM": {
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7520.0,
-      "change": -25.75,
-      "changePercent": -0.34,
+      "price": 7519.0,
+      "change": -26.75,
+      "changePercent": -0.35,
       "prev": 7545.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 29077.75,
-      "change": -238.25,
-      "changePercent": -0.81,
+      "price": 29073.25,
+      "change": -242.75,
+      "changePercent": -0.83,
       "prev": 29316.0
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 65990.0,
-      "change": -1245.0,
-      "changePercent": -1.85,
+      "price": 66030.0,
+      "change": -1205.0,
+      "changePercent": -1.79,
       "prev": 67235.0
     },
     "TWN": {
@@ -98,17 +98,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4123.1,
-      "change": 52.0,
-      "changePercent": 1.28,
+      "price": 4122.2,
+      "change": 51.1,
+      "changePercent": 1.26,
       "prev": 4071.1
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 59.67,
-      "change": 0.84,
-      "changePercent": 1.43,
+      "price": 59.62,
+      "change": 0.78,
+      "changePercent": 1.33,
       "prev": 58.84
     }
   },
