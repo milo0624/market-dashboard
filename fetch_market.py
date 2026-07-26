@@ -235,11 +235,74 @@ except Exception as e:
 
 indices = {**global_indices, **tw_indices}
 
+# ── 訊號歷史紀錄 ──
+def calc_signal_dir(indices, futures):
+    """計算今日訊號方向：+1=多 -1=空 0=中性"""
+    tsm = indices.get("TSM_ADR", {})
+    sox = indices.get("SOX", {})
+    sp  = futures.get("ES", {})
+    twn = futures.get("TWN", {})
+    tsmC = tsm.get("changePercent", 0)
+    soxC = sox.get("changePercent", 0)
+    spC  = sp.get("changePercent", 0)
+    twnC = twn.get("changePercent", 0)
+    tsmDir = 1 if tsmC > 0.3 else (-1 if tsmC < -0.3 else 0)
+    soxDir = 1 if soxC > 0.3 else (-1 if soxC < -0.3 else 0)
+    spDir  = 1 if spC  > 0.3 else (-1 if spC  < -0.3 else 0)
+    twnDir = 1 if twnC > 0.3 else (-1 if twnC < -0.3 else 0)
+    score = tsmDir + soxDir + spDir + twnDir
+    if score >= 3:   return 1
+    if score <= -3:  return -1
+    if score >= 2 and tsmDir == 1:  return 1
+    if score <= -2 and tsmDir == -1: return -1
+    return 0
+
+HISTORY_FILE = "public/signal_history.json"
+try:
+    with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+        history = json.load(f)
+except:
+    history = []
+
+today_dir = calc_signal_dir(indices, futures)
+today_entry = {"date": today, "dir": today_dir}
+
+# 更新今日紀錄（避免重複）
+if history and history[-1]["date"] == today:
+    history[-1] = today_entry
+else:
+    history.append(today_entry)
+
+# 只保留最近 30 天
+history = history[-30:]
+
+# 計算連續訊號天數
+streak = 0
+streak_dir = today_dir
+if today_dir != 0:
+    for entry in reversed(history):
+        if entry["dir"] == today_dir:
+            streak += 1
+        else:
+            break
+
+signal_meta = {
+    "today_dir": today_dir,
+    "streak": streak,
+    "streak_dir": streak_dir,
+    "history": history[-10:],  # 最近10天給前端顯示
+}
+
+with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+    json.dump(history, f, ensure_ascii=False, indent=2)
+print(f"✅ 訊號歷史更新：今日方向={today_dir}，連續{streak}天")
+
 payload = {
     "date": today, "updated": now.isoformat(), "source": tw_source,
     "indices": indices,
     "futures": futures,
     "metals": metals,
+    "signal_meta": signal_meta,
     "tw_sectors": tw_sectors,
     "sox_sectors": sox_sectors,
 }
