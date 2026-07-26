@@ -1,6 +1,6 @@
 {
   "date": "2026-07-26",
-  "updated": "2026-07-26T12:49:47.432694+08:00",
+  "updated": "2026-07-26T13:04:03.951779+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -111,6 +111,17 @@
       "changePercent": 0.43,
       "prev": 58.66
     }
+  },
+  "signal_meta": {
+    "today_dir": -1,
+    "streak": 1,
+    "streak_dir": -1,
+    "history": [
+      {
+        "date": "2026-07-26",
+        "dir": -1
+      }
+    ]
   },
   "tw_sectors": [
     {
