@@ -356,6 +356,46 @@ function renderStrategy() {
     '</div>';
   }).join('');
 
+  // ── 連續訊號天數（從 signal_meta 讀取）──
+  var sm = data.signal_meta || {};
+  var streak = sm.streak || 0;
+  var streakDir = sm.streak_dir || 0;
+  var recentHistory = sm.history || [];
+
+  // 連續天數加強訊號
+  var streakBonus = '';
+  var streakColor = '';
+  if (streak >= 3 && streakDir !== 0) {
+    streakBonus = '🔥 連續 ' + streak + ' 天' + (streakDir > 0 ? '看多' : '看空') + '，訊號高度可靠';
+    streakColor = streakDir > 0 ? '#276749' : '#9b2335';
+  } else if (streak === 2 && streakDir !== 0) {
+    streakBonus = '📈 連續 2 天' + (streakDir > 0 ? '看多' : '看空') + '，訊號趨於確認';
+    streakColor = streakDir > 0 ? '#38a169' : '#e53e3e';
+  } else if (streak === 1) {
+    streakBonus = '⚠️ 首次出現訊號（第 1 天），建議觀察確認';
+    streakColor = '#718096';
+  } else {
+    streakBonus = '⚪ 今日訊號中性，無連續趨勢';
+    streakColor = '#718096';
+  }
+
+  // 近期歷史小圖
+  var histHtml = recentHistory.slice(-7).map(function(h) {
+    var bg = h.dir > 0 ? '#38a169' : h.dir < 0 ? '#e53e3e' : '#e2e8f0';
+    var fg = h.dir !== 0 ? '#fff' : '#718096';
+    var ico = h.dir > 0 ? '▲' : h.dir < 0 ? '▼' : '—';
+    return '<div style="display:flex;flex-direction:column;align-items:center;gap:2px">' +
+      '<div style="width:28px;height:28px;border-radius:6px;background:' + bg + ';color:' + fg + ';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">' + ico + '</div>' +
+      '<div style="font-size:9px;color:var(--hi)">' + h.date.slice(5) + '</div>' +
+    '</div>';
+  }).join('');
+
+  var streakHtml =
+    '<div style="background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px">' +
+      '<div style="font-size:12px;font-weight:700;color:' + streakColor + ';margin-bottom:8px">' + streakBonus + '</div>' +
+      '<div style="display:flex;gap:6px;align-items:flex-end">' + histHtml + '</div>' +
+    '</div>';
+
   document.getElementById('stratContent').innerHTML =
     '<div style="background:' + color + ';border:1.5px solid ' + border + ';border-radius:10px;padding:12px 14px;margin-bottom:10px">' +
       '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + signal + '</div>' +
@@ -366,6 +406,7 @@ function renderStrategy() {
       '</div>' +
       '<div style="font-size:11px;color:var(--mu);border-top:1px solid rgba(0,0,0,.06);padding-top:6px">' + entryNote + '</div>' +
     '</div>' +
+    streakHtml +
     rowHtml +
     '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法簡化版 · 僅供參考，不構成投資建議</div>';
 }
