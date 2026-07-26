@@ -1,6 +1,6 @@
 {
-  "date": "2026-07-26",
-  "updated": "2026-07-26T18:54:14.639003+08:00",
+  "date": "2026-07-27",
+  "updated": "2026-07-27T07:28:25.597680+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7447.5,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 7499.75,
+      "change": 52.25,
+      "changePercent": 0.7,
       "prev": 7447.5
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 28282.25,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 28622.75,
+      "change": 340.5,
+      "changePercent": 1.2,
       "prev": 28282.25
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 64440.0,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 65615.0,
+      "change": 1175.0,
+      "changePercent": 1.82,
       "prev": 64440.0
     },
     "TWN": {
@@ -98,28 +98,32 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4070.8,
-      "change": 3.2,
-      "changePercent": 0.08,
+      "price": 4088.3,
+      "change": 20.7,
+      "changePercent": 0.51,
       "prev": 4067.6
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 58.91,
-      "change": 0.25,
-      "changePercent": 0.43,
+      "price": 59.84,
+      "change": 1.18,
+      "changePercent": 2.01,
       "prev": 58.66
     }
   },
   "signal_meta": {
-    "today_dir": -1,
-    "streak": 1,
-    "streak_dir": -1,
+    "today_dir": 0,
+    "streak": 0,
+    "streak_dir": 0,
     "history": [
       {
         "date": "2026-07-26",
         "dir": -1
+      },
+      {
+        "date": "2026-07-27",
+        "dir": 0
       }
     ]
   },
@@ -480,7 +484,8 @@
         -9.87,
         -6.25,
         -4.5,
-        -6.1
+        -6.1,
+        -9.0
       ]
     },
     {
@@ -537,7 +542,8 @@
         -19.91,
         -14.84,
         -15.7,
-        -14.91
+        -14.91,
+        -18.57
       ]
     },
     {
@@ -594,7 +600,8 @@
         -11.27,
         -8.04,
         -7.05,
-        -9.52
+        -9.52,
+        -11.75
       ]
     },
     {
@@ -651,7 +658,8 @@
         -22.3,
         -16.65,
         -15.91,
-        -19.11
+        -19.11,
+        -23.01
       ]
     },
     {
@@ -708,7 +716,8 @@
         -24.5,
         -19.42,
         -19.24,
-        -21.96
+        -21.96,
+        -26.61
       ]
     }
   ]
