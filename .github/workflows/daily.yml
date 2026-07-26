@@ -1,7 +1,7 @@
 name: market-update
 on:
   schedule:
-    - cron: '30 22 * * 0-4'
+    - cron: '30 22 * * 0-4'   # 台灣時間 06:30（UTC 22:30 前一天）
   workflow_dispatch:
 permissions:
   contents: write
@@ -32,8 +32,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data.json
-          git diff --staged --quiet || git commit -m "data update"
+          git add public/data.json public/signal_history.json
+          git diff --staged --quiet || git commit -m "data update $(date +'%Y-%m-%d')"
           git push
       - uses: peaceiris/actions-gh-pages@v3
         with:
