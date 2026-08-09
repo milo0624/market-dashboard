@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-08",
-  "updated": "2026-08-08T14:22:38.011687+08:00",
+  "date": "2026-08-10",
+  "updated": "2026-08-10T06:59:35.174276+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -64,26 +64,26 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7779.75,
-      "change": 45.0,
-      "changePercent": 0.58,
-      "prev": 7734.75
+      "price": 7768.25,
+      "change": -11.5,
+      "changePercent": -0.15,
+      "prev": 7779.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 29834.75,
-      "change": 346.5,
-      "changePercent": 1.18,
-      "prev": 29488.25
+      "price": 29836.25,
+      "change": 1.5,
+      "changePercent": 0.01,
+      "prev": 29834.75
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 66345.0,
-      "change": 685.0,
-      "changePercent": 1.04,
-      "prev": 65660.0
+      "price": 66300.0,
+      "change": -45.0,
+      "changePercent": -0.07,
+      "prev": 66345.0
     },
     "TWN": {
       "name": "台指期",
@@ -98,29 +98,25 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4399.7,
-      "change": 157.7,
-      "changePercent": 3.72,
-      "prev": 4242.0
+      "price": 4402.1,
+      "change": 61.4,
+      "changePercent": 1.41,
+      "prev": 4340.7
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 63.5,
-      "change": 2.06,
-      "changePercent": 3.35,
-      "prev": 61.44
+      "price": 63.92,
+      "change": 0.59,
+      "changePercent": 0.93,
+      "prev": 63.33
     }
   },
   "signal_meta": {
     "today_dir": 1,
-    "streak": 1,
+    "streak": 2,
     "streak_dir": 1,
     "history": [
-      {
-        "date": "2026-07-28",
-        "dir": -1
-      },
       {
         "date": "2026-07-29",
         "dir": -1
@@ -155,6 +151,10 @@
       },
       {
         "date": "2026-08-08",
+        "dir": 1
+      },
+      {
+        "date": "2026-08-10",
         "dir": 1
       }
     ]
