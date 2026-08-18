@@ -1,6 +1,6 @@
 {
   "date": "2026-08-18",
-  "updated": "2026-08-18T06:49:53.729431+08:00",
+  "updated": "2026-08-18T16:21:10.340233+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -14,10 +14,10 @@
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 69220.25,
-      "change": 506.45,
-      "changePercent": 0.74,
-      "prev": 68713.8
+      "price": 67460.73,
+      "change": -1759.52,
+      "changePercent": -2.54,
+      "prev": 69220.25
     },
     "TSM_ADR": {
       "name": "TSM ADR",
@@ -30,10 +30,10 @@
     "TWII": {
       "name": "台股 TAIEX",
       "symbol": "^TWII",
-      "price": 45857.27,
-      "change": 46.26,
-      "changePercent": 0.1,
-      "prev": 45811.01
+      "price": 45308.68,
+      "change": -502.32,
+      "changePercent": -1.1,
+      "prev": 45811.0
     },
     "NVDA": {
       "name": "輝達 NVDA",
@@ -46,43 +46,43 @@
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 15.19,
-      "change": 0.94,
-      "changePercent": 6.6,
-      "prev": 14.25
+      "price": 16.07,
+      "change": 0.88,
+      "changePercent": 5.79,
+      "prev": 15.19
     },
     "TSM": {
       "name": "台積電",
       "symbol": "2330",
-      "price": 2400,
-      "change": 5,
-      "changePercent": 0.21,
-      "prev": 2395
+      "price": 2380,
+      "change": -20,
+      "changePercent": -0.83,
+      "prev": 2400
     }
   },
   "futures": {
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7764.75,
-      "change": -4.0,
-      "changePercent": -0.05,
+      "price": 7721.5,
+      "change": -47.25,
+      "changePercent": -0.61,
       "prev": 7768.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30068.25,
-      "change": -27.75,
-      "changePercent": -0.09,
+      "price": 29751.75,
+      "change": -344.25,
+      "changePercent": -1.14,
       "prev": 30096.0
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 69040.0,
-      "change": -50.0,
-      "changePercent": -0.07,
+      "price": 67220.0,
+      "change": -1870.0,
+      "changePercent": -2.71,
       "prev": 69090.0
     },
     "TWN": {
@@ -98,18 +98,18 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4469.3,
-      "change": -4.4,
-      "changePercent": -0.1,
-      "prev": 4473.7
+      "price": 4445.6,
+      "change": 27.8,
+      "changePercent": 0.63,
+      "prev": 4417.8
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 65.86,
-      "change": -0.38,
-      "changePercent": -0.57,
-      "prev": 66.23
+      "price": 64.97,
+      "change": -1.15,
+      "changePercent": -1.74,
+      "prev": 66.12
     }
   },
   "signal_meta": {
@@ -166,57 +166,57 @@
         {
           "symbol": "2330",
           "name": "台積電",
-          "price": 2400,
-          "changePercent": 0.21
+          "price": 2380,
+          "changePercent": -0.83
         },
         {
           "symbol": "2454",
           "name": "聯發科",
-          "price": 4050,
-          "changePercent": -3.8
+          "price": 3885,
+          "changePercent": -4.07
         },
         {
           "symbol": "3711",
           "name": "日月光",
-          "price": 615,
-          "changePercent": -0.16
+          "price": 599,
+          "changePercent": -2.6
         },
         {
           "symbol": "2303",
           "name": "聯電",
-          "price": 121.5,
-          "changePercent": 0.41
+          "price": 119,
+          "changePercent": -2.06
         },
         {
           "symbol": "2379",
           "name": "瑞昱",
-          "price": 717,
-          "changePercent": -0.55
+          "price": 707,
+          "changePercent": -1.39
         }
       ],
       "trend": [
         0.0,
-        -2.66,
-        3.1,
-        5.18,
-        5.13,
-        1.25,
-        0.89,
-        -6.24,
-        -11.04,
-        -10.4,
-        -3.81,
-        -0.23,
-        -1.15,
-        1.92,
-        0.9,
-        -0.1,
-        3.01,
-        3.85,
-        3.57,
-        5.14,
-        2.86,
-        1.88
+        5.89,
+        8.06,
+        8.0,
+        3.93,
+        3.54,
+        -3.85,
+        -8.87,
+        -8.12,
+        -1.33,
+        2.29,
+        1.37,
+        4.5,
+        3.47,
+        2.39,
+        5.64,
+        6.49,
+        6.2,
+        7.8,
+        5.45,
+        4.46,
+        2.1
       ]
     },
     {
@@ -225,57 +225,57 @@
         {
           "symbol": "2317",
           "name": "鴻海",
-          "price": 255,
-          "changePercent": -1.73
+          "price": 249,
+          "changePercent": -2.35
         },
         {
           "symbol": "2308",
           "name": "台達電",
-          "price": 1885,
-          "changePercent": 0
+          "price": 1820,
+          "changePercent": -3.45
         },
         {
           "symbol": "2382",
           "name": "廣達",
-          "price": 333.5,
-          "changePercent": 1.83
+          "price": 327,
+          "changePercent": -1.95
         },
         {
           "symbol": "2357",
           "name": "華碩",
-          "price": 938,
-          "changePercent": -5.82
+          "price": 910,
+          "changePercent": -2.99
         },
         {
           "symbol": "2354",
           "name": "鴻準",
-          "price": 61.7,
-          "changePercent": -1.28
+          "price": 59.9,
+          "changePercent": -2.92
         }
       ],
       "trend": [
         0.0,
-        -1.29,
-        3.5,
-        5.73,
-        7.35,
-        5.43,
-        4.11,
-        -1.24,
-        -2.17,
-        -4.93,
-        2.24,
-        1.72,
-        2.22,
-        4.24,
-        6.44,
-        5.73,
-        9.47,
-        9.81,
-        11.33,
-        14.06,
-        15.57,
-        13.6
+        4.85,
+        7.11,
+        8.75,
+        6.79,
+        5.45,
+        0.04,
+        -0.91,
+        -3.73,
+        3.52,
+        2.99,
+        3.51,
+        5.56,
+        7.75,
+        7.03,
+        10.84,
+        11.18,
+        12.73,
+        15.53,
+        17.07,
+        15.09,
+        11.92
       ]
     },
     {
@@ -284,57 +284,57 @@
         {
           "symbol": "2881",
           "name": "富邦金",
-          "price": 125.5,
-          "changePercent": -3.09
+          "price": 129.5,
+          "changePercent": 3.19
         },
         {
           "symbol": "2882",
           "name": "國泰金",
-          "price": 98.1,
-          "changePercent": -3.35
+          "price": 99.2,
+          "changePercent": 1.12
         },
         {
           "symbol": "2891",
           "name": "中信金",
-          "price": 65.6,
-          "changePercent": -0.3
+          "price": 66.5,
+          "changePercent": 1.37
         },
         {
           "symbol": "2886",
           "name": "兆豐金",
-          "price": 46.6,
-          "changePercent": -1.58
+          "price": 46.9,
+          "changePercent": 0.64
         },
         {
           "symbol": "2884",
           "name": "玉山金",
-          "price": 37.75,
-          "changePercent": 0.27
+          "price": 38.1,
+          "changePercent": 0.93
         }
       ],
       "trend": [
         0.0,
-        0.26,
-        1.83,
-        2.34,
-        2.27,
-        2.38,
-        3.56,
-        1.92,
-        1.45,
-        3.55,
-        7.65,
-        6.58,
-        5.51,
-        6.6,
-        4.48,
-        5.74,
-        6.45,
-        4.98,
-        4.4,
-        3.68,
-        4.87,
-        3.18
+        1.55,
+        2.09,
+        2.03,
+        2.13,
+        3.3,
+        1.66,
+        1.17,
+        3.26,
+        7.35,
+        6.29,
+        5.23,
+        6.32,
+        4.2,
+        5.45,
+        6.18,
+        4.73,
+        4.15,
+        3.44,
+        4.62,
+        2.93,
+        4.42
       ]
     },
     {
@@ -343,57 +343,57 @@
         {
           "symbol": "1795",
           "name": "美時",
-          "price": 183.5,
-          "changePercent": 1.66
+          "price": 184,
+          "changePercent": 0.27
         },
         {
           "symbol": "6472",
           "name": "保瑞",
-          "price": 416,
-          "changePercent": 1.71
+          "price": 404.5,
+          "changePercent": -2.76
         },
         {
           "symbol": "6446",
           "name": "藥華藥",
-          "price": 1410,
-          "changePercent": -6
+          "price": 1400,
+          "changePercent": -0.71
         },
         {
           "symbol": "4726",
           "name": "永昕",
-          "price": 24.4,
-          "changePercent": -0.41
+          "price": 24,
+          "changePercent": -1.64
         },
         {
           "symbol": "6547",
           "name": "聯合再生",
-          "price": 50.4,
-          "changePercent": -2.14
+          "price": 52.2,
+          "changePercent": 3.57
         }
       ],
       "trend": [
         0.0,
-        -0.67,
-        0.31,
-        2.65,
-        -0.75,
-        -2.5,
-        -0.67,
-        -5.74,
-        -6.94,
-        -8.41,
-        -7.21,
-        -0.97,
-        -0.13,
-        6.66,
-        4.63,
-        3.07,
+        0.99,
+        3.35,
+        -0.07,
+        -1.84,
+        0.02,
+        -5.1,
+        -6.31,
+        -7.8,
+        -6.58,
+        -0.3,
+        0.56,
+        7.43,
+        5.38,
+        3.79,
+        8.46,
+        10.72,
+        10.11,
+        9.99,
+        9.12,
         7.69,
-        9.88,
-        9.28,
-        9.16,
-        8.27,
-        6.88
+        6.52
       ]
     },
     {
@@ -402,57 +402,57 @@
         {
           "symbol": "6669",
           "name": "緯穎",
-          "price": 6620,
-          "changePercent": 2.87
+          "price": 6400,
+          "changePercent": -3.32
         },
         {
           "symbol": "2409",
           "name": "友達",
-          "price": 27.25,
-          "changePercent": 5.62
+          "price": 26.35,
+          "changePercent": -3.3
         },
         {
           "symbol": "3481",
           "name": "群創",
-          "price": 51.2,
-          "changePercent": 2.2
+          "price": 49.5,
+          "changePercent": -3.32
         },
         {
           "symbol": "3673",
           "name": "TPK",
-          "price": 62.6,
-          "changePercent": 1.62
+          "price": 60.2,
+          "changePercent": -3.83
         },
         {
           "symbol": "2498",
           "name": "宏達電",
-          "price": 40.9,
-          "changePercent": 0.99
+          "price": 39.5,
+          "changePercent": -3.42
         }
       ],
       "trend": [
         0.0,
-        -1.54,
-        0.58,
-        4.1,
-        3.81,
-        2.88,
-        0.42,
-        -4.51,
-        -8.42,
-        -11.95,
-        -4.44,
-        -1.35,
-        1.82,
-        2.38,
-        3.82,
-        1.4,
-        5.99,
-        3.89,
-        4.62,
-        3.68,
-        5.45,
-        8.29
+        2.13,
+        5.68,
+        5.37,
+        4.35,
+        1.81,
+        -3.18,
+        -7.19,
+        -10.76,
+        -3.14,
+        -0.04,
+        3.18,
+        3.77,
+        5.24,
+        2.78,
+        7.53,
+        5.38,
+        6.12,
+        5.13,
+        6.88,
+        9.76,
+        6.0
       ]
     }
   ],
@@ -511,8 +511,7 @@
         3.13,
         4.65,
         5.59,
-        5.61,
-        6.07
+        5.61
       ]
     },
     {
@@ -569,8 +568,7 @@
         3.05,
         7.13,
         8.33,
-        6.9,
-        10.82
+        6.9
       ]
     },
     {
@@ -609,26 +607,23 @@
       ],
       "trend": [
         0.0,
-        3.65,
-        4.77,
-        1.94,
-        -0.54,
-        0.37,
-        -1.11,
-        -4.94,
-        -1.34,
-        -0.11,
-        -2.21,
-        2.86,
-        1.81,
-        1.14,
-        6.83,
-        4.37,
-        4.57,
-        4.6,
-        2.86,
-        4.65,
-        4.78
+        3.72,
+        3.87,
+        1.85,
+        0.54,
+        0.78,
+        -2.28,
+        -4.5,
+        -1.74,
+        1.4,
+        -0.3,
+        2.88,
+        3.02,
+        1.79,
+        6.06,
+        4.67,
+        5.05,
+        4.58
       ]
     },
     {
@@ -685,8 +680,7 @@
         -7.74,
         -6.08,
         -4.43,
-        -2.45,
-        0.09
+        -2.45
       ]
     },
     {
@@ -719,8 +713,8 @@
         {
           "symbol": "IFNNY",
           "name": "英飛凌",
-          "price": 71.53,
-          "changePercent": -0.17
+          "price": 71.54,
+          "changePercent": -0.15
         }
       ],
       "trend": [
@@ -743,8 +737,7 @@
         -2.27,
         0.05,
         0.54,
-        0.5,
-        0.84
+        0.5
       ]
     }
   ]
