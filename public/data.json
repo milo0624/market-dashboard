@@ -1,6 +1,6 @@
 {
   "date": "2026-09-02",
-  "updated": "2026-09-02T07:56:41.209172+08:00",
+  "updated": "2026-09-02T08:23:55.404635+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -14,10 +14,10 @@
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 66215.34,
-      "change": -96.59,
-      "changePercent": -0.15,
-      "prev": 66311.93
+      "price": 64731.06,
+      "change": -1484.28,
+      "changePercent": -2.24,
+      "prev": 66215.34
     },
     "TSM_ADR": {
       "name": "TSM ADR",
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7646.5,
-      "change": -52.5,
-      "changePercent": -0.68,
+      "price": 7645.25,
+      "change": -53.75,
+      "changePercent": -0.7,
       "prev": 7699.0
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 29141.0,
-      "change": -372.0,
-      "changePercent": -1.26,
+      "price": 29133.0,
+      "change": -380.0,
+      "changePercent": -1.29,
       "prev": 29513.0
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 64810.0,
-      "change": -1100.0,
-      "changePercent": -1.67,
+      "price": 64740.0,
+      "change": -1170.0,
+      "changePercent": -1.78,
       "prev": 65910.0
     },
     "TWN": {
@@ -98,17 +98,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4378.0,
-      "change": -53.1,
-      "changePercent": -1.2,
+      "price": 4370.5,
+      "change": -60.6,
+      "changePercent": -1.37,
       "prev": 4431.1
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 64.8,
-      "change": -1.43,
-      "changePercent": -2.16,
+      "price": 64.71,
+      "change": -1.51,
+      "changePercent": -2.28,
       "prev": 66.22
     }
   },
@@ -569,8 +569,8 @@
         1.22,
         0.98,
         1.82,
-        -2.57,
-        -4.64
+        -2.44,
+        -4.0
       ]
     },
     {
@@ -604,7 +604,7 @@
           "symbol": "SWKS",
           "name": "思佳訊",
           "price": 67.41,
-          "changePercent": 0.6
+          "changePercent": 2.46
         }
       ],
       "trend": [
@@ -627,8 +627,8 @@
         0.37,
         0.83,
         2.07,
-        -0.49,
-        -1.39
+        -0.83,
+        -0.2
       ]
     },
     {
@@ -708,13 +708,13 @@
           "symbol": "UMC",
           "name": "聯電ADR",
           "price": 20.47,
-          "changePercent": 2.97
+          "changePercent": 3.44
         },
         {
           "symbol": "ASX",
           "name": "台積ADR",
           "price": 37.43,
-          "changePercent": 1.3
+          "changePercent": -0.93
         },
         {
           "symbol": "IFNNY",
@@ -743,8 +743,8 @@
         -3.18,
         -3.57,
         -0.83,
-        -2.67,
-        -2.5
+        -2.22,
+        -2.76
       ]
     }
   ]
