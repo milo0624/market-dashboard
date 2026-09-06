@@ -235,6 +235,14 @@ except Exception as e:
 
 indices = {**global_indices, **tw_indices}
 
+# ── 關鍵資料檢查：避免抓取失敗時仍以 0 覆蓋掉正確資料 ──
+CRITICAL_INDEX_KEYS = ["TWII", "TSM_ADR", "SOX"]
+CRITICAL_FUTURE_KEYS = ["ES", "TWN"]
+missing = [k for k in CRITICAL_INDEX_KEYS if indices.get(k, {}).get("price", 0) == 0]
+missing += [f"期貨:{k}" for k in CRITICAL_FUTURE_KEYS if futures.get(k, {}).get("price", 0) == 0]
+if missing:
+    raise RuntimeError(f"關鍵資料抓取失敗，中止更新以避免用 0 覆蓋既有資料：{missing}")
+
 # ── 訊號歷史紀錄 ──
 def calc_signal_dir(indices, futures):
     """計算今日訊號方向：+1=多 -1=空 0=中性"""

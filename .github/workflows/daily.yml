@@ -7,6 +7,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -40,3 +41,17 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           keep_files: true
+      - name: notify-on-failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="⚠️ 市場早報資料更新失敗"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "in:title \"$TITLE\"" --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "再次失敗，請查看 log：$RUN_URL"
+          else
+            gh issue create --repo "${{ github.repository }}" --title "$TITLE" \
+              --body "自動更新流程（$(date +'%Y-%m-%d')）執行失敗，請查看 log：$RUN_URL"
+          fi
