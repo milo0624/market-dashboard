@@ -104,7 +104,7 @@ def fetch_global():
         ("ES=F",  "ES",  "S&P 500 期貨"),
         ("NQ=F",  "NQ",  "那斯達克期貨"),
         ("NKD=F", "NKD", "日經期貨"),
-        ("TWN=F", "TWN", "台指期"),
+        ("EWT",   "TWN", "台指ETF(EWT)"),
     ]
 
     indices = {}
