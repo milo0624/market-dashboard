@@ -77,6 +77,23 @@ def yahoo_history(symbol):
     base = closes[0]
     return [round((c - base) / base * 100, 2) for c in closes]
 
+def yahoo_ohlcv(symbol, rng="6mo"):
+    """抓取每日 OHLCV（開高低收量），由舊到新排序，供策略計算使用"""
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range={rng}"
+    req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        data = json.loads(r.read())
+    result = data["chart"]["result"][0]
+    ts = result.get("timestamp", [])
+    q = result["indicators"]["quote"][0]
+    bars = []
+    for i in range(len(ts)):
+        o, h, l, c, v = q["open"][i], q["high"][i], q["low"][i], q["close"][i], q["volume"][i]
+        if None in (o, h, l, c, v):
+            continue
+        bars.append({"open": o, "high": h, "low": l, "close": c, "volume": v})
+    return bars
+
 def sector_trend(symbols):
     all_series = []
     for sym in symbols:
@@ -243,27 +260,73 @@ missing += [f"期貨:{k}" for k in CRITICAL_FUTURE_KEYS if futures.get(k, {}).ge
 if missing:
     raise RuntimeError(f"關鍵資料抓取失敗，中止更新以避免用 0 覆蓋既有資料：{missing}")
 
-# ── 訊號歷史紀錄 ──
-def calc_signal_dir(indices, futures):
-    """計算今日訊號方向：+1=多 -1=空 0=中性"""
-    tsm = indices.get("TSM_ADR", {})
-    sox = indices.get("SOX", {})
-    sp  = futures.get("ES", {})
-    twn = futures.get("TWN", {})
-    tsmC = tsm.get("changePercent", 0)
-    soxC = sox.get("changePercent", 0)
-    spC  = sp.get("changePercent", 0)
-    twnC = twn.get("changePercent", 0)
-    tsmDir = 1 if tsmC > 0.3 else (-1 if tsmC < -0.3 else 0)
-    soxDir = 1 if soxC > 0.3 else (-1 if soxC < -0.3 else 0)
-    spDir  = 1 if spC  > 0.3 else (-1 if spC  < -0.3 else 0)
-    twnDir = 1 if twnC > 0.3 else (-1 if twnC < -0.3 else 0)
-    score = tsmDir + soxDir + spDir + twnDir
-    if score >= 3:   return 1
-    if score <= -3:  return -1
-    if score >= 2 and tsmDir == 1:  return 1
-    if score <= -2 and tsmDir == -1: return -1
-    return 0
+# ── 訊號歷史紀錄（井田戰法 + 酒田戰法 + 成交量確認，對應原始 Pine Script 策略）──
+def calc_pine_signal(bars):
+    """
+    移植自使用者的 Pine Script v5 策略（井田箱體突破 + 酒田K線型態 + 成交量確認），
+    在每日 K 棒上執行「嚴格模式」：突破 + 量能 + 均線趨勢 + K 線型態需同時成立。
+    bars：依時間由舊到新排序的 OHLCV 列表（至少需要 61 根）。
+    回傳 (today_dir, detail)：today_dir 為 +1 多 / -1 空 / 0 中性；detail 為判斷細節。
+    """
+    LENGTH_BOX, MA_SHORT, MA_LONG, LENGTH_VOL, VOL_MULT = 20, 20, 60, 20, 1.5
+
+    min_bars = max(LENGTH_BOX + 1, MA_LONG, LENGTH_VOL, 3) + 1
+    if len(bars) < min_bars:
+        raise RuntimeError(f"EWT 歷史K棒不足（需要至少 {min_bars} 根，實際 {len(bars)} 根），無法計算策略訊號")
+
+    c, p1, p2 = bars[-1], bars[-2], bars[-3]
+    closes  = [b["close"]  for b in bars]
+    volumes = [b["volume"] for b in bars]
+
+    box_bars = bars[-(LENGTH_BOX + 1):-1]  # 箱體不含當前K棒，對應 Pine 的 high[1]/low[1]
+    highest_high = max(b["high"] for b in box_bars)
+    lowest_low   = min(b["low"]  for b in box_bars)
+
+    ma20 = sum(closes[-MA_SHORT:]) / MA_SHORT
+    ma60 = sum(closes[-MA_LONG:]) / MA_LONG
+    avg_vol = sum(volumes[-LENGTH_VOL:]) / LENGTH_VOL
+
+    bull_vol = c["close"] > c["open"] and c["volume"] > avg_vol * VOL_MULT
+    bear_vol = c["close"] < c["open"] and c["volume"] > avg_vol * VOL_MULT
+
+    bull_trend = c["close"] > ma20 and ma20 > ma60
+    bear_trend = c["close"] < ma20 and ma20 < ma60
+
+    long_breakout  = c["close"] > highest_high
+    short_breakout = c["close"] < lowest_low
+
+    def is_doji(b):
+        return abs(b["close"] - b["open"]) <= (b["high"] - b["low"]) * 0.1
+
+    def is_small_body(b):
+        return abs(b["open"] - b["close"]) <= (b["high"] - b["low"]) * 0.3
+
+    bull_engulf = (c["close"] > c["open"] and p1["close"] < p1["open"]
+                   and c["close"] >= p1["open"] and c["open"] <= p1["close"])
+    bear_engulf = (c["close"] < c["open"] and p1["close"] > p1["open"]
+                   and c["close"] <= p1["open"] and c["open"] >= p1["close"])
+
+    morning_star = (p2["close"] < p2["open"] and is_doji(p1) and is_small_body(p1)
+                     and c["close"] > (p2["open"] + p2["close"]) / 2)
+    evening_star = (p2["close"] > p2["open"] and is_doji(p1) and is_small_body(p1)
+                     and c["close"] < (p2["open"] + p2["close"]) / 2)
+
+    long_confirm  = long_breakout  and bull_vol and bull_trend and (bull_engulf or morning_star)
+    short_confirm = short_breakout and bear_vol and bear_trend and (bear_engulf or evening_star)
+
+    today_dir = 1 if long_confirm else (-1 if short_confirm else 0)
+
+    detail = {
+        "symbol": "EWT", "close": c["close"], "open": c["open"], "volume": c["volume"],
+        "avgVol": round(avg_vol, 0), "highestHigh": round(highest_high, 2), "lowestLow": round(lowest_low, 2),
+        "ma20": round(ma20, 2), "ma60": round(ma60, 2),
+        "longBreakout": long_breakout, "shortBreakout": short_breakout,
+        "bullVol": bull_vol, "bearVol": bear_vol,
+        "bullTrend": bull_trend, "bearTrend": bear_trend,
+        "bullEngulf": bull_engulf, "bearEngulf": bear_engulf,
+        "morningStar": morning_star, "eveningStar": evening_star,
+    }
+    return today_dir, detail
 
 HISTORY_FILE = "public/signal_history.json"
 try:
@@ -272,7 +335,14 @@ try:
 except:
     history = []
 
-today_dir = calc_signal_dir(indices, futures)
+print("\n📡 抓取 EWT 日K棒，計算井田+酒田+成交量策略訊號...")
+try:
+    ewt_bars = yahoo_ohlcv("EWT", rng="6mo")
+    today_dir, signal_detail = calc_pine_signal(ewt_bars)
+    print(f"  策略訊號明細：{json.dumps(signal_detail, ensure_ascii=False)}")
+except Exception as e:
+    raise RuntimeError(f"策略訊號計算失敗，中止更新：{e}")
+
 today_entry = {"date": today, "dir": today_dir}
 
 # 更新今日紀錄（避免重複）
@@ -299,6 +369,7 @@ signal_meta = {
     "streak": streak,
     "streak_dir": streak_dir,
     "history": history[-10:],  # 最近10天給前端顯示
+    "detail": signal_detail,   # 井田+酒田+成交量策略的判斷明細（供前端顯示）
 }
 
 with open(HISTORY_FILE, "w", encoding="utf-8") as f:

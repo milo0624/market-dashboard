@@ -122,7 +122,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 
   <div class="card" id="stratCard">
     <div class="c-title">策略推薦</div>
-    <div class="c-sub">TSM ADR × S&P期貨 × 台指期 合併判斷</div>
+    <div class="c-sub">EWT 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
     <div id="stratContent"></div>
   </div>
 
@@ -253,111 +253,63 @@ function renderFutures() {
 }
 
 function renderStrategy() {
-  var tsm = data.indices.TSM_ADR || data.indices.TSM || {};
-  var sox = data.indices.SOX || {};
-  var sp  = (data.futures && data.futures.ES)  || {};
-  var twn = (data.futures && data.futures.TWN) || {};
+  var sm = data.signal_meta || {};
+  var dir = sm.today_dir || 0;
+  var detail = sm.detail || null;
 
-  var tsmC = tsm.changePercent || 0;
-  var soxC = sox.changePercent || 0;
-  var spC  = sp.changePercent  || 0;
-  var twnC = twn.changePercent || 0;
+  var signal, color, border, advice, sl, tp, entryNote;
 
-  // 方向判斷（對應 MA 趨勢）
-  var tsmDir = tsmC >  0.3 ? 1 : tsmC < -0.3 ? -1 : 0;
-  var soxDir = soxC >  0.3 ? 1 : soxC < -0.3 ? -1 : 0;
-  var spDir  = spC  >  0.3 ? 1 : spC  < -0.3 ? -1 : 0;
-  var twnDir = twnC >  0.3 ? 1 : twnC < -0.3 ? -1 : 0;
-
-  // 突破強度（對應箱頂/箱底突破）
-  var tsmBreakout = Math.abs(tsmC) >= 1.5;
-
-  // 成交量替代：SOX 與 TSM 同向視為量能確認
-  var volConfirm = (tsmDir > 0 && soxDir > 0) || (tsmDir < 0 && soxDir < 0);
-
-  // K線型態替代：S&P + 台指期同向
-  var patternConfirm = (tsmDir > 0 && spDir > 0 && twnDir > 0) ||
-                       (tsmDir < 0 && spDir < 0 && twnDir < 0);
-
-  // 嚴格模式：對應原策略 longConfirm_strict
-  var strictLong  = tsmBreakout && tsmDir > 0 && volConfirm && patternConfirm;
-  var strictShort = tsmBreakout && tsmDir < 0 && volConfirm && patternConfirm;
-
-  // 寬鬆模式：對應原策略 longConfirm_loose
-  var looseLong  = tsmDir > 0 && (volConfirm || patternConfirm);
-  var looseShort = tsmDir < 0 && (volConfirm || patternConfirm);
-
-  // 確認數量（0~4）
-  var bullScore = (tsmDir > 0 ? 1 : 0) + (soxDir > 0 ? 1 : 0) +
-                  (spDir > 0 ? 1 : 0) + (twnDir > 0 ? 1 : 0);
-  var bearScore = (tsmDir < 0 ? 1 : 0) + (soxDir < 0 ? 1 : 0) +
-                  (spDir < 0 ? 1 : 0) + (twnDir < 0 ? 1 : 0);
-
-  var signal, mode, color, border, advice, sl, tp, entryNote;
-
-  if (strictLong) {
+  if (!detail) {
+    signal = '⚪ 策略資料尚未更新';
+    color = '#f7fafc'; border = '#e2e8f0';
+    advice = '尚未取得井田＋酒田策略的完整計算結果，請稍後重新整理。';
+    sl = '—'; tp = '—'; entryNote = '';
+  } else if (dir > 0) {
     signal = '🔵 強勢多頭（嚴格確認）';
-    mode = '嚴格';
     color = '#ebf8ff'; border = '#90cdf4';
-    advice = 'TSM ADR 強勢突破（' + tsmC.toFixed(2) + '%），SOX 量能確認，S&P+台指期三向同多，符合嚴格做多條件。';
+    advice = 'EWT 收盤 ' + fm(detail.close) + ' 突破 20 日箱頂 ' + fm(detail.highestHigh) +
+      '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.5 倍以上），MA20(' + fm(detail.ma20) + ')>MA60(' + fm(detail.ma60) + ') 多頭排列，並出現' +
+      (detail.bullEngulf ? '多頭吞噬' : '晨星') + 'K線型態，符合嚴格做多條件。';
     sl = '止損：進場價 × 97%（-3%）';
     tp = '止盈：進場價 × 106%（+6%）';
-    entryNote = '可考慮台指期多單或 S&P 多單，建議開盤確認後進場。';
-  } else if (strictShort) {
+    entryNote = '依原策略規則，突破／量能／趨勢／K線型態四項需同時成立才算有效訊號。';
+  } else if (dir < 0) {
     signal = '🔴 強勢空頭（嚴格確認）';
-    mode = '嚴格';
     color = '#fff5f5'; border = '#feb2b2';
-    advice = 'TSM ADR 強勢下破（' + tsmC.toFixed(2) + '%），SOX 量能確認，S&P+台指期三向同空，符合嚴格做空條件。';
+    advice = 'EWT 收盤 ' + fm(detail.close) + ' 跌破 20 日箱底 ' + fm(detail.lowestLow) +
+      '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.5 倍以上），MA20(' + fm(detail.ma20) + ')<MA60(' + fm(detail.ma60) + ') 空頭排列，並出現' +
+      (detail.bearEngulf ? '空頭吞噬' : '夜星') + 'K線型態，符合嚴格做空條件。';
     sl = '止損：進場價 × 103%（+3%）';
     tp = '止盈：進場價 × 94%（-6%）';
-    entryNote = '可考慮台指期空單或 S&P 空單，建議開盤確認後進場。';
-  } else if (looseLong && bullScore >= 3) {
-    signal = '🟢 偏多（寬鬆確認）';
-    mode = '寬鬆';
-    color = '#f0fff4'; border = '#9ae6b4';
-    advice = 'TSM ADR 看多（' + tsmC.toFixed(2) + '%），' + bullScore + '/4 指標同向，量能或型態其一確認，符合寬鬆做多條件。';
-    sl = '止損：進場價 × 97%（-3%）';
-    tp = '止盈：進場價 × 106%（+6%）';
-    entryNote = '訊號強度中等，建議倉位 50% 以下，等待更多確認。';
-  } else if (looseShort && bearScore >= 3) {
-    signal = '🟠 偏空（寬鬆確認）';
-    mode = '寬鬆';
-    color = '#fffaf0'; border = '#fbd38d';
-    advice = 'TSM ADR 看空（' + tsmC.toFixed(2) + '%），' + bearScore + '/4 指標同向，量能或型態其一確認，符合寬鬆做空條件。';
-    sl = '止損：進場價 × 103%（+3%）';
-    tp = '止盈：進場價 × 94%（-6%）';
-    entryNote = '訊號強度中等，建議倉位 50% 以下，等待更多確認。';
+    entryNote = '依原策略規則，突破／量能／趨勢／K線型態四項需同時成立才算有效訊號。';
   } else {
     signal = '⚪ 訊號不明，觀望';
-    mode = '無';
     color = '#f7fafc'; border = '#e2e8f0';
-    advice = '各指標方向不一致（多：' + bullScore + '/4，空：' + bearScore + '/4），未達進場條件。';
-    sl = '—';
-    tp = '—';
+    var reasons = [];
+    if (!detail.longBreakout && !detail.shortBreakout) reasons.push('尚未突破箱體');
+    if (!detail.bullVol && !detail.bearVol) reasons.push('量能未達1.5倍均量');
+    if (!detail.bullTrend && !detail.bearTrend) reasons.push('均線未呈多空排列');
+    if (!detail.bullEngulf && !detail.bearEngulf && !detail.morningStar && !detail.eveningStar) reasons.push('未出現吞噬／晨星／夜星型態');
+    advice = '嚴格策略四項條件未同時成立' + (reasons.length ? '（' + reasons.join('、') + '）' : '') + '，未達進場條件。';
+    sl = '—'; tp = '—';
     entryNote = '依原策略紀律，訊號未確認前不進場。';
   }
 
-  var indicators = [
-    {label:'TSM ADR（突破主訊號）', val:tsmC, dir:tsmDir, extra: tsmBreakout ? '✓ 突破閾值' : ''},
-    {label:'SOX（量能確認）',       val:soxC, dir:soxDir, extra: volConfirm ? '✓ 量能同向' : ''},
-    {label:'S&P 期貨（型態確認）',  val:spC,  dir:spDir,  extra:''},
-    {label:'台指期（型態確認）',    val:twnC, dir:twnDir, extra: patternConfirm ? '✓ 型態確認' : ''},
+  var indicators = !detail ? [] : [
+    {label: '20日箱體突破', val: detail.longBreakout ? '✓ 突破箱頂 ' + fm(detail.highestHigh) : detail.shortBreakout ? '✓ 跌破箱底 ' + fm(detail.lowestLow) : '箱內盤整（' + fm(detail.lowestLow) + '～' + fm(detail.highestHigh) + '）', ok: detail.longBreakout || detail.shortBreakout},
+    {label: '成交量確認（>1.5倍均量）', val: (detail.bullVol || detail.bearVol) ? '✓ 量能確認' : '量能不足', ok: detail.bullVol || detail.bearVol},
+    {label: '均線排列（MA20/MA60）', val: detail.bullTrend ? '多頭排列' : detail.bearTrend ? '空頭排列' : '無明確排列', ok: detail.bullTrend || detail.bearTrend},
+    {label: '酒田K線型態', val: detail.bullEngulf ? '多頭吞噬' : detail.bearEngulf ? '空頭吞噬' : detail.morningStar ? '晨星' : detail.eveningStar ? '夜星' : '無型態訊號', ok: detail.bullEngulf || detail.bearEngulf || detail.morningStar || detail.eveningStar},
   ];
 
   var rowHtml = indicators.map(function(r) {
-    var cls = r.dir > 0 ? 'up' : r.dir < 0 ? 'dn' : 'fl';
-    var ico = r.dir > 0 ? '▲' : r.dir < 0 ? '▼' : '—';
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr)">' +
-      '<div>' +
-        '<div style="font-size:11px;color:var(--mu)">' + r.label + '</div>' +
-        (r.extra ? '<div style="font-size:10px;color:var(--Gm)">' + r.extra + '</div>' : '') +
-      '</div>' +
-      '<span class="badge ' + cls + '">' + ico + ' ' + Math.abs(r.val).toFixed(2) + '%</span>' +
+      '<div style="font-size:11px;color:var(--mu)">' + r.label + '</div>' +
+      '<span class="badge ' + (r.ok ? (dir > 0 ? 'up' : dir < 0 ? 'dn' : 'fl') : 'fl') + '">' + r.val + '</span>' +
     '</div>';
   }).join('');
 
   // ── 連續訊號天數（從 signal_meta 讀取）──
-  var sm = data.signal_meta || {};
   var streak = sm.streak || 0;
   var streakDir = sm.streak_dir || 0;
   var recentHistory = sm.history || [];
@@ -408,7 +360,7 @@ function renderStrategy() {
     '</div>' +
     streakHtml +
     rowHtml +
-    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法簡化版 · 僅供參考，不構成投資建議</div>';
+    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法 + 成交量確認（EWT 日K，嚴格模式）· 僅供參考，不構成投資建議</div>';
 }
 
 function renderBanner() {
