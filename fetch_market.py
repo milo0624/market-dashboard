@@ -78,20 +78,22 @@ def yahoo_history(symbol):
     return [round((c - base) / base * 100, 2) for c in closes]
 
 def yahoo_ohlcv(symbol, rng="6mo"):
-    """抓取每日 OHLCV（開高低收量），由舊到新排序，供策略計算使用"""
+    """抓取每日 OHLCV（開高低收量 + 交易日日期），由舊到新排序，供策略計算與事後勝率追蹤使用"""
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range={rng}"
     req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=15) as r:
         data = json.loads(r.read())
     result = data["chart"]["result"][0]
     ts = result.get("timestamp", [])
+    gmtoffset = result.get("meta", {}).get("gmtoffset", 0)
     q = result["indicators"]["quote"][0]
     bars = []
     for i in range(len(ts)):
         o, h, l, c, v = q["open"][i], q["high"][i], q["low"][i], q["close"][i], q["volume"][i]
         if None in (o, h, l, c, v):
             continue
-        bars.append({"open": o, "high": h, "low": l, "close": c, "volume": v})
+        date_str = datetime.fromtimestamp(ts[i] + gmtoffset, tz=timezone.utc).strftime('%Y-%m-%d')
+        bars.append({"date": date_str, "open": o, "high": h, "low": l, "close": c, "volume": v})
     return bars
 
 def sector_trend(symbols):
@@ -317,7 +319,7 @@ def calc_pine_signal(bars):
     today_dir = 1 if long_confirm else (-1 if short_confirm else 0)
 
     detail = {
-        "symbol": "EWT", "close": c["close"], "open": c["open"], "volume": c["volume"],
+        "symbol": "EWT", "date": c["date"], "close": c["close"], "open": c["open"], "volume": c["volume"],
         "avgVol": round(avg_vol, 0), "highestHigh": round(highest_high, 2), "lowestLow": round(lowest_low, 2),
         "ma20": round(ma20, 2), "ma60": round(ma60, 2),
         "longBreakout": long_breakout, "shortBreakout": short_breakout,
@@ -344,6 +346,8 @@ except Exception as e:
     raise RuntimeError(f"策略訊號計算失敗，中止更新：{e}")
 
 today_entry = {"date": today, "dir": today_dir}
+if today_dir != 0:
+    today_entry["closeAtSignal"] = signal_detail["close"]
 
 # 更新今日紀錄（避免重複）
 if history and history[-1]["date"] == today:
@@ -353,6 +357,35 @@ else:
 
 # 只保留最近 30 天
 history = history[-30:]
+
+# ── 事後勝率追蹤：訊號出現 5 / 10 個交易日後，方向是否猜對 ──
+# 只針對「有 closeAtSignal」的訊號（即本次新策略上線後才產生的訊號）計分，
+# 不回溯舊版（跨市場漲跌幅）策略留下的歷史紀錄，避免混淆勝率。
+date_to_idx = {b["date"]: i for i, b in enumerate(ewt_bars)}
+for entry in history:
+    if entry.get("dir", 0) == 0 or "closeAtSignal" not in entry:
+        continue
+    idx = date_to_idx.get(entry["date"])
+    if idx is None:
+        continue
+    for horizon, key in ((5, "fwd5"), (10, "fwd10")):
+        if key in entry or idx + horizon >= len(ewt_bars):
+            continue
+        fut_close = ewt_bars[idx + horizon]["close"]
+        ret = round((fut_close - entry["closeAtSignal"]) / entry["closeAtSignal"] * 100, 2)
+        hit = (entry["dir"] > 0 and ret > 0) or (entry["dir"] < 0 and ret < 0)
+        entry[key] = {"ret": ret, "hit": hit}
+
+def summarize_track_record(history, key):
+    scored = [e[key] for e in history if key in e]
+    n = len(scored)
+    hits = sum(1 for s in scored if s["hit"])
+    return {"n": n, "hits": hits, "winRate": round(hits / n * 100, 1) if n else None}
+
+track_record = {
+    "fwd5": summarize_track_record(history, "fwd5"),
+    "fwd10": summarize_track_record(history, "fwd10"),
+}
 
 # 計算連續訊號天數
 streak = 0
@@ -370,6 +403,7 @@ signal_meta = {
     "streak_dir": streak_dir,
     "history": history[-10:],  # 最近10天給前端顯示
     "detail": signal_detail,   # 井田+酒田+成交量策略的判斷明細（供前端顯示）
+    "track_record": track_record,  # 訊號出現後 5/10 個交易日的事後勝率（樣本僅計入新策略上線後的訊號）
 }
 
 with open(HISTORY_FILE, "w", encoding="utf-8") as f:
