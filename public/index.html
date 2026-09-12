@@ -581,10 +581,22 @@ function renderAll() {
   renderStrategy();
   renderHeat();
   var upd = new Date(data.updated);
-  var upd = new Date(data.updated);
   var h = upd.getHours(), mi = upd.getMinutes();
   var timeStr = (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
-  document.getElementById('lupd').textContent = '資料更新於 ' + data.date + ' ' + timeStr + '（富邦即時 + Yahoo Finance）';
+  var lupdEl = document.getElementById('lupd');
+  var now = new Date();
+  var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+  var isWeekday = now.getDay() >= 1 && now.getDay() <= 5;
+  var isStale = isWeekday && now.getHours() >= 9 && data.date !== todayStr;
+  if (isStale) {
+    lupdEl.style.color = 'var(--R)';
+    lupdEl.style.fontWeight = 'bold';
+    lupdEl.textContent = '⚠️ 資料尚未更新，最新資料為 ' + data.date + ' ' + timeStr + '（排程可能失敗，請確認）';
+  } else {
+    lupdEl.style.color = '';
+    lupdEl.style.fontWeight = '';
+    lupdEl.textContent = '資料更新於 ' + data.date + ' ' + timeStr + '（富邦即時 + Yahoo Finance）';
+  }
   document.getElementById('topSub').textContent = data.date + ' 更新';
 }
 

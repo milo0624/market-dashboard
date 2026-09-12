@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: '30 22 * * 0-4'   # 台灣時間 06:30（UTC 22:30 前一天）
   workflow_dispatch:
+concurrency:
+  group: market-update
+  cancel-in-progress: false
 permissions:
   contents: write
   pages: write
