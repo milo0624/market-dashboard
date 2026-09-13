@@ -122,7 +122,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 
   <div class="card" id="stratCard">
     <div class="c-title">策略推薦</div>
-    <div class="c-sub">EWT 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
+    <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
     <div id="stratContent"></div>
   </div>
 
@@ -226,7 +226,6 @@ function renderFutures() {
     {key:'ES',  label:'S&P 500'},
     {key:'NQ',  label:'那斯達克'},
     {key:'NKD', label:'日經'},
-    {key:'TWN', label:'台指ETF(EWT)'},
   ];
   var html = '';
   for (var i = 0; i < order.length; i++) {
@@ -267,7 +266,7 @@ function renderStrategy() {
   } else if (dir > 0) {
     signal = '🔵 強勢多頭（嚴格確認）';
     color = '#ebf8ff'; border = '#90cdf4';
-    advice = 'EWT 收盤 ' + fm(detail.close) + ' 突破 20 日箱頂 ' + fm(detail.highestHigh) +
+    advice = '台指現貨 收盤 ' + fm(detail.close) + ' 突破 20 日箱頂 ' + fm(detail.highestHigh) +
       '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.5 倍以上），MA20(' + fm(detail.ma20) + ')>MA60(' + fm(detail.ma60) + ') 多頭排列，並出現' +
       (detail.bullEngulf ? '多頭吞噬' : '晨星') + 'K線型態，符合嚴格做多條件。';
     sl = '止損：進場價 × 97%（-3%）';
@@ -276,7 +275,7 @@ function renderStrategy() {
   } else if (dir < 0) {
     signal = '🔴 強勢空頭（嚴格確認）';
     color = '#fff5f5'; border = '#feb2b2';
-    advice = 'EWT 收盤 ' + fm(detail.close) + ' 跌破 20 日箱底 ' + fm(detail.lowestLow) +
+    advice = '台指現貨 收盤 ' + fm(detail.close) + ' 跌破 20 日箱底 ' + fm(detail.lowestLow) +
       '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.5 倍以上），MA20(' + fm(detail.ma20) + ')<MA60(' + fm(detail.ma60) + ') 空頭排列，並出現' +
       (detail.bearEngulf ? '空頭吞噬' : '夜星') + 'K線型態，符合嚴格做空條件。';
     sl = '止損：進場價 × 103%（+3%）';
@@ -378,7 +377,7 @@ function renderStrategy() {
     streakHtml +
     trHtml +
     rowHtml +
-    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法 + 成交量確認（EWT 日K，嚴格模式）· 僅供參考，不構成投資建議</div>';
+    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法 + 成交量確認（台指現貨 ^TWII 日K，嚴格模式）· 僅供參考，不構成投資建議</div>';
 }
 
 function renderBanner() {

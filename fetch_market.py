@@ -123,7 +123,6 @@ def fetch_global():
         ("ES=F",  "ES",  "S&P 500 期貨"),
         ("NQ=F",  "NQ",  "那斯達克期貨"),
         ("NKD=F", "NKD", "日經期貨"),
-        ("EWT",   "TWN", "台指ETF(EWT)"),
     ]
 
     indices = {}
@@ -256,7 +255,7 @@ indices = {**global_indices, **tw_indices}
 
 # ── 關鍵資料檢查：避免抓取失敗時仍以 0 覆蓋掉正確資料 ──
 CRITICAL_INDEX_KEYS = ["TWII", "TSM_ADR", "SOX"]
-CRITICAL_FUTURE_KEYS = ["ES", "TWN"]
+CRITICAL_FUTURE_KEYS = ["ES"]
 missing = [k for k in CRITICAL_INDEX_KEYS if indices.get(k, {}).get("price", 0) == 0]
 missing += [f"期貨:{k}" for k in CRITICAL_FUTURE_KEYS if futures.get(k, {}).get("price", 0) == 0]
 if missing:
@@ -274,7 +273,7 @@ def calc_pine_signal(bars):
 
     min_bars = max(LENGTH_BOX + 1, MA_LONG, LENGTH_VOL, 3) + 1
     if len(bars) < min_bars:
-        raise RuntimeError(f"EWT 歷史K棒不足（需要至少 {min_bars} 根，實際 {len(bars)} 根），無法計算策略訊號")
+        raise RuntimeError(f"台指現貨(^TWII) 歷史K棒不足（需要至少 {min_bars} 根，實際 {len(bars)} 根），無法計算策略訊號")
 
     c, p1, p2 = bars[-1], bars[-2], bars[-3]
     closes  = [b["close"]  for b in bars]
@@ -319,7 +318,7 @@ def calc_pine_signal(bars):
     today_dir = 1 if long_confirm else (-1 if short_confirm else 0)
 
     detail = {
-        "symbol": "EWT", "date": c["date"], "close": c["close"], "open": c["open"], "volume": c["volume"],
+        "symbol": "^TWII", "date": c["date"], "close": c["close"], "open": c["open"], "volume": c["volume"],
         "avgVol": round(avg_vol, 0), "highestHigh": round(highest_high, 2), "lowestLow": round(lowest_low, 2),
         "ma20": round(ma20, 2), "ma60": round(ma60, 2),
         "longBreakout": long_breakout, "shortBreakout": short_breakout,
@@ -337,10 +336,10 @@ try:
 except:
     history = []
 
-print("\n📡 抓取 EWT 日K棒，計算井田+酒田+成交量策略訊號...")
+print("\n📡 抓取台指現貨(^TWII) 日K棒，計算井田+酒田+成交量策略訊號...")
 try:
-    ewt_bars = yahoo_ohlcv("EWT", rng="6mo")
-    today_dir, signal_detail = calc_pine_signal(ewt_bars)
+    twii_bars = yahoo_ohlcv("^TWII", rng="6mo")
+    today_dir, signal_detail = calc_pine_signal(twii_bars)
     print(f"  策略訊號明細：{json.dumps(signal_detail, ensure_ascii=False)}")
 except Exception as e:
     raise RuntimeError(f"策略訊號計算失敗，中止更新：{e}")
@@ -361,7 +360,7 @@ history = history[-30:]
 # ── 事後勝率追蹤：訊號出現 5 / 10 個交易日後，方向是否猜對 ──
 # 只針對「有 closeAtSignal」的訊號（即本次新策略上線後才產生的訊號）計分，
 # 不回溯舊版（跨市場漲跌幅）策略留下的歷史紀錄，避免混淆勝率。
-date_to_idx = {b["date"]: i for i, b in enumerate(ewt_bars)}
+date_to_idx = {b["date"]: i for i, b in enumerate(twii_bars)}
 for entry in history:
     if entry.get("dir", 0) == 0 or "closeAtSignal" not in entry:
         continue
@@ -369,9 +368,9 @@ for entry in history:
     if idx is None:
         continue
     for horizon, key in ((5, "fwd5"), (10, "fwd10")):
-        if key in entry or idx + horizon >= len(ewt_bars):
+        if key in entry or idx + horizon >= len(twii_bars):
             continue
-        fut_close = ewt_bars[idx + horizon]["close"]
+        fut_close = twii_bars[idx + horizon]["close"]
         ret = round((fut_close - entry["closeAtSignal"]) / entry["closeAtSignal"] * 100, 2)
         hit = (entry["dir"] > 0 and ret > 0) or (entry["dir"] < 0 and ret < 0)
         entry[key] = {"ret": ret, "hit": hit}
