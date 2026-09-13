@@ -269,7 +269,7 @@ def calc_pine_signal(bars):
     bars：依時間由舊到新排序的 OHLCV 列表（至少需要 61 根）。
     回傳 (today_dir, detail)：today_dir 為 +1 多 / -1 空 / 0 中性；detail 為判斷細節。
     """
-    LENGTH_BOX, MA_SHORT, MA_LONG, LENGTH_VOL, VOL_MULT = 20, 20, 60, 20, 1.5
+    LENGTH_BOX, MA_SHORT, MA_LONG, LENGTH_VOL, VOL_MULT = 20, 20, 60, 20, 1.2
 
     min_bars = max(LENGTH_BOX + 1, MA_LONG, LENGTH_VOL, 3) + 1
     if len(bars) < min_bars:
@@ -357,9 +357,34 @@ else:
 # 只保留最近 30 天
 history = history[-30:]
 
-# ── 事後勝率追蹤：訊號出現 5 / 10 個交易日後，方向是否猜對 ──
+# ── 事後勝率追蹤：訊號出現後，依「進場價 ±3%/6%」停損停利規則模擬到 5 / 10 個交易日 ──
 # 只針對「有 closeAtSignal」的訊號（即本次新策略上線後才產生的訊號）計分，
 # 不回溯舊版（跨市場漲跌幅）策略留下的歷史紀錄，避免混淆勝率。
+# 停損/停利比例與前端顯示的建議規則一致（多單 -3%/+6%，空單 +3%/-6%）：
+# 一旦期間內觸價就視為出場，不再像過去一樣硬等滿 5/10 天才用收盤價計算，
+# 避免像回測看到的「獲利在持有期間整個回吐」問題反映不到勝率數字上。
+STOP_PCT, TARGET_PCT = 0.03, 0.06
+
+def simulate_exit(bars, entry_idx, direction, entry_price, horizon):
+    """從進場隔天起逐日檢查是否觸及停損/停利，回傳 (exit_price, exit_kind)；
+    若在 horizon 個交易日內都沒觸價，回傳 (None, 'horizon') 交由呼叫端取滿期收盤價。"""
+    if direction > 0:
+        stop_price, target_price = entry_price * (1 - STOP_PCT), entry_price * (1 + TARGET_PCT)
+    else:
+        stop_price, target_price = entry_price * (1 + STOP_PCT), entry_price * (1 - TARGET_PCT)
+    for step in range(1, horizon + 1):
+        idx = entry_idx + step
+        if idx >= len(bars):
+            break
+        bar = bars[idx]
+        stop_hit  = bar["low"] <= stop_price   if direction > 0 else bar["high"] >= stop_price
+        target_hit = bar["high"] >= target_price if direction > 0 else bar["low"] <= target_price
+        if stop_hit:
+            return stop_price, "stop"  # 同一天觸及停損/停利無法判斷先後順序，保守假設停損先發生
+        if target_hit:
+            return target_price, "target"
+    return None, "horizon"
+
 date_to_idx = {b["date"]: i for i, b in enumerate(twii_bars)}
 for entry in history:
     if entry.get("dir", 0) == 0 or "closeAtSignal" not in entry:
@@ -370,16 +395,21 @@ for entry in history:
     for horizon, key in ((5, "fwd5"), (10, "fwd10")):
         if key in entry or idx + horizon >= len(twii_bars):
             continue
-        fut_close = twii_bars[idx + horizon]["close"]
-        ret = round((fut_close - entry["closeAtSignal"]) / entry["closeAtSignal"] * 100, 2)
+        exit_price, exit_kind = simulate_exit(twii_bars, idx, entry["dir"], entry["closeAtSignal"], horizon)
+        if exit_price is None:
+            exit_price = twii_bars[idx + horizon]["close"]
+        ret = round((exit_price - entry["closeAtSignal"]) / entry["closeAtSignal"] * 100, 2)
         hit = (entry["dir"] > 0 and ret > 0) or (entry["dir"] < 0 and ret < 0)
-        entry[key] = {"ret": ret, "hit": hit}
+        entry[key] = {"ret": ret, "hit": hit, "exit": exit_kind}
 
 def summarize_track_record(history, key):
     scored = [e[key] for e in history if key in e]
     n = len(scored)
     hits = sum(1 for s in scored if s["hit"])
-    return {"n": n, "hits": hits, "winRate": round(hits / n * 100, 1) if n else None}
+    stopped = sum(1 for s in scored if s.get("exit") == "stop")
+    targeted = sum(1 for s in scored if s.get("exit") == "target")
+    return {"n": n, "hits": hits, "winRate": round(hits / n * 100, 1) if n else None,
+            "stopped": stopped, "targeted": targeted}
 
 track_record = {
     "fwd5": summarize_track_record(history, "fwd5"),
