@@ -1,0 +1,8 @@
+{
+  "_說明": "自選股清單。market 為 TW 的股票會優先用富邦即時報價（富邦失敗才退回 Yahoo），其餘一律用 Yahoo Finance。改完直接 commit / push 到 main，下一次排程（或按 App 上的「↻ 更新」）就會套用新清單，不需要改 fetch_market.py。",
+  "stocks": [
+    {"symbol": "2603", "name": "長榮", "market": "TW"},
+    {"symbol": "3037", "name": "欣興", "market": "TW"},
+    {"symbol": "AAPL", "name": "蘋果", "market": "US"}
+  ]
+}

@@ -53,6 +53,21 @@ SOX_SECTORS = [
         {"symbol":"IFNNY","name":"英飛凌"}]},
 ]
 
+def load_watchlist():
+    """讀取 watchlist.json（自選股清單）。檔案不存在或格式錯誤時回傳空清單，不影響其餘資料抓取。
+    格式：{"stocks": [{"symbol":"2317","name":"鴻海","market":"TW"}, {"symbol":"AAPL","name":"蘋果","market":"US"}]}
+    market 為 "TW" 時優先用富邦即時報價（Fubon 失敗則退回 Yahoo 的 <代號>.TW），其餘視為美股/其他市場一律用 Yahoo。"""
+    try:
+        with open("watchlist.json", "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        stocks = cfg.get("stocks", [])
+        return [s for s in stocks if s.get("symbol")]
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        print(f"⚠️ 讀取 watchlist.json 失敗，自選股略過本次更新: {e}")
+        return []
+
 def yahoo_quote(symbol):
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=2d"
     req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
@@ -193,7 +208,7 @@ def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
         print(f"  {sec['name']} 完成（走勢{len(trend)}點）")
     return result
 
-def fetch_tw():
+def fetch_tw(watchlist_tw_symbols=None):
     from fubon_neo.sdk import FubonSDK
     cert_b64 = os.environ["FUBON_CERT_B64"]
     cert_b64 += "=" * (4 - len(cert_b64) % 4)
@@ -229,7 +244,52 @@ def fetch_tw():
             tw_indices[key] = {"name":name,"symbol":sym,"price":0,"change":0,"changePercent":0,"prev":0}
 
     tw_sectors = fetch_sectors_with_trend(TW_SECTORS, use_yahoo=False, rest=rest)
-    return tw_indices, tw_sectors
+
+    tw_watch_quotes = {}
+    if watchlist_tw_symbols:
+        print("  [自選股-台股]")
+        for sym in watchlist_tw_symbols:
+            try:
+                d = rest.intraday.quote(symbol=sym)
+                tw_watch_quotes[sym] = {
+                    "price": d.get("closePrice") or d.get("lastPrice") or 0,
+                    "change": d.get("change", 0),
+                    "changePercent": d.get("changePercent", 0),
+                    "prev": d.get("previousClose", 0),
+                }
+                print(f"    {sym}: {tw_watch_quotes[sym]['price']} ({tw_watch_quotes[sym]['changePercent']:+.2f}%)")
+            except Exception as e:
+                print(f"    ⚠️ 自選股 {sym} 失敗: {e}")
+
+    return tw_indices, tw_sectors, tw_watch_quotes
+
+def fetch_institutional_futures():
+    """抓取期交所官方 OpenAPI：三大法人-區分各期貨契約-依日期（外資期貨未平倉部位）。
+    來源：https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate
+    （對應 data.gov.tw 資料集 11596，官方公開 API，非爬蟲，每日更新）。
+    目前欄位名稱尚未在 sandbox 內驗證成功（回應被判定為二進位內容，無法預覽 JSON schema），
+    這裡先用「除錯探測」模式：把第一筆資料的所有欄位名稱與內容原封不動印出來、也整包塞進回傳值，
+    之後從實際跑出來的 public/data.json 裡看到真正欄位長相後，再補上正式的外資/臺股期貨過濾與解析邏輯。
+    這一步失敗不影響其他資料，會被上層 try/except 接住。"""
+    url = "https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        raw = r.read()
+    parsed = json.loads(raw)
+    records = parsed if isinstance(parsed, list) else (
+        parsed.get("data") or parsed.get("Data") or parsed.get("result") or []
+    )
+    if not records:
+        raise RuntimeError(f"API 回應無資料筆數（頂層型別：{type(parsed).__name__}）")
+    sample = records[0]
+    print(f"  [除錯] 共 {len(records)} 筆，第一筆欄位名稱：{list(sample.keys())}")
+    print(f"  [除錯] 第一筆範例內容：{json.dumps(sample, ensure_ascii=False)}")
+    return {
+        "status": "debug_probe",
+        "field_names": list(sample.keys()),
+        "sample_record": sample,
+        "record_count": len(records),
+    }
 
 # ── 主流程 ──
 print("\n📡 抓取全球指數 + 期貨（Yahoo Finance）...")
@@ -241,17 +301,58 @@ metals = fetch_metals()
 print("\n📡 抓取 SOX 個股 + 走勢（Yahoo Finance）...")
 sox_sectors = fetch_sectors_with_trend(SOX_SECTORS, use_yahoo=True)
 
+watchlist_cfg = load_watchlist()
+watchlist_tw_syms = [w["symbol"] for w in watchlist_cfg if w.get("market", "US").upper() == "TW"]
+if watchlist_cfg:
+    print(f"\n📡 自選股清單：共 {len(watchlist_cfg)} 檔（台股 {len(watchlist_tw_syms)} 檔）")
+
 print("\n📡 抓取台股（富邦 Neo API）+ 走勢（Yahoo Finance）...")
 try:
-    tw_indices, tw_sectors = fetch_tw()
+    tw_indices, tw_sectors, tw_watch_quotes = fetch_tw(watchlist_tw_syms)
     tw_source = "fubon_neo"
 except Exception as e:
     print(f"⚠️ 富邦 SDK 失敗: {e}")
     tw_source = "fallback"
     tw_indices = {"TSM":{"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0}}
     tw_sectors = fetch_sectors_with_trend(TW_SECTORS, use_yahoo=True)
+    tw_watch_quotes = {}
+    if watchlist_tw_syms:
+        print("  [自選股-台股 → 退回 Yahoo Finance]")
+        for sym in watchlist_tw_syms:
+            try:
+                tw_watch_quotes[sym] = yahoo_quote(sym + ".TW")
+            except Exception as e2:
+                print(f"    ⚠️ 自選股 {sym} 失敗: {e2}")
 
 indices = {**global_indices, **tw_indices}
+
+# ── 自選股清單：台股用富邦即時（或上面的 Yahoo 退回），其餘一律用 Yahoo Finance ──
+watchlist = []
+if watchlist_cfg:
+    print("\n📡 抓取自選股（其餘市場，Yahoo Finance）...")
+for w in watchlist_cfg:
+    sym = w["symbol"]
+    name = w.get("name", sym)
+    market = w.get("market", "US").upper()
+    if market == "TW":
+        q = tw_watch_quotes.get(sym)
+    else:
+        try:
+            q = yahoo_quote(sym)
+            print(f"    {name}({sym}): {q['price']} ({q['changePercent']:+.2f}%)")
+        except Exception as e:
+            print(f"    ⚠️ 自選股 {name}({sym}) 失敗: {e}")
+            q = None
+    if not q:
+        q = {"price": 0, "change": 0, "changePercent": 0, "prev": 0}
+    watchlist.append({"symbol": sym, "name": name, "market": market, **q})
+
+print("\n📡 抓取三大法人期貨未平倉（期交所 OpenAPI，欄位確認中，僅除錯探測）...")
+try:
+    inst_futures = fetch_institutional_futures()
+except Exception as e:
+    print(f"⚠️ 三大法人期貨資料抓取失敗（不影響其他資料）: {e}")
+    inst_futures = None
 
 # ── 關鍵資料檢查：避免抓取失敗時仍以 0 覆蓋掉正確資料 ──
 CRITICAL_INDEX_KEYS = ["TWII", "TSM_ADR", "SOX"]
@@ -447,6 +548,8 @@ payload = {
     "signal_meta": signal_meta,
     "tw_sectors": tw_sectors,
     "sox_sectors": sox_sectors,
+    "watchlist": watchlist,
+    "inst_futures": inst_futures,
 }
 
 os.makedirs("public", exist_ok=True)
