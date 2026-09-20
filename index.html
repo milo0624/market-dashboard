@@ -69,7 +69,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .trend-pct.up{color:var(--Gm)}.trend-pct.dn{color:var(--Rm)}.trend-pct.fl{color:var(--mu)}
 .trend-sub{font-size:10px;color:var(--hi)}
 .hc-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
-.hcell{border-radius:6px;padding:6px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.4;cursor:default}
+.hcell{position:relative;border-radius:6px;padding:6px 3px;text-align:center;font-size:9px;font-weight:700;line-height:1.4;cursor:pointer}
+.hcell-star{position:absolute;top:1px;right:2px;font-size:9px;opacity:.55;line-height:1}
+.hcell-star.on{opacity:1}
+.pick-card{position:relative}
+.pick-x{position:absolute;top:6px;right:6px;font-size:11px;color:var(--hi);cursor:pointer;padding:2px 4px}
+.reso-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bdr);cursor:pointer}
+.reso-row:last-child{border-bottom:none}
+.reso-mkt{font-size:9px;font-weight:700;color:#fff;background:var(--hi);border-radius:4px;padding:2px 5px;flex-shrink:0}
+.reso-name{font-size:12px;font-weight:600;color:var(--tx);width:52px;flex-shrink:0}
+.reso-bar{flex:1;display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--bg)}
+.reso-seg-up{background:var(--Gm)}
+.reso-seg-dn{background:var(--Rm)}
+.reso-seg-fl{background:var(--hi)}
+.reso-tag{font-size:10px;font-weight:700;flex-shrink:0;width:78px;text-align:right}
+.reso-tag.hot-up{color:var(--G)}
+.reso-tag.hot-dn{color:var(--R)}
+.reso-tag.mid{color:var(--mu);font-weight:500}
 .status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
@@ -120,13 +136,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <div class="fut-grid" id="metalsGrid"></div>
   </div>
 
+  <div class="fut-section" id="myPicksSection">
+    <div class="fut-header">
+      <span class="fut-label">📌 我的關注</span>
+      <span style="font-size:10px;color:var(--hi)" id="myPicksHint"></span>
+    </div>
+    <div class="fut-grid" id="myPicksGrid" style="grid-template-columns:1fr"></div>
+  </div>
+
+  <div class="fut-section" id="watchlistSection">
+    <div class="fut-header">
+      <span class="fut-label">⭐ 站長自選股</span>
+      <span style="font-size:10px;color:var(--hi)" id="watchlistHint"></span>
+    </div>
+    <div class="fut-grid" id="watchlistGrid"></div>
+  </div>
+
   <div class="card" id="stratCard">
     <div class="c-title">策略推薦</div>
     <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
     <div id="stratContent"></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="resoCard">
+    <div class="c-title">🔥 族群共振</div>
+    <div class="c-sub">板塊內同方向股票比例，越高代表資金越可能整族群一起上車 · 點列可跳去對應板塊</div>
+    <div id="resoList"></div>
+  </div>
+
+  <div class="card" id="heatCard">
     <div class="c-title">板塊熱力圖</div>
     <div class="c-sub" id="heatSub">深綠強漲 · 深紅重跌</div>
     <div class="mkt-seg">
@@ -163,6 +201,33 @@ try {
   if (saved) idxOrder = JSON.parse(saved);
 } catch(e) {}
 
+// ── 我的關注（訪客自己從板塊熱力圖點星號加入，存在自己瀏覽器，不會同步到別的裝置）──
+var myPicks = [];
+try {
+  var savedPicks = localStorage.getItem('myPicks');
+  if (savedPicks) myPicks = JSON.parse(savedPicks);
+} catch(e) {}
+function savePicks() {
+  try { localStorage.setItem('myPicks', JSON.stringify(myPicks)); } catch(e) {}
+}
+function isPicked(symbol, mktIdx) {
+  for (var i = 0; i < myPicks.length; i++) {
+    if (myPicks[i].symbol === symbol && myPicks[i].mkt === mktIdx) return true;
+  }
+  return false;
+}
+function togglePick(symbol, name, mktIdx) {
+  var idx = -1;
+  for (var i = 0; i < myPicks.length; i++) {
+    if (myPicks[i].symbol === symbol && myPicks[i].mkt === mktIdx) { idx = i; break; }
+  }
+  if (idx > -1) myPicks.splice(idx, 1);
+  else myPicks.push({symbol: symbol, name: name, mkt: mktIdx});
+  savePicks();
+  renderMyPicks();
+  renderHeat();
+}
+
 var IDX_META = {
   TSM_ADR: {label:'TSM ADR',   lead:true,  dollar:true},
   TWII:    {label:'台股 TAIEX',lead:false, dollar:false},
@@ -189,6 +254,76 @@ function hc(v) {
 function currentSectors() {
   if (!data) return [];
   return mkt === 0 ? (data.tw_sectors || []) : (data.sox_sectors || []);
+}
+
+// ── 族群共振：板塊內同方向股票比例，越極端代表族群越可能一起被資金推動 ──
+function computeResonance(sec) {
+  var up = 0, dn = 0, fl = 0;
+  for (var i = 0; i < sec.stocks.length; i++) {
+    var c = sec.stocks[i].changePercent;
+    if (c > 0) up++; else if (c < 0) dn++; else fl++;
+  }
+  var total = sec.stocks.length || 1;
+  var dom = up >= dn ? 'up' : 'dn';
+  var domCount = up >= dn ? up : dn;
+  var ratio = domCount / total;
+  return {up: up, dn: dn, fl: fl, total: total, dom: dom, ratio: ratio};
+}
+
+function renderResonance() {
+  if (!data) return;
+  var rows = [];
+  var groups = [
+    {mkt: 0, mktLabel: '台', sectors: data.tw_sectors || []},
+    {mkt: 1, mktLabel: 'SOX', sectors: data.sox_sectors || []},
+  ];
+  for (var g = 0; g < groups.length; g++) {
+    var grp = groups[g];
+    for (var i = 0; i < grp.sectors.length; i++) {
+      var sec = grp.sectors[i];
+      if (!sec.stocks || !sec.stocks.length) continue;
+      var r = computeResonance(sec);
+      rows.push({mkt: grp.mkt, mktLabel: grp.mktLabel, name: sec.name, subIdx: i, r: r});
+    }
+  }
+  // 依共振強度排序：同方向比例越高排越前面
+  rows.sort(function(a, b) { return b.r.ratio - a.r.ratio; });
+
+  var html = '';
+  for (var k = 0; k < rows.length; k++) {
+    var row = rows[k];
+    var r = row.r;
+    var upPct = (r.up / r.total * 100).toFixed(0);
+    var dnPct = (r.dn / r.total * 100).toFixed(0);
+    var flPct = (100 - upPct - dnPct);
+    var tagCls = 'mid', tagText = r.up + '漲' + r.dn + '跌';
+    if (r.ratio >= 0.8 && r.dom === 'up') { tagCls = 'hot-up'; tagText = '🔥 ' + r.up + '/' + r.total + ' 齊漲'; }
+    else if (r.ratio >= 0.8 && r.dom === 'dn') { tagCls = 'hot-dn'; tagText = '❄️ ' + r.dn + '/' + r.total + ' 齊跌'; }
+    html += '<div class="reso-row" data-mkt="' + row.mkt + '" data-idx="' + row.subIdx + '">' +
+      '<span class="reso-mkt">' + row.mktLabel + '</span>' +
+      '<span class="reso-name">' + row.name + '</span>' +
+      '<span class="reso-bar">' +
+        (r.up ? '<span class="reso-seg-up" style="flex:' + r.up + '"></span>' : '') +
+        (r.fl ? '<span class="reso-seg-fl" style="flex:' + r.fl + '"></span>' : '') +
+        (r.dn ? '<span class="reso-seg-dn" style="flex:' + r.dn + '"></span>' : '') +
+      '</span>' +
+      '<span class="reso-tag ' + tagCls + '">' + tagText + '</span>' +
+    '</div>';
+  }
+  document.getElementById('resoList').innerHTML = html || '<div style="font-size:12px;color:var(--mu)">尚無板塊資料</div>';
+
+  var rowEls = document.querySelectorAll('.reso-row');
+  for (var ri = 0; ri < rowEls.length; ri++) {
+    (function(el) {
+      el.addEventListener('click', function() {
+        mkt = parseInt(el.dataset.mkt);
+        subTab = parseInt(el.dataset.idx);
+        renderHeat();
+        var card = document.getElementById('heatCard');
+        if (card) card.scrollIntoView({behavior: 'smooth', block: 'start'});
+      });
+    })(rowEls[ri]);
+  }
 }
 
 function renderMetals() {
@@ -249,6 +384,42 @@ function renderFutures() {
     '</div>';
   }
   document.getElementById('futGrid').innerHTML = html || '<div style="font-size:12px;color:var(--mu);padding:8px">期貨資料待更新</div>';
+}
+
+function renderWatchlist() {
+  var list = data.watchlist || [];
+  var grid = document.getElementById('watchlistGrid');
+  var hint = document.getElementById('watchlistHint');
+  if (!list.length) {
+    hint.textContent = '尚未設定';
+    grid.style.gridTemplateColumns = '1fr';
+    grid.innerHTML = '<div style="font-size:12px;color:var(--mu);padding:8px 2px">在 repo 根目錄新增 watchlist.json 即可加入自選股（範例見 README）</div>';
+    return;
+  }
+  hint.textContent = list.length + ' 檔';
+  grid.style.gridTemplateColumns = '1fr 1fr';
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var d = list[i];
+    var isTw = d.market === 'TW';
+    var c = d.changePercent || 0;
+    var chg = d.change || 0;
+    var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    var dec = d.price >= 100 ? 1 : 2;
+    var prefix = isTw ? '' : '$';
+    html += '<div class="fut-card">' +
+      '<div class="fut-l">' + (d.name || d.symbol) +
+        '<span style="font-size:9px;background:#805AD5;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px">' + (isTw ? '台股' : '美股') + '</span>' +
+      '</div>' +
+      '<div class="fut-v">' + (d.price ? (prefix + fm(d.price, dec)) : '—') + '</div>' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-top:5px">' +
+        '<span class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</span>' +
+        '<span style="font-size:10px;color:var(--mu)">' + (chg >= 0 ? '+' : '') + fm(chg, dec) + '</span>' +
+      '</div>' +
+      '<div class="fut-p">前 ' + (d.prev ? (prefix + fm(d.prev, dec)) : '—') + '</div>' +
+    '</div>';
+  }
+  grid.innerHTML = html;
 }
 
 function renderStrategy() {
@@ -532,12 +703,67 @@ function renderHeat() {
   for (var h = 0; h < sec.stocks.length; h++) {
     var st = sec.stocks[h];
     var col = hc(st.changePercent);
-    hgHtml += '<div class="hcell" style="background:' + col.bg + ';color:' + col.fg + '" title="' + st.name + ' ' + sg(st.changePercent) + st.changePercent.toFixed(2) + '%">' +
+    var picked = isPicked(st.symbol, mkt);
+    hgHtml += '<div class="hcell" data-symbol="' + st.symbol + '" data-name="' + st.name + '" style="background:' + col.bg + ';color:' + col.fg + '" title="' + st.name + ' ' + sg(st.changePercent) + st.changePercent.toFixed(2) + '% · 點一下加入／移除我的關注">' +
+      '<span class="hcell-star' + (picked ? ' on' : '') + '">' + (picked ? '★' : '☆') + '</span>' +
       st.name.substring(0, 4) + '<br>' +
       '<span style="font-size:8px;opacity:.85">' + fm(st.price, st.price >= 100 ? 0 : 1) + '</span><br>' +
       sg(st.changePercent) + st.changePercent.toFixed(1) + '%</div>';
   }
   document.getElementById('hg').innerHTML = hgHtml;
+  var hcells = document.querySelectorAll('.hcell');
+  for (var hi = 0; hi < hcells.length; hi++) {
+    (function(cell) {
+      cell.addEventListener('click', function() {
+        togglePick(cell.dataset.symbol, cell.dataset.name, mkt);
+      });
+    })(hcells[hi]);
+  }
+}
+
+function renderMyPicks() {
+  var grid = document.getElementById('myPicksGrid');
+  var hint = document.getElementById('myPicksHint');
+  if (!myPicks.length) {
+    hint.textContent = '尚未選擇';
+    grid.innerHTML = '<div style="font-size:12px;color:var(--mu);padding:8px 2px">在下面「板塊熱力圖」點股票方塊上的 ☆ 就能加入這裡，只存在這個瀏覽器，換裝置不會同步</div>';
+    return;
+  }
+  hint.textContent = myPicks.length + ' 檔 · 存在此瀏覽器';
+  var html = '';
+  for (var i = 0; i < myPicks.length; i++) {
+    var p = myPicks[i];
+    var sectors = p.mkt === 0 ? (data.tw_sectors || []) : (data.sox_sectors || []);
+    var st = null;
+    for (var s = 0; s < sectors.length && !st; s++) {
+      for (var j = 0; j < sectors[s].stocks.length; j++) {
+        if (sectors[s].stocks[j].symbol === p.symbol) { st = sectors[s].stocks[j]; break; }
+      }
+    }
+    var price = st ? st.price : 0;
+    var c = st ? st.changePercent : 0;
+    var dir = c > 0 ? 'up' : c < 0 ? 'dn' : 'fl';
+    html += '<div class="fut-card pick-card">' +
+      '<span class="pick-x" data-symbol="' + p.symbol + '" data-mkt="' + p.mkt + '">✕</span>' +
+      '<div class="fut-l">' + (p.name || p.symbol) +
+        '<span style="font-size:9px;background:#805AD5;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px">' + (p.mkt === 0 ? '台股' : 'SOX') + '</span>' +
+      '</div>' +
+      '<div class="fut-v">' + (price ? fm(price, price >= 100 ? 0 : 1) : '—') + '</div>' +
+      '<div style="display:flex;align-items:center;gap:5px;margin-top:5px">' +
+        '<span class="badge ' + dir + '">' + (c >= 0 ? '▲' : '▼') + ' ' + Math.abs(c).toFixed(2) + '%</span>' +
+      '</div>' +
+    '</div>';
+  }
+  grid.innerHTML = html;
+  var xs = document.querySelectorAll('.pick-x');
+  for (var xi = 0; xi < xs.length; xi++) {
+    (function(x) {
+      x.addEventListener('click', function(e) {
+        e.stopPropagation();
+        togglePick(x.dataset.symbol, null, parseInt(x.dataset.mkt));
+      });
+    })(xs[xi]);
+  }
 }
 
 function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
@@ -547,7 +773,10 @@ function renderAll() {
   renderIdx();
   renderFutures();
   renderMetals();
+  renderMyPicks();
+  renderWatchlist();
   renderStrategy();
+  renderResonance();
   renderHeat();
   var upd = new Date(data.updated);
   var h = upd.getHours(), mi = upd.getMinutes();
