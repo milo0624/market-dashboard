@@ -1,6 +1,6 @@
 {
   "date": "2026-09-20",
-  "updated": "2026-09-20T13:49:24.647050+08:00",
+  "updated": "2026-09-20T13:56:54.451807+08:00",
   "source": "fallback",
   "indices": {
     "SOX": {
@@ -715,6 +715,11 @@
       }
     ],
     "totalNetOi": 71918,
-    "totalNetOiValue": 682191811
+    "totalNetOiValue": 682191811,
+    "debugAllItemsSeen": [
+      "外資及陸資",
+      "投信",
+      "自營商"
+    ]
   }
 }
