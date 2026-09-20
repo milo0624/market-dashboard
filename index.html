@@ -86,6 +86,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .reso-tag.hot-up{color:var(--G)}
 .reso-tag.hot-dn{color:var(--R)}
 .reso-tag.mid{color:var(--mu);font-weight:500}
+.inst-total{background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:13px;font-weight:700}
+.inst-total.up{color:var(--G)}.inst-total.dn{color:var(--R)}.inst-total.fl{color:var(--mu)}
+.inst-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr)}
+.inst-row:last-child{border-bottom:none}
+.inst-name{font-size:12px;font-weight:600;color:var(--tx)}
 .status{display:flex;align-items:center;gap:6px;margin-bottom:12px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--Gm);flex-shrink:0}
 .dot.busy{background:#dd6b20}.dot.err{background:var(--Rm)}
@@ -156,6 +161,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <div class="c-title">策略推薦</div>
     <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
     <div id="stratContent"></div>
+  </div>
+
+  <div class="card" id="instCard">
+    <div class="c-title">📊 三大法人期貨未平倉</div>
+    <div class="c-sub" id="instSub">臺股期貨（大台）未沖銷部位淨口數 · 期交所 OpenAPI</div>
+    <div id="instContent"></div>
   </div>
 
   <div class="card" id="resoCard">
@@ -551,6 +562,33 @@ function renderStrategy() {
     '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法 + 成交量確認（台指現貨 ^TWII 日K，嚴格模式）· 僅供參考，不構成投資建議</div>';
 }
 
+// ── 三大法人期貨未平倉：臺股期貨（大台）自營商／投信／外資未沖銷淨口數 ──
+function renderInstFutures() {
+  var inst = data.inst_futures;
+  var sub = document.getElementById('instSub');
+  var content = document.getElementById('instContent');
+  if (!inst || !inst.items || !inst.items.length) {
+    sub.textContent = '臺股期貨（大台）未沖銷部位淨口數 · 期交所 OpenAPI';
+    content.innerHTML = '<div style="font-size:12px;color:var(--mu)">尚無三大法人期貨資料（可能是抓取失敗或期交所今日尚未公布）</div>';
+    return;
+  }
+  sub.textContent = (inst.date || '') + ' · 臺股期貨（大台）未沖銷部位淨口數 · 期交所 OpenAPI';
+  var total = inst.totalNetOi || 0;
+  var totalDir = total > 0 ? 'up' : total < 0 ? 'dn' : 'fl';
+  var totalText = total > 0 ? '三大法人合計偏多' : total < 0 ? '三大法人合計偏空' : '三大法人合計中性';
+  var rowHtml = inst.items.map(function(it) {
+    var dir = it.netOi > 0 ? 'up' : it.netOi < 0 ? 'dn' : 'fl';
+    return '<div class="inst-row">' +
+      '<span class="inst-name">' + it.name + '</span>' +
+      '<span class="badge ' + dir + '">' + (it.netOi >= 0 ? '淨多 ' : '淨空 ') + Math.abs(it.netOi).toLocaleString('zh-TW') + ' 口</span>' +
+    '</div>';
+  }).join('');
+  content.innerHTML =
+    '<div class="inst-total ' + totalDir + '">' + totalText + ' · 合計 ' + (total >= 0 ? '+' : '') + total.toLocaleString('zh-TW') + ' 口</div>' +
+    rowHtml +
+    '<div style="font-size:10px;color:var(--hi);margin-top:8px">正值＝未平倉淨多單，負值＝未平倉淨空單，僅供參考，不構成投資建議</div>';
+}
+
 function renderBanner() {
   var tsm = data.indices.TSM_ADR || data.indices.TSM;
   if (!tsm || !tsm.price) return;
@@ -776,6 +814,7 @@ function renderAll() {
   renderMyPicks();
   renderWatchlist();
   renderStrategy();
+  renderInstFutures();
   renderResonance();
   renderHeat();
   var upd = new Date(data.updated);
