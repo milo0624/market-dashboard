@@ -1,6 +1,6 @@
 {
   "date": "2026-09-20",
-  "updated": "2026-09-20T13:35:50.734243+08:00",
+  "updated": "2026-09-20T13:49:24.647050+08:00",
   "source": "fallback",
   "indices": {
     "SOX": {
@@ -219,7 +219,7 @@
         },
         {
           "symbol": "2379",
-          "name": "瑞昱",
+          "name": "瑞昂",
           "price": 0,
           "changePercent": 0
         }
@@ -339,7 +339,7 @@
       "stocks": [
         {
           "symbol": "6669",
-          "name": "緯穎",
+          "name": "緯飀",
           "price": 0,
           "changePercent": 0
         },
@@ -363,7 +363,7 @@
         },
         {
           "symbol": "2498",
-          "name": "宏達電",
+          "name": "寏達電",
           "price": 0,
           "changePercent": 0
         }
@@ -401,7 +401,7 @@
         },
         {
           "symbol": "MRVL",
-          "name": "邁威爾",
+          "name": "邂威爾",
           "price": 244.25,
           "changePercent": 6.33
         }
@@ -436,7 +436,7 @@
       "stocks": [
         {
           "symbol": "ASML",
-          "name": "艾司摩爾",
+          "name": "艱司摩爾",
           "price": 1679.92,
           "changePercent": 4.85
         },
@@ -698,41 +698,23 @@
     }
   ],
   "inst_futures": {
-    "status": "debug_probe",
-    "field_names": [
-      "Date",
-      "ContractCode",
-      "Item",
-      "TradingVolume(Long)",
-      "TradingValue(Long)(Thousands)",
-      "TradingVolume(Short)",
-      "TradingValue(Short)(Thousands)",
-      "TradingVolume(Net)",
-      "TradingValue(Net)(Thousands)",
-      "OpenInterest(Long)",
-      "ContractValueofOpenInterest(Long)(Thousands)",
-      "OpenInterest(Short)",
-      "ContractValueofOpenInterest(Short)(Thousands)",
-      "OpenInterest(Net)",
-      "ContractValueofOpenInterest(Net)(Thousands)"
+    "date": "2026-09-18",
+    "contract": "臺股期貨",
+    "items": [
+      {
+        "name": "自營商",
+        "netOi": -3192,
+        "netOiValue": -30271605,
+        "netVol": -2437
+      },
+      {
+        "name": "投信",
+        "netOi": 75110,
+        "netOiValue": 712463416,
+        "netVol": 1084
+      }
     ],
-    "sample_record": {
-      "Date": "20260918",
-      "ContractCode": "臺股期貨",
-      "Item": "自營商",
-      "TradingVolume(Long)": "3420",
-      "TradingValue(Long)(Thousands)": "32264766",
-      "TradingVolume(Short)": "5857",
-      "TradingValue(Short)(Thousands)": "55268606",
-      "TradingVolume(Net)": "-2437",
-      "TradingValue(Net)(Thousands)": "-23003840",
-      "OpenInterest(Long)": "2183",
-      "ContractValueofOpenInterest(Long)(Thousands)": "20730858",
-      "OpenInterest(Short)": "5375",
-      "ContractValueofOpenInterest(Short)(Thousands)": "51002463",
-      "OpenInterest(Net)": "-3192",
-      "ContractValueofOpenInterest(Net)(Thousands)": "-30271605"
-    },
-    "record_count": 66
+    "totalNetOi": 71918,
+    "totalNetOiValue": 682191811
   }
 }
