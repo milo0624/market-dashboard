@@ -11,7 +11,7 @@ TW_SECTORS = [
     {"name":"半導體","stocks":[
         {"symbol":"2330","name":"台積電"},{"symbol":"2454","name":"聯發科"},
         {"symbol":"3711","name":"日月光"},{"symbol":"2303","name":"聯電"},
-        {"symbol":"2379","name":"瑞昂"}]},
+        {"symbol":"2379","name":"瑞昱"}]},
     {"name":"電子","stocks":[
         {"symbol":"2317","name":"鴻海"},{"symbol":"2308","name":"台達電"},
         {"symbol":"2382","name":"廣達"},{"symbol":"2357","name":"華碩"},
@@ -25,18 +25,18 @@ TW_SECTORS = [
         {"symbol":"6446","name":"藥華藥"},{"symbol":"4726","name":"永昕"},
         {"symbol":"6547","name":"聯合再生"}]},
     {"name":"光電","stocks":[
-        {"symbol":"6669","name":"緯飀"},{"symbol":"2409","name":"友達"},
+        {"symbol":"6669","name":"緯穎"},{"symbol":"2409","name":"友達"},
         {"symbol":"3481","name":"群創"},{"symbol":"3673","name":"TPK"},
-        {"symbol":"2498","name":"寏達電"}]},
+        {"symbol":"2498","name":"宏達電"}]},
 ]
 
 SOX_SECTORS = [
     {"name":"晶片設計","stocks":[
         {"symbol":"NVDA","name":"輝達"},{"symbol":"AVGO","name":"博通"},
         {"symbol":"AMD","name":"超微"},{"symbol":"QCOM","name":"高通"},
-        {"symbol":"MRVL","name":"邂威爾"}]},
+        {"symbol":"MRVL","name":"邁威爾"}]},
     {"name":"設備材料","stocks":[
-        {"symbol":"ASML","name":"艱司摩爾"},{"symbol":"AMAT","name":"應用材料"},
+        {"symbol":"ASML","name":"艾司摩爾"},{"symbol":"AMAT","name":"應用材料"},
         {"symbol":"LRCX","name":"拉姆研究"},{"symbol":"KLAC","name":"科磊"},
         {"symbol":"TER","name":"泰瑞達"}]},
     {"name":"類比IC","stocks":[
@@ -55,7 +55,7 @@ SOX_SECTORS = [
 
 def load_watchlist():
     """讀取 watchlist.json（自選股清單）。檔案不存在或格式錯誤時回傳空清單，不影響其餘資料抓取。
-    格式：{"stocks": [{"symbol":"2317","name":"鴻海","market":"TW"}, {"symbol":"AAPL","name":"蓹果","market":"US"}]}
+    格式：{"stocks": [{"symbol":"2317","name":"鴻海","market":"TW"}, {"symbol":"AAPL","name":"蘋果","market":"US"}]}
     market 為 "TW" 時優先用富邦即時報價（Fubon 失敗則退回 Yahoo 的 <代號>.TW），其餘視為美股/其他市場一律用 Yahoo。"""
     try:
         with open("watchlist.json", "r", encoding="utf-8") as f:
@@ -267,11 +267,14 @@ def fetch_institutional_futures():
     """抓取期交所官方 OpenAPI：三大法人-區分各期貨契約-依日期，取出「臺股期貨」（大台）未沖銷部位。
     來源：https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate
     （對應 data.gov.tw 資料集 11596，官方公開 API，非爬蟲，每日更新）。
-    先取出 ContractCode=="臺股期貨" 的所有列，再從中院選 Item 為自營商／投信／外資的三筆，避免因為
-    兩個條件一起過濾而漏掉實際存在但命名與預期不同的 Item（例如「外資及陸資」而非「外資」）：
-    若此次沒找到完整三筆，會把「臺股期貨」實際出現過的所有 Item 名稱寫進 log 與回傳值，
-    方便從 public/data.json 直接看到真實名稱後修正對應表。
-    這一步失敗不影響其餘資料，會被上層 try/except 接住。"""
+    欄位名稱與三大法人的 Item 實際名稱都已由 GitHub Actions 實際跑過驗證確認，格式範例：
+    {"Date":"20260918","ContractCode":"臺股期貨","Item":"自營商",
+     "TradingVolume(Net)":"-2437","OpenInterest(Net)":"-3192",
+     "ContractValueofOpenInterest(Net)(Thousands)":"-30271605", ...}
+    期交所官方對外資的 Item 名稱是「外資及陸資」而非「外資」，這裡用 ITEM_DISPLAY_MAP 把原始名稱換成
+    前端要顯示的簡稱（外資及陸資 → 外資），其餘照抄。只取 ContractCode=="臺股期貨" 且 Item 為
+    自營商／投信／外資及陸資 的三筆，算出各自與合計的未平倉淨口數。
+    這一步失敗不影響其他資料，會被上層 try/except 接住。"""
     url = "https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=20) as r:
@@ -284,7 +287,9 @@ def fetch_institutional_futures():
         raise RuntimeError(f"API 回應無資料筆數（頂層型別：{type(parsed).__name__}）")
 
     TARGET_CONTRACT = "臺股期貨"
-    WANTED_ITEMS = ["自營商", "投信", "外資"]
+    # 期交所 API 原始 Item 名稱 → 前端顯示用簡稱（已實際跑過 GitHub Actions 驗證過原始名稱）
+    ITEM_DISPLAY_MAP = {"自營商": "自營商", "投信": "投信", "外資及陸資": "外資"}
+    WANTED_RAW_ITEMS = list(ITEM_DISPLAY_MAP.keys())
 
     def to_int(v):
         try:
@@ -298,28 +303,28 @@ def fetch_institutional_futures():
                             f"{sorted(set(r.get('ContractCode') for r in records))[:20]}）")
 
     all_items_seen = sorted(set(r.get("Item") for r in contract_rows))
-    rows = [r for r in contract_rows if r.get("Item") in WANTED_ITEMS]
+    rows = [r for r in contract_rows if r.get("Item") in WANTED_RAW_ITEMS]
 
     items = []
     total_net_oi = 0
     total_net_oi_value = 0
-    for item_name in WANTED_ITEMS:
-        row = next((r for r in rows if r.get("Item") == item_name), None)
+    for raw_name in WANTED_RAW_ITEMS:
+        row = next((r for r in rows if r.get("Item") == raw_name), None)
         if not row:
             continue
         net_oi = to_int(row.get("OpenInterest(Net)"))
         net_oi_value = to_int(row.get("ContractValueofOpenInterest(Net)(Thousands)"))
         net_vol = to_int(row.get("TradingVolume(Net)"))
-        items.append({"name": item_name, "netOi": net_oi, "netOiValue": net_oi_value, "netVol": net_vol})
+        items.append({"name": ITEM_DISPLAY_MAP[raw_name], "netOi": net_oi, "netOiValue": net_oi_value, "netVol": net_vol})
         total_net_oi += net_oi
         total_net_oi_value += net_oi_value
 
     date_raw = contract_rows[0].get("Date", "")
     date_fmt = f"{date_raw[0:4]}-{date_raw[4:6]}-{date_raw[6:8]}" if len(str(date_raw)) == 8 else date_raw
 
-    missing_items = [n for n in WANTED_ITEMS if n not in [it["name"] for it in items]]
-    if missing_items:
-        print(f"  ⚠️ 三大法人臺股期貨未平倉：找不到 {missing_items}，「{TARGET_CONTRACT}」實際出現的 Item 值：{all_items_seen}")
+    missing_raw = [n for n in WANTED_RAW_ITEMS if ITEM_DISPLAY_MAP[n] not in [it["name"] for it in items]]
+    if missing_raw:
+        print(f"  ⚠️ 三大法人臺股期貨未平倉：找不到 {missing_raw}，「{TARGET_CONTRACT}」實際出現的 Item 值：{all_items_seen}")
 
     print(f"  三大法人臺股期貨未平倉（{date_fmt}）：合計淨 {total_net_oi} 口，明細：" +
           "、".join(f"{it['name']} {it['netOi']}口" for it in items))
@@ -330,7 +335,6 @@ def fetch_institutional_futures():
         "items": items,
         "totalNetOi": total_net_oi,
         "totalNetOiValue": total_net_oi_value,
-        "debugAllItemsSeen": all_items_seen if missing_items else None,
     }
 
 # ── 主流程 ──
@@ -368,7 +372,7 @@ except Exception as e:
 
 indices = {**global_indices, **tw_indices}
 
-# ── 自選股清單：台股用富邦即時（或上面的 Yahoo 退回），其餘市場一律用 Yahoo Finance ──
+# ── 自選股清單：台股用富邦即時（或上面的 Yahoo 退回），其餘一律用 Yahoo Finance ──
 watchlist = []
 if watchlist_cfg:
     print("\n📡 抓取自選股（其餘市場，Yahoo Finance）...")
@@ -393,7 +397,7 @@ print("\n📡 抓取三大法人期貨未平倉（期交所 OpenAPI，臺股期�
 try:
     inst_futures = fetch_institutional_futures()
 except Exception as e:
-    print(f"⚠️ 三大法人期貨資料抓取失敗（不影響其餘資料）: {e}")
+    print(f"⚠️ 三大法人期貨資料抓取失敗（不影響其他資料）: {e}")
     inst_futures = None
 
 # ── 關鍵資料檢查：避免抓取失敗時仍以 0 覆蓋掉正確資料 ──
@@ -409,7 +413,7 @@ def calc_pine_signal(bars):
     """
     移植自使用者的 Pine Script v5 策略（井田箱體突破 + 酒田K線型態 + 成交量確認），
     在每日 K 棒上執行「嚴格模式」：突破 + 量能 + 均線趨勢 + K 線型態需同時成立。
-    bars：依時間由舊到新排序的 OHLCV 列表（至少需要61根）。
+    bars：依時間由舊到新排序的 OHLCV 列表（至少需要 61 根）。
     回傳 (today_dir, detail)：today_dir 為 +1 多 / -1 空 / 0 中性；detail 為判斷細節。
     """
     LENGTH_BOX, MA_SHORT, MA_LONG, LENGTH_VOL, VOL_MULT = 20, 20, 60, 20, 1.2
@@ -500,16 +504,16 @@ else:
 # 只保留最近 30 天
 history = history[-30:]
 
-# ── 事後勝率追蹤：訊號出現後，依「進場價 ±3%/6%」停損停盈規則模擬到 5 / 10 個交易日 ──
+# ── 事後勝率追蹤：訊號出現後，依「進場價 ±3%/6%」停損停利規則模擬到 5 / 10 個交易日 ──
 # 只針對「有 closeAtSignal」的訊號（即本次新策略上線後才產生的訊號）計分，
-# 不回溯舊版（跨市場涨跌幅）策略留下的歷史紀錄，避免混淆勝率。
-# 停損/停盈比例與前端顯示的建議規則一致（多單 -3%/+6%，空單 +3%/-6%）：
-# 一旦期間內觸價就視為出場，不再像過去一樣硬等满5/10天才用收盤價計算，
+# 不回溯舊版（跨市場漲跌幅）策略留下的歷史紀錄，避免混淆勝率。
+# 停損/停利比例與前端顯示的建議規則一致（多單 -3%/+6%，空單 +3%/-6%）：
+# 一旦期間內觸價就視為出場，不再像過去一樣硬等滿 5/10 天才用收盤價計算，
 # 避免像回測看到的「獲利在持有期間整個回吐」問題反映不到勝率數字上。
 STOP_PCT, TARGET_PCT = 0.03, 0.06
 
 def simulate_exit(bars, entry_idx, direction, entry_price, horizon):
-    """從進場隔天起逐日檢查是否觸及停損/停盈，回傳 (exit_price, exit_kind)；
+    """從進場隔天起逐日檢查是否觸及停損/停利，回傳 (exit_price, exit_kind)；
     若在 horizon 個交易日內都沒觸價，回傳 (None, 'horizon') 交由呼叫端取滿期收盤價。"""
     if direction > 0:
         stop_price, target_price = entry_price * (1 - STOP_PCT), entry_price * (1 + TARGET_PCT)
@@ -523,7 +527,7 @@ def simulate_exit(bars, entry_idx, direction, entry_price, horizon):
         stop_hit  = bar["low"] <= stop_price   if direction > 0 else bar["high"] >= stop_price
         target_hit = bar["high"] >= target_price if direction > 0 else bar["low"] <= target_price
         if stop_hit:
-            return stop_price, "stop"  # 同一天觸及停損/停盈無法判斷先後順序，保守假設停損先發生
+            return stop_price, "stop"  # 同一天觸及停損/停利無法判斷先後順序，保守假設停損先發生
         if target_hit:
             return target_price, "target"
     return None, "horizon"
