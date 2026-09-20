@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>資產冒險記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script>
+<style>
+html, body { margin:0; padding:0; background:#10152a; }
+
+.nwa-root {
+  --bg-deep: #10152a;
+  --bg-panel: #1a2140;
+  --bg-panel-2: #212a4d;
+  --text-primary: #f1ede2;
+  --text-muted: #9aa3c7;
+  --border: rgba(255,255,255,0.08);
+  --gold: #e8b355;
+  --good: #4fbe8e;
+  --bad: #e8637a;
+
+  font-family: 'Noto Sans TC', sans-serif;
+  background: radial-gradient(circle at 50% 0%, #1b2247 0%, var(--bg-deep) 55%);
+  color: var(--text-primary);
+  padding: 28px 18px 48px;
+  max-width: 560px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+.nwa-root * { box-sizing: border-box; }
+
+.nwa-header { text-align:center; margin-bottom: 22px; position: relative; }
+.eyebrow { font-size:11px; letter-spacing: 0.18em; text-transform:uppercase; color: var(--gold); margin:0 0 6px; font-weight:700; }
+.nwa-header h1 { font-family:'Noto Serif TC', serif; font-weight:900; font-size:28px; margin:0 0 6px; letter-spacing: 0.04em; }
+.subtitle { color: var(--text-muted); font-size:13px; margin:0; }
+
+.hero-card {
+  background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-panel-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 22px 20px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin-bottom: 16px;
+}
+.char-stage { width: min(220px, 62vw); aspect-ratio: 1/1; }
+.species-picker { display:flex; gap:6px; margin-bottom:10px; }
+.species-picker button { background: var(--bg-deep); border:1px solid var(--border); border-radius:999px; width:32px; height:32px; font-size:16px; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0.55; transition: all 0.2s; }
+.species-picker button.active { opacity:1; border-color: rgba(232,179,85,0.5); background: rgba(232,179,85,0.1); transform: scale(1.08); }
+.char-svg { width:100%; height:100%; }
+.aura-ring { animation: pulse-ring 2.6s ease-in-out infinite; transform-origin: 100px 100px; }
+@keyframes pulse-ring { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.sparkles .twinkle { animation: twinkle 1.8s ease-in-out infinite; transform-origin: center; }
+@keyframes twinkle { 0%,100% { opacity:0.3; transform: scale(0.8); } 50% { opacity:1; transform: scale(1.15); } }
+
+.char-idle { animation: idle-bob 3.2s ease-in-out infinite; transform-box: view-box; transform-origin: 100px 180px; }
+@keyframes idle-bob { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(0.6deg); } }
+.char-shadow { animation: shadow-breathe 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes shadow-breathe { 0%,100% { transform: scaleX(1); opacity: 0.14; } 50% { transform: scaleX(0.92); opacity: 0.1; } }
+.char-eye { animation: eye-blink 4.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes eye-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.15); } }
+
+.lv-badge { margin-top: 4px; }
+.lv-num { font-family:'Cinzel', serif; font-weight:700; font-size:14px; letter-spacing:0.06em; color: var(--gold); border: 1px solid rgba(232,179,85,0.4); padding: 3px 12px; border-radius: 999px; background: rgba(232,179,85,0.08); }
+.char-title { font-family:'Noto Serif TC', serif; font-weight:900; font-size:22px; margin: 10px 0 6px; }
+.char-percentile { font-size:11.5px; color: var(--text-muted); margin: 0 0 10px; display:flex; align-items:center; justify-content:center; gap:8px; }
+.percentile-toggle { background:transparent; border:none; color: var(--text-muted); text-decoration:underline; font-size:10.5px; cursor:pointer; padding:0; font-family:inherit; }
+.percentile-toggle.standalone { margin: 0 0 10px; text-decoration:none; border:1px solid var(--border); border-radius:999px; padding:3px 10px; }
+
+.health-tag { display:inline-flex; align-items:center; gap:5px; font-size:12px; padding: 4px 12px; border-radius:999px; border:1px solid var(--border); color: var(--text-muted); margin-bottom: 16px; }
+.health-tag.tone-great { color: var(--gold); border-color: rgba(232,179,85,0.4); }
+.health-tag.tone-good { color: var(--good); border-color: rgba(79,190,142,0.35); }
+.health-tag.tone-ok { color: #e8d081; border-color: rgba(232,208,129,0.3); }
+.health-tag.tone-bad { color: var(--bad); border-color: rgba(232,99,122,0.35); }
+
+.progress-wrap { width:100%; }
+.progress-track { width:100%; height:8px; border-radius:999px; background: rgba(255,255,255,0.08); overflow:hidden; }
+.progress-fill { height:100%; border-radius:999px; transition: width 0.5s ease; }
+.progress-label { font-size:12px; color: var(--text-muted); margin: 8px 0 0; }
+
+.stats-row { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-bottom: 18px; }
+.week-delta { display:flex; align-items:center; justify-content:center; gap:5px; font-size:12.5px; font-weight:600; margin: -8px 0 16px; }
+.stat-card { background: var(--bg-panel); border:1px solid var(--border); border-radius:14px; padding: 12px 8px; text-align:center; }
+.stat-card.highlight { background: linear-gradient(180deg, rgba(232,179,85,0.12), var(--bg-panel)); border-color: rgba(232,179,85,0.3); }
+.stat-label { display:block; font-size:11px; color: var(--text-muted); margin-bottom:5px; }
+.stat-value { display:block; font-size:14px; font-weight:700; font-family:'Noto Serif TC', serif; }
+.stat-value.tone-good { color: var(--good); }
+.stat-value.tone-bad { color: var(--bad); }
+
+.tab-nav { display:flex; gap:6px; margin-bottom: 14px; background: var(--bg-panel); border:1px solid var(--border); border-radius: 14px; padding:4px; }
+.tab-nav button { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; background:transparent; border:none; color: var(--text-muted); font-size:13px; font-weight:500; padding: 9px 6px; border-radius:10px; cursor:pointer; transition: all 0.2s; font-family: inherit; }
+.tab-nav button.active { background: var(--bg-panel-2); color: var(--text-primary); box-shadow: 0 0 0 1px var(--border); }
+
+.panel { background: var(--bg-panel); border:1px solid var(--border); border-radius:18px; padding: 18px; }
+.panel-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
+.panel-head h3 { margin:0; font-family:'Noto Serif TC', serif; font-size:16px; font-weight:700; }
+.panel-total { font-weight:700; color: var(--gold); font-size:14px; }
+
+.add-form { display:flex; flex-direction:column; gap:8px; margin-bottom: 16px; }
+.add-form input, .add-form select { background: var(--bg-deep); border:1px solid var(--border); color: var(--text-primary); border-radius:10px; padding: 9px 10px; font-size:13px; font-family: inherit; min-width:0; }
+.add-form input::placeholder { color: #5f6790; }
+.add-form-name { width:100%; }
+.add-form-name-row { display:flex; gap:8px; }
+.add-form-name-row .add-form-name { flex:1; min-width:0; }
+.add-form-date { width:132px; flex-shrink:0; }
+.add-form-row { display:grid; grid-template-columns: 1fr 74px 1fr auto; gap:8px; align-items:start; }
+.amount-field { display:flex; flex-direction:column; min-width:0; }
+.amount-field input { width:100%; }
+.amount-preview { font-size:10.5px; color: var(--good); margin: 3px 2px 0; }
+.add-btn { background: var(--gold); border:none; color:#10152a; border-radius:10px; width:38px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; font-weight:700; }
+
+.item-list, .log-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.item-list li { display:flex; align-items:center; justify-content:space-between; background: var(--bg-deep); border:1px solid var(--border); border-radius:12px; padding: 10px 12px; }
+.item-info { display:flex; flex-direction:column; gap:2px; }
+.item-name { font-size:13px; font-weight:500; }
+.item-cat { font-size:11px; color: var(--text-muted); }
+.item-date { font-size:10.5px; color: var(--text-muted); display:flex; align-items:center; gap:6px; }
+.item-week-badge { font-size:9.5px; font-weight:700; color: var(--good); background: rgba(79,190,142,0.12); border:1px solid rgba(79,190,142,0.3); border-radius:999px; padding:1px 7px; }
+.item-right { display:flex; align-items:center; gap:8px; }
+.item-amount { font-size:13px; font-weight:700; }
+.item-amount-block { display:flex; flex-direction:column; align-items:flex-end; gap:1px; }
+.item-amount-sub { font-size:10.5px; color: var(--text-muted); }
+.del-btn { background:transparent; border:none; color: var(--text-muted); cursor:pointer; padding:4px; display:flex; font-size:14px; }
+.del-btn:hover { color: var(--bad); }
+.edit-btn { background:transparent; border:none; color: var(--text-muted); cursor:pointer; padding:4px; display:flex; font-size:14px; }
+.edit-btn:hover { color: var(--gold); }
+
+.item-edit-row { flex-direction:column; align-items:stretch; gap:8px; }
+.item-edit-row > input[type="text"] { background: var(--bg-panel); border:1px solid var(--border); color: var(--text-primary); border-radius:10px; padding:9px 10px; font-size:13px; font-family:inherit; width:100%; }
+.item-edit-fields { display:grid; grid-template-columns: 1fr 68px 1fr 1fr; gap:6px; }
+.item-edit-fields select, .item-edit-fields input { background: var(--bg-panel); border:1px solid var(--border); color: var(--text-primary); border-radius:9px; padding:7px 8px; font-size:12px; font-family:inherit; min-width:0; }
+.item-edit-actions { display:flex; gap:8px; justify-content:flex-end; }
+.item-edit-actions .add-btn { width:auto; padding:0 14px; height:34px; }
+.item-edit-actions .del-btn { border:1px solid var(--border); border-radius:10px; width:34px; height:34px; justify-content:center; }
+
+.save-btn { display:flex; align-items:center; gap:6px; background: rgba(232,179,85,0.12); border:1px solid rgba(232,179,85,0.35); color: var(--gold); font-size:12px; font-weight:600; padding: 8px 12px; border-radius:10px; cursor:pointer; font-family: inherit; }
+.save-btn.full { width:100%; justify-content:center; }
+.privacy-note { font-size:11.5px; color: var(--text-muted); background: rgba(232,179,85,0.08); border:1px solid rgba(232,179,85,0.25); border-radius:10px; padding:9px 11px; margin: 0 0 16px; line-height:1.5; }
+.backup-actions { display:flex; flex-direction:column; gap:8px; }
+
+.insight-list { list-style:none; margin:0 0 14px; padding:0; display:flex; flex-direction:column; gap:10px; }
+.insight-item { display:flex; gap:10px; align-items:flex-start; background: var(--bg-deep); border:1px solid var(--border); border-radius:12px; padding:12px; }
+.insight-icon { flex-shrink:0; margin-top:1px; font-size:15px; }
+.insight-title { font-size:13px; font-weight:700; margin:0 0 3px; }
+.insight-text { font-size:12px; color: var(--text-muted); margin:0; line-height:1.5; }
+
+.ai-advice-block { border-top:1px solid var(--border); padding-top:14px; margin-top:4px; }
+.ai-advice-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.ai-advice-list li { font-size:12.5px; color: var(--text-primary); line-height:1.6; background: var(--bg-deep); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
+.week-note { font-size:11.5px; color: var(--text-muted); margin: 0 0 14px; }
+
+.chart-wrap { margin: 4px 0 16px; height: 200px; }
+.legend-list { list-style:none; margin:0 0 14px; padding:0; display:flex; flex-direction:column; gap:8px; }
+.legend-list li { display:flex; align-items:center; gap:8px; background: var(--bg-deep); border:1px solid var(--border); border-radius:10px; padding:8px 12px; font-size:12px; }
+.legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; display:inline-block; }
+.legend-name { flex:1; color: var(--text-primary); }
+.legend-value { color: var(--text-muted); }
+.log-list li { display:flex; align-items:center; justify-content:space-between; background: var(--bg-deep); border:1px solid var(--border); border-radius:12px; padding:10px 12px; }
+.log-date { display:block; font-size:11px; color: var(--text-muted); }
+.log-net { display:block; font-size:13px; font-weight:700; margin-top:2px; }
+.log-delta { display:flex; align-items:center; gap:3px; font-size:12px; font-weight:600; }
+.log-delta.tone-good { color: var(--good); }
+.log-delta.tone-bad { color: var(--bad); }
+.log-right { display:flex; align-items:center; gap:8px; }
+.log-carried-tag { font-size:9.5px; font-weight:600; color: var(--text-muted); background: rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:999px; padding:1px 7px; margin-left:6px; }
+
+.empty-note { color: var(--text-muted); font-size:13px; text-align:center; padding: 18px 0; }
+
+.import-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+.import-hint { font-size:11px; color: var(--text-muted); }
+.import-msg { font-size:11.5px; color: var(--good); margin: 0 0 12px; }
+.house-query-row { display:flex; gap:8px; margin-bottom:12px; }
+.house-query-row input, .house-query-row select { flex:1; min-width:0; background: var(--bg-deep); border:1px solid var(--border); color: var(--text-primary); border-radius:10px; padding:9px 10px; font-size:13px; font-family:inherit; }
+.stock-shares-input { max-width:88px; flex:none !important; }
+
+.rate-bar { background: var(--bg-panel); border:1px solid var(--border); border-radius:12px; padding:10px 12px; margin-bottom:16px; }
+.rate-bar-top { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.ghost-btn.small { flex:none; display:flex; align-items:center; gap:6px; background:transparent; border:1px solid var(--border); color: var(--text-muted); font-size:11px; padding:6px 10px; border-radius:10px; cursor:pointer; font-family:inherit; }
+.ghost-btn.full { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; background:transparent; border:1px solid var(--border); color: var(--text-muted); font-size:12px; padding:9px; border-radius:10px; cursor:pointer; font-family:inherit; margin-top:14px; }
+.ghost-btn.danger:hover { color: var(--bad); border-color: rgba(232,99,122,0.35); }
+.rate-updated { font-size:11px; color: var(--text-muted); }
+.rate-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.rate-chip { font-size:11px; color: var(--text-muted); background: var(--bg-deep); border:1px solid var(--border); border-radius:999px; padding:3px 9px; }
+.rate-error { color: var(--bad); font-size:11px; margin: 8px 0 0; }
+.team-error { color: var(--bad); font-size:12px; margin: 0 0 12px; }
+.spin { display:inline-block; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-ring, .twinkle, .spin, .char-idle, .char-shadow, .char-eye { animation: none !important; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+/* ----------------------------- 遊戲設定資料 ----------------------------- */
+
+const ASSET_CATEGORIES = ['現金 / 存款', '股票 / 基金', '房地產', '保單 / 其他'];
+const LIABILITY_CATEGORIES = ['房貸', '車貸', '信貸 / 卡債', '其他負債'];
+
+const ASSET_CATEGORY_COLORS = {
+  '現金 / 存款': '#4fbe8e',
+  '股票 / 基金': '#5fa8f5',
+  '房地產': '#e8b355',
+  '保單 / 其他': '#c084fc',
+};
+const LIABILITY_CATEGORY_COLORS = {
+  '房貸': '#f472b6',
+  '車貸': '#fb923c',
+  '信貸 / 卡債': '#e8637a',
+  '其他負債': '#9aa3c7',
+};
+
+// 全台 22 縣市與其行政區清單，code 對應內政部實價登錄開放資料的縣市檔名代號。
+// 行政區名單是從實際的成交資料反推出來的（近四季有出現過交易紀錄的區），
+// 極少數幾乎沒有交易紀錄的偏遠鄉鎮（例如金門烏坵鄉）可能不在清單內。
+const TAIWAN_DISTRICTS = {
+  "台北市": { code: "a", districts: ["中山區", "中正區", "信義區", "內湖區", "北投區", "南港區", "士林區", "大同區", "大安區", "文山區", "松山區", "萬華區"] },
+  "新北市": { code: "f", districts: ["三峽區", "三芝區", "三重區", "中和區", "五股區", "八里區", "土城區", "坪林區", "平溪區", "新店區", "新莊區", "板橋區", "林口區", "樹林區", "永和區", "汐止區", "泰山區", "淡水區", "深坑區", "烏來區", "瑞芳區", "石碇區", "石門區", "萬里區", "蘆洲區", "貢寮區", "金山區", "雙溪區", "鶯歌區"] },
+  "桃園市": { code: "h", districts: ["中壢區", "八德區", "大園區", "大溪區", "平鎮區", "復興區", "新屋區", "桃園區", "楊梅區", "蘆竹區", "觀音區", "龍潭區", "龜山區"] },
+  "台中市": { code: "b", districts: ["中區", "北區", "北屯區", "南區", "南屯區", "后里區", "和平區", "外埔區", "大安區", "大甲區", "大肚區", "大里區", "大雅區", "太平區", "新社區", "東勢區", "東區", "梧棲區", "沙鹿區", "清水區", "潭子區", "烏日區", "石岡區", "神岡區", "西區", "西屯區", "豐原區", "霧峰區", "龍井區"] },
+  "台南市": { code: "d", districts: ["七股區", "下營區", "中西區", "仁德區", "佳里區", "六甲區", "北區", "北門區", "南化區", "南區", "善化區", "大內區", "學甲區", "安南區", "安定區", "安平區", "官田區", "將軍區", "山上區", "左鎮區", "後壁區", "新化區", "新市區", "新營區", "東區", "東山區", "柳營區", "楠西區", "歸仁區", "永康區", "玉井區", "白河區", "西港區", "關廟區", "鹽水區", "麻豆區", "龍崎區"] },
+  "高雄市": { code: "e", districts: ["三民區", "仁武區", "內門區", "六龜區", "前金區", "前鎮區", "大寮區", "大樹區", "大社區", "小港區", "岡山區", "左營區", "彌陀區", "新興區", "旗山區", "旗津區", "杉林區", "林園區", "桃源區", "梓官區", "楠梓區", "橋頭區", "永安區", "湖內區", "燕巢區", "田寮區", "甲仙區", "美濃區", "苓雅區", "茂林區", "茄萣區", "路竹區", "那瑪夏區", "阿蓮區", "鳥松區", "鳳山區", "鹽埕區", "鼓山區"] },
+  "基隆市": { code: "c", districts: ["七堵區", "中山區", "中正區", "仁愛區", "信義區", "安樂區", "暖暖區"] },
+  "新竹市": { code: "o", districts: ["新竹市"] },
+  "嘉義市": { code: "i", districts: ["嘉義市"] },
+  "新竹縣": { code: "j", districts: ["五峰鄉", "北埔鄉", "寶山鄉", "尖石鄉", "峨眉鄉", "新埔鎮", "新豐鄉", "橫山鄉", "湖口鄉", "竹北市", "竹東鎮", "芎林鄉", "關西鎮"] },
+  "苗栗縣": { code: "k", districts: ["三灣鄉", "三義鄉", "公館鄉", "卓蘭鎮", "南庄鄉", "大湖鄉", "後龍鎮", "泰安鄉", "獅潭鄉", "竹南鎮", "苑裡鎮", "苗栗市", "西湖鄉", "通霄鎮", "造橋鄉", "銅鑼鄉", "頭份市", "頭屋鄉"] },
+  "彰化縣": { code: "n", districts: ["二林鎮", "二水鄉", "伸港鄉", "北斗鎮", "和美鎮", "員林市", "埔心鄉", "埔鹽鄉", "埤頭鄉", "大城鄉", "大村鄉", "彰化市", "永靖鄉", "溪州鄉", "溪湖鎮", "田中鎮", "田尾鄉", "社頭鄉", "福興鄉", "秀水鄉", "竹塘鄉", "線西鄉", "芬園鄉", "花壇鄉", "芳苑鄉", "鹿港鎮"] },
+  "南投縣": { code: "m", districts: ["中寮鄉", "仁愛鄉", "信義鄉", "南投市", "名間鄉", "國姓鄉", "埔里鎮", "水里鄉", "竹山鎮", "草屯鎮", "集集鎮", "魚池鄉", "鹿谷鄉"] },
+  "雲林縣": { code: "p", districts: ["二崙鄉", "元長鄉", "北港鎮", "口湖鄉", "古坑鄉", "台西鄉", "四湖鄉", "土庫鎮", "大埤鄉", "崙背鄉", "斗六市", "斗南鎮", "東勢鄉", "林內鄉", "水林鄉", "莿桐鄉", "虎尾鎮", "褒忠鄉", "西螺鎮", "麥寮鄉"] },
+  "嘉義縣": { code: "q", districts: ["中埔鄉", "六腳鄉", "大埔鄉", "大林鎮", "太保市", "布袋鎮", "新港鄉", "朴子市", "東石鄉", "梅山鄉", "民雄鄉", "水上鄉", "溪口鄉", "番路鄉", "竹崎鄉", "義竹鄉", "阿里山鄉", "鹿草鄉"] },
+  "屏東縣": { code: "t", districts: ["三地門鄉", "九如鄉", "佳冬鄉", "來義鄉", "內埔鄉", "南州鄉", "屏東市", "崁頂鄉", "恆春鎮", "新園鄉", "新埤鄉", "春日鄉", "東港鎮", "枋寮鄉", "枋山鄉", "林邊鄉", "泰武鄉", "滿州鄉", "潮州鎮", "牡丹鄉", "獅子鄉", "琉球鄉", "瑪家鄉", "竹田鄉", "萬丹鄉", "萬巒鄉", "車城鄉", "里港鄉", "長治鄉", "霧臺鄉", "高樹鄉", "鹽埔鄉", "麟洛鄉"] },
+  "宜蘭縣": { code: "g", districts: ["三星鄉", "五結鄉", "冬山鄉", "南澳鄉", "員山鄉", "壯圍鄉", "大同鄉", "宜蘭市", "礁溪鄉", "羅東鎮", "蘇澳鎮", "頭城鎮"] },
+  "花蓮縣": { code: "u", districts: ["光復鄉", "卓溪鄉", "吉安鄉", "壽豐鄉", "富里鄉", "新城鄉", "玉里鎮", "瑞穗鄉", "秀林鄉", "花蓮市", "萬榮鄉", "豐濱鄉", "鳳林鎮"] },
+  "台東縣": { code: "v", districts: ["卑南鄉", "台東市", "大武鄉", "太麻里鄉", "延平鄉", "成功鎮", "東河鄉", "池上鄉", "海端鄉", "綠島鄉", "達仁鄉", "金峰鄉", "長濱鄉", "關山鎮", "鹿野鄉"] },
+  "澎湖縣": { code: "x", districts: ["七美鄉", "望安鄉", "湖西鄉", "白沙鄉", "西嶼鄉", "馬公市"] },
+  "金門縣": { code: "w", districts: ["烈嶼鄉", "金城鎮", "金寧鄉", "金沙鎮", "金湖鎮"] },
+  "連江縣": { code: "z", districts: ["北竿鄉", "南竿鄉", "東引鄉", "莒光鄉"] },
+};
+
+// 門檻依據行政院主計總處「110年（2021年）家庭財富分配統計」的十分位數：
+// D1=143萬, D3=490萬, D5(中位數)=894萬, D7=1,547萬, D9=3,391萬, 前20%平均=5,133萬
+const LEVELS = [
+  { id: 1, title: '新手冒險者', percentile: '負債大於資產', min: -Infinity, max: 0, color: '#8b93ad', glow: '#b8c0dd' },
+  { id: 2, title: '見習儲蓄生', percentile: '全國後 10%', min: 0, max: 1430000, color: '#5fa8f5', glow: '#9cc7f8' },
+  { id: 3, title: '小資理財家', percentile: '全國後 10–30%', min: 1430000, max: 4900000, color: '#4fbe8e', glow: '#8fe0bb' },
+  { id: 4, title: '穩健存錢俠', percentile: '全國 30%–中位數', min: 4900000, max: 8940000, color: '#2dd4bf', glow: '#7fe8db' },
+  { id: 5, title: '資產守護者', percentile: '全國中位數–前 30%', min: 8940000, max: 15470000, color: '#8b8cf7', glow: '#bcbdfb' },
+  { id: 6, title: '財富鍊金師', percentile: '全國前 10–30%', min: 15470000, max: 33910000, color: '#c084fc', glow: '#ddb3fd' },
+  { id: 7, title: '投資大師', percentile: '全國前 10%', min: 33910000, max: 51330000, color: '#f472b6', glow: '#f9aed0' },
+  { id: 8, title: '財富自由者', percentile: '全國前 20% 平均以上', min: 51330000, max: Infinity, color: '#e8b355', glow: '#f6d590' },
+];
+
+
+// rate = 1 單位該幣別約等於多少新台幣（僅用於調整角色升級門檻，非即時匯率）
+const CURRENCIES = [
+  { code: 'TWD', label: '新台幣', symbol: 'NT$', rate: 1 },
+  { code: 'USD', label: '美元', symbol: 'US$', rate: 31 },
+  { code: 'JPY', label: '日圓', symbol: 'JP¥', rate: 0.21 },
+  { code: 'CNY', label: '人民幣', symbol: 'CN¥', rate: 4.3 },
+  { code: 'EUR', label: '歐元', symbol: '€', rate: 34 },
+  { code: 'HKD', label: '港幣', symbol: 'HK$', rate: 4 },
+];
+
+function getCurrency(code) {
+  return CURRENCIES.find((c) => c.code === code) || CURRENCIES[0];
+}
+
+function getLevel(netWorth, levels = LEVELS) {
+  return levels.find((l) => netWorth >= l.min && netWorth < l.max) || levels[levels.length - 1];
+}
+
+function getHealth(totalAssets, totalLiabilities) {
+  if (totalLiabilities <= 0) return { tone: 'great', label: '無債一身輕' };
+  const ratio = totalAssets > 0 ? totalLiabilities / totalAssets : 1;
+  if (ratio < 0.3) return { tone: 'good', label: '體質健康', ratio };
+  if (ratio < 0.6) return { tone: 'ok', label: '穩定平衡', ratio };
+  return { tone: 'bad', label: '負擔有點吃緊', ratio };
+}
+
+function getProgress(netWorth, level, levels = LEVELS) {
+  if (level.id === 8) return { percent: 100, label: '已達巔峰境界' };
+  if (level.id === 1) {
+    const floor = -500000;
+    const percent = Math.max(0, Math.min(100, ((netWorth - floor) / (0 - floor)) * 100));
+    return { percent, label: `距離轉正還差 ${formatMoney(0 - netWorth)}` };
+  }
+  const next = levels[level.id];
+  const percent = Math.max(0, Math.min(100, ((netWorth - level.min) / (level.max - level.min)) * 100));
+  return { percent, label: `距離 Lv.${next.id}「${next.title}」還差 ${formatMoney(level.max - netWorth)}` };
+}
+
+function formatMoney(n, code = 'TWD') {
+  const c = getCurrency(code);
+  const sign = n < 0 ? '-' : '';
+  const formatted = Math.abs(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
+  return `${sign}${c.symbol} ${formatted}`;
+}
+
+function evaluateExpr(str) {
+  if (!str) return NaN;
+  const trimmed = String(str).trim();
+  if (!trimmed) return NaN;
+  if (!/^[0-9+\-*/(). ]+$/.test(trimmed)) return NaN;
+  try {
+    let i = 0;
+    const skip = () => {
+      while (trimmed[i] === ' ') i++;
+    };
+    const parseExpr = () => {
+      let value = parseTerm();
+      skip();
+      while (trimmed[i] === '+' || trimmed[i] === '-') {
+        const op = trimmed[i];
+        i++;
+        const rhs = parseTerm();
+        value = op === '+' ? value + rhs : value - rhs;
+        skip();
+      }
+      return value;
+    };
+    const parseTerm = () => {
+      let value = parseFactor();
+      skip();
+      while (trimmed[i] === '*' || trimmed[i] === '/') {
+        const op = trimmed[i];
+        i++;
+        const rhs = parseFactor();
+        value = op === '*' ? value * rhs : value / rhs;
+        skip();
+      }
+      return value;
+    };
+    const parseFactor = () => {
+      skip();
+      if (trimmed[i] === '-') {
+        i++;
+        return -parseFactor();
+      }
+      if (trimmed[i] === '+') {
+        i++;
+        return parseFactor();
+      }
+      if (trimmed[i] === '(') {
+        i++;
+        const value = parseExpr();
+        skip();
+        if (trimmed[i] !== ')') throw new Error('expected )');
+        i++;
+        return value;
+      }
+      const start = i;
+      while (i < trimmed.length && /[0-9.]/.test(trimmed[i])) i++;
+      if (start === i) throw new Error('expected number');
+      const num = parseFloat(trimmed.slice(start, i));
+      if (Number.isNaN(num)) throw new Error('bad number');
+      return num;
+    };
+    skip();
+    const result = parseExpr();
+    skip();
+    if (i !== trimmed.length) throw new Error('trailing characters');
+    if (typeof result !== 'number' || !isFinite(result)) throw new Error('not finite');
+    return result;
+  } catch (e) {
+    return NaN;
+  }
+}
+
+function computeCategoryBreakdown(itemsTWD, categories) {
+  const breakdown = {};
+  categories.forEach((c) => {
+    breakdown[c] = 0;
+  });
+  itemsTWD.forEach((item) => {
+    const cat = categories.includes(item.category) ? item.category : categories[0];
+    breakdown[cat] = (breakdown[cat] || 0) + item.twd;
+  });
+  return breakdown;
+}
+
+let twseStockListCache = null;
+
+function parseCsvLine(line) {
+  // 欄位皆以雙引號包住、用逗號分隔（例如 "2330","台積電","2410.00"），
+  // 股票名稱本身不含逗號，直接用正規表示式取出每個引號內的內容即可。
+  return (line.match(/"([^"]*)"/g) || []).map((s) => s.slice(1, -1));
+}
+
+async function fetchTWSEStockList() {
+  if (twseStockListCache) return twseStockListCache;
+  // openapi.twse.com.tw 的 JSON 版本沒有回傳 CORS 標頭（Access-Control-Allow-Origin），
+  // 瀏覽器端 fetch 會直接被擋下來，所以改用有開放 CORS 的舊版 CSV 端點，自行解析文字內容。
+  const res = await fetch('https://www.twse.com.tw/exchangeReport/STOCK_DAY_ALL?response=json');
+  const text = await res.text();
+  const lines = text.trim().split('\n').filter(Boolean);
+  const map = {};
+  lines.slice(1).forEach((line) => {
+    const cols = parseCsvLine(line);
+    const [, code, name, , , , , , closingPrice] = cols;
+    if (code) {
+      map[code] = { price: parseFloat(String(closingPrice).replace(/,/g, '')), name };
+    }
+  });
+  twseStockListCache = map;
+  return map;
+}
+
+async function fetchStockPriceTWSE(ticker) {
+  const map = await fetchTWSEStockList();
+  const entry = map[ticker];
+  if (!entry || !entry.price || !isFinite(entry.price) || entry.price <= 0) {
+    throw new Error('not-found');
+  }
+  return { price: entry.price, name: entry.name || ticker, currency: 'TWD' };
+}
+
+/* ------------------------- 內政部實價登錄房價查詢 ------------------------- */
+// 資料來源：內政部不動產交易實價查詢服務網開放資料（有開放 CORS），
+// 每季一個 zip，內含全台 22 縣市的「不動產買賣」CSV。用 fflate 在瀏覽器端解壓縮，
+// 只取需要的那個縣市檔案，避免整包 236 個檔案都解開。
+const PING_IN_SQM = 3.305785;
+
+function currentRocSeason() {
+  const now = new Date();
+  return { year: now.getFullYear() - 1911, quarter: Math.floor(now.getMonth() / 3) + 1 };
+}
+function prevRocSeason(season) {
+  return season.quarter === 1
+    ? { year: season.year - 1, quarter: 4 }
+    : { year: season.year, quarter: season.quarter - 1 };
+}
+function seasonCode(season) {
+  return `${season.year}S${season.quarter}`;
+}
+
+const lvrSeasonZipCache = {}; // 季度 -> ArrayBuffer｜null（本次頁面存活期間有效，null 代表該季尚未公布）
+
+async function getLvrSeasonZipBuffer(season) {
+  if (season in lvrSeasonZipCache) return lvrSeasonZipCache[season];
+  const res = await fetch(`https://plvr.land.moi.gov.tw/DownloadSeason?season=${season}&fileName=lvr_landcsv.zip`);
+  const buf = await res.arrayBuffer();
+  // 尚未公布的季度會回傳一小段「系統訊息」HTML，不是真正的 zip，用大小簡單判斷。
+  const result = buf.byteLength < 5000 ? null : buf;
+  lvrSeasonZipCache[season] = result;
+  return result;
+}
+
+function aggregateLvrCsv(csvText) {
+  const lines = csvText.split('\n');
+  const agg = {};
+  for (let i = 2; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+    const cols = line.split(',');
+    const district = cols[0];
+    const dealType = cols[1];
+    const unitPricePerSqm = parseFloat(cols[22]);
+    if (!district || !dealType || !dealType.includes('房地')) continue;
+    if (!isFinite(unitPricePerSqm) || unitPricePerSqm <= 0) continue;
+    if (!agg[district]) agg[district] = { sum: 0, count: 0 };
+    agg[district].sum += unitPricePerSqm;
+    agg[district].count += 1;
+  }
+  return agg;
+}
+
+async function getCountySeasonAggregate(season, code) {
+  const cacheKey = `nw-lvr-agg-${season}-${code}`;
+  const cached = storageGet(cacheKey);
+  if (cached) return cached;
+  const buf = await getLvrSeasonZipBuffer(season);
+  if (!buf) return null;
+  const targetName = `${code}_lvr_land_a.csv`;
+  const files = fflate.unzipSync(new Uint8Array(buf), { filter: (f) => f.name === targetName });
+  const bytes = files[targetName];
+  if (!bytes) return null;
+  const text = fflate.strFromU8(bytes);
+  const agg = aggregateLvrCsv(text);
+  storageSet(cacheKey, agg);
+  return agg;
+}
+
+// 抓「最近一年」＝最近 4 個已公布的季度。內政部的下載伺服器本身速度不快（一季壓縮檔約
+// 14MB，抓一次常常要 5～10 秒），所以多抓 2 季當備援（最新一季可能還沒公布）、
+// 同時平行下載，而不是抓完一季再抓下一季，藉此縮短等待時間。
+async function fetchDistrictYearlyPrice(countyName, district) {
+  const info = TAIWAN_DISTRICTS[countyName];
+  if (!info) throw new Error('unknown-county');
+  let season = currentRocSeason();
+  const candidateSeasons = [];
+  for (let i = 0; i < 6; i++) {
+    candidateSeasons.push(seasonCode(season));
+    season = prevRocSeason(season);
+  }
+  const results = await Promise.all(
+    candidateSeasons.map((code) => getCountySeasonAggregate(code, info.code).catch(() => null))
+  );
+  const usedSeasons = [];
+  let sum = 0;
+  let count = 0;
+  for (let i = 0; i < results.length && usedSeasons.length < 4; i++) {
+    const agg = results[i];
+    if (!agg) continue;
+    usedSeasons.push(candidateSeasons[i]);
+    const d = agg[district];
+    if (d) {
+      sum += d.sum;
+      count += d.count;
+    }
+  }
+  if (usedSeasons.length === 0) throw new Error('no-season-data');
+  if (count === 0) return { pricePerPing: null, count: 0, seasons: usedSeasons };
+  const avgPerSqm = sum / count;
+  return { pricePerPing: avgPerSqm * PING_IN_SQM, count, seasons: usedSeasons };
+}
+
+function uid() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+function dedupeItems(list) {
+  const groups = {};
+  list.forEach((item) => {
+    if (!groups[item.name]) groups[item.name] = [];
+    groups[item.name].push(item);
+  });
+  const kept = [];
+  let removed = 0;
+  Object.values(groups).forEach((group) => {
+    if (group.length === 1) {
+      kept.push(group[0]);
+      return;
+    }
+    const sorted = [...group].sort((a, b) => {
+      const ad = a.date || '';
+      const bd = b.date || '';
+      if (ad !== bd) return ad < bd ? 1 : -1;
+      return 0;
+    });
+    kept.push(sorted[0]);
+    removed += group.length - 1;
+  });
+  return { kept, removed };
+}
+
+function generateInsights({ assetsTWD, liabilitiesTWD, totalAssets, totalLiabilities, health, history }) {
+  const tips = [];
+
+  if (totalLiabilities <= 0) {
+    tips.push({
+      tone: 'good',
+      title: '目前沒有負債',
+      text: '財務體質不錯，可以考慮把多餘資金分配到緊急預備金，或報酬率較高的投資工具上。',
+    });
+  } else if (health.tone === 'bad') {
+    tips.push({
+      tone: 'bad',
+      title: '負債比偏高',
+      text: '負債占資產比重較高，一般建議優先償還利率最高的負債（例如信用卡循環息、信貸），並暫緩非必要的新支出或借貸。',
+    });
+  } else if (health.tone === 'ok') {
+    tips.push({
+      tone: 'ok',
+      title: '負債比中等',
+      text: '負債比例還在可控範圍，持續留意每月還款進度，避免再新增高利率負債。',
+    });
+  } else {
+    tips.push({
+      tone: 'good',
+      title: '負債狀況相對健康',
+      text: '負債占比不高，可以考慮把餘裕資金做更有效率的配置。',
+    });
+  }
+
+  const highInterest = liabilitiesTWD.filter((l) => l.category === '信貸 / 卡債');
+  if (highInterest.length > 0) {
+    const sum = highInterest.reduce((s, l) => s + l.twd, 0);
+    tips.push({
+      tone: 'bad',
+      title: '留意高利率負債',
+      text: `信貸／卡債合計約 ${formatMoney(sum)}，這類負債利率通常偏高，一般會建議列為優先清償項目。`,
+    });
+  }
+
+  const cashTotal = assetsTWD.filter((a) => a.category === '現金 / 存款').reduce((s, a) => s + a.twd, 0);
+  const cashRatio = totalAssets > 0 ? cashTotal / totalAssets : 0;
+  if (totalAssets > 0 && cashRatio < 0.1) {
+    tips.push({
+      tone: 'ok',
+      title: '流動資金偏低',
+      text: '現金／存款占總資產比重偏低，一般建議保留約 3–6 個月生活開銷的現金，作為緊急預備金。',
+    });
+  }
+
+  const categoryTotals = {};
+  assetsTWD.forEach((a) => {
+    categoryTotals[a.category] = (categoryTotals[a.category] || 0) + a.twd;
+  });
+  const sortedCategories = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
+  if (sortedCategories.length > 1 && totalAssets > 0 && sortedCategories[0][1] / totalAssets > 0.7) {
+    const [topName, topSum] = sortedCategories[0];
+    tips.push({
+      tone: 'ok',
+      title: '資產集中度偏高',
+      text: `「${topName}」占總資產約 ${((topSum / totalAssets) * 100).toFixed(0)}%，可以考慮適度分散到其他資產類別，降低單一類別波動對整體淨值的影響。`,
+    });
+  }
+
+  if (history.length >= 2) {
+    const last = history[history.length - 1];
+    const prev = history[history.length - 2];
+    const change = last.netWorth - prev.netWorth;
+    if (change > 0) {
+      tips.push({
+        tone: 'good',
+        title: '淨值持續成長',
+        text: `上週到這週淨值增加了約 ${formatMoney(change)}，保持這個節奏！`,
+      });
+    } else if (change < 0) {
+      tips.push({
+        tone: 'bad',
+        title: '淨值較上週下降',
+        text: `這週淨值比上週減少約 ${formatMoney(Math.abs(change))}，可以檢視一下這段期間的支出或負債變化。`,
+      });
+    }
+  }
+
+  if (tips.length === 0) {
+    tips.push({
+      tone: 'ok',
+      title: '持續記錄中',
+      text: '目前資料還不多，持續記錄資產與負債，之後這裡會依照你的財務狀況提供更多觀察。',
+    });
+  }
+
+  return tips;
+}
+
+/* --------------------------- AI 深入建議（使用者自帶 API Key） --------------------------- */
+// 直接從瀏覽器呼叫 Anthropic API：金鑰只存在使用者自己的 localStorage，
+// 不會經過任何其他伺服器。需要在請求上加 anthropic-dangerous-direct-browser-access
+// 標頭，Anthropic 才會允許瀏覽器端直接呼叫（一般後端 SDK 不需要這個標頭）。
+const AI_MODELS = [
+  { id: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5（快、便宜）' },
+  { id: 'claude-sonnet-5', label: 'Claude Sonnet 5（較深入）' },
+];
+
+function buildAIPrompt(s) {
+  const fmt = (n) => formatMoney(n);
+  const assetLines = s.assets.map((a) => `- ${a.name}（${a.category}）：${fmt(a.twd)}`).join('\n') || '（目前沒有資產項目）';
+  const liabLines = s.liabilities.map((l) => `- ${l.name}（${l.category}）：${fmt(l.twd)}`).join('\n') || '（目前沒有負債項目）';
+  const historyLines = s.history.map((h) => `- ${h.weekKey}：淨值 ${fmt(h.netWorth)}`).join('\n') || '（尚無每週紀錄）';
+
+  return `你是「資產冒險記」這個記帳養成遊戲裡的理財助理。請根據以下使用者的資產負債資料，用繁體中文給出精簡、具體、可執行的財務觀察與建議，最多 5 點，語氣像懂財務的朋友在提醒，不要說教或重複制式警語超過一次。使用者目前的角色等級稱號是「${s.levelTitle}」。
+
+總資產：${fmt(s.totalAssets)}
+總負債：${fmt(s.totalLiabilities)}
+淨值：${fmt(s.netWorth)}
+負債健康度：${s.health.label}
+
+資產明細：
+${assetLines}
+
+負債明細：
+${liabLines}
+
+近期每週淨值紀錄（由舊到新）：
+${historyLines}
+
+請在回覆最後用一句話提醒這只是輔助參考，不構成專業理財建議。`;
+}
+
+// 用「本地時區」的年月日格式化，而不是 toISOString()（那個是 UTC 時間）。
+// 台灣是 UTC+8，如果用 toISOString() 來判斷「今天」，每天 00:00–08:00 這段時間
+// 會誤判成前一天，連帶影響「本週」的判斷（半夜剛過 0 點還會被算進上一週）。
+function localDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+// 把「YYYY-MM-DD」這種純日期字串，當成本地日期解析（而不是交給 new Date() 當 UTC 午夜解析），
+// 避免時區造成的日期偏移；其他格式（含時間的 ISO 字串等）則照常交給 new Date() 處理。
+function toLocalDate(dateInput) {
+  if (typeof dateInput === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateInput)) {
+    const [y, m, day] = dateInput.split('-').map(Number);
+    return new Date(y, m - 1, day);
+  }
+  return new Date(dateInput);
+}
+
+function getWeekKey(dateInput) {
+  const d = toLocalDate(dateInput);
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay();
+  d.setDate(d.getDate() - day);
+  return localDateStr(d);
+}
+
+function todayStr() {
+  return localDateStr(new Date());
+}
+
+function normalizeDate(value) {
+  if (!value) return todayStr();
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  if (value instanceof Date && !isNaN(value)) return localDateStr(value);
+  const parsed = new Date(value);
+  if (!isNaN(parsed)) return localDateStr(parsed);
+  return todayStr();
+}
+
+function parseExcelRows(rows, currentType) {
+  const assetRows = [];
+  const liabilityRows = [];
+  let skipped = 0;
+  rows.forEach((row) => {
+    const name = String(row['名稱'] ?? row['name'] ?? row['Name'] ?? '').trim();
+    const amountRaw = row['金額'] ?? row['amount'] ?? row['Amount'];
+    const amount = parseFloat(amountRaw);
+    if (!name || !amount || amount <= 0) {
+      skipped++;
+      return;
+    }
+    const categoryRaw = String(row['分類'] ?? row['category'] ?? row['Category'] ?? '').trim();
+    let currency = String(row['幣別'] ?? row['currency'] ?? row['Currency'] ?? 'TWD').trim().toUpperCase();
+    if (!CURRENCIES.find((c) => c.code === currency)) currency = 'TWD';
+    const date = normalizeDate(row['日期'] ?? row['date'] ?? row['Date']);
+
+    if (LIABILITY_CATEGORIES.includes(categoryRaw)) {
+      liabilityRows.push({ name, category: categoryRaw, currency, amount, date });
+    } else if (ASSET_CATEGORIES.includes(categoryRaw)) {
+      assetRows.push({ name, category: categoryRaw, currency, amount, date });
+    } else if (currentType === 'liability') {
+      liabilityRows.push({ name, category: LIABILITY_CATEGORIES[0], currency, amount, date });
+    } else {
+      assetRows.push({ name, category: ASSET_CATEGORIES[0], currency, amount, date });
+    }
+  });
+  return { assetRows, liabilityRows, skipped };
+}
+
+/* ------------------------------ 本機儲存 ------------------------------ */
+
+function storageGet(key) {
+  try {
+    const v = localStorage.getItem(key);
+    return v ? JSON.parse(v) : null;
+  } catch (e) {
+    return null;
+  }
+}
+function storageSet(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error('儲存失敗', e);
+  }
+}
+
+/* ------------------------------ 角色徽章圖形 ------------------------------ */
+
+function SealAccessory({ levelId }) {
+  const mainAccessory = (() => {
+    switch (levelId) {
+      case 3:
+        return <path d="M100,48 Q94,38 100,28 Q106,38 100,48 Z" fill="#4fbe8e" />;
+      case 4:
+        return (
+          <path
+            d="M84,168 Q100,178 116,168 L112,178 Q100,184 88,178 Z"
+            fill="#2dd4bf"
+          />
+        );
+      case 5:
+        return (
+          <path
+            d="M100,150 L111,155 L111,166 Q100,174 89,166 L89,155 Z"
+            fill="#8b8cf7"
+            stroke="#ffffff"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+        );
+      case 6:
+        return <polygon points="148,80 156,88 148,100 140,88" fill="#c084fc" />;
+      case 7:
+        return <StarShape cx="46" cy="105" s="10" />;
+      case 8:
+        return (
+          <polygon
+            points="82,42 90,26 98,40 100,22 102,40 110,26 118,42 118,50 82,50"
+            fill="#e8b355"
+            stroke="#e8b355"
+            strokeLinejoin="round"
+          />
+        );
+      default:
+        return null;
+    }
+  })();
+
+  return (
+    <>
+      {levelId >= 2 && <StarShape cx="146" cy="40" s="6" delay="0.3s" />}
+      {levelId >= 6 && <circle cx="54" cy="150" r="4" fill="#f9aed0" opacity="0.9" />}
+      {levelId >= 7 && <circle cx="150" cy="150" r="3.2" fill="#9cc7f8" opacity="0.9" />}
+      {mainAccessory}
+    </>
+  );
+}
+
+function StarShape({ cx, cy, s, delay }) {
+  const c = parseFloat(cx);
+  const cy2 = parseFloat(cy);
+  const r = parseFloat(s);
+  return (
+    <path
+      d={`M${c},${cy2 - r} L${c + r * 0.28},${cy2 - r * 0.28} L${c + r},${cy2} L${c + r * 0.28},${cy2 + r * 0.28} L${c},${cy2 + r} L${c - r * 0.28},${cy2 + r * 0.28} L${c - r},${cy2} L${c - r * 0.28},${cy2 - r * 0.28} Z`}
+      fill="#e8b355"
+      className="twinkle"
+      style={{ animationDelay: delay || '0s' }}
+    />
+  );
+}
+
+const SPECIES = [
+  { id: 'seal', name: '海豹', emoji: '🦭' },
+  { id: 'panda', name: '貓熊', emoji: '🐼' },
+  { id: 'rabbit', name: '兔子', emoji: '🐰' },
+];
+
+function Character({ level, mood, health, species = 'seal' }) {
+  const ringCount = Math.min(level.id, 5);
+  const rings = Array.from({ length: ringCount });
+  const gradId = `seal-grad-${level.id}`;
+  const bad = health.tone === 'bad';
+  const glad = health.tone === 'good' || health.tone === 'great';
+
+  const mouthPath = {
+    happy: 'M86,140 Q94,150 100,141 Q106,150 114,140',
+    neutral: 'M89,143 Q100,147 111,143',
+    sad: 'M88,148 Q100,140 112,148',
+  }[mood];
+
+  return (
+    <svg viewBox="0 0 200 200" className="char-svg" role="img" aria-label={level.title}>
+      <defs>
+        <radialGradient id={gradId} cx="38%" cy="30%" r="90%">
+          <stop offset="0%" stopColor={bad ? '#fbdadf' : '#fffdf6'} />
+          <stop offset="100%" stopColor={bad ? '#f3c6cd' : '#f4ecd4'} />
+        </radialGradient>
+      </defs>
+
+      <ellipse cx="100" cy="183" rx="48" ry="8" fill="#0b0f22" opacity="0.14" className="char-shadow" />
+
+      {rings.map((_, i) => (
+        <circle
+          key={i}
+          cx="100"
+          cy="118"
+          r={88 + i * 11}
+          fill="none"
+          stroke={bad ? '#e8637a' : level.glow}
+          strokeWidth="1.6"
+          opacity={0.4 - i * 0.06}
+          className="aura-ring"
+          style={{ animationDelay: `${i * 0.35}s` }}
+        />
+      ))}
+
+      <g className="char-idle">
+        {species === 'panda' && (
+          <>
+            <circle cx="66" cy="58" r="17" fill="#2b2b2b" />
+            <circle cx="134" cy="58" r="17" fill="#2b2b2b" />
+          </>
+        )}
+        {species === 'rabbit' && (
+          <>
+            <ellipse cx="73" cy="22" rx="13" ry="36" fill={`url(#${gradId})`} transform="rotate(-8 73 22)" />
+            <ellipse cx="73" cy="26" rx="6" ry="24" fill="#f6b8c4" transform="rotate(-8 73 26)" />
+            <ellipse cx="127" cy="22" rx="13" ry="36" fill={`url(#${gradId})`} transform="rotate(8 127 22)" />
+            <ellipse cx="127" cy="26" rx="6" ry="24" fill="#f6b8c4" transform="rotate(8 127 26)" />
+          </>
+        )}
+
+        <path
+          d="M100,48
+             C 148,48 172,90 172,126
+             C 172,164 140,180 100,180
+             C 60,180 28,164 28,126
+             C 28,90 52,48 100,48 Z"
+          fill={`url(#${gradId})`}
+        />
+
+        <circle cx="100" cy="112" r="3" fill={level.color} opacity="0.9" />
+
+        <SealAccessory levelId={level.id} />
+
+        {species === 'panda' && (
+          <>
+            <ellipse cx="78" cy="119" rx="15" ry="18" fill="#2b2b2b" />
+            <ellipse cx="122" cy="119" rx="15" ry="18" fill="#2b2b2b" />
+          </>
+        )}
+
+        <circle cx="86" cy="88" r="2.2" fill="#4a3c2c" />
+        <circle cx="114" cy="88" r="2.2" fill="#4a3c2c" />
+
+        <circle cx="78" cy="118" r="9.5" fill="#3a2c1e" className="char-eye" />
+        <circle cx="122" cy="118" r="9.5" fill="#3a2c1e" className="char-eye" />
+        <circle cx="75" cy="114.5" r="2.3" fill="#ffffff" opacity="0.9" className="char-eye" />
+        <circle cx="119" cy="114.5" r="2.3" fill="#ffffff" opacity="0.9" className="char-eye" />
+
+        <ellipse cx="100" cy="133" rx="4.5" ry="3.4" fill="#3a2c1e" />
+
+        {species !== 'panda' && (
+          <>
+            <path
+              d="M84,136 L62,131 M83,141 L60,141 M84,146 L62,151"
+              stroke="rgba(58,44,30,0.55)"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              fill="none"
+            />
+            <path
+              d="M116,136 L138,131 M117,141 L140,141 M116,146 L138,151"
+              stroke="rgba(58,44,30,0.55)"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              fill="none"
+            />
+          </>
+        )}
+
+        <path d={mouthPath} stroke="#3a2c1e" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+        {bad && (
+          <path
+            d="M122,128 Q126,135 122,142"
+            stroke="#5fa8f5"
+            strokeWidth="2.6"
+            fill="none"
+            strokeLinecap="round"
+          />
+        )}
+
+        {glad && (
+          <>
+            <ellipse cx="64" cy="130" rx="7" ry="4.5" fill="#f9aed0" opacity="0.5" />
+            <ellipse cx="136" cy="130" rx="7" ry="4.5" fill="#f9aed0" opacity="0.5" />
+          </>
+        )}
+      </g>
+
+      {glad && (
+        <>
+          <g className="sparkles">
+            <StarShape cx="38" cy="70" s="6" />
+            <StarShape cx="164" cy="66" s="5" delay="0.4s" />
+            <StarShape cx="158" cy="160" s="4" delay="0.8s" />
+          </g>
+        </>
+      )}
+    </svg>
+  );
+}
+
+/* --------------------------------- 主程式 --------------------------------- */
+
+function NetWorthAdventure() {
+  const [assets, setAssets] = useState(() => {
+    const d = storageGet('nw-data');
+    return d && Array.isArray(d.assets) ? d.assets : [];
+  });
+  const [liabilities, setLiabilities] = useState(() => {
+    const d = storageGet('nw-data');
+    return d && Array.isArray(d.liabilities) ? d.liabilities : [];
+  });
+  const [history, setHistory] = useState(() => storageGet('nw-history') || []);
+  const [tab, setTab] = useState('assets');
+  const [species, setSpecies] = useState(() => storageGet('nw-species') || 'seal');
+  const [showPercentile, setShowPercentile] = useState(() => {
+    const v = storageGet('nw-show-percentile');
+    return v === null ? true : v;
+  });
+
+  const [assetForm, setAssetForm] = useState({ name: '', category: ASSET_CATEGORIES[0], amount: '', currency: 'TWD', date: todayStr() });
+  const [liabForm, setLiabForm] = useState({ name: '', category: LIABILITY_CATEGORIES[0], amount: '', currency: 'TWD', date: todayStr() });
+  const [knownAssetItems, setKnownAssetItems] = useState(() => storageGet('nw-known-assets') || []);
+  const [knownLiabilityItems, setKnownLiabilityItems] = useState(() => storageGet('nw-known-liabilities') || []);
+  const [liveRates, setLiveRates] = useState(() => storageGet('nw-live-rates') || null);
+  const [ratesLoading, setRatesLoading] = useState(false);
+  const [ratesError, setRatesError] = useState('');
+  const [downloadsCap, setDownloadsCap] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    if (window.claude && typeof window.claude.use === 'function') {
+      window.claude.use('downloads').then((d) => {
+        if (mounted) setDownloadsCap(d);
+      }).catch(() => {});
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    storageSet('nw-species', species);
+  }, [species]);
+
+  useEffect(() => {
+    storageSet('nw-show-percentile', showPercentile);
+  }, [showPercentile]);
+
+  useEffect(() => {
+    storageSet('nw-data', { assets, liabilities });
+  }, [assets, liabilities]);
+
+  const getEffectiveRate = (code) => {
+    if (code === 'TWD') return 1;
+    if (liveRates && typeof liveRates[code] === 'number') return liveRates[code];
+    return getCurrency(code).rate;
+  };
+
+  const fetchLiveRates = async () => {
+    setRatesLoading(true);
+    setRatesError('');
+    try {
+      const res = await fetch('https://api.frankfurter.dev/v2/rates?quotes=USD,JPY,CNY,EUR,HKD,TWD');
+      const rows = await res.json();
+      const map = { EUR: 1 };
+      (Array.isArray(rows) ? rows : []).forEach((r) => {
+        if (r && r.quote && typeof r.rate === 'number') map[r.quote] = r.rate;
+      });
+      const twdPerEur = map.TWD;
+      if (!twdPerEur || !map.USD || !map.JPY || !map.CNY || !map.HKD) throw new Error('missing-rate');
+      const rates = {
+        USD: twdPerEur / map.USD,
+        JPY: twdPerEur / map.JPY,
+        CNY: twdPerEur / map.CNY,
+        EUR: twdPerEur,
+        HKD: twdPerEur / map.HKD,
+        updatedAt: new Date().toISOString(),
+      };
+      setLiveRates(rates);
+      storageSet('nw-live-rates', rates);
+    } catch (e) {
+      setRatesError('取得即時匯率失敗，暫時使用預設參考匯率');
+    }
+    setRatesLoading(false);
+  };
+
+  const totalAssets = useMemo(
+    () => assets.reduce((s, i) => s + (i.currency && i.currency !== 'TWD' ? i.amount * getEffectiveRate(i.currency) : i.amount), 0),
+    [assets, liveRates]
+  );
+  const totalLiabilities = useMemo(
+    () => liabilities.reduce((s, i) => s + (i.currency && i.currency !== 'TWD' ? i.amount * getEffectiveRate(i.currency) : i.amount), 0),
+    [liabilities, liveRates]
+  );
+  const netWorth = totalAssets - totalLiabilities;
+  const level = getLevel(netWorth);
+  const health = getHealth(totalAssets, totalLiabilities);
+  const progress = getProgress(netWorth, level);
+  const mood = netWorth < 0 || health.tone === 'bad' ? 'sad' : health.tone === 'ok' ? 'neutral' : 'happy';
+
+  const assetsTWD = useMemo(
+    () => assets.map((a) => ({ ...a, twd: a.currency && a.currency !== 'TWD' ? a.amount * getEffectiveRate(a.currency) : a.amount })),
+    [assets, liveRates]
+  );
+  const liabilitiesTWD = useMemo(
+    () => liabilities.map((l) => ({ ...l, twd: l.currency && l.currency !== 'TWD' ? l.amount * getEffectiveRate(l.currency) : l.amount })),
+    [liabilities, liveRates]
+  );
+  const insights = useMemo(
+    () => generateInsights({ assetsTWD, liabilitiesTWD, totalAssets, totalLiabilities, health, history }),
+    [assetsTWD, liabilitiesTWD, totalAssets, totalLiabilities, health, history]
+  );
+
+  const latestItemDate = useMemo(() => {
+    const dates = [...assets, ...liabilities].map((i) => i.date).filter(Boolean);
+    if (dates.length === 0) return todayStr();
+    return dates.reduce((max, d) => (d > max ? d : max), dates[0]);
+  }, [assets, liabilities]);
+
+  const sortedHistory = useMemo(() => {
+    return [...history].sort((a, b) => {
+      const ak = a.weekKey || getWeekKey(a.date);
+      const bk = b.weekKey || getWeekKey(b.date);
+      return ak < bk ? -1 : ak > bk ? 1 : 0;
+    });
+  }, [history]);
+
+  // 有些週沒有手動按「更新本週紀錄」（例如每月才操作一次）時，在兩筆真實紀錄之間
+  // 自動補上「沿用上一筆」的週紀錄，讓成長曲線與清單不會出現空白週。這些補上的
+  // 項目只在畫面上顯示，不會寫回 history 儲存，真正的資料仍以使用者手動存檔為準。
+  const sortedHistoryFilled = useMemo(() => {
+    const filled = [];
+    sortedHistory.forEach((entry) => {
+      const entryKey = entry.weekKey || getWeekKey(entry.date);
+      if (filled.length > 0) {
+        let prev = filled[filled.length - 1];
+        let cursor = toLocalDate(prev.weekKey || getWeekKey(prev.date));
+        cursor.setDate(cursor.getDate() + 7);
+        let cursorKey = localDateStr(cursor);
+        while (cursorKey < entryKey) {
+          const carried = { ...prev, id: `carried-${cursorKey}`, weekKey: cursorKey, date: cursor.toISOString(), carried: true };
+          filled.push(carried);
+          prev = carried;
+          cursor.setDate(cursor.getDate() + 7);
+          cursorKey = localDateStr(cursor);
+        }
+      }
+      filled.push(entry);
+    });
+    return filled;
+  }, [sortedHistory]);
+
+  const lastCompletedEntry = useMemo(() => {
+    const currentWeekKey = getWeekKey(latestItemDate);
+    return [...sortedHistoryFilled].reverse().find((h) => (h.weekKey || getWeekKey(h.date)) !== currentWeekKey) || null;
+  }, [sortedHistoryFilled, latestItemDate]);
+  const weeklyChange = lastCompletedEntry ? netWorth - lastCompletedEntry.netWorth : null;
+
+  const currentAssetAllocation = useMemo(() => {
+    const breakdown = computeCategoryBreakdown(assetsTWD, ASSET_CATEGORIES);
+    return ASSET_CATEGORIES.map((c) => ({ name: c, value: breakdown[c], color: ASSET_CATEGORY_COLORS[c] })).filter(
+      (d) => d.value > 0
+    );
+  }, [assetsTWD]);
+
+  const categoryTrendData = useMemo(() => {
+    return sortedHistoryFilled.map((h) => ({
+      label: toLocalDate(h.weekKey || getWeekKey(h.date)).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }),
+      values: ASSET_CATEGORIES.reduce((acc, c) => {
+        acc[c] = h.assetsByCategory ? h.assetsByCategory[c] ?? null : null;
+        return acc;
+      }, {}),
+    }));
+  }, [sortedHistoryFilled]);
+  const hasCategoryHistory = sortedHistoryFilled.some((h) => h.assetsByCategory);
+
+  const upsertKnownItem = (list, entry) => {
+    const idx = list.findIndex((i) => i.name === entry.name);
+    if (idx >= 0) {
+      const next = [...list];
+      next[idx] = entry;
+      return next;
+    }
+    return [...list, entry];
+  };
+
+  const addItem = (type) => {
+    const form = type === 'asset' ? assetForm : liabForm;
+    const amount = evaluateExpr(form.amount);
+    if (!form.name.trim() || !amount || amount <= 0) return null;
+    const trimmedName = form.name.trim();
+    const rawList = type === 'asset' ? assets : liabilities;
+    const list = Array.isArray(rawList) ? rawList : [];
+    let existing = null;
+    try {
+      existing = list.find((i) => i && i.name === trimmedName) || null;
+    } catch (e) {
+      existing = null;
+    }
+    const date = form.date || todayStr();
+
+    if (existing) {
+      editItem(type, existing.id, { name: trimmedName, category: form.category, currency: form.currency, amount, date });
+      if (type === 'asset') {
+        setAssetForm({ name: '', category: assetForm.category, amount: '', currency: assetForm.currency, date: assetForm.date });
+      } else {
+        setLiabForm({ name: '', category: liabForm.category, amount: '', currency: liabForm.currency, date: liabForm.date });
+      }
+      return { updated: true, name: trimmedName };
+    }
+
+    const item = { id: uid(), name: trimmedName, category: form.category, currency: form.currency, amount, date };
+    if (type === 'asset') {
+      setAssets((prev) => [...prev, item]);
+      setAssetForm({ name: '', category: assetForm.category, amount: '', currency: assetForm.currency, date: assetForm.date });
+      const nextKnown = upsertKnownItem(knownAssetItems, { name: item.name, category: item.category, currency: item.currency });
+      setKnownAssetItems(nextKnown);
+      storageSet('nw-known-assets', nextKnown);
+    } else {
+      setLiabilities((prev) => [...prev, item]);
+      setLiabForm({ name: '', category: liabForm.category, amount: '', currency: liabForm.currency, date: liabForm.date });
+      const nextKnown = upsertKnownItem(knownLiabilityItems, { name: item.name, category: item.category, currency: item.currency });
+      setKnownLiabilityItems(nextKnown);
+      storageSet('nw-known-liabilities', nextKnown);
+    }
+    return { updated: false, name: trimmedName };
+  };
+
+  const removeItem = (type, id) => {
+    if (type === 'asset') setAssets((prev) => prev.filter((i) => i.id !== id));
+    else setLiabilities((prev) => prev.filter((i) => i.id !== id));
+  };
+
+  const editItem = (type, id, updates) => {
+    if (type === 'asset') {
+      setAssets((prev) => prev.map((i) => (i.id === id ? { ...i, ...updates } : i)));
+      const nextKnown = upsertKnownItem(knownAssetItems, { name: updates.name, category: updates.category, currency: updates.currency });
+      setKnownAssetItems(nextKnown);
+      storageSet('nw-known-assets', nextKnown);
+    } else {
+      setLiabilities((prev) => prev.map((i) => (i.id === id ? { ...i, ...updates } : i)));
+      const nextKnown = upsertKnownItem(knownLiabilityItems, { name: updates.name, category: updates.category, currency: updates.currency });
+      setKnownLiabilityItems(nextKnown);
+      storageSet('nw-known-liabilities', nextKnown);
+    }
+  };
+
+  const cleanupDuplicates = (type) => {
+    const list = type === 'asset' ? assets : liabilities;
+    const setList = type === 'asset' ? setAssets : setLiabilities;
+    const { kept, removed } = dedupeItems(list);
+    if (removed > 0) setList(kept);
+    return { removed };
+  };
+
+  const addStockHolding = async (ticker, shares) => {
+    const { price, name, currency } = await fetchStockPriceTWSE(ticker);
+    const amount = shares * price;
+    const displayName = `${name}（${ticker}）`;
+    const nowIso = new Date().toISOString();
+    const existing = assets.find((a) => a.ticker === ticker);
+    if (existing) {
+      editItem('asset', existing.id, {
+        name: displayName,
+        category: '股票 / 基金',
+        currency,
+        amount,
+        date: todayStr(),
+        ticker,
+        shares,
+        priceUpdatedAt: nowIso,
+      });
+      return { updated: true, name };
+    }
+    const item = {
+      id: uid(),
+      name: displayName,
+      category: '股票 / 基金',
+      currency,
+      amount,
+      date: todayStr(),
+      ticker,
+      shares,
+      priceUpdatedAt: nowIso,
+    };
+    setAssets((prev) => [...prev, item]);
+    const nextKnown = upsertKnownItem(knownAssetItems, { name: item.name, category: item.category, currency: item.currency });
+    setKnownAssetItems(nextKnown);
+    storageSet('nw-known-assets', nextKnown);
+    return { updated: false, name };
+  };
+
+  const addHouseAsset = (name, amount) => {
+    const item = {
+      id: uid(),
+      name,
+      category: '房地產',
+      currency: 'TWD',
+      amount,
+      date: todayStr(),
+    };
+    setAssets((prev) => [...prev, item]);
+    const nextKnown = upsertKnownItem(knownAssetItems, { name: item.name, category: item.category, currency: item.currency });
+    setKnownAssetItems(nextKnown);
+    storageSet('nw-known-assets', nextKnown);
+  };
+
+  const refreshStockHolding = async (itemId) => {
+    const item = assets.find((a) => a.id === itemId);
+    if (!item || !item.ticker) return;
+    const { price, name, currency } = await fetchStockPriceTWSE(item.ticker);
+    editItem('asset', itemId, {
+      name: `${name}（${item.ticker}）`,
+      amount: item.shares * price,
+      currency,
+      date: todayStr(),
+      priceUpdatedAt: new Date().toISOString(),
+    });
+  };
+
+  const refreshAllHoldings = async () => {
+    const holdings = assets.filter((a) => a.ticker);
+    for (const h of holdings) {
+      try {
+        await refreshStockHolding(h.id);
+      } catch (e) {
+        /* 單一檔更新失敗就跳過，繼續更新其他檔 */
+      }
+    }
+  };
+
+  const importItems = (type, rows) => {
+    const list = type === 'asset' ? assets : liabilities;
+    const setList = type === 'asset' ? setAssets : setLiabilities;
+    const knownList = type === 'asset' ? knownAssetItems : knownLiabilityItems;
+    const setKnown = type === 'asset' ? setKnownAssetItems : setKnownLiabilityItems;
+    const knownKey = type === 'asset' ? 'nw-known-assets' : 'nw-known-liabilities';
+
+    const workingList = [...list];
+    let nextKnown = knownList;
+    let addedCount = 0;
+    let updatedCount = 0;
+
+    rows.forEach((r) => {
+      const idx = workingList.findIndex((i) => i.name === r.name);
+      if (idx >= 0) {
+        workingList[idx] = { ...workingList[idx], ...r };
+        updatedCount++;
+      } else {
+        workingList.push({ id: uid(), ...r });
+        addedCount++;
+      }
+      nextKnown = upsertKnownItem(nextKnown, { name: r.name, category: r.category, currency: r.currency });
+    });
+
+    setList(workingList);
+    setKnown(nextKnown);
+    storageSet(knownKey, nextKnown);
+    return { addedCount, updatedCount };
+  };
+
+  const handleImportFile = async (file, currentType) => {
+    try {
+      const buf = await file.arrayBuffer();
+      const wb = XLSX.read(buf, { type: 'array', cellDates: true });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+      const { assetRows, liabilityRows, skipped } = parseExcelRows(rows, currentType);
+      let assetResult = { addedCount: 0, updatedCount: 0 };
+      let liabilityResult = { addedCount: 0, updatedCount: 0 };
+      if (assetRows.length > 0) assetResult = importItems('asset', assetRows);
+      if (liabilityRows.length > 0) liabilityResult = importItems('liability', liabilityRows);
+      return {
+        assetAdded: assetResult.addedCount,
+        assetUpdated: assetResult.updatedCount,
+        liabilityAdded: liabilityResult.addedCount,
+        liabilityUpdated: liabilityResult.updatedCount,
+        skipped,
+      };
+    } catch (err) {
+      return { error: '讀取檔案失敗，請確認檔案格式是否正確' };
+    }
+  };
+
+  const [backupMsg, setBackupMsg] = useState('');
+
+  const exportBackup = async () => {
+    const backup = {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      assets,
+      liabilities,
+      history,
+      knownAssetItems,
+      knownLiabilityItems,
+    };
+    const filename = `資產冒險記備份_${new Date().toISOString().slice(0, 10)}.json`;
+    const json = JSON.stringify(backup, null, 2);
+
+    if (downloadsCap) {
+      try {
+        await downloadsCap.save({ filename, data: json });
+        setBackupMsg('已下載備份檔案');
+      } catch (e) {
+        if (e && e.code === 'declined') return;
+        setBackupMsg('下載失敗，請稍後再試');
+      }
+      return;
+    }
+
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setBackupMsg('已下載備份檔案');
+  };
+
+  const importBackup = async (file) => {
+    if (!file) return;
+    if (!window.confirm('還原備份會覆蓋目前所有資產、負債與紀錄，確定要繼續嗎？')) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const nextAssets = Array.isArray(data.assets) ? data.assets : [];
+      const nextLiabilities = Array.isArray(data.liabilities) ? data.liabilities : [];
+      const nextHistory = Array.isArray(data.history) ? data.history : [];
+      const nextKnownA = Array.isArray(data.knownAssetItems) ? data.knownAssetItems : [];
+      const nextKnownL = Array.isArray(data.knownLiabilityItems) ? data.knownLiabilityItems : [];
+      setAssets(nextAssets);
+      setLiabilities(nextLiabilities);
+      setHistory(nextHistory);
+      setKnownAssetItems(nextKnownA);
+      setKnownLiabilityItems(nextKnownL);
+      storageSet('nw-data', { assets: nextAssets, liabilities: nextLiabilities });
+      storageSet('nw-history', nextHistory);
+      storageSet('nw-known-assets', nextKnownA);
+      storageSet('nw-known-liabilities', nextKnownL);
+      setBackupMsg('備份還原成功！');
+    } catch (e) {
+      setBackupMsg('讀取備份檔案失敗，請確認檔案格式是否正確');
+    }
+  };
+
+  const saveSnapshot = useCallback(() => {
+    const now = new Date();
+    const weekKey = getWeekKey(latestItemDate);
+    const assetsByCategory = computeCategoryBreakdown(assetsTWD, ASSET_CATEGORIES);
+    const liabilitiesByCategory = computeCategoryBreakdown(liabilitiesTWD, LIABILITY_CATEGORIES);
+    const idx = history.findIndex((h) => (h.weekKey || getWeekKey(h.date)) === weekKey);
+    let next;
+    if (idx >= 0) {
+      next = history.map((h, i) =>
+        i === idx
+          ? { ...h, date: now.toISOString(), weekKey, totalAssets, totalLiabilities, netWorth, assetsByCategory, liabilitiesByCategory }
+          : h
+      );
+    } else {
+      next = [
+        ...history,
+        { id: uid(), date: now.toISOString(), weekKey, totalAssets, totalLiabilities, netWorth, assetsByCategory, liabilitiesByCategory },
+      ];
+    }
+    setHistory(next);
+    storageSet('nw-history', next);
+  }, [history, totalAssets, totalLiabilities, netWorth, latestItemDate, assetsTWD, liabilitiesTWD]);
+
+  const deleteHistoryEntry = useCallback(
+    (id) => {
+      const next = history.filter((h) => h.id !== id);
+      setHistory(next);
+      storageSet('nw-history', next);
+    },
+    [history]
+  );
+
+  const clearHistory = useCallback(() => {
+    if (!window.confirm('確定要清空所有成長紀錄嗎？這個動作無法復原。')) return;
+    setHistory([]);
+    storageSet('nw-history', []);
+  }, []);
+
+  const enrichedHistory = sortedHistoryFilled.map((h, i) => ({
+    ...h,
+    delta: i === 0 ? 0 : h.netWorth - sortedHistoryFilled[i - 1].netWorth,
+  }));
+  const chartData = sortedHistoryFilled.map((h) => ({
+    label: toLocalDate(h.weekKey || getWeekKey(h.date)).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }),
+    netWorth: h.netWorth,
+  }));
+
+  return (
+    <div className="nwa-root">
+      <header className="nwa-header">
+        <p className="eyebrow">個人財富養成計畫</p>
+        <h1>資產冒險記</h1>
+        <p className="subtitle">記錄資產與負債，看你的角色一路成長（可用不同幣別記帳，自動換算台幣）</p>
+      </header>
+
+      <RateBar
+        liveRates={liveRates}
+        ratesLoading={ratesLoading}
+        ratesError={ratesError}
+        onRefresh={fetchLiveRates}
+      />
+
+      <section className="hero-card">
+        <div className="species-picker">
+          {SPECIES.map((s) => (
+            <button
+              key={s.id}
+              className={species === s.id ? 'active' : ''}
+              onClick={() => setSpecies(s.id)}
+              aria-label={s.name}
+              title={s.name}
+            >
+              {s.emoji}
+            </button>
+          ))}
+        </div>
+        <div className="char-stage">
+          <Character level={level} mood={mood} health={health} species={species} />
+        </div>
+        <div className="lv-badge">
+          <span className="lv-num">Lv.{level.id}</span>
+        </div>
+        <h2 className="char-title" style={{ color: level.color }}>{level.title}</h2>
+        {showPercentile ? (
+          <p className="char-percentile">
+            {level.percentile}
+            <button className="percentile-toggle" onClick={() => setShowPercentile(false)}>隱藏</button>
+          </p>
+        ) : (
+          <button className="percentile-toggle standalone" onClick={() => setShowPercentile(true)}>顯示統計對照</button>
+        )}
+        <span className={`health-tag tone-${health.tone}`}>
+          {health.tone === 'great' && '✨ '}
+          {health.label}
+        </span>
+
+        <div className="progress-wrap">
+          <div className="progress-track">
+            <div className="progress-fill" style={{ width: `${progress.percent}%`, background: level.color }} />
+          </div>
+          <p className="progress-label">{progress.label}</p>
+        </div>
+      </section>
+
+      <section className="stats-row">
+        <div className="stat-card">
+          <span className="stat-label">總資產</span>
+          <span className="stat-value tone-good">{formatMoney(totalAssets)}</span>
+        </div>
+        <div className="stat-card">
+          <span className="stat-label">總負債</span>
+          <span className="stat-value tone-bad">{formatMoney(totalLiabilities)}</span>
+        </div>
+        <div className="stat-card highlight">
+          <span className="stat-label">淨值</span>
+          <span className={`stat-value ${netWorth >= 0 ? 'tone-good' : 'tone-bad'}`}>{formatMoney(netWorth)}</span>
+        </div>
+      </section>
+
+      {lastCompletedEntry && weeklyChange !== null && (
+        <p className={`week-delta ${weeklyChange >= 0 ? 'tone-good' : 'tone-bad'}`}>
+          {weeklyChange >= 0 ? '▲' : '▼'} 比 {toLocalDate(lastCompletedEntry.weekKey || getWeekKey(lastCompletedEntry.date)).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' })} 那週{weeklyChange >= 0 ? '增加' : '減少'} {formatMoney(Math.abs(weeklyChange))}
+        </p>
+      )}
+
+      <nav className="tab-nav">
+        <button className={tab === 'assets' ? 'active' : ''} onClick={() => setTab('assets')}>💰 資產</button>
+        <button className={tab === 'liabilities' ? 'active' : ''} onClick={() => setTab('liabilities')}>💳 負債</button>
+        <button className={tab === 'history' ? 'active' : ''} onClick={() => setTab('history')}>📜 成長紀錄</button>
+        <button className={tab === 'charts' ? 'active' : ''} onClick={() => setTab('charts')}>📊 圖表</button>
+        <button className={tab === 'insights' ? 'active' : ''} onClick={() => setTab('insights')}>💡 建議</button>
+        <button className={tab === 'backup' ? 'active' : ''} onClick={() => setTab('backup')}>💾 備份</button>
+      </nav>
+
+      {tab === 'assets' && (
+        <>
+          <HousePriceQuery onAdd={addHouseAsset} />
+          <StockHoldingWidget
+            onAdd={addStockHolding}
+            onRefreshAll={refreshAllHoldings}
+            holdingsCount={assets.filter((a) => a.ticker).length}
+          />
+          <ItemPanel
+            type="asset"
+            items={assets}
+            categories={ASSET_CATEGORIES}
+            form={assetForm}
+            setForm={setAssetForm}
+            onAdd={() => addItem('asset')}
+            onRemove={(id) => removeItem('asset', id)}
+            onEdit={(id, updates) => editItem('asset', id, updates)}
+            latestItemDate={latestItemDate}
+            total={totalAssets}
+            getEffectiveRate={getEffectiveRate}
+            knownItems={knownAssetItems}
+            onImportFile={(file) => handleImportFile(file, 'asset')}
+            onCleanup={() => cleanupDuplicates('asset')}
+            onRefreshHolding={refreshStockHolding}
+          />
+        </>
+      )}
+
+      {tab === 'liabilities' && (
+        <ItemPanel
+          type="liability"
+          items={liabilities}
+          categories={LIABILITY_CATEGORIES}
+          form={liabForm}
+          setForm={setLiabForm}
+          onAdd={() => addItem('liability')}
+          onRemove={(id) => removeItem('liability', id)}
+          onEdit={(id, updates) => editItem('liability', id, updates)}
+          latestItemDate={latestItemDate}
+          total={totalLiabilities}
+          getEffectiveRate={getEffectiveRate}
+          knownItems={knownLiabilityItems}
+          onImportFile={(file) => handleImportFile(file, 'liability')}
+          onCleanup={() => cleanupDuplicates('liability')}
+        />
+      )}
+
+      {tab === 'history' && (
+        <HistoryPanel
+          chartData={chartData}
+          enrichedHistory={enrichedHistory}
+          onSave={saveSnapshot}
+          onDeleteEntry={deleteHistoryEntry}
+          onClearAll={clearHistory}
+        />
+      )}
+
+      {tab === 'charts' && (
+        <AllocationPanel
+          allocation={currentAssetAllocation}
+          totalAssets={totalAssets}
+          trendData={categoryTrendData}
+          hasCategoryHistory={hasCategoryHistory}
+        />
+      )}
+
+      {tab === 'insights' && (
+        <InsightsPanel
+          insights={insights}
+          snapshot={{
+            levelTitle: level.title,
+            netWorth,
+            totalAssets,
+            totalLiabilities,
+            health,
+            assets: assetsTWD.map((a) => ({ name: a.name, category: a.category, twd: a.twd })),
+            liabilities: liabilitiesTWD.map((l) => ({ name: l.name, category: l.category, twd: l.twd })),
+            history: sortedHistory.slice(-8).map((h) => ({ weekKey: h.weekKey || getWeekKey(h.date), netWorth: h.netWorth })),
+          }}
+        />
+      )}
+
+      {tab === 'backup' && (
+        <BackupPanel onExport={exportBackup} onImport={importBackup} message={backupMsg} />
+      )}
+    </div>
+  );
+}
+
+function InsightsPanel({ insights, snapshot }) {
+  const toneIcon = { good: '✅', bad: '⚠️', ok: 'ℹ️' };
+
+  const [apiKey, setApiKey] = useState(() => storageGet('nw-ai-key') || '');
+  const [keyDraft, setKeyDraft] = useState('');
+  const [aiModel, setAiModel] = useState(() => storageGet('nw-ai-model') || AI_MODELS[0].id);
+  const [aiText, setAiText] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState('');
+
+  useEffect(() => {
+    storageSet('nw-ai-model', aiModel);
+  }, [aiModel]);
+
+  const saveKey = () => {
+    const trimmed = keyDraft.trim();
+    if (!trimmed) return;
+    setApiKey(trimmed);
+    storageSet('nw-ai-key', trimmed);
+    setKeyDraft('');
+  };
+
+  const clearKey = () => {
+    setApiKey('');
+    storageSet('nw-ai-key', '');
+    setAiText('');
+    setAiError('');
+  };
+
+  const askAI = async () => {
+    if (!apiKey || aiLoading) return;
+    setAiLoading(true);
+    setAiError('');
+    setAiText('');
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: aiModel,
+          max_tokens: 700,
+          messages: [{ role: 'user', content: buildAIPrompt(snapshot) }],
+        }),
+      });
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => null);
+        throw new Error((errBody && errBody.error && errBody.error.message) || `API 回應錯誤（狀態碼 ${res.status}）`);
+      }
+      const data = await res.json();
+      const text = (data.content || []).map((block) => block.text || '').join('\n').trim();
+      setAiText(text || '（沒有取得回應內容，請再試一次）');
+    } catch (e) {
+      setAiError(e && e.message === 'Failed to fetch' ? '連線失敗，請確認網路連線或 API Key 是否正確' : (e && e.message) || '發生未知錯誤');
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>財務觀察</h3>
+      </div>
+      <ul className="insight-list">
+        {insights.map((tip, i) => (
+          <li key={i} className={`insight-item tone-${tip.tone}`}>
+            <span className="insight-icon">{toneIcon[tip.tone] || 'ℹ️'}</span>
+            <div>
+              <p className="insight-title">{tip.title}</p>
+              <p className="insight-text">{tip.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="privacy-note">
+        以上為根據你輸入的資料自動產生的一般性財務觀察，僅供參考，不構成專業理財或投資建議。實際決策請依個人狀況並諮詢專業理財顧問。
+      </p>
+
+      <div className="ai-advice-block">
+        <div className="panel-head">
+          <h3>AI 深入建議</h3>
+        </div>
+
+        {!apiKey ? (
+          <>
+            <p className="empty-note" style={{ textAlign: 'left', padding: '0 0 10px' }}>
+              這個功能會用你自己的 Anthropic API Key，直接從瀏覽器呼叫 Claude，金鑰只存在這台裝置的 localStorage，不會經過任何其他伺服器。還沒有 Key 的話可以到{' '}
+              <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noreferrer" style={{ color: 'var(--gold)' }}>
+                console.anthropic.com
+              </a>{' '}申請。
+            </p>
+            <div className="import-row">
+              <input
+                type="password"
+                placeholder="貼上你的 Anthropic API Key（sk-ant-...）"
+                value={keyDraft}
+                onChange={(e) => setKeyDraft(e.target.value)}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  background: 'var(--bg-deep)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-primary)',
+                  borderRadius: 10,
+                  padding: '9px 10px',
+                  fontSize: 13,
+                  fontFamily: 'inherit',
+                }}
+              />
+              <button className="save-btn" onClick={saveKey} disabled={!keyDraft.trim()}>
+                💾 儲存
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="import-row">
+              <select
+                value={aiModel}
+                onChange={(e) => setAiModel(e.target.value)}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  background: 'var(--bg-deep)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-primary)',
+                  borderRadius: 10,
+                  padding: '9px 10px',
+                  fontSize: 13,
+                  fontFamily: 'inherit',
+                }}
+              >
+                {AI_MODELS.map((m) => (
+                  <option key={m.id} value={m.id}>{m.label}</option>
+                ))}
+              </select>
+              <button className="ghost-btn small" onClick={askAI} disabled={aiLoading}>
+                {aiLoading ? <span className="spin">⏳</span> : '💡'} {aiLoading ? '分析中…' : '詢問 AI'}
+              </button>
+              <button className="ghost-btn small" onClick={clearKey}>🗑 移除 Key</button>
+            </div>
+
+            {aiError && <p className="rate-error">{aiError}</p>}
+
+            {aiText ? (
+              <ul className="ai-advice-list">
+                <li style={{ whiteSpace: 'pre-wrap' }}>{aiText}</li>
+              </ul>
+            ) : (
+              !aiLoading && !aiError && <p className="empty-note">按「詢問 AI」，讓 Claude 根據你目前的資產狀況給更深入的分析。</p>
+            )}
+          </>
+        )}
+
+        <p className="privacy-note" style={{ marginTop: 12 }}>
+          API Key 只存在這台裝置的瀏覽器裡，只會直接送到 Anthropic 的伺服器；你的資產與負債資料會整理成文字一併送出，用來產生這份分析。AI 給的內容僅供參考，不構成專業理財或投資建議。
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function BackupPanel({ onExport, onImport, message }) {
+  const fileInputRef = useRef(null);
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>備份與還原</h3>
+      </div>
+      <p className="privacy-note">
+        建議在清除瀏覽器資料、換裝置或換瀏覽器之前，先下載一份備份檔。備份檔包含資產、負債、成長紀錄與常用項目清單，之後可以用「還原備份」完整復原。
+      </p>
+      <div className="backup-actions">
+        <button className="save-btn full" onClick={onExport}>💾 下載備份檔案（JSON）</button>
+        <button className="ghost-btn small" onClick={() => fileInputRef.current.click()}>📤 還原備份</button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".json,application/json"
+          style={{ display: 'none' }}
+          onChange={(e) => {
+            onImport(e.target.files[0]);
+            e.target.value = '';
+          }}
+        />
+      </div>
+      {message && <p className="import-msg">{message}</p>}
+    </section>
+  );
+}
+
+function StockHoldingWidget({ onAdd, onRefreshAll, holdingsCount }) {
+  const [ticker, setTicker] = useState('');
+  const [shares, setShares] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [refreshingAll, setRefreshingAll] = useState(false);
+  const [msg, setMsg] = useState('');
+  const [error, setError] = useState('');
+
+  const handleAdd = async () => {
+    const sharesNum = evaluateExpr(shares);
+    if (!ticker.trim() || !sharesNum || sharesNum <= 0) {
+      setError('請輸入股票代號與股數');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    setMsg('');
+    try {
+      const result = await onAdd(ticker.trim(), sharesNum);
+      setMsg(result.updated ? `已更新「${result.name}」的持股與股價` : `已加入「${result.name}」，${sharesNum} 股`);
+      setTicker('');
+      setShares('');
+    } catch (e) {
+      setError('查詢股價失敗，請確認是否為上市股票代號（4位數字），或稍後再試');
+    }
+    setLoading(false);
+  };
+
+  const handleRefreshAll = async () => {
+    setRefreshingAll(true);
+    setError('');
+    setMsg('');
+    try {
+      await onRefreshAll();
+      setMsg('已更新所有持股的股價');
+    } catch (e) {
+      setError('更新失敗，請稍後再試');
+    }
+    setRefreshingAll(false);
+  };
+
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>📈 持股快速加入</h3>
+        {holdingsCount > 0 && (
+          <button className="ghost-btn small" onClick={handleRefreshAll} disabled={refreshingAll}>
+            <span className={refreshingAll ? 'spin' : ''}>🔄</span> 全部更新股價
+          </button>
+        )}
+      </div>
+      <div className="house-query-row">
+        <input
+          type="text"
+          placeholder="股票代號，例如 2330"
+          value={ticker}
+          onChange={(e) => setTicker(e.target.value)}
+        />
+        <input
+          type="text"
+          inputMode="decimal"
+          placeholder="股數"
+          value={shares}
+          onChange={(e) => setShares(e.target.value)}
+          className="stock-shares-input"
+        />
+        <button className="add-btn" onClick={handleAdd} disabled={loading}>
+          {loading ? <span className="spin">🔄</span> : '＋'}
+        </button>
+      </div>
+      {msg && <p className="import-msg">{msg}</p>}
+      {error && <p className="team-error">{error}</p>}
+      <p className="privacy-note">
+        輸入台股上市股票代號（4位數字）和股數，會自動抓取最新收盤價換算成金額並加入資產清單（分類為「股票 / 基金」）。資料來源：證交所 OpenAPI，僅支援上市股票，不支援上櫃或美股，請手動輸入。之後可以在清單裡按 🔄 個別更新股價，或用上面的「全部更新股價」一次更新所有持股。
+      </p>
+    </section>
+  );
+}
+
+function HousePriceQuery({ onAdd }) {
+  const countyNames = Object.keys(TAIWAN_DISTRICTS);
+  const [county, setCounty] = useState(countyNames[0]);
+  const [district, setDistrict] = useState(TAIWAN_DISTRICTS[countyNames[0]].districts[0]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState(null);
+  const [ping, setPing] = useState('');
+  const [addMsg, setAddMsg] = useState('');
+
+  const districts = TAIWAN_DISTRICTS[county].districts;
+
+  const handleCountyChange = (next) => {
+    setCounty(next);
+    setDistrict(TAIWAN_DISTRICTS[next].districts[0]);
+    setResult(null);
+    setError('');
+    setAddMsg('');
+  };
+
+  const handleQuery = async () => {
+    setLoading(true);
+    setError('');
+    setResult(null);
+    setAddMsg('');
+    try {
+      const data = await fetchDistrictYearlyPrice(county, district);
+      setResult(data);
+    } catch (e) {
+      setError('查詢失敗，內政部網站可能暫時無法連線，請稍後再試');
+    }
+    setLoading(false);
+  };
+
+  const handleAdd = () => {
+    const pingNum = evaluateExpr(ping);
+    if (!result || !result.pricePerPing || !pingNum || pingNum <= 0) {
+      setAddMsg('請先查詢均價，並輸入坪數');
+      return;
+    }
+    const amount = Math.round(result.pricePerPing * pingNum);
+    onAdd(`${county}${district}（約 ${pingNum} 坪，近一年均價估算）`, amount);
+    setAddMsg(`已加入「${county}${district}」，估算金額 ${formatMoney(amount)}`);
+    setPing('');
+  };
+
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>🏠 房價查詢</h3>
+      </div>
+      <p className="empty-note" style={{ textAlign: 'left', padding: '0 0 12px' }}>
+        用內政部實價登錄公開資料，抓最近可查到的 4 季（約一年）成交紀錄，算出所選行政區的「每坪均價」。只計入房地買賣（不含純土地、純車位交易）。內政部的資料檔案不小，第一次查某個縣市可能要等 30 秒到 1 分鐘，之後同一個縣市（不管換查哪個行政區）就會直接讀取快取，幾乎不用等。
+      </p>
+      <div className="house-query-row">
+        <select value={county} onChange={(e) => handleCountyChange(e.target.value)}>
+          {countyNames.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <select value={district} onChange={(e) => { setDistrict(e.target.value); setResult(null); setAddMsg(''); }}>
+          {districts.map((d) => <option key={d} value={d}>{d}</option>)}
+        </select>
+      </div>
+      <button className="save-btn full" onClick={handleQuery} disabled={loading}>
+        {loading ? <><span className="spin">🔄</span> 下載資料中，請稍候（最久約 1 分鐘）…</> : <>🔍 查詢均價</>}
+      </button>
+      {error && <p className="team-error">{error}</p>}
+
+      {result && (
+        <div className="rate-bar" style={{ marginTop: '14px' }}>
+          {result.pricePerPing ? (
+            <>
+              <p style={{ margin: '0 0 4px', fontSize: '13px' }}>
+                {county}{district}近一年（{result.seasons.length} 季、共 {result.count} 筆房地成交）平均約
+                <strong style={{ color: 'var(--gold)' }}> {formatMoney(Math.round(result.pricePerPing))} / 坪</strong>
+              </p>
+              {result.count < 5 && (
+                <p className="rate-error" style={{ color: 'var(--text-muted)' }}>
+                  ⚠️ 這段期間成交筆數偏少，均價僅供參考，實際行情建議多比對幾筆案例。
+                </p>
+              )}
+              <div className="house-query-row" style={{ marginTop: '10px', marginBottom: 0 }}>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="坪數"
+                  value={ping}
+                  onChange={(e) => setPing(e.target.value)}
+                  className="stock-shares-input"
+                />
+                <button className="add-btn" onClick={handleAdd}>＋ 加入資產</button>
+              </div>
+            </>
+          ) : (
+            <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-muted)' }}>
+              近一年（{result.seasons.length} 季）查無「{county}{district}」的房地成交紀錄，這個區交易量可能很少，建議直接手動輸入或改查鄰近行政區。
+            </p>
+          )}
+        </div>
+      )}
+      {addMsg && <p className="import-msg">{addMsg}</p>}
+
+      <a
+        className="ghost-btn full"
+        href="https://lvr.land.moi.gov.tw/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: 'none' }}
+      >
+        🔗 想查特定門牌或社區，前往內政部實價登錄查詢
+      </a>
+    </section>
+  );
+}
+
+function RateBar({ liveRates, ratesLoading, ratesError, onRefresh }) {
+  return (
+    <div className="rate-bar">
+      <div className="rate-bar-top">
+        <button className="ghost-btn small" onClick={onRefresh} disabled={ratesLoading}>
+          <span className={ratesLoading ? 'spin' : ''}>🔄</span>
+          {ratesLoading ? '更新中…' : '更新即時匯率'}
+        </button>
+        <span className="rate-updated">
+          {liveRates && liveRates.updatedAt
+            ? `最後更新：${new Date(liveRates.updatedAt).toLocaleString('zh-TW', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}`
+            : '目前使用預設參考匯率'}
+        </span>
+      </div>
+      <div className="rate-list">
+        {CURRENCIES.filter((c) => c.code !== 'TWD').map((c) => {
+          const r = liveRates && typeof liveRates[c.code] === 'number' ? liveRates[c.code] : c.rate;
+          return <span key={c.code} className="rate-chip">{c.code} ≈ NT$ {r.toFixed(2)}</span>;
+        })}
+      </div>
+      {ratesError && <p className="rate-error">{ratesError}</p>}
+    </div>
+  );
+}
+
+function ItemPanel({ type, items, categories, form, setForm, onAdd, onRemove, total, getEffectiveRate, knownItems, onImportFile, onEdit, latestItemDate, onCleanup, onRefreshHolding }) {
+  const isAsset = type === 'asset';
+  const listId = `known-${type}-list`;
+  const fileInputRef = useRef(null);
+  const [importMsg, setImportMsg] = useState('');
+  const [cleanupMsg, setCleanupMsg] = useState('');
+  const [formMsg, setFormMsg] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [refreshingIds, setRefreshingIds] = useState([]);
+
+  const handleRefreshHolding = async (id) => {
+    setRefreshingIds((prev) => [...prev, id]);
+    try {
+      await onRefreshHolding(id);
+    } catch (e) {
+      /* 更新失敗就保留原本的金額 */
+    }
+    setRefreshingIds((prev) => prev.filter((x) => x !== id));
+  };
+  const [editForm, setEditForm] = useState(null);
+
+  const startEdit = (item) => {
+    setEditingId(item.id);
+    setEditForm({
+      name: item.name,
+      category: item.category,
+      currency: item.currency || 'TWD',
+      amount: String(item.amount),
+      date: todayStr(),
+    });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditForm(null);
+  };
+
+  const saveEdit = () => {
+    const amount = evaluateExpr(editForm.amount);
+    if (!editForm.name.trim() || !amount || amount <= 0) return;
+    onEdit(editingId, {
+      name: editForm.name.trim(),
+      category: editForm.category,
+      currency: editForm.currency,
+      amount,
+      date: editForm.date || todayStr(),
+    });
+    setEditingId(null);
+    setEditForm(null);
+  };
+
+  const handleFile = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const result = await onImportFile(file);
+    if (result.error) {
+      setImportMsg(result.error);
+    } else {
+      const parts = [];
+      if (result.assetAdded || result.assetUpdated) {
+        parts.push(`資產：新增 ${result.assetAdded} 筆、更新 ${result.assetUpdated} 筆`);
+      }
+      if (result.liabilityAdded || result.liabilityUpdated) {
+        parts.push(`負債：新增 ${result.liabilityAdded} 筆、更新 ${result.liabilityUpdated} 筆`);
+      }
+      setImportMsg(
+        parts.length === 0
+          ? '沒有讀到任何有效資料，請確認欄位名稱與內容'
+          : `已匯入 — ${parts.join('；')}${result.skipped > 0 ? `，略過 ${result.skipped} 筆（缺名稱或金額）` : ''}`
+      );
+    }
+    e.target.value = '';
+  };
+
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>{isAsset ? '資產清單' : '負債清單'}</h3>
+        <span className="panel-total">{formatMoney(total)}</span>
+      </div>
+
+      <div className="import-row">
+        <button type="button" className="ghost-btn small" onClick={() => fileInputRef.current.click()}>
+          📥 匯入 Excel
+        </button>
+        <button
+          type="button"
+          className="ghost-btn small"
+          onClick={() => {
+            const { removed } = onCleanup();
+            setCleanupMsg(removed > 0 ? `已清除 ${removed} 筆重複項目（同名項目僅保留日期最新的那筆）` : '沒有找到重複的項目名稱');
+          }}
+        >
+          ✨ 清理重複項目
+        </button>
+        <span className="import-hint">欄位：名稱、分類、幣別、金額、日期（分類自動判斷資產／負債；同名項目會更新既有資料，不會重複新增）</span>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".xlsx,.xls,.csv"
+          style={{ display: 'none' }}
+          onChange={handleFile}
+        />
+      </div>
+      {importMsg && <p className="import-msg">{importMsg}</p>}
+      {cleanupMsg && <p className="import-msg">{cleanupMsg}</p>}
+
+      <form className="add-form" onSubmit={(e) => {
+        e.preventDefault();
+        const result = onAdd();
+        if (result && result.updated) {
+          setFormMsg(`偵測到同名項目，已更新「${result.name}」的金額與日期，沒有新增重複項目`);
+        } else {
+          setFormMsg('');
+        }
+      }}>
+        <div className="add-form-name-row">
+          <input
+            type="text"
+            className="add-form-name"
+            list={listId}
+            placeholder={isAsset ? '例如：台幣活存（可從清單挑選）' : '例如：房屋貸款（可從清單挑選）'}
+            value={form.name}
+            onChange={(e) => {
+              const val = e.target.value;
+              const match = knownItems.find((k) => k.name === val);
+              if (match) {
+                setForm({ ...form, name: val, category: match.category, currency: match.currency });
+              } else {
+                setForm({ ...form, name: val });
+              }
+            }}
+          />
+          <input
+            type="date"
+            className="add-form-date"
+            value={form.date || todayStr()}
+            onChange={(e) => setForm({ ...form, date: e.target.value })}
+          />
+        </div>
+        <datalist id={listId}>
+          {knownItems.map((k) => <option key={k.name} value={k.name} />)}
+        </datalist>
+        <div className="add-form-row">
+          <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
+            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+          <select value={form.currency} onChange={(e) => setForm({ ...form, currency: e.target.value })}>
+            {CURRENCIES.map((c) => <option key={c.code} value={c.code}>{c.symbol} {c.code}</option>)}
+          </select>
+          <div className="amount-field">
+            <input
+              type="text"
+              inputMode="decimal"
+              placeholder="金額或算式，例如 1000+250"
+              value={form.amount}
+              onChange={(e) => setForm({ ...form, amount: e.target.value })}
+            />
+            {/[+\-*/]/.test(form.amount) && !Number.isNaN(evaluateExpr(form.amount)) && (
+              <span className="amount-preview">= {evaluateExpr(form.amount).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            )}
+          </div>
+          <button type="submit" className="add-btn">＋</button>
+        </div>
+      </form>
+      {formMsg && <p className="import-msg">{formMsg}</p>}
+
+      {items.length === 0 ? (
+        <p className="empty-note">{isAsset ? '還沒有記錄任何資產。' : '還沒有記錄任何負債，太棒了！'}</p>
+      ) : (
+        <ul className="item-list">
+          {items.map((item) => {
+            if (editingId === item.id) {
+              return (
+                <li key={item.id} className="item-edit-row">
+                  <input
+                    type="text"
+                    value={editForm.name}
+                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                  />
+                  <div className="item-edit-fields">
+                    <select value={editForm.category} onChange={(e) => setEditForm({ ...editForm, category: e.target.value })}>
+                      {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+                    </select>
+                    <select value={editForm.currency} onChange={(e) => setEditForm({ ...editForm, currency: e.target.value })}>
+                      {CURRENCIES.map((c) => <option key={c.code} value={c.code}>{c.symbol} {c.code}</option>)}
+                    </select>
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="金額或算式"
+                      value={editForm.amount}
+                      onChange={(e) => setEditForm({ ...editForm, amount: e.target.value })}
+                    />
+                    <input
+                      type="date"
+                      value={editForm.date}
+                      onChange={(e) => setEditForm({ ...editForm, date: e.target.value })}
+                    />
+                  </div>
+                  <div className="item-edit-actions">
+                    <button className="add-btn" onClick={saveEdit} aria-label="儲存">✓</button>
+                    <button className="del-btn" onClick={cancelEdit} aria-label="取消">✕</button>
+                  </div>
+                </li>
+              );
+            }
+            const itemCurrency = item.currency || 'TWD';
+            const twdValue = itemCurrency === 'TWD' ? item.amount : item.amount * getEffectiveRate(itemCurrency);
+            return (
+              <li key={item.id}>
+                <div className="item-info">
+                  <span className="item-name">{item.name}</span>
+                  <span className="item-cat">{item.category}</span>
+                  {item.ticker && (
+                    <span className="item-date">
+                      📈 {item.ticker} · {item.shares} 股
+                      {item.priceUpdatedAt
+                        ? ` · 股價更新於 ${new Date(item.priceUpdatedAt).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' })}`
+                        : ''}
+                    </span>
+                  )}
+                  {item.date && (
+                    <span className="item-date">
+                      📅 {item.date}
+                      {getWeekKey(item.date) === getWeekKey(latestItemDate) && (
+                        <span className="item-week-badge">本週已更新</span>
+                      )}
+                    </span>
+                  )}
+                </div>
+                <div className="item-right">
+                  <div className="item-amount-block">
+                    <span className="item-amount">{formatMoney(item.amount, itemCurrency)}</span>
+                    {itemCurrency !== 'TWD' && (
+                      <span className="item-amount-sub">≈ {formatMoney(twdValue, 'TWD')}</span>
+                    )}
+                  </div>
+                  {item.ticker && (
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleRefreshHolding(item.id)}
+                      disabled={refreshingIds.includes(item.id)}
+                      aria-label="更新股價"
+                    >
+                      <span className={refreshingIds.includes(item.id) ? 'spin' : ''}>🔄</span>
+                    </button>
+                  )}
+                  <button className="edit-btn" onClick={() => startEdit(item)} aria-label="編輯">✏️</button>
+                  <button className="del-btn" onClick={() => onRemove(item.id)} aria-label="刪除">🗑</button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function AllocationPanel({ allocation, totalAssets, trendData, hasCategoryHistory }) {
+  const pieCanvasRef = useRef(null);
+  const pieChartRef = useRef(null);
+  const trendCanvasRef = useRef(null);
+  const trendChartRef = useRef(null);
+
+  useEffect(() => {
+    if (!pieCanvasRef.current || allocation.length === 0) return;
+    if (pieChartRef.current) pieChartRef.current.destroy();
+    const ctx = pieCanvasRef.current.getContext('2d');
+    pieChartRef.current = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: allocation.map((d) => d.name),
+        datasets: [{
+          data: allocation.map((d) => d.value),
+          backgroundColor: allocation.map((d) => d.color),
+          borderColor: '#10152a',
+          borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '60%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (c) => `${c.label}：${formatMoney(c.parsed)}` },
+            backgroundColor: '#1a2140',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            titleColor: '#9aa3c7',
+            bodyColor: '#f1ede2',
+          },
+        },
+      },
+    });
+    return () => { if (pieChartRef.current) pieChartRef.current.destroy(); };
+  }, [allocation]);
+
+  useEffect(() => {
+    if (!trendCanvasRef.current || !hasCategoryHistory || trendData.length < 2) return;
+    if (trendChartRef.current) trendChartRef.current.destroy();
+    const ctx = trendCanvasRef.current.getContext('2d');
+    trendChartRef.current = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: trendData.map((d) => d.label),
+        datasets: ASSET_CATEGORIES.map((c) => ({
+          label: c,
+          data: trendData.map((d) => d.values[c]),
+          borderColor: ASSET_CATEGORY_COLORS[c],
+          backgroundColor: ASSET_CATEGORY_COLORS[c],
+          tension: 0.3,
+          pointRadius: 2.5,
+          spanGaps: true,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#9aa3c7', font: { size: 11 }, boxWidth: 10 } },
+          tooltip: {
+            callbacks: { label: (c) => `${c.dataset.label}：${formatMoney(c.parsed.y)}` },
+            backgroundColor: '#1a2140',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            titleColor: '#9aa3c7',
+            bodyColor: '#f1ede2',
+          },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#9aa3c7', font: { size: 11 } } },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.08)' },
+            ticks: { color: '#9aa3c7', font: { size: 10 }, callback: (v) => (v / 10000).toFixed(0) + '萬' },
+          },
+        },
+      },
+    });
+    return () => { if (trendChartRef.current) trendChartRef.current.destroy(); };
+  }, [trendData, hasCategoryHistory]);
+
+  return (
+    <>
+      <section className="panel">
+        <div className="panel-head">
+          <h3>資產配置</h3>
+          <span className="panel-total">{formatMoney(totalAssets)}</span>
+        </div>
+        {allocation.length === 0 ? (
+          <p className="empty-note">還沒有資產資料，先到「資產」分頁新增幾筆吧。</p>
+        ) : (
+          <>
+            <div className="chart-wrap" style={{ height: 220 }}><canvas ref={pieCanvasRef}></canvas></div>
+            <ul className="legend-list">
+              {allocation.map((entry) => (
+                <li key={entry.name}>
+                  <span className="legend-dot" style={{ background: entry.color }}></span>
+                  <span className="legend-name">{entry.name}</span>
+                  <span className="legend-value">
+                    {formatMoney(entry.value)}（{((entry.value / totalAssets) * 100).toFixed(0)}%）
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </section>
+
+      <section className="panel">
+        <div className="panel-head">
+          <h3>各分類歷史趨勢</h3>
+        </div>
+        {!hasCategoryHistory || trendData.length < 2 ? (
+          <p className="empty-note">
+            多按幾次「更新本週紀錄」，累積 2 週以上的分類資料後，這裡就會畫出各類別的走勢。
+          </p>
+        ) : (
+          <div className="chart-wrap" style={{ height: 240 }}><canvas ref={trendCanvasRef}></canvas></div>
+        )}
+        <p className="privacy-note">
+          分類趨勢是從你按下「更新本週紀錄」那一刻的資料算出來的，只有加上這個功能之後存的紀錄才會有分類明細，更早以前存的週紀錄不會補上。
+        </p>
+      </section>
+    </>
+  );
+}
+
+function HistoryPanel({ chartData, enrichedHistory, onSave, onDeleteEntry, onClearAll }) {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    if (!canvasRef.current || chartData.length < 2) return;
+    if (chartRef.current) chartRef.current.destroy();
+    const ctx = canvasRef.current.getContext('2d');
+    chartRef.current = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: chartData.map((d) => d.label),
+        datasets: [{
+          label: '淨值',
+          data: chartData.map((d) => d.netWorth),
+          borderColor: '#e8b355',
+          backgroundColor: 'rgba(232,179,85,0.15)',
+          tension: 0.35,
+          pointBackgroundColor: '#e8b355',
+          pointRadius: 3,
+          fill: true,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (c) => formatMoney(c.parsed.y) },
+            backgroundColor: '#1a2140',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            titleColor: '#9aa3c7',
+            bodyColor: '#f1ede2',
+          },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#9aa3c7', font: { size: 11 } } },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.08)' },
+            ticks: { color: '#9aa3c7', font: { size: 10 }, callback: (v) => (v / 10000).toFixed(0) + '萬' },
+          },
+        },
+      },
+    });
+    return () => { if (chartRef.current) chartRef.current.destroy(); };
+  }, [chartData]);
+
+  return (
+    <section className="panel">
+      <div className="panel-head">
+        <h3>成長曲線</h3>
+        <button className="save-btn" onClick={onSave}>💾 更新本週紀錄</button>
+      </div>
+      <p className="week-note">每週只會保留一筆紀錄，同一週內再次更新會覆蓋，不會重複累加。歸屬的「週」是看資產／負債項目裡最新的日期，不是你按下按鈕當下的日期。中間如果有幾週沒按更新（例如每月才操作一次），系統會自動用前一筆的數字補上那些週，成長曲線不會中斷，補上的週會標示「沿用」。</p>
+
+      {chartData.length >= 2 ? (
+        <div className="chart-wrap"><canvas ref={canvasRef}></canvas></div>
+      ) : (
+        <p className="empty-note">多更新幾週的紀錄，你的成長曲線就會顯示在這裡。</p>
+      )}
+
+      <ul className="log-list">
+        {[...enrichedHistory].reverse().map((h) => (
+          <li key={h.id}>
+            <div>
+              <span className="log-date">
+                {toLocalDate(h.weekKey || getWeekKey(h.date)).toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })} 那週
+                {h.carried && <span className="log-carried-tag">沿用</span>}
+              </span>
+              <span className="log-net">{formatMoney(h.netWorth)}</span>
+            </div>
+            <div className="log-right">
+              {h.delta !== 0 && (
+                <span className={`log-delta ${h.delta > 0 ? 'tone-good' : 'tone-bad'}`}>
+                  {h.delta > 0 ? '▲' : '▼'} {formatMoney(Math.abs(h.delta))}
+                </span>
+              )}
+              {!h.carried && (
+                <button className="del-btn" onClick={() => onDeleteEntry(h.id)} aria-label="刪除這筆紀錄">🗑</button>
+              )}
+            </div>
+          </li>
+        ))}
+        {enrichedHistory.length === 0 && <p className="empty-note">還沒有任何週紀錄。</p>}
+      </ul>
+
+      {enrichedHistory.length > 0 && (
+        <button className="ghost-btn danger full" onClick={onClearAll}>🗑 清空所有成長紀錄</button>
+      )}
+    </section>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<NetWorthAdventure />);
+</script>
+</body>
+</html>
