@@ -267,11 +267,10 @@ def fetch_institutional_futures():
     """抓取期交所官方 OpenAPI：三大法人-區分各期貨契約-依日期，取出「臺股期貨」（大台）未沖銷部位。
     來源：https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate
     （對應 data.gov.tw 資料集 11596，官方公開 API，非爬蟲，每日更新）。
-    欄位名稱已由除錯探測版本確認（實際跑過 GitHub Actions 驗證），格式範例：
-    {"Date":"20260918","ContractCode":"臺股期貨","Item":"自營商",
-     "TradingVolume(Net)":"-2437","OpenInterest(Net)":"-3192",
-     "ContractValueofOpenInterest(Net)(Thousands)":"-30271605", ...}
-    這裡只取 ContractCode=="臺股期貨" 且 Item 為自營商／投信／外資 的三筆，算出各自與合計的未平倉淨口數。
+    先取出 ContractCode=="臺股期貨" 的所有列，再從中院選 Item 為自營商／投信／外資的三筆，避免因為
+    兩個條件一起過濾而漏掉實際存在但命名與預期不同的 Item（例如「外資及陸資」而非「外資」）：
+    若此次沒找到完整三筆，會把「臺股期貨」實際出現過的所有 Item 名稱寫進 log 與回傳值，
+    方便從 public/data.json 直接看到真實名稱後修正對應表。
     這一步失敗不影響其餘資料，會被上層 try/except 接住。"""
     url = "https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersDetailsOfFuturesContractsBytheDate"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
@@ -293,9 +292,13 @@ def fetch_institutional_futures():
         except Exception:
             return 0
 
-    rows = [r for r in records if r.get("ContractCode") == TARGET_CONTRACT and r.get("Item") in WANTED_ITEMS]
-    if not rows:
-        raise RuntimeError(f"找不到「{TARGET_CONTRACT}」的三大法人資料（欄位或契約代碼可能已變動）")
+    contract_rows = [r for r in records if r.get("ContractCode") == TARGET_CONTRACT]
+    if not contract_rows:
+        raise RuntimeError(f"找不到「{TARGET_CONTRACT}」的資料列（契約代碼可能已變動，實際出現的 ContractCode：" +
+                            f"{sorted(set(r.get('ContractCode') for r in records))[:20]}）")
+
+    all_items_seen = sorted(set(r.get("Item") for r in contract_rows))
+    rows = [r for r in contract_rows if r.get("Item") in WANTED_ITEMS]
 
     items = []
     total_net_oi = 0
@@ -311,8 +314,12 @@ def fetch_institutional_futures():
         total_net_oi += net_oi
         total_net_oi_value += net_oi_value
 
-    date_raw = rows[0].get("Date", "")
+    date_raw = contract_rows[0].get("Date", "")
     date_fmt = f"{date_raw[0:4]}-{date_raw[4:6]}-{date_raw[6:8]}" if len(str(date_raw)) == 8 else date_raw
+
+    missing_items = [n for n in WANTED_ITEMS if n not in [it["name"] for it in items]]
+    if missing_items:
+        print(f"  ⚠️ 三大法人臺股期貨未平倉：找不到 {missing_items}，「{TARGET_CONTRACT}」實際出現的 Item 值：{all_items_seen}")
 
     print(f"  三大法人臺股期貨未平倉（{date_fmt}）：合計淨 {total_net_oi} 口，明細：" +
           "、".join(f"{it['name']} {it['netOi']}口" for it in items))
@@ -323,6 +330,7 @@ def fetch_institutional_futures():
         "items": items,
         "totalNetOi": total_net_oi,
         "totalNetOiValue": total_net_oi_value,
+        "debugAllItemsSeen": all_items_seen if missing_items else None,
     }
 
 # ── 主流程 ──
