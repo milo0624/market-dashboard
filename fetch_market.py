@@ -151,17 +151,19 @@ def fetch_tw_close_prices():
 def build_tw_sectors_top20(fallback_sectors, top_n=20):
     """依「目前市值」動態抓出每個板塊市值前 top_n 大的上市公司，取代寫死的代表股名單，
     這樣板塊成分股會隨市值排名變化自動更新，不用手動維護。
-    市值 = 已發行股數 × 最近收盤價（證交所 OpenAPI），依官方「產業別」欄位分類到對應板塊：
-    半導體業→半導體、電子零組件業+電腦及週邊設備業→電子、金融保險業→金融、
-    生技醫療業→生技、光電業→光電。
+    市值 = 已發行股數 × 最近收盤價（證交所 OpenAPI），依官方「產業別」欄位分類到對應板塊。
+    注意：證交所 OpenAPI 的「產業別」欄位實際回傳的是數字代碼（不是中文名稱），
+    已用已知龍頭股（2330台積電→半導體、2317鴻海/2308台達電→電子、2881富邦金→金融、
+    1795美時→生技、2409友達→光電）實際跑過 GitHub Actions 反查確認過對照如下：
+    24→半導體、28+31→電子（電子零組件業+其他電子業）、17→金融保險業、22→生技醫療業、26→光電業。
     任何一步失敗（連不上 TWSE、欄位對不到等）都會安全退回 fallback_sectors（原本寫死的代表股），
     不影響其他資料。"""
     INDUSTRY_MAP = {
-        "半導體": ["半導體業"],
-        "電子": ["電子零組件業", "電腦及週邊設備業"],
-        "金融": ["金融保險業"],
-        "生技": ["生技醫療業"],
-        "光電": ["光電業"],
+        "半導體": ["24"],
+        "電子": ["28", "31"],
+        "金融": ["17"],
+        "生技": ["22"],
+        "光電": ["26"],
     }
     try:
         info = fetch_tw_industry_info()
@@ -181,13 +183,6 @@ def build_tw_sectors_top20(fallback_sectors, top_n=20):
         )
 
     all_industries_seen = sorted(by_industry.keys())
-    # 除錯探測：證交所「產業別」欄位實際回傳的是數字代碼而非中文名稱，用幾檔已知板塊的龍頭股
-    # 反查它們對應的代碼，等這次 GitHub Actions 真的跑過、把結果印出來後，
-    # 就能把 INDUSTRY_MAP 從中文名稱改成正確的代碼。
-    ANCHOR_SYMBOLS = {"2330": "半導體", "2317": "電子", "2308": "電子",
-                       "2881": "金融", "1795": "生技", "2409": "光電"}
-    anchor_report = {f"{sym}({sec})": info.get(sym, {}).get("industry") for sym, sec in ANCHOR_SYMBOLS.items()}
-    print(f"  🔍 產業別代碼探測（用已知龍頭股反查）：{anchor_report}")
     result = []
     any_matched = False
     for sec_name, industries in INDUSTRY_MAP.items():
