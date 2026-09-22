@@ -181,6 +181,13 @@ def build_tw_sectors_top20(fallback_sectors, top_n=20):
         )
 
     all_industries_seen = sorted(by_industry.keys())
+    # 除錯探測：證交所「產業別」欄位實際回傳的是數字代碼而非中文名稱，用幾檔已知板塊的龍頭股
+    # 反查它們對應的代碼，等這次 GitHub Actions 真的跑過、把結果印出來後，
+    # 就能把 INDUSTRY_MAP 從中文名稱改成正確的代碼。
+    ANCHOR_SYMBOLS = {"2330": "半導體", "2317": "電子", "2308": "電子",
+                       "2881": "金融", "1795": "生技", "2409": "光電"}
+    anchor_report = {f"{sym}({sec})": info.get(sym, {}).get("industry") for sym, sec in ANCHOR_SYMBOLS.items()}
+    print(f"  🔍 產業別代碼探測（用已知龍頭股反查）：{anchor_report}")
     result = []
     any_matched = False
     for sec_name, industries in INDUSTRY_MAP.items():
