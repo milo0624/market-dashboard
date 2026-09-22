@@ -1,6 +1,6 @@
 {
   "date": "2026-09-22",
-  "updated": "2026-09-22T14:09:11.040283+08:00",
+  "updated": "2026-09-22T14:21:23.788178+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7838.75,
-      "change": 5.25,
-      "changePercent": 0.07,
+      "price": 7836.25,
+      "change": 2.75,
+      "changePercent": 0.04,
       "prev": 7833.5
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30818.75,
-      "change": 34.0,
-      "changePercent": 0.11,
+      "price": 30787.75,
+      "change": 3.0,
+      "changePercent": 0.01,
       "prev": 30784.75
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 66420.0,
-      "change": -45.0,
-      "changePercent": -0.07,
+      "price": 66345.0,
+      "change": -120.0,
+      "changePercent": -0.18,
       "prev": 66465.0
     }
   },
@@ -90,17 +90,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4361.5,
-      "change": -22.4,
-      "changePercent": -0.51,
+      "price": 4352.6,
+      "change": -31.3,
+      "changePercent": -0.71,
       "prev": 4383.9
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 66.03,
-      "change": 0.2,
-      "changePercent": 0.3,
+      "price": 65.78,
+      "change": -0.04,
+      "changePercent": -0.06,
       "prev": 65.83
     }
   },
@@ -802,5 +802,30 @@
       "prev": 337.0
     }
   ],
-  "inst_futures": null
+  "inst_futures": {
+    "date": "2026-09-21",
+    "contract": "臺股期貨",
+    "items": [
+      {
+        "name": "自營商",
+        "netOi": -3354,
+        "netOiValue": -32229030,
+        "netVol": -138
+      },
+      {
+        "name": "投信",
+        "netOi": 74019,
+        "netOiValue": 711367002,
+        "netVol": -1091
+      },
+      {
+        "name": "外資",
+        "netOi": -74081,
+        "netOiValue": -712023417,
+        "netVol": 2034
+      }
+    ],
+    "totalNetOi": -3416,
+    "totalNetOiValue": -32885445
+  }
 }
