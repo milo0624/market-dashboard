@@ -7,6 +7,8 @@ now = datetime.now(TW)
 today = now.strftime('%Y-%m-%d')
 print(f"執行時間：{now.strftime('%Y-%m-%d %H:%M:%S')} (台灣時間)")
 
+# 台股五大板塊的「備援」代表股名單：只有在 build_tw_sectors_top20() 動態抓取市值排名失敗時才會用到，
+# 平常實際顯示的板塊成分股是依「目前市值」自動抓當下前20大，不需要手動維護這份清單。
 TW_SECTORS = [
     {"name":"半導體","stocks":[
         {"symbol":"2330","name":"台積電"},{"symbol":"2454","name":"聯發科"},
@@ -67,6 +69,141 @@ def load_watchlist():
     except Exception as e:
         print(f"⚠️ 讀取 watchlist.json 失敗，自選股略過本次更新: {e}")
         return []
+
+def fetch_tw_industry_info():
+    """抓取證交所公開資訊觀測站 OpenAPI：上市公司基本資料（含產業別、已發行股數）。
+    來源：https://openapi.twse.com.tw/v1/opendata/t187ap03_L
+    回傳 {股票代號: {"name":公司簡稱, "industry":產業別, "shares":已發行普通股數}}。
+    欄位名稱以官方文件為準，但保留多組候選欄位名稱以防版本變動；若都對不到，
+    會把實際欄位名稱丟出來，方便之後對照修正。"""
+    url = "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        records = json.loads(r.read())
+    if not records:
+        raise RuntimeError("證交所上市公司基本資料回應無資料")
+
+    CODE_KEYS = ["公司代號", "證券代號"]
+    NAME_KEYS = ["公司簡稱", "公司名稱"]
+    IND_KEYS = ["產業別"]
+    SHARE_KEYS = ["已發行普通股數或TDR原股發行股數", "已發行普通股數", "已發行股數"]
+
+    def pick(d, keys):
+        for k in keys:
+            if k in d and d[k] not in (None, ""):
+                return d[k]
+        return None
+
+    info = {}
+    for rec in records:
+        code = pick(rec, CODE_KEYS)
+        shares_raw = pick(rec, SHARE_KEYS)
+        if not code or shares_raw is None:
+            continue
+        try:
+            shares = int(str(shares_raw).replace(",", ""))
+        except Exception:
+            continue
+        info[code] = {
+            "name": pick(rec, NAME_KEYS) or code,
+            "industry": pick(rec, IND_KEYS) or "",
+            "shares": shares,
+        }
+    if not info:
+        raise RuntimeError(f"找不到可用的公司代號/已發行股數欄位，實際欄位名稱：{list(records[0].keys())}")
+    return info
+
+def fetch_tw_close_prices():
+    """抓取證交所 OpenAPI：全部上市股票最近一個交易日收盤價，用來計算市值。
+    來源：https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"""
+    url = "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        records = json.loads(r.read())
+    if not records:
+        raise RuntimeError("證交所收盤價資料回應無資料")
+
+    CODE_KEYS = ["Code", "證券代號"]
+    CLOSE_KEYS = ["ClosingPrice", "收盤價"]
+
+    def pick(d, keys):
+        for k in keys:
+            if k in d and d[k] not in (None, ""):
+                return d[k]
+        return None
+
+    prices = {}
+    for rec in records:
+        code = pick(rec, CODE_KEYS)
+        close_raw = pick(rec, CLOSE_KEYS)
+        if not code or close_raw is None:
+            continue
+        try:
+            close = float(str(close_raw).replace(",", ""))
+        except Exception:
+            continue
+        if close > 0:
+            prices[code] = close
+    if not prices:
+        raise RuntimeError(f"找不到可用的股票代號/收盤價欄位，實際欄位名稱：{list(records[0].keys())}")
+    return prices
+
+def build_tw_sectors_top20(fallback_sectors, top_n=20):
+    """依「目前市值」動態抓出每個板塊市值前 top_n 大的上市公司，取代寫死的代表股名單，
+    這樣板塊成分股會隨市值排名變化自動更新，不用手動維護。
+    市值 = 已發行股數 × 最近收盤價（證交所 OpenAPI），依官方「產業別」欄位分類到對應板塊：
+    半導體業→半導體、電子零組件業+電腦及週邊設備業→電子、金融保險業→金融、
+    生技醫療業→生技、光電業→光電。
+    任何一步失敗（連不上 TWSE、欄位對不到等）都會安全退回 fallback_sectors（原本寫死的代表股），
+    不影響其他資料。"""
+    INDUSTRY_MAP = {
+        "半導體": ["半導體業"],
+        "電子": ["電子零組件業", "電腦及週邊設備業"],
+        "金融": ["金融保險業"],
+        "生技": ["生技醫療業"],
+        "光電": ["光電業"],
+    }
+    try:
+        info = fetch_tw_industry_info()
+        prices = fetch_tw_close_prices()
+    except Exception as e:
+        print(f"  ⚠️ 動態抓取板塊前{top_n}大市值失敗，退回固定代表股清單: {e}")
+        return fallback_sectors
+
+    by_industry = {}
+    for code, meta in info.items():
+        price = prices.get(code)
+        if not price:
+            continue
+        market_cap = meta["shares"] * price
+        by_industry.setdefault(meta["industry"], []).append(
+            {"symbol": code, "name": meta["name"], "marketCap": market_cap}
+        )
+
+    all_industries_seen = sorted(by_industry.keys())
+    result = []
+    any_matched = False
+    for sec_name, industries in INDUSTRY_MAP.items():
+        pool = []
+        for ind in industries:
+            pool.extend(by_industry.get(ind, []))
+        if not pool:
+            fb = next((s for s in fallback_sectors if s["name"] == sec_name), None)
+            print(f"  ⚠️ 板塊「{sec_name}」比對不到任何公司（找的產業別：{industries}），退回固定名單。" +
+                  f"實際出現過的產業別：{all_industries_seen}")
+            result.append(fb if fb else {"name": sec_name, "stocks": []})
+            continue
+        any_matched = True
+        pool.sort(key=lambda s: s["marketCap"], reverse=True)
+        top = pool[:top_n]
+        result.append({"name": sec_name, "stocks": [{"symbol": s["symbol"], "name": s["name"]} for s in top]})
+        print(f"  板塊「{sec_name}」市值前{len(top)}大：" + "、".join(s["name"] for s in top[:6]) +
+              ("…" if len(top) > 6 else ""))
+
+    if not any_matched:
+        print(f"  ⚠️ 所有板塊都比對不到產業別，整批退回固定代表股清單")
+        return fallback_sectors
+    return result
 
 def yahoo_quote(symbol):
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=2d"
@@ -208,7 +345,7 @@ def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
         print(f"  {sec['name']} 完成（走勢{len(trend)}點）")
     return result
 
-def fetch_tw(watchlist_tw_symbols=None):
+def fetch_tw(watchlist_tw_symbols=None, sectors=None):
     from fubon_neo.sdk import FubonSDK
     cert_b64 = os.environ["FUBON_CERT_B64"]
     cert_b64 += "=" * (4 - len(cert_b64) % 4)
@@ -243,7 +380,7 @@ def fetch_tw(watchlist_tw_symbols=None):
             print(f"  ⚠️ {name} 失敗: {e}")
             tw_indices[key] = {"name":name,"symbol":sym,"price":0,"change":0,"changePercent":0,"prev":0}
 
-    tw_sectors = fetch_sectors_with_trend(TW_SECTORS, use_yahoo=False, rest=rest)
+    tw_sectors = fetch_sectors_with_trend(sectors or TW_SECTORS, use_yahoo=False, rest=rest)
 
     tw_watch_quotes = {}
     if watchlist_tw_symbols:
@@ -352,15 +489,18 @@ watchlist_tw_syms = [w["symbol"] for w in watchlist_cfg if w.get("market", "US")
 if watchlist_cfg:
     print(f"\n📡 自選股清單：共 {len(watchlist_cfg)} 檔（台股 {len(watchlist_tw_syms)} 檔）")
 
+print("\n📡 依市值動態抓取台股各板塊前20大成分股（證交所 OpenAPI）...")
+tw_sectors_def = build_tw_sectors_top20(TW_SECTORS, top_n=20)
+
 print("\n📡 抓取台股（富邦 Neo API）+ 走勢（Yahoo Finance）...")
 try:
-    tw_indices, tw_sectors, tw_watch_quotes = fetch_tw(watchlist_tw_syms)
+    tw_indices, tw_sectors, tw_watch_quotes = fetch_tw(watchlist_tw_syms, sectors=tw_sectors_def)
     tw_source = "fubon_neo"
 except Exception as e:
     print(f"⚠️ 富邦 SDK 失敗: {e}")
     tw_source = "fallback"
     tw_indices = {"TSM":{"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0}}
-    tw_sectors = fetch_sectors_with_trend(TW_SECTORS, use_yahoo=True)
+    tw_sectors = fetch_sectors_with_trend(tw_sectors_def, use_yahoo=True)
     tw_watch_quotes = {}
     if watchlist_tw_syms:
         print("  [自選股-台股 → 退回 Yahoo Finance]")
