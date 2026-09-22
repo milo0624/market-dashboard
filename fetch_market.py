@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, base64, tempfile, urllib.request
+import json, os, base64, tempfile, urllib.request, urllib.parse
 from datetime import datetime, timezone, timedelta
 
 TW = timezone(timedelta(hours=8))
@@ -32,6 +32,8 @@ TW_SECTORS = [
         {"symbol":"2498","name":"宏達電"}]},
 ]
 
+# 美股 SOX 五大子板塊的「備援」代表股名單：只有在 build_sox_sectors_top20() 動態抓取市值排名失敗時
+# 才會用到，平常實際顯示的板塊成分股是依「目前市值」自動從下面 SOX_CANDIDATE_POOLS 候選池排出前20大。
 SOX_SECTORS = [
     {"name":"晶片設計","stocks":[
         {"symbol":"NVDA","name":"輝達"},{"symbol":"AVGO","name":"博通"},
@@ -54,6 +56,46 @@ SOX_SECTORS = [
         {"symbol":"UMC","name":"聯電ADR"},{"symbol":"ASX","name":"台積ADR"},
         {"symbol":"IFNNY","name":"英飛凌"}]},
 ]
+
+# 美股沒有像證交所那樣「全市場官方產業分類」的公開 API，所以子板塊成分股改用人工維護的
+# 候選股池（同一檔股票只會出現在一個板塊），build_sox_sectors_top20() 再依即時市值排序取前20大；
+# 記憶體、晶圓代工這兩個板塊全球可交易的美股標的本來就不到20檔，會直接列出候選池全部（依市值排序）。
+SOX_CANDIDATE_POOLS = {
+    "晶片設計": [
+        {"symbol":"NVDA","name":"輝達"},{"symbol":"AVGO","name":"博通"},
+        {"symbol":"AMD","name":"超微"},{"symbol":"QCOM","name":"高通"},
+        {"symbol":"MRVL","name":"邁威爾"},{"symbol":"ARM","name":"Arm控股"},
+        {"symbol":"LSCC","name":"萊迪思半導體"},{"symbol":"AMBA","name":"安霞"},
+        {"symbol":"CRUS","name":"思睲邏輯"},{"symbol":"SITM","name":"SiTime"},
+        {"symbol":"ALAB","name":"Astera Labs"},{"symbol":"CEVA","name":"CEVA"},
+    ],
+    "設備材料": [
+        {"symbol":"ASML","name":"艾司摩爾"},{"symbol":"AMAT","name":"應用材料"},
+        {"symbol":"LRCX","name":"拉姆研究"},{"symbol":"KLAC","name":"科磊"},
+        {"symbol":"TER","name":"泰瑞達"},{"symbol":"ENTG","name":"英特格"},
+        {"symbol":"ONTO","name":"Onto Innovation"},{"symbol":"UCTT","name":"Ultra Clean"},
+        {"symbol":"FORM","name":"FormFactor"},{"symbol":"COHU","name":"Cohu"},
+        {"symbol":"AEIS","name":"先進能源"},
+    ],
+    "類比IC": [
+        {"symbol":"TXN","name":"德州儀器"},{"symbol":"ADI","name":"亞德諾"},
+        {"symbol":"MCHP","name":"微芯科技"},{"symbol":"MPWR","name":"單體電源"},
+        {"symbol":"SWKS","name":"思佳訊"},{"symbol":"NXPI","name":"恩智浦"},
+        {"symbol":"ON","name":"安森美"},{"symbol":"STM","name":"意法半導"},
+        {"symbol":"QRVO","name":"Qorvo"},{"symbol":"DIOD","name":"二極體公司"},
+        {"symbol":"SLAB","name":"Silicon Labs"},{"symbol":"POWI","name":"Power Integrations"},
+    ],
+    "記憶體": [
+        {"symbol":"MU","name":"美光"},{"symbol":"WDC","name":"威騰"},
+        {"symbol":"STX","name":"希捷"},{"symbol":"SNDK","name":"SanDisk"},
+        {"symbol":"RMBS","name":"Rambus"},
+    ],
+    "晶圓代工": [
+        {"symbol":"INTC","name":"英特爾"},{"symbol":"GFS","name":"格芯"},
+        {"symbol":"UMC","name":"聯電ADR"},{"symbol":"TSM","name":"台積電ADR"},
+        {"symbol":"ASX","name":"日月光ADR"},{"symbol":"IFNNY","name":"英飛凌"},
+    ],
+}
 
 def load_watchlist():
     """讀取 watchlist.json（自選股清單）。檔案不存在或格式錯誤時回傳空清單，不影響其餘資料抓取。
@@ -205,6 +247,85 @@ def build_tw_sectors_top20(fallback_sectors, top_n=20):
     if not any_matched:
         print(f"  ⚠️ 所有板塊都比對不到產業別，整批退回固定代表股清單")
         return fallback_sectors
+    return result
+
+def _yahoo_crumb_opener():
+    """取得 Yahoo Finance 的 cookie + crumb（v7 quote 批次市值 API 目前需要才能查詢）。
+    任何一步失敗都回傳 (None, None)，由呼叫端安全退回固定名單，不影響其他資料。"""
+    try:
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor())
+        req1 = urllib.request.Request("https://fc.yahoo.com", headers={"User-Agent": "Mozilla/5.0"})
+        opener.open(req1, timeout=10)
+        req2 = urllib.request.Request("https://query1.finance.yahoo.com/v1/test/getcrumb",
+                                       headers={"User-Agent": "Mozilla/5.0"})
+        crumb = opener.open(req2, timeout=10).read().decode("utf-8").strip()
+        if not crumb or "<html" in crumb.lower():
+            print(f"  ⚠️ Yahoo crumb 回應異常（可能被擋）：{crumb[:80]!r}")
+            return None, None
+        return opener, crumb
+    except Exception as e:
+        print(f"  ⚠️ 取得 Yahoo cookie/crumb 失敗: {e}")
+        return None, None
+
+def fetch_us_market_caps(symbols):
+    """批次查詢美股即時市值（Yahoo Finance v7 quote API，需先取得 cookie+crumb）。
+    回傳 {symbol: 市值}；任何一步失敗回傳空 dict {}，由呼叫端安全退回固定代表股清單。"""
+    opener, crumb = _yahoo_crumb_opener()
+    if not opener or not crumb:
+        return {}
+    caps = {}
+    CHUNK = 15
+    symbols = list(symbols)
+    for i in range(0, len(symbols), CHUNK):
+        chunk = symbols[i:i + CHUNK]
+        url = ("https://query1.finance.yahoo.com/v7/finance/quote?symbols=" +
+               ",".join(chunk) + "&crumb=" + urllib.parse.quote(crumb))
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+        try:
+            with opener.open(req, timeout=15) as r:
+                data = json.loads(r.read())
+            results = data.get("quoteResponse", {}).get("result", [])
+            if not results:
+                print(f"  ⚠️ 美股市值批次查詢無資料（{chunk}），回應：{json.dumps(data, ensure_ascii=False)[:200]}")
+            for item in results:
+                sym = item.get("symbol")
+                cap = item.get("marketCap")
+                if sym and cap:
+                    caps[sym] = cap
+        except Exception as e:
+            print(f"  ⚠️ 美股市值批次抓取失敗（{chunk}）: {e}")
+    print(f"  🔍 美股市值查詢：成功取得 {len(caps)}/{len(symbols)} 檔")
+    return caps
+
+def build_sox_sectors_top20(fallback_sectors, candidate_pools, top_n=20):
+    """依「目前市值」動態排序美股半導體各子板塊成分股，取代寫死的5檔代表股。
+    美股沒有像證交所那樣的官方全市場產業分類 API，所以候選股是人工維護的清單
+    （見 SOX_CANDIDATE_POOLS），市值透過 Yahoo Finance 批次查詢取得，抓到後在候選池內依市值排序，
+    取前 top_n 大；部分子板塊（記憶體、晶圓代工）候選池本來就不到 top_n 檔，會直接列出全部。
+    任何一步失敗（Yahoo 擋 API、cookie/crumb 拿不到等）都會安全退回 fallback_sectors，不影響其他資料。"""
+    all_symbols = sorted({s["symbol"] for pool in candidate_pools.values() for s in pool})
+    try:
+        caps = fetch_us_market_caps(all_symbols)
+    except Exception as e:
+        print(f"  ⚠️ 美股板塊市值排序失敗，退回固定代表股清單: {e}")
+        return fallback_sectors
+    if not caps:
+        print("  ⚠️ 美股市值批次抓取完全失敗，退回固定代表股清單")
+        return fallback_sectors
+
+    result = []
+    for sec_name, pool in candidate_pools.items():
+        ranked = [s for s in pool if s["symbol"] in caps]
+        if not ranked:
+            fb = next((s for s in fallback_sectors if s["name"] == sec_name), None)
+            print(f"  ⚠️ 板塊「{sec_name}」候選股都查不到市值，退回固定名單")
+            result.append(fb if fb else {"name": sec_name, "stocks": []})
+            continue
+        ranked.sort(key=lambda s: caps[s["symbol"]], reverse=True)
+        top = ranked[:top_n]
+        result.append({"name": sec_name, "stocks": [{"symbol": s["symbol"], "name": s["name"]} for s in top]})
+        print(f"  板塊「{sec_name}」市值前{len(top)}大（候選池共{len(pool)}檔）：" +
+              "、".join(s["name"] for s in top[:6]) + ("…" if len(top) > 6 else ""))
     return result
 
 def yahoo_quote(symbol):
@@ -483,8 +604,11 @@ global_indices, futures = fetch_global()
 print("\n📡 抓取貴金屬（Yahoo Finance）...")
 metals = fetch_metals()
 
+print("\n📡 依市值動態排序美股半導體各子板塊成分股（Yahoo Finance）...")
+sox_sectors_def = build_sox_sectors_top20(SOX_SECTORS, SOX_CANDIDATE_POOLS, top_n=20)
+
 print("\n📡 抓取 SOX 個股 + 走勢（Yahoo Finance）...")
-sox_sectors = fetch_sectors_with_trend(SOX_SECTORS, use_yahoo=True)
+sox_sectors = fetch_sectors_with_trend(sox_sectors_def, use_yahoo=True)
 
 watchlist_cfg = load_watchlist()
 watchlist_tw_syms = [w["symbol"] for w in watchlist_cfg if w.get("market", "US").upper() == "TW"]
