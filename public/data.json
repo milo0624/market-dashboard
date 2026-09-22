@@ -1,6 +1,6 @@
 {
   "date": "2026-09-22",
-  "updated": "2026-09-22T14:26:48.137676+08:00",
+  "updated": "2026-09-22T16:14:16.657114+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -46,10 +46,10 @@
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 14.87,
-      "change": 0.06,
-      "changePercent": 0.41,
-      "prev": 14.81
+      "price": 14.81,
+      "change": -0.06,
+      "changePercent": -0.4,
+      "prev": 14.87
     },
     "TSM": {
       "name": "台積電",
@@ -64,25 +64,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7837.0,
-      "change": 3.5,
-      "changePercent": 0.04,
+      "price": 7823.75,
+      "change": -9.75,
+      "changePercent": -0.12,
       "prev": 7833.5
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30782.5,
-      "change": -2.25,
-      "changePercent": -0.01,
+      "price": 30739.0,
+      "change": -45.75,
+      "changePercent": -0.15,
       "prev": 30784.75
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 66325.0,
-      "change": -140.0,
-      "changePercent": -0.21,
+      "price": 66300.0,
+      "change": -165.0,
+      "changePercent": -0.25,
       "prev": 66465.0
     }
   },
@@ -90,17 +90,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4355.7,
-      "change": -28.2,
-      "changePercent": -0.64,
+      "price": 4338.8,
+      "change": -45.1,
+      "changePercent": -1.03,
       "prev": 4383.9
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 65.82,
-      "change": -0.01,
-      "changePercent": -0.02,
+      "price": 65.42,
+      "change": -0.41,
+      "changePercent": -0.62,
       "prev": 65.83
     }
   },
@@ -1252,5 +1252,30 @@
       "prev": 337.0
     }
   ],
-  "inst_futures": null
+  "inst_futures": {
+    "date": "2026-09-21",
+    "contract": "臺股期貨",
+    "items": [
+      {
+        "name": "自營商",
+        "netOi": -3354,
+        "netOiValue": -32229030,
+        "netVol": -138
+      },
+      {
+        "name": "投信",
+        "netOi": 74019,
+        "netOiValue": 711367002,
+        "netVol": -1091
+      },
+      {
+        "name": "外資",
+        "netOi": -74081,
+        "netOiValue": -712023417,
+        "netVol": 2034
+      }
+    ],
+    "totalNetOi": -3416,
+    "totalNetOiValue": -32885445
+  }
 }
