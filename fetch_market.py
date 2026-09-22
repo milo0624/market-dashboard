@@ -251,12 +251,18 @@ def build_tw_sectors_top20(fallback_sectors, top_n=20):
 
 def _yahoo_crumb_opener():
     """取得 Yahoo Finance 的 cookie + crumb（v7 quote 批次市值 API 目前需要才能查詢）。
+    第一版用 https://fc.yahoo.com 取 cookie，實際跑 GitHub Actions 後發現該網址回傳 404
+    （HTTP Error 404: Not Found on Accelerator），改用真正的 finance.yahoo.com 首頁取 cookie。
     任何一步失敗都回傳 (None, None)，由呼叫端安全退回固定名單，不影響其他資料。"""
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor())
     try:
-        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor())
-        req1 = urllib.request.Request("https://fc.yahoo.com", headers={"User-Agent": "Mozilla/5.0"})
+        req1 = urllib.request.Request("https://finance.yahoo.com/", headers={"User-Agent": "Mozilla/5.0"})
         opener.open(req1, timeout=10)
-        req2 = urllib.request.Request("https://query1.finance.yahoo.com/v1/test/getcrumb",
+    except Exception as e:
+        print(f"  ⚠️ 取得 Yahoo cookie 失敗（finance.yahoo.com）: {e}")
+        return None, None
+    try:
+        req2 = urllib.request.Request("https://query2.finance.yahoo.com/v1/test/getcrumb",
                                        headers={"User-Agent": "Mozilla/5.0"})
         crumb = opener.open(req2, timeout=10).read().decode("utf-8").strip()
         if not crumb or "<html" in crumb.lower():
@@ -264,7 +270,7 @@ def _yahoo_crumb_opener():
             return None, None
         return opener, crumb
     except Exception as e:
-        print(f"  ⚠️ 取得 Yahoo cookie/crumb 失敗: {e}")
+        print(f"  ⚠️ 取得 Yahoo crumb 失敗（getcrumb）: {e}")
         return None, None
 
 def fetch_us_market_caps(symbols):
@@ -278,7 +284,7 @@ def fetch_us_market_caps(symbols):
     symbols = list(symbols)
     for i in range(0, len(symbols), CHUNK):
         chunk = symbols[i:i + CHUNK]
-        url = ("https://query1.finance.yahoo.com/v7/finance/quote?symbols=" +
+        url = ("https://query2.finance.yahoo.com/v7/finance/quote?symbols=" +
                ",".join(chunk) + "&crumb=" + urllib.parse.quote(crumb))
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
         try:
