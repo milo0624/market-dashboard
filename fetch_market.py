@@ -65,8 +65,8 @@ SOX_CANDIDATE_POOLS = {
         {"symbol":"NVDA","name":"輝達"},{"symbol":"AVGO","name":"博通"},
         {"symbol":"AMD","name":"超微"},{"symbol":"QCOM","name":"高通"},
         {"symbol":"MRVL","name":"邁威爾"},{"symbol":"ARM","name":"Arm控股"},
-        {"symbol":"LSCC","name":"萊迪思半導體"},{"symbol":"AMBA","name":"安霞"},
-        {"symbol":"CRUS","name":"思睲邏輯"},{"symbol":"SITM","name":"SiTime"},
+        {"symbol":"LSCC","name":"萊迪思半導體"},{"symbol":"AMBA","name":"安霸"},
+        {"symbol":"CRUS","name":"思睿邏輯"},{"symbol":"SITM","name":"SiTime"},
         {"symbol":"ALAB","name":"Astera Labs"},{"symbol":"CEVA","name":"CEVA"},
     ],
     "設備材料": [
@@ -306,26 +306,36 @@ def fetch_us_market_caps(symbols):
 def build_sox_sectors_top20(fallback_sectors, candidate_pools, top_n=20):
     """依「目前市值」動態排序美股半導體各子板塊成分股，取代寫死的5檔代表股。
     美股沒有像證交所那樣的官方全市場產業分類 API，所以候選股是人工維護的清單
-    （見 SOX_CANDIDATE_POOLS），市值透過 Yahoo Finance 批次查詢取得，抓到後在候選池內依市值排序，
-    取前 top_n 大；部分子板塊（記憶體、晶圓代工）候選池本來就不到 top_n 檔，會直接列出全部。
-    任何一步失敗（Yahoo 擋 API、cookie/crumb 拿不到等）都會安全退回 fallback_sectors，不影響其他資料。"""
+    （見 SOX_CANDIDATE_POOLS，每個子板塊 5~12 檔），市值透過 Yahoo Finance 批次查詢取得，
+    抓到後在候選池內依市值排序，取前 top_n 大；候選池本來就不到 top_n 檔的板塊會直接列出全部。
+    注意：實際跑過 GitHub Actions 後發現 Yahoo 的市值批次 API（v7/finance/quote）對雲端/機房 IP
+    （包含 GitHub Actions runner）會回傳 401 Unauthorized，即使 cookie 正確也一樣——這是 Yahoo
+    近年針對雲端 IP 的封鎖，不是程式碼或 cookie 設定的問題，目前沒有穩定繞過的方法。
+    所以「依市值排序」現階段多半會失敗；失敗時退回候選池「原順序、但仍是完整清單」而非退回
+    寫死的5檔代表股，這樣使用者至少能看到比原本更完整的成分股名單，只是排序不是依即時市值。
+    只有在候選池本身抓不到任何資料（理論上不會發生，因為是寫死的清單）時才會用到 fallback_sectors。"""
+    pool_as_list = [
+        {"name": sec_name, "stocks": [{"symbol": s["symbol"], "name": s["name"]} for s in pool[:top_n]]}
+        for sec_name, pool in candidate_pools.items()
+    ]
+    pool_fallback = pool_as_list if pool_as_list else fallback_sectors
+
     all_symbols = sorted({s["symbol"] for pool in candidate_pools.values() for s in pool})
     try:
         caps = fetch_us_market_caps(all_symbols)
     except Exception as e:
-        print(f"  ⚠️ 美股板塊市值排序失敗，退回固定代表股清單: {e}")
-        return fallback_sectors
+        print(f"  ⚠️ 美股板塊市值排序失敗，改用候選池清單（未依市值排序）: {e}")
+        return pool_fallback
     if not caps:
-        print("  ⚠️ 美股市值批次抓取完全失敗，退回固定代表股清單")
-        return fallback_sectors
+        print("  ⚠️ 美股市值批次抓取失敗（常見原因：Yahoo 擋了雲端 IP），改用候選池清單（未依市值排序，但仍是完整候選名單）")
+        return pool_fallback
 
     result = []
     for sec_name, pool in candidate_pools.items():
         ranked = [s for s in pool if s["symbol"] in caps]
         if not ranked:
-            fb = next((s for s in fallback_sectors if s["name"] == sec_name), None)
-            print(f"  ⚠️ 板塊「{sec_name}」候選股都查不到市值，退回固定名單")
-            result.append(fb if fb else {"name": sec_name, "stocks": []})
+            print(f"  ⚠️ 板塊「{sec_name}」候選股都查不到市值，改用候選池原順序")
+            result.append({"name": sec_name, "stocks": [{"symbol": s["symbol"], "name": s["name"]} for s in pool[:top_n]]})
             continue
         ranked.sort(key=lambda s: caps[s["symbol"]], reverse=True)
         top = ranked[:top_n]
