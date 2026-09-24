@@ -99,6 +99,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .fut-l{font-size:11px;color:var(--mu);margin-bottom:3px;font-weight:500}
 .fut-v{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
 .fut-p{font-size:10px;color:var(--hi);margin-top:3px}
+
+/* 電腦（網頁版）：畫面夠寬時，卡片改成一列三個，內容區置中加寬，跟手機版窄畫面（一列兩個）區分開來 */
+@media (min-width:768px){
+  .scroll{max-width:960px;margin:0 auto;width:100%}
+  .ig{grid-template-columns:repeat(3,1fr)}
+  .fut-grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
@@ -397,7 +404,7 @@ function renderWatchlist() {
     return;
   }
   hint.textContent = list.length + ' 檔';
-  grid.style.gridTemplateColumns = '1fr 1fr';
+  grid.style.gridTemplateColumns = '';
   var html = '';
   for (var i = 0; i < list.length; i++) {
     var d = list[i];
@@ -448,7 +455,7 @@ function renderStrategy() {
     color = '#fff5f5'; border = '#feb2b2';
     advice = '台指現貨 收盤 ' + fm(detail.close) + ' 跌破 20 日箱底 ' + fm(detail.lowestLow) +
       '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.2 倍以上），MA20(' + fm(detail.ma20) + ')<MA60(' + fm(detail.ma60) + ') 空頭排列，並出現' +
-      (detail.bearEngulf ? '空頭吞噬' : '夜星') + 'K線型態，符合嚴格做空條件。';
+      (detail.bearEngulf ? '空頭吞噬' : '夕星') + 'K線型態，符合嚴格做空條件。';
     sl = '止損：進場價 × 103%（+3%）';
     tp = '止盈：進場價 × 94%（-6%）';
     entryNote = '依原策略規則，突破／量能／趨勢／K線型態四項需同時成立才算有效訊號。';
@@ -459,7 +466,7 @@ function renderStrategy() {
     if (!detail.longBreakout && !detail.shortBreakout) reasons.push('尚未突破箱體');
     if (!detail.bullVol && !detail.bearVol) reasons.push('量能未達1.2倍均量');
     if (!detail.bullTrend && !detail.bearTrend) reasons.push('均線未呈多空排列');
-    if (!detail.bullEngulf && !detail.bearEngulf && !detail.morningStar && !detail.eveningStar) reasons.push('未出現吞噬／晨星／夜星型態');
+    if (!detail.bullEngulf && !detail.bearEngulf && !detail.morningStar && !detail.eveningStar) reasons.push('未出現吞噬／晨星／夕星型態');
     advice = '嚴格策略四項條件未同時成立' + (reasons.length ? '（' + reasons.join('、') + '）' : '') + '，未達進場條件。';
     sl = '—'; tp = '—';
     entryNote = '依原策略紀律，訊號未確認前不進場。';
@@ -469,7 +476,7 @@ function renderStrategy() {
     {label: '20日箱體突破', val: detail.longBreakout ? '✓ 突破箱頂 ' + fm(detail.highestHigh) : detail.shortBreakout ? '✓ 跌破箱底 ' + fm(detail.lowestLow) : '箱內盤整（' + fm(detail.lowestLow) + '～' + fm(detail.highestHigh) + '）', ok: detail.longBreakout || detail.shortBreakout},
     {label: '成交量確認（>1.2倍均量）', val: (detail.bullVol || detail.bearVol) ? '✓ 量能確認' : '量能不足', ok: detail.bullVol || detail.bearVol},
     {label: '均線排列（MA20/MA60）', val: detail.bullTrend ? '多頭排列' : detail.bearTrend ? '空頭排列' : '無明確排列', ok: detail.bullTrend || detail.bearTrend},
-    {label: '酒田K線型態', val: detail.bullEngulf ? '多頭吞噬' : detail.bearEngulf ? '空頭吞噬' : detail.morningStar ? '晨星' : detail.eveningStar ? '夜星' : '無型態訊號', ok: detail.bullEngulf || detail.bearEngulf || detail.morningStar || detail.eveningStar},
+    {label: '酒田K線型態', val: detail.bullEngulf ? '多頭吞噬' : detail.bearEngulf ? '空頭吞噬' : detail.morningStar ? '晨星' : detail.eveningStar ? '夕星' : '無型態訊號', ok: detail.bullEngulf || detail.bearEngulf || detail.morningStar || detail.eveningStar},
   ];
 
   var rowHtml = indicators.map(function(r) {
@@ -518,7 +525,7 @@ function renderStrategy() {
       '<div style="display:flex;gap:6px;align-items:flex-end">' + histHtml + '</div>' +
     '</div>';
 
-  // ── 事後勝率追蹤（訊號出現 5 / 10 個交易日後，方向是否猜對；僅計入新策略上線後的訊號）──
+  // ── 事後勝率追蹤（訊號出現 5 ／ 10 個交易日後，方向是否猜對；僅計入新策略上線後的訊號）──
   var tr = sm.track_record || {};
   var trParts = [];
   if (tr.fwd5 && tr.fwd5.n > 0) trParts.push('5日勝率 ' + tr.fwd5.winRate + '%（' + tr.fwd5.hits + '/' + tr.fwd5.n + '）');
@@ -560,7 +567,7 @@ function renderBanner() {
   var ico = dir === 'up' ? '📈' : dir === 'dn' ? '📉' : '📊';
   var sig = dir === 'up' ? (strength + '看多訊號 — 台股半導體預期開高') :
             dir === 'dn' ? (strength + '看空訊號 — 台股半導體預期開低') :
-            '訊號偏中性 — 方向待觀察';
+            '訊號偷中性 — 方向待觀察';
   document.getElementById('banner').innerHTML =
     '<div class="signal ' + dir + '">' +
       '<div class="sig-ic">' + ico + '</div>' +
@@ -843,7 +850,7 @@ function waitForComplete() {
             if (s.updated_at !== lastUpdated && s.status === 'completed' && s.conclusion === 'success') {
               resolve();
             } else if (tried >= maxTries) {
-              reject(new Error('等待逾時，請稍後手動重新整理'));
+              reject(new Error('等待逸時，請稍後手動重新整理'));
             } else {
               poll();
             }
