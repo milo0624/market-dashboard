@@ -120,6 +120,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .rv-tbl td{padding:5px 3px;text-align:right;border-bottom:1px solid var(--bdr);color:var(--tx);font-variant-numeric:tabular-nums}
 .rv-tbl tr.sec td{background:#f7fafc;color:var(--mu);font-weight:700;text-align:left}
 details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font-weight:600}
+
+/* 電腦（網頁版）：畫面夠寬時，卡片改成一列三個，內容區置中加寬，跟手機版窄畫面（一列兩個）區分開來 */
+@media (min-width:768px){
+  .scroll{max-width:960px;margin:0 auto;width:100%}
+  .ig{grid-template-columns:repeat(3,1fr)}
+  .fut-grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
@@ -436,7 +443,7 @@ function renderWatchlist() {
     return;
   }
   hint.textContent = list.length + ' 檔';
-  grid.style.gridTemplateColumns = '1fr 1fr';
+  grid.style.gridTemplateColumns = '';
   var html = '';
   for (var i = 0; i < list.length; i++) {
     var d = list[i];

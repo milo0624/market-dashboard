@@ -473,14 +473,22 @@ def fetch_metals():
             metals[key] = {"name":name,"symbol":symbol,"price":0,"change":0,"changePercent":0,"prev":0}
     return metals
 
-def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
+def yahoo_quote_tw(code):
+    """台股代號在 Yahoo 上市為 .TW、上櫃為 .TWO，先試 .TW 失敗再試 .TWO"""
+    try:
+        return yahoo_quote(code + ".TW")
+    except Exception:
+        return yahoo_quote(code + ".TWO")
+
+def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None, tw=False):
+    """tw=True 表示 sector_list 是台股代號（不含 .TW），走 Yahoo 時需補上市場後綴"""
     result = []
     for sec in sector_list:
         stocks = []
         for s in sec["stocks"]:
             try:
                 if use_yahoo:
-                    q = yahoo_quote(s["symbol"])
+                    q = yahoo_quote_tw(s["symbol"]) if tw else yahoo_quote(s["symbol"])
                     stocks.append({"symbol":s["symbol"],"name":s["name"],
                         "price":q["price"],"changePercent":q["changePercent"]})
                 else:
@@ -493,8 +501,8 @@ def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None):
                 stocks.append({"symbol":s["symbol"],"name":s["name"],"price":0,"changePercent":0})
 
         print(f"  計算 {sec['name']} 板塊走勢...")
-        trend_syms = [s["symbol"] for s in sec["stocks"]] if use_yahoo \
-                     else [s["symbol"]+".TW" for s in sec["stocks"]]
+        trend_syms = [s["symbol"]+".TW" for s in sec["stocks"]] if (tw or not use_yahoo) \
+                     else [s["symbol"] for s in sec["stocks"]]
         trend = sector_trend(trend_syms)
         result.append({"name":sec["name"],"stocks":stocks,"trend":trend})
         print(f"  {sec['name']} 完成（走勢{len(trend)}點）")
@@ -658,13 +666,13 @@ except Exception as e:
     print(f"⚠️ 富邦 SDK 失敗: {e}")
     tw_source = "fallback"
     tw_indices = {"TSM":{"name":"台積電","symbol":"2330","price":0,"change":0,"changePercent":0,"prev":0}}
-    tw_sectors = fetch_sectors_with_trend(tw_sectors_def, use_yahoo=True)
+    tw_sectors = fetch_sectors_with_trend(tw_sectors_def, use_yahoo=True, tw=True)
     tw_watch_quotes = {}
     if watchlist_tw_syms:
         print("  [自選股-台股 → 退回 Yahoo Finance]")
         for sym in watchlist_tw_syms:
             try:
-                tw_watch_quotes[sym] = yahoo_quote(sym + ".TW")
+                tw_watch_quotes[sym] = yahoo_quote_tw(sym)
             except Exception as e2:
                 print(f"    ⚠️ 自選股 {sym} 失敗: {e2}")
 
