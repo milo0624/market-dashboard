@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json, os, base64, tempfile, urllib.request, urllib.parse
 from datetime import datetime, timezone, timedelta
+import indicators
 
 TW = timezone(timedelta(hours=8))
 now = datetime.now(TW)
@@ -357,13 +358,20 @@ def yahoo_quote(symbol):
     return {"price": round(price,2), "change": change,
             "changePercent": change_pct, "prev": round(prev,2)}
 
-def yahoo_history(symbol):
-    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1mo"
+def yahoo_closes(symbol, rng="6mo"):
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range={rng}"
     req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=10) as r:
         data = json.loads(r.read())
     closes = data["chart"]["result"][0]["indicators"]["quote"][0].get("close", [])
-    closes = [c for c in closes if c is not None]
+    return [c for c in closes if c is not None]
+
+# 各股近 6 個月收盤（key 為不含 .TW/.TWO 的代號），板塊走勢與市場寬度共用，避免重複抓取
+CLOSES = {}
+TREND_DAYS = 22  # 板塊走勢顯示近 1 個月（約 22 個交易日）
+
+def to_trend(closes):
+    closes = closes[-TREND_DAYS:]
     if not closes: return []
     base = closes[0]
     return [round((c - base) / base * 100, 2) for c in closes]
@@ -390,10 +398,17 @@ def yahoo_ohlcv(symbol, rng="6mo"):
 def sector_trend(symbols):
     all_series = []
     for sym in symbols:
-        try:
-            s = yahoo_history(sym)
-            if s: all_series.append(s)
-        except: pass
+        # 上櫃股在 Yahoo 的代號是 .TWO，.TW 抓不到時改試 .TWO
+        candidates = [sym, sym[:-3] + ".TWO"] if sym.endswith(".TW") else [sym]
+        for cand in candidates:
+            try:
+                closes = yahoo_closes(cand)
+            except Exception:
+                continue
+            if closes:
+                CLOSES[sym.split(".")[0]] = closes
+                all_series.append(to_trend(closes))
+                break
     if not all_series: return []
     min_len = min(len(s) for s in all_series)
     return [round(sum(s[i] for s in all_series) / len(all_series), 2)
@@ -408,6 +423,7 @@ def fetch_global():
         ("^TWII", "TWII",    "台股 TAIEX"),
         ("NVDA",  "NVDA",    "輝達 NVDA"),
         ("^VIX",  "VIX",     "VIX 恐慌"),
+        ("^VIX3M","VIX3M",   "VIX 三個月"),
     ]
     # 期貨
     fut_targets = [
@@ -783,8 +799,8 @@ if history and history[-1]["date"] == today:
 else:
     history.append(today_entry)
 
-# 只保留最近 30 天
-history = history[-30:]
+# 保留約 2 年的紀錄，讓事後勝率有足夠樣本（前端只取最後 10 筆顯示）
+history = history[-500:]
 
 # ── 事後勝率追蹤：訊號出現後，依「進場價 ±3%/6%」停損停利規則模擬到 5 / 10 個交易日 ──
 # 只針對「有 closeAtSignal」的訊號（即本次新策略上線後才產生的訊號）計分，
@@ -821,6 +837,11 @@ for entry in history:
     idx = date_to_idx.get(entry["date"])
     if idx is None:
         continue
+    # 訊號當下的盤勢：過去 21 個交易日台指漲 → 多頭(up)，跌 → 空頭(down)，供勝率分組
+    if "regime" not in entry:
+        rg = indicators.regime_at(twii_bars, idx)
+        if rg:
+            entry["regime"] = rg
     for horizon, key in ((5, "fwd5"), (10, "fwd10")):
         if key in entry or idx + horizon >= len(twii_bars):
             continue
@@ -831,18 +852,10 @@ for entry in history:
         hit = (entry["dir"] > 0 and ret > 0) or (entry["dir"] < 0 and ret < 0)
         entry[key] = {"ret": ret, "hit": hit, "exit": exit_kind}
 
-def summarize_track_record(history, key):
-    scored = [e[key] for e in history if key in e]
-    n = len(scored)
-    hits = sum(1 for s in scored if s["hit"])
-    stopped = sum(1 for s in scored if s.get("exit") == "stop")
-    targeted = sum(1 for s in scored if s.get("exit") == "target")
-    return {"n": n, "hits": hits, "winRate": round(hits / n * 100, 1) if n else None,
-            "stopped": stopped, "targeted": targeted}
-
+# 勝率統計：同段行情去重 + 巧合機率 + 多空盤勢分組（見 indicators.track_stats）
 track_record = {
-    "fwd5": summarize_track_record(history, "fwd5"),
-    "fwd10": summarize_track_record(history, "fwd10"),
+    "fwd5": indicators.track_stats(history, "fwd5", 5, date_to_idx),
+    "fwd10": indicators.track_stats(history, "fwd10", 10, date_to_idx),
 }
 
 # 計算連續訊號天數
@@ -868,6 +881,32 @@ with open(HISTORY_FILE, "w", encoding="utf-8") as f:
     json.dump(history, f, ensure_ascii=False, indent=2)
 print(f"✅ 訊號歷史更新：今日方向={today_dir}，連續{streak}天")
 
+# ── 輔助指標（顯示用，失敗不中止整體更新）──
+def safe(label, fn):
+    try:
+        return fn()
+    except Exception as e:
+        print(f"  ⚠️ {label} 失敗: {e}")
+        return None
+
+print("\n📡 計算輔助指標（市場寬度 / 恐慌溫度計 / 台股月營收）...")
+twii_closes = [b["close"] for b in twii_bars]
+breadth = {
+    "tw": safe("台股市場寬度", lambda: indicators.calc_breadth(tw_sectors_def, CLOSES, twii_closes)),
+    "sox": safe("費半市場寬度", lambda: indicators.calc_breadth(sox_sectors_def, CLOSES, yahoo_closes("^SOX"))),
+}
+risk_gauges = {
+    "vixTerm": safe("VIX 期限結構", lambda: indicators.calc_vix_term(
+        indices.get("VIX", {}).get("price"), indices.get("VIX3M", {}).get("price"))),
+    "hyOas": safe("信用利差 HY OAS", indicators.fetch_hy_oas),
+}
+monthly_revenue = safe("台股月營收", lambda: indicators.fetch_monthly_revenue(tw_sectors_def))
+for k, v in breadth.items():
+    if v: print(f"  寬度 {k}: {v['above']}/{v['total']} 站上50MA（{v['pct']}%），背離={v['divergence']}")
+if risk_gauges["vixTerm"]: print(f"  VIX/VIX3M = {risk_gauges['vixTerm']['ratio']}")
+if risk_gauges["hyOas"]: print(f"  HY OAS = {risk_gauges['hyOas']['value']}%（20日 {risk_gauges['hyOas']['d20']:+}）")
+if monthly_revenue: print(f"  月營收 {monthly_revenue['month']}：{len(monthly_revenue['companies'])} 檔，缺 {monthly_revenue['missing']}")
+
 payload = {
     "date": today, "updated": now.isoformat(), "source": tw_source,
     "indices": indices,
@@ -878,6 +917,9 @@ payload = {
     "sox_sectors": sox_sectors,
     "watchlist": watchlist,
     "inst_futures": inst_futures,
+    "breadth": breadth,
+    "risk_gauges": risk_gauges,
+    "monthly_revenue": monthly_revenue,
 }
 
 os.makedirs("public", exist_ok=True)
