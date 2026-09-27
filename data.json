@@ -1,31 +1,31 @@
 {
-  "date": "2026-09-25",
-  "updated": "2026-09-25T08:40:02.221259+08:00",
+  "date": "2026-09-27",
+  "updated": "2026-09-27T13:37:58.409242+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
       "name": "費半 SOX",
       "symbol": "^SOX",
-      "price": 12492.54,
-      "change": -41.74,
-      "changePercent": -0.33,
+      "price": 12668.93,
+      "change": 134.65,
+      "changePercent": 1.07,
       "prev": 12534.28
     },
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 65798.18,
-      "change": 284.19,
-      "changePercent": 0.43,
+      "price": 66364.2,
+      "change": 850.21,
+      "changePercent": 1.3,
       "prev": 65513.99
     },
     "TSM_ADR": {
       "name": "TSM ADR",
       "symbol": "TSM",
-      "price": 451.15,
-      "change": -0.85,
-      "changePercent": -0.19,
-      "prev": 452.0
+      "price": 450.61,
+      "change": 4.04,
+      "changePercent": 0.9,
+      "prev": 446.57
     },
     "TWII": {
       "name": "台股 TAIEX",
@@ -38,18 +38,18 @@
     "NVDA": {
       "name": "輝達 NVDA",
       "symbol": "NVDA",
-      "price": 224.58,
-      "change": -4.29,
-      "changePercent": -1.87,
-      "prev": 228.87
+      "price": 225.07,
+      "change": -0.44,
+      "changePercent": -0.2,
+      "prev": 225.51
     },
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 15.67,
-      "change": 0.49,
-      "changePercent": 3.23,
-      "prev": 15.18
+      "price": 14.87,
+      "change": -0.8,
+      "changePercent": -5.11,
+      "prev": 15.67
     },
     "TSM": {
       "name": "台積電",
@@ -64,44 +64,44 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7755.0,
-      "change": -17.5,
-      "changePercent": -0.23,
-      "prev": 7772.5
+      "price": 7803.75,
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 7803.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30713.25,
-      "change": -51.5,
-      "changePercent": -0.17,
-      "prev": 30764.75
+      "price": 30889.25,
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 30889.25
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 65710.0,
-      "change": -280.0,
-      "changePercent": -0.42,
-      "prev": 65990.0
+      "price": 66495.0,
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 66495.0
     }
   },
   "metals": {
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4305.1,
-      "change": -13.3,
-      "changePercent": -0.31,
-      "prev": 4318.4
+      "price": 4321.2,
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 4321.2
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 64.08,
-      "change": -0.31,
-      "changePercent": -0.48,
-      "prev": 64.38
+      "price": 64.8,
+      "change": 0.56,
+      "changePercent": 0.87,
+      "prev": 64.25
     }
   },
   "signal_meta": {
@@ -109,10 +109,6 @@
     "streak": 0,
     "streak_dir": 0,
     "history": [
-      {
-        "date": "2026-09-16",
-        "dir": 0
-      },
       {
         "date": "2026-09-17",
         "dir": 0
@@ -148,20 +144,24 @@
       {
         "date": "2026-09-25",
         "dir": 0
+      },
+      {
+        "date": "2026-09-27",
+        "dir": 0
       }
     ],
     "detail": {
       "symbol": "^TWII",
-      "date": "2026-09-23",
-      "close": 48157.2890625,
-      "open": 47894.76953125,
-      "volume": 4866300,
-      "avgVol": 4495095.0,
-      "highestHigh": 47750.98,
-      "lowestLow": 44210.31,
-      "ma20": 46554.93,
-      "ma60": 45277.32,
-      "longBreakout": true,
+      "date": "2026-09-24",
+      "close": 48024.6015625,
+      "open": 48075.390625,
+      "volume": 3540900,
+      "avgVol": 4542350.0,
+      "highestHigh": 48601.53,
+      "lowestLow": 45398.43,
+      "ma20": 46755.77,
+      "ma60": 45321.99,
+      "longBreakout": false,
       "shortBreakout": false,
       "bullVol": false,
       "bearVol": false,
@@ -953,97 +953,99 @@
         {
           "symbol": "NVDA",
           "name": "輝達",
-          "price": 224.58,
-          "changePercent": -1.87
+          "price": 225.07,
+          "changePercent": -0.2
         },
         {
           "symbol": "AVGO",
           "name": "博通",
-          "price": 350.36,
-          "changePercent": -3.89
+          "price": 352.81,
+          "changePercent": -0.61
         },
         {
           "symbol": "AMD",
           "name": "超微",
-          "price": 629.26,
-          "changePercent": 0.88
+          "price": 630.63,
+          "changePercent": 2.61
         },
         {
           "symbol": "QCOM",
           "name": "高通",
-          "price": 194.26,
-          "changePercent": -2.02
+          "price": 201.97,
+          "changePercent": 2.4
         },
         {
           "symbol": "MRVL",
           "name": "邁威爾",
-          "price": 258.95,
-          "changePercent": -1.3
+          "price": 261.94,
+          "changePercent": 0.4
         },
         {
           "symbol": "ARM",
           "name": "Arm控股",
-          "price": 306.34,
-          "changePercent": -8.06
+          "price": 310.32,
+          "changePercent": -6.69
         },
         {
           "symbol": "LSCC",
           "name": "萊迪思半導體",
-          "price": 122.22,
-          "changePercent": 0.46
+          "price": 128.05,
+          "changePercent": 5.25
         },
         {
           "symbol": "AMBA",
           "name": "安霸",
-          "price": 69.86,
-          "changePercent": 3.31
+          "price": 72.68,
+          "changePercent": 7.48
         },
         {
           "symbol": "CRUS",
           "name": "思睿邏輯",
-          "price": 118.8,
-          "changePercent": -1.37
+          "price": 119.92,
+          "changePercent": -0.44
         },
         {
           "symbol": "SITM",
           "name": "SiTime",
-          "price": 643.24,
-          "changePercent": 5.64
+          "price": 662.27,
+          "changePercent": 8.76
         },
         {
           "symbol": "ALAB",
           "name": "Astera Labs",
-          "price": 360.51,
-          "changePercent": -0.81
+          "price": 364.62,
+          "changePercent": 1.15
         },
         {
           "symbol": "CEVA",
           "name": "CEVA",
-          "price": 34.46,
-          "changePercent": 2.5
+          "price": 36.2,
+          "changePercent": 7.67
         }
       ],
       "trend": [
         0.0,
-        0.98,
-        3.06,
-        -1.16,
-        -0.35,
-        -2.59,
-        -1.94,
-        -1.82,
-        1.1,
-        1.9,
-        3.19,
-        1.88,
-        4.63,
-        -2.1,
-        -1.12,
-        -0.78,
-        4.35,
-        5.49,
-        12.63,
-        14.5
+        2.07,
+        -2.08,
+        -1.28,
+        -3.49,
+        -2.83,
+        -2.74,
+        0.13,
+        0.91,
+        2.19,
+        0.91,
+        3.62,
+        -3.02,
+        -2.04,
+        -1.72,
+        3.34,
+        4.46,
+        11.46,
+        13.53,
+        12.55,
+        12.49,
+        14.95
       ]
     },
     {
@@ -1052,91 +1054,93 @@
         {
           "symbol": "ASML",
           "name": "艾司摩爾",
-          "price": 1722.5,
-          "changePercent": -1.27
+          "price": 1743.94,
+          "changePercent": -0.04
         },
         {
           "symbol": "AMAT",
           "name": "應用材料",
-          "price": 474.25,
-          "changePercent": 0.38
+          "price": 485.0,
+          "changePercent": 2.24
         },
         {
           "symbol": "LRCX",
           "name": "拉姆研究",
-          "price": 307.16,
-          "changePercent": -1.22
+          "price": 315.21,
+          "changePercent": 2.58
         },
         {
           "symbol": "KLAC",
           "name": "科磊",
-          "price": 187.11,
-          "changePercent": -0.4
+          "price": 187.92,
+          "changePercent": 0.03
         },
         {
           "symbol": "TER",
           "name": "泰瑞達",
-          "price": 387.7,
-          "changePercent": -0.37
+          "price": 398.38,
+          "changePercent": 2.37
         },
         {
           "symbol": "ENTG",
           "name": "英特格",
-          "price": 148.63,
-          "changePercent": -1.52
+          "price": 151.89,
+          "changePercent": 0.64
         },
         {
           "symbol": "ONTO",
           "name": "Onto Innovation",
-          "price": 279.73,
-          "changePercent": -0.91
+          "price": 287.64,
+          "changePercent": 1.89
         },
         {
           "symbol": "UCTT",
           "name": "Ultra Clean",
-          "price": 76.52,
-          "changePercent": -1.0
+          "price": 77.69,
+          "changePercent": 0.52
         },
         {
           "symbol": "FORM",
           "name": "FormFactor",
-          "price": 129.04,
-          "changePercent": -1.69
+          "price": 129.69,
+          "changePercent": -1.2
         },
         {
           "symbol": "COHU",
           "name": "Cohu",
-          "price": 63.7,
-          "changePercent": -1.21
+          "price": 67.0,
+          "changePercent": 3.91
         },
         {
           "symbol": "AEIS",
           "name": "先進能源",
-          "price": 278.03,
-          "changePercent": -0.5
+          "price": 279.68,
+          "changePercent": 0.09
         }
       ],
       "trend": [
         0.0,
-        0.47,
-        1.69,
-        -4.09,
-        -4.88,
-        -8.43,
-        -7.64,
-        -7.57,
-        -1.93,
-        1.74,
-        2.19,
-        -1.5,
-        1.06,
-        -8.8,
-        -9.25,
-        -8.53,
-        -6.0,
-        -1.21,
-        1.69,
-        6.14
+        1.21,
+        -4.53,
+        -5.33,
+        -8.86,
+        -8.07,
+        -8.01,
+        -2.4,
+        1.27,
+        1.71,
+        -1.96,
+        0.58,
+        -9.23,
+        -9.68,
+        -8.97,
+        -6.46,
+        -1.67,
+        1.22,
+        5.26,
+        5.57,
+        4.68,
+        6.83
       ]
     },
     {
@@ -1145,97 +1149,99 @@
         {
           "symbol": "TXN",
           "name": "德州儀器",
-          "price": 270.65,
-          "changePercent": -0.72
+          "price": 278.07,
+          "changePercent": 2.0
         },
         {
           "symbol": "ADI",
           "name": "亞德諾",
-          "price": 382.61,
-          "changePercent": -0.68
+          "price": 393.6,
+          "changePercent": 2.17
         },
         {
           "symbol": "MCHP",
           "name": "微芯科技",
-          "price": 74.69,
-          "changePercent": -1.11
+          "price": 78.69,
+          "changePercent": 4.18
         },
         {
           "symbol": "MPWR",
           "name": "單體電源",
-          "price": 1335.55,
-          "changePercent": -1.47
+          "price": 1367.43,
+          "changePercent": 0.88
         },
         {
           "symbol": "SWKS",
           "name": "思佳訊",
-          "price": 87.81,
-          "changePercent": -3.98
+          "price": 89.34,
+          "changePercent": -2.31
         },
         {
           "symbol": "NXPI",
           "name": "恩智浦",
-          "price": 230.16,
-          "changePercent": -2.24
+          "price": 238.08,
+          "changePercent": 1.12
         },
         {
           "symbol": "ON",
           "name": "安森美",
-          "price": 73.15,
-          "changePercent": -1.28
+          "price": 77.2,
+          "changePercent": 4.18
         },
         {
           "symbol": "STM",
           "name": "意法半導",
-          "price": 51.58,
-          "changePercent": -1.68
+          "price": 51.93,
+          "changePercent": -1.01
         },
         {
           "symbol": "QRVO",
           "name": "Qorvo",
-          "price": 116.34,
-          "changePercent": -2.72
+          "price": 117.97,
+          "changePercent": -1.35
         },
         {
           "symbol": "DIOD",
           "name": "二極體公司",
-          "price": 94.74,
-          "changePercent": -0.81
+          "price": 95.84,
+          "changePercent": 0.35
         },
         {
           "symbol": "SLAB",
           "name": "Silicon Labs",
-          "price": 221.38,
-          "changePercent": 0.06
+          "price": 221.24,
+          "changePercent": -0.0
         },
         {
           "symbol": "POWI",
           "name": "Power Integrations",
-          "price": 50.78,
-          "changePercent": -0.53
+          "price": 52.22,
+          "changePercent": 2.29
         }
       ],
       "trend": [
         0.0,
-        0.16,
-        1.43,
-        -1.59,
-        -0.52,
-        -2.29,
-        -0.4,
-        -0.29,
-        1.2,
-        0.73,
-        0.67,
-        1.8,
-        5.97,
-        -0.04,
-        2.48,
-        0.11,
-        2.52,
-        3.96,
-        5.15,
-        7.59
+        1.26,
+        -1.75,
+        -0.68,
+        -2.46,
+        -0.57,
+        -0.46,
+        1.03,
+        0.55,
+        0.49,
+        1.61,
+        5.77,
+        -0.23,
+        2.27,
+        -0.08,
+        2.31,
+        3.75,
+        4.94,
+        7.68,
+        7.39,
+        5.74,
+        8.34
       ]
     },
     {
@@ -1244,55 +1250,57 @@
         {
           "symbol": "MU",
           "name": "美光",
-          "price": 1080.53,
-          "changePercent": -1.43
+          "price": 1082.28,
+          "changePercent": 0.97
         },
         {
           "symbol": "WDC",
           "name": "威騰",
-          "price": 450.31,
-          "changePercent": -3.08
+          "price": 456.81,
+          "changePercent": -3.56
         },
         {
           "symbol": "STX",
           "name": "希捷",
-          "price": 905.92,
-          "changePercent": -1.94
+          "price": 916.83,
+          "changePercent": -0.76
         },
         {
           "symbol": "SNDK",
           "name": "SanDisk",
-          "price": 1753.62,
-          "changePercent": -7.07
+          "price": 1777.8,
+          "changePercent": -2.13
         },
         {
           "symbol": "RMBS",
           "name": "Rambus",
-          "price": 104.55,
-          "changePercent": 1.04
+          "price": 105.16,
+          "changePercent": 1.63
         }
       ],
       "trend": [
         0.0,
-        1.81,
-        1.51,
-        -0.28,
-        1.16,
-        -0.58,
-        -0.07,
-        -0.66,
-        5.73,
-        7.45,
-        8.33,
-        4.25,
-        2.37,
-        -2.79,
-        -3.88,
-        -3.92,
-        0.23,
-        5.96,
-        9.06,
-        15.12
+        -0.29,
+        -2.05,
+        -0.62,
+        -2.34,
+        -1.83,
+        -2.39,
+        3.87,
+        5.53,
+        6.41,
+        2.41,
+        0.59,
+        -4.5,
+        -5.54,
+        -5.6,
+        -1.5,
+        4.13,
+        7.2,
+        13.47,
+        12.1,
+        10.26,
+        11.29
       ]
     },
     {
@@ -1301,61 +1309,63 @@
         {
           "symbol": "INTC",
           "name": "英特爾",
-          "price": 127.39,
-          "changePercent": 2.85
+          "price": 123.0,
+          "changePercent": 0.33
         },
         {
           "symbol": "GFS",
           "name": "格芯",
-          "price": 47.05,
-          "changePercent": 1.36
+          "price": 49.0,
+          "changePercent": 5.56
         },
         {
           "symbol": "UMC",
           "name": "聯電ADR",
-          "price": 24.1,
-          "changePercent": -6.48
+          "price": 24.31,
+          "changePercent": -1.5
         },
         {
           "symbol": "TSM",
           "name": "台積電ADR",
-          "price": 451.15,
-          "changePercent": -0.19
+          "price": 450.61,
+          "changePercent": 0.9
         },
         {
           "symbol": "ASX",
           "name": "日月光ADR",
-          "price": 43.5,
-          "changePercent": -0.98
+          "price": 44.31,
+          "changePercent": 0.87
         },
         {
           "symbol": "IFNNY",
           "name": "英飛凌",
-          "price": 64.81,
-          "changePercent": -2.75
+          "price": 65.17,
+          "changePercent": -2.21
         }
       ],
       "trend": [
         0.0,
-        -0.29,
-        2.48,
-        0.79,
-        0.34,
-        0.24,
-        0.14,
-        0.76,
-        3.49,
-        7.67,
-        9.26,
-        6.29,
-        8.48,
-        2.42,
-        1.86,
-        3.96,
-        9.52,
-        11.84,
-        17.28,
-        17.45
+        2.76,
+        1.1,
+        0.65,
+        0.56,
+        0.45,
+        1.07,
+        3.82,
+        7.99,
+        9.6,
+        6.64,
+        8.83,
+        2.77,
+        2.2,
+        4.31,
+        9.91,
+        12.24,
+        17.67,
+        19.61,
+        16.42,
+        16.57,
+        17.07
       ]
     }
   ],
