@@ -1,0 +1,29 @@
+name: 結算資料下載（回測用，手動執行）
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: '從哪一天開始抓（yyyy-mm-dd）'
+        default: '2010-01-01'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: fetch
+        env:
+          SETTLE_START: ${{ github.event.inputs.start }}
+        run: python fetch_taifex_settlement.py 2>&1 | tee settle_log.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: settlement-data
+          path: |
+            settle_fut.csv
+            settle_oi.csv
+            settle_log.txt
+          retention-days: 7
