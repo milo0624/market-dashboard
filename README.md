@@ -100,7 +100,7 @@ https://你的GitHub帳號.github.io/market-dashboard/
 | 恐慌溫度計 | VIX ÷ VIX3M（>1 代表恐慌）、美國高收益債信用利差 20 日變化 | Yahoo Finance、FRED |
 | 台股月營收 | 年增率連 2 個月上升＝加速，由正轉負＝轉弱 | 證交所、櫃買中心、公開資訊觀測站 |
 
-> 網頁實際部署的是 `public/index.html`；根目錄的 `index.html` 是同步副本，修改時請兩份一起更新（或只改 `public/` 後複製過去）。
+> 網頁只有一份：`public/index.html`（GitHub Pages 只發佈 `public/` 資料夾），修改網頁時改這個檔案即可。
 
 ---
 
