@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-抓台指期（近月連續）30 分 K 歷史資料 → txf_30m.csv，供 trading/backtest/box_sakata_30m.py 回測原始 Pine Script 策略。
+抓台指期（近月連續）30 分 K 歷史資料（日盤＋夜盤，session 欄位區分）→ txf_30m.csv，供 trading/backtest/box_sakata_30m.py 回測原始 Pine Script 策略。
 
 只在 GitHub Actions「期貨分K下載」手動執行（沿用儀表板既有的富邦 Secrets），不影響每日排程。
 富邦文件沒寫每次可抓幾天、分K能回溯多久，所以本程式會：
@@ -47,9 +47,54 @@ def rows_of(resp):
     return out
 
 
-def call(rest, product, frm, to):
-    params = {"symbol": product, "from": frm.isoformat(), "to": to.isoformat(), "timeframe": TIMEFRAME}
+NIGHT_PARAM_CANDIDATES = [{"session": "afterhours"}, {"session": "AFTERHOURS"}, {"afterhours": True}]
+
+
+def call(rest, product, frm, to, extra=None):
+    params = {"symbol": product, "from": frm.isoformat(), "to": to.isoformat(), "timeframe": TIMEFRAME, **(extra or {})}
     return rest.historical.candles(**params)
+
+
+def is_night(dt):
+    """夜盤 15:00～隔日 05:00；以時間字串判斷（格式如 2026-09-24T15:00:00.000+08:00）"""
+    hh = int(str(dt)[11:13])
+    return hh >= 15 or hh < 6
+
+
+def find_span(rest, product, extra, tag):
+    to = date.today()
+    for days in (365, 180, 90, 60, 30, 14, 7):
+        try:
+            n = len(rows_of(call(rest, product, to - timedelta(days=days), to, extra)))
+            print(f"[{tag}區間] 一次抓 {days} 天 → {n} 根")
+            if n:
+                return days
+        except Exception as e:
+            print(f"[{tag}區間] 一次抓 {days} 天失敗：{type(e).__name__}: {e}")
+    return None
+
+
+def fetch_all(rest, product, extra, span, tag):
+    allrows, to, empty_streak = {}, date.today(), 0
+    while to > EARLIEST and empty_streak < 3:
+        frm = max(EARLIEST, to - timedelta(days=span - 1))
+        try:
+            got = rows_of(call(rest, product, frm, to, extra))
+        except Exception as e:
+            print(f"  [{tag}] {frm} ~ {to} 失敗：{e}；等 5 秒重試一次")
+            time.sleep(5)
+            try:
+                got = rows_of(call(rest, product, frm, to, extra))
+            except Exception as e2:
+                print(f"  [{tag}] 重試仍失敗：{e2}")
+                got = []
+        for r in got:
+            allrows[r["datetime"]] = r
+        empty_streak = 0 if got else empty_streak + 1
+        print(f"  [{tag}] {frm} ~ {to}：{len(got)} 根（累計 {len(allrows)}）")
+        to = frm - timedelta(days=1)
+        time.sleep(0.5)   # 避免打太快被限流
+    return allrows
 
 
 def main():
@@ -72,48 +117,44 @@ def main():
         sys.exit("所有商品代號都抓不到資料，請把上面的 log 貼給 Claude")
     print(f"➡️ 使用商品代號 {product}，timeframe={TIMEFRAME}")
 
-    # ── 2. 找出單次可抓的最大天數（由大到小試）──
-    span = None
-    for days in (365, 180, 90, 60, 30, 14, 7):
-        try:
-            n = len(rows_of(call(rest, product, probe_to - timedelta(days=days), probe_to)))
-            print(f"[區間] 一次抓 {days} 天 → {n} 根")
-            if n:
-                span = days
-                break
-        except Exception as e:
-            print(f"[區間] 一次抓 {days} 天失敗：{type(e).__name__}: {e}")
+    # ── 2. 日盤 ──
+    span = find_span(rest, product, None, "日盤")
     if not span:
         sys.exit("找不到可用的抓取區間")
+    day = fetch_all(rest, product, None, span, "日盤")
+    for r in day.values():
+        r["session"] = "day"
 
-    # ── 3. 從今天往回抓 ──
-    allrows, to, empty_streak = {}, probe_to, 0
-    while to > EARLIEST and empty_streak < 3:
-        frm = max(EARLIEST, to - timedelta(days=span - 1))
+    # ── 3. 夜盤：文件沒寫死參數名稱，逐一試，確認回來的真的是 15:00 後的K棒才採用 ──
+    night, night_extra = {}, None
+    for extra in NIGHT_PARAM_CANDIDATES:
         try:
-            got = rows_of(call(rest, product, frm, to))
+            got = rows_of(call(rest, product, probe_from, probe_to, extra))
+            n_night = sum(is_night(r["datetime"]) for r in got)
+            print(f"[夜盤試探] {extra} → {len(got)} 根，其中夜盤時段 {n_night} 根；前 3 根時間："
+                  f"{[r['datetime'] for r in got[:3]]}")
+            if got and n_night >= len(got) * 0.9:
+                night_extra = extra
+                break
         except Exception as e:
-            print(f"  {frm} ~ {to} 失敗：{e}；等 5 秒重試一次")
-            time.sleep(5)
-            try:
-                got = rows_of(call(rest, product, frm, to))
-            except Exception as e2:
-                print(f"  重試仍失敗：{e2}")
-                got = []
-        for r in got:
-            allrows[r["datetime"]] = r
-        empty_streak = 0 if got else empty_streak + 1
-        print(f"  {frm} ~ {to}：{len(got)} 根（累計 {len(allrows)}）")
-        to = frm - timedelta(days=1)
-        time.sleep(0.5)   # 避免打太快被限流
+            print(f"[夜盤試探] {extra} 失敗：{type(e).__name__}: {e}")
+    if night_extra:
+        nspan = find_span(rest, product, night_extra, "夜盤") or span
+        night = fetch_all(rest, product, night_extra, nspan, "夜盤")
+        for r in night.values():
+            r["session"] = "night"
+    else:
+        print("⚠️ 抓不到夜盤，只輸出日盤（請把上面的 [夜盤試探] log 貼給 Claude）")
 
-    rows = [allrows[k] for k in sorted(allrows)]
+    merged = {**day, **night}
+    rows = [merged[k] for k in sorted(merged)]
     if not rows:
         sys.exit("沒有抓到任何資料")
     with open(OUT, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["datetime", "open", "high", "low", "close", "volume"])
+        w = csv.DictWriter(f, fieldnames=["datetime", "open", "high", "low", "close", "volume", "session"])
         w.writeheader(); w.writerows(rows)
-    print(f"✅ {product} {TIMEFRAME} 分K：{rows[0]['datetime']} ～ {rows[-1]['datetime']}，共 {len(rows):,} 根 → {OUT}")
+    print(f"✅ {product} {TIMEFRAME} 分K：{rows[0]['datetime']} ～ {rows[-1]['datetime']}，"
+          f"日盤 {len(day):,} 根＋夜盤 {len(night):,} 根 → {OUT}")
 
 
 if __name__ == "__main__":
