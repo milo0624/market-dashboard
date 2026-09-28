@@ -180,9 +180,16 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
     <div class="fut-grid" id="watchlistGrid"></div>
   </div>
 
+  <div class="card" id="nightCard">
+    <div class="c-title">🌙 今晚夜盤</div>
+    <div class="c-sub" id="nightSub">只抱夜盤 ＋ 日K 60MA 過濾 ＋ 300 點停損 ＋ 連假不留倉 · 每個交易日 14:05 更新 · 紙上交易中</div>
+    <div id="nightContent"><div style="font-size:12px;color:var(--mu)">載入中...</div></div>
+  </div>
+
   <div class="card" id="stratCard">
     <div class="c-title">策略推薦</div>
     <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
+    <div style="background:var(--Rbg);border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:var(--R);line-height:1.6">⚠️ 回測（2003–2026 日K、2010–2026 台指期 30 分K）顯示這套訊號沒有可靠優勢，僅供參考，不建議照著下單。詳見 trading/backtest/README.md</div>
     <div id="stratContent"></div>
   </div>
 
@@ -945,6 +952,43 @@ function renderMyPicks() {
 
 function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
 
+// ── 今晚夜盤：讀 night_signal.json（由「今晚夜盤判斷」排程每個交易日 14:05 產生）──
+function renderNight() {
+  var box = document.getElementById('nightContent');
+  fetch('./night_signal.json?t=' + Date.now())
+    .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+    .then(function(s) {
+      var go = s.decision === '做';
+      var color = go ? 'var(--Gbg)' : (s.decision === '休市' ? 'var(--bg)' : 'var(--Rbg)');
+      var border = go ? 'var(--Gm)' : (s.decision === '休市' ? 'var(--bdr)' : 'var(--Rm)');
+      var head = go ? '✅ 今晚做多 ' + s.lots + ' 口 TMF' : (s.decision === '休市' ? '⏸ 今天休市' : '⛔ 今晚不做');
+      var reasons = (s.reasons || []).map(function(r) { return '<div>・' + r + '</div>'; }).join('');
+      var plan = s.plan ? '<div style="font-size:11px;color:var(--mu);border-top:1px solid rgba(0,0,0,.06);padding-top:6px;margin-top:6px">' + s.plan + '</div>' : '';
+      var last = '';
+      if (s.lastResult) {
+        var r = s.lastResult, up = r.pnl > 0;
+        last = '<div style="background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12px">' +
+          '<span style="color:var(--mu)">最近一筆紙上交易（' + r.date + ' 夜盤）</span><br>' +
+          fm(r.entry, 0) + ' → ' + fm(r.exit, 0) + '（' + r.how + '）' +
+          '<span style="font-weight:700;color:' + (up ? 'var(--G)' : 'var(--R)') + ';margin-left:6px">' + (up ? '+' : '') + r.pnl.toLocaleString('zh-TW') + ' 元</span></div>';
+      }
+      var p = s.paper || {};
+      var paper = p.trades ?
+        '<div style="font-size:12px;color:var(--tx)">紙上交易 ' + p.trades + ' 筆（自 ' + p.since + '）· 勝 ' + p.wins + ' 筆 · 合計 ' +
+        '<b style="color:' + (p.total >= 0 ? 'var(--G)' : 'var(--R)') + '">' + (p.total >= 0 ? '+' : '') + p.total.toLocaleString('zh-TW') + ' 元</b></div>' :
+        '<div style="font-size:12px;color:var(--mu)">紙上交易剛開始，還沒有已結算的紀錄</div>';
+      box.innerHTML =
+        '<div style="background:' + color + ';border:1.5px solid ' + border + ';border-radius:10px;padding:12px 14px;margin-bottom:10px">' +
+          '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + head + '</div>' +
+          '<div style="font-size:12px;color:var(--tx);line-height:1.7">' + reasons + '</div>' + plan +
+        '</div>' + last + paper +
+        '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">' + String(s.updated || s.date).replace('T', ' ').slice(0, 16) + ' 更新 · 回測：2017–2026 夏普 1.24、最大回落 −7.3 萬（1 口）· 僅供參考，不構成投資建議</div>';
+    })
+    .catch(function() {
+      box.innerHTML = '<div style="font-size:12px;color:var(--mu)">尚無今晚夜盤判斷（排程第一次執行後才會出現）</div>';
+    });
+}
+
 function renderAll() {
   renderBanner();
   renderIdx();
@@ -952,6 +996,7 @@ function renderAll() {
   renderMetals();
   renderMyPicks();
   renderWatchlist();
+  renderNight();
   renderStrategy();
   renderInstFutures();
   renderResonance();
