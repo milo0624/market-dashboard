@@ -1,0 +1,37 @@
+name: 期貨分K下載（回測用，手動執行）
+on:
+  workflow_dispatch:
+    inputs:
+      earliest:
+        description: '最早要抓到哪一天（yyyy-mm-dd）'
+        default: '2010-01-01'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: install-sdk
+        run: |
+          wget -q "https://www.fbs.com.tw/TradeAPI_SDK/fubon_binary/fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.zip" -O sdk.zip
+          unzip -q sdk.zip
+          pip install fubon_neo-2.2.8-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+      - name: fetch
+        env:
+          FUBON_ID: ${{ secrets.FUBON_ID }}
+          FUBON_API_KEY: ${{ secrets.FUBON_API_KEY }}
+          FUBON_CERT_B64: ${{ secrets.FUBON_CERT_B64 }}
+          FUBON_CERT_PW: ${{ secrets.FUBON_CERT_PW }}
+          KBAR_EARLIEST: ${{ github.event.inputs.earliest }}
+        run: python fetch_futures_kbars.py 2>&1 | tee fetch_log.txt
+      # 資料不 commit 進公開 repo，只放在這次執行的附件（Artifacts），7 天後自動刪除
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: txf-30m
+          path: |
+            txf_30m.csv
+            fetch_log.txt
+          retention-days: 7
