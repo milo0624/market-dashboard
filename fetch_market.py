@@ -797,12 +797,16 @@ try:
 except Exception as e:
     raise RuntimeError(f"策略訊號計算失敗，中止更新：{e}")
 
-today_entry = {"date": today, "dir": today_dir}
+# 用「訊號所屬 K 棒」的日期記錄，而不是程式執行日：
+# 排程在台灣 06:30 跑，拿到的是前一個交易日的 K 棒；若記成執行日，事後勝率會少算進場後第一天，
+# 週末/假日手動執行的紀錄也會對不到任何 K 棒而永遠無法計分。
+signal_date = signal_detail["date"]
+today_entry = {"date": signal_date, "dir": today_dir}
 if today_dir != 0:
     today_entry["closeAtSignal"] = signal_detail["close"]
 
-# 更新今日紀錄（避免重複）
-if history and history[-1]["date"] == today:
+# 同一根 K 棒只留一筆（盤中手動更新的暫時訊號，會被收盤後的正式結果覆蓋）
+if history and history[-1]["date"] == signal_date:
     history[-1] = today_entry
 else:
     history.append(today_entry)
