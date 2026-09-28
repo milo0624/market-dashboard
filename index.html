@@ -104,6 +104,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .fut-l{font-size:11px;color:var(--mu);margin-bottom:3px;font-weight:500}
 .fut-v{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
 .fut-p{font-size:10px;color:var(--hi);margin-top:3px}
+.gz{padding:10px 0;border-bottom:1px solid var(--bdr)}
+.gz:last-child{border-bottom:none;padding-bottom:0}
+.gz-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.gz-name{font-size:12px;font-weight:700;color:var(--tx)}
+.gz-val{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
+.gz-note{font-size:11px;color:var(--mu);margin-top:3px;line-height:1.5}
+.gz-warn{font-size:11px;color:var(--R);font-weight:700;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.chip{font-size:10px;padding:2px 7px;border-radius:5px;background:#edf2f7;color:#4a5568}
+.spark{position:relative;height:44px;margin-top:6px}
+.rv-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+.rv-tbl th{font-weight:500;color:var(--mu);text-align:right;padding:4px 3px;border-bottom:1px solid var(--bdr)}
+.rv-tbl th:first-child,.rv-tbl td:first-child{text-align:left}
+.rv-tbl td{padding:5px 3px;text-align:right;border-bottom:1px solid var(--bdr);color:var(--tx);font-variant-numeric:tabular-nums}
+.rv-tbl tr.sec td{background:#f7fafc;color:var(--mu);font-weight:700;text-align:left}
+details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font-weight:600}
+
+/* 電腦（網頁版）：畫面夠寬時，卡片改成一列三個，內容區置中加寬，跟手機版窄畫面（一列兩個）區分開來 */
+@media (min-width:768px){
+  .scroll{max-width:960px;margin:0 auto;width:100%}
+  .ig{grid-template-columns:repeat(3,1fr)}
+  .fut-grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
@@ -173,6 +196,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
     <div class="c-title">🔥 族群共振</div>
     <div class="c-sub">板塊內同方向股票比例，越高代表資金越可能整族群一起上車 · 點列可跳去對應板塊</div>
     <div id="resoList"></div>
+  </div>
+
+  <div class="card">
+    <div class="c-title">市場溫度計</div>
+    <div class="c-sub">漲勢健不健康 · 市場恐不恐慌</div>
+    <div id="gaugeContent"></div>
+  </div>
+
+  <div class="card">
+    <div class="c-title">台股月營收</div>
+    <div class="c-sub" id="revSub">公司生意在加速還是轉弱</div>
+    <div id="revContent"></div>
   </div>
 
   <div class="card" id="heatCard">
@@ -408,7 +443,7 @@ function renderWatchlist() {
     return;
   }
   hint.textContent = list.length + ' 檔';
-  grid.style.gridTemplateColumns = '1fr 1fr';
+  grid.style.gridTemplateColumns = '';
   var html = '';
   for (var i = 0; i < list.length; i++) {
     var d = list[i];
@@ -529,18 +564,28 @@ function renderStrategy() {
       '<div style="display:flex;gap:6px;align-items:flex-end">' + histHtml + '</div>' +
     '</div>';
 
-  // ── 事後勝率追蹤（訊號出現 5 / 10 個交易日後，方向是否猜對；僅計入新策略上線後的訊號）──
+  // ── 事後勝率追蹤：同段行情只算 1 次，並附「丟銅板也能做到的機率」（巧合機率）──
   var tr = sm.track_record || {};
-  var trParts = [];
-  if (tr.fwd5 && tr.fwd5.n > 0) trParts.push('5日勝率 ' + tr.fwd5.winRate + '%（' + tr.fwd5.hits + '/' + tr.fwd5.n + '）');
-  if (tr.fwd10 && tr.fwd10.n > 0) trParts.push('10日勝率 ' + tr.fwd10.winRate + '%（' + tr.fwd10.hits + '/' + tr.fwd10.n + '）');
   var trHtml;
-  if (trParts.length) {
-    var lowSample = (tr.fwd5 && tr.fwd5.n > 0 && tr.fwd5.n < 5) || (tr.fwd10 && tr.fwd10.n > 0 && tr.fwd10.n < 5);
+  if ((tr.fwd5 && tr.fwd5.n > 0) || (tr.fwd10 && tr.fwd10.n > 0)) {
+    var trRows = [['5日', tr.fwd5], ['10日', tr.fwd10]].filter(function(x) { return x[1] && x[1].n > 0; }).map(function(x) {
+      var t = x[1], st = STATUS_TXT[t.status] || STATUS_TXT.unverified;
+      var rgUp = t.byRegime && t.byRegime.up, rgDn = t.byRegime && t.byRegime.down;
+      return '<div style="padding:6px 0;border-top:1px solid var(--bdr)">' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline">' +
+          '<span style="color:var(--tx);font-weight:700">' + x[0] + '勝率 ' + t.winRate + '%（' + t.hits + '/' + t.n + '）</span>' +
+          '<span style="font-weight:700;color:' + st.c + '">' + st.t + '</span>' +
+        '</div>' +
+        '<div style="color:var(--mu);margin-top:2px">丟銅板也能做到的機率 ' + t.pChance + '%' +
+          (t.rawN > t.n ? ' · 原始 ' + t.rawN + ' 次訊號，同段行情合併為 ' + t.n + ' 次' : '') + '</div>' +
+        '<div style="color:var(--mu);margin-top:2px">多頭盤 ' + (rgUp && rgUp.n ? rgUp.hits + '/' + rgUp.n : '—') +
+          ' · 空頭盤 ' + (rgDn && rgDn.n ? rgDn.hits + '/' + rgDn.n : '—') +
+          ' · 停利 ' + t.targeted + ' 次、停損 ' + t.stopped + ' 次</div>' +
+      '</div>';
+    }).join('');
     trHtml = '<div style="background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:11px">' +
-      '<div style="font-weight:700;color:var(--tx);margin-bottom:4px">📊 新策略事後勝率</div>' +
-      '<div style="color:var(--mu)">' + trParts.join(' · ') + '</div>' +
-      (lowSample ? '<div style="margin-top:4px;color:var(--hi)">樣本數過少，僅供參考</div>' : '') +
+      '<div style="font-weight:700;color:var(--tx);margin-bottom:4px">📊 新策略事後勝率</div>' + trRows +
+      '<div style="margin-top:6px;color:var(--hi);line-height:1.5">巧合機率 ≤5% 且獨立訊號 ≥5 次才算已驗證；多頭／空頭盤＝訊號當天台指過去 21 個交易日漲或跌</div>' +
     '</div>';
   } else {
     trHtml = '<div style="background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:var(--hi)">📊 新策略尚未累積足夠事後驗證資料（訊號出現至少 5 個交易日後才會有數據）</div>';
@@ -587,6 +632,100 @@ function renderInstFutures() {
     '<div class="inst-total ' + totalDir + '">' + totalText + ' · 合計 ' + (total >= 0 ? '+' : '') + total.toLocaleString('zh-TW') + ' 口</div>' +
     rowHtml +
     '<div style="font-size:10px;color:var(--hi);margin-top:8px">正值＝未平倉淨多單，負值＝未平倉淨空單，僅供參考，不構成投資建議</div>';
+}
+
+var STATUS_TXT = {
+  verified:     {t:'🟢 已驗證', c:'var(--G)'},
+  support:      {t:'🟡 初步支持', c:'#b7791f'},
+  unverified:   {t:'⚪ 未驗證，可能只是運氣', c:'var(--mu)'},
+  insufficient: {t:'⚪ 樣本不足（<5 次）', c:'var(--mu)'},
+  inverse:      {t:'🔴 疑似反向', c:'var(--R)'},
+};
+
+var sparkCharts = [];
+function drawSpark(id, values, suffix) {
+  var el = document.getElementById(id);
+  if (!el || !values || !values.length) return;
+  sparkCharts.push(new Chart(el, {
+    type: 'line',
+    data: { labels: values.map(function(_, i) { return i - values.length + 1; }),
+      datasets: [{ data: values, borderColor: '#3182ce', borderWidth: 2, pointRadius: 0, pointHitRadius: 8, tension: .3, fill: false }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { display: false }, tooltip: { displayColors: false, callbacks: {
+        title: function(c) { var d = +c[0].label; return d === 0 ? '今天' : (-d) + ' 個交易日前'; },
+        label: function(c) { return c.parsed.y + suffix; } } } },
+      scales: { x: { display: false }, y: { display: false } } }
+  }));
+}
+
+function renderGauges() {
+  sparkCharts.forEach(function(c) { c.destroy(); }); sparkCharts = [];
+  var br = data.breadth || {}, rg = data.risk_gauges || {};
+  var html = '';
+  var BR_STATE = {strong: '🟢 普遍強勢', neutral: '⚪ 中性', weak: '🔴 普遍弱勢'};
+  [['tw', '台股'], ['sox', '費半']].forEach(function(x) {
+    var b = br[x[0]];
+    if (!b) { html += '<div class="gz"><div class="gz-name">市場寬度 · ' + x[1] + '</div><div class="gz-note">今日資料抓取失敗</div></div>'; return; }
+    html += '<div class="gz">' +
+      '<div class="gz-top"><span class="gz-name">市場寬度 · ' + x[1] + ' ' + b.total + ' 檔</span><span class="gz-val">' + b.pct + '%</span></div>' +
+      '<div class="gz-note">' + b.above + '/' + b.total + ' 檔站上 50 日均線 · ' + BR_STATE[b.state] +
+        ' · 20 日前 ' + b.series[0] + '%（' + sg(b.change20) + b.change20 + '）</div>' +
+      (b.divergence ? '<div class="gz-warn">⚠️ 背離：指數在高檔，但站上均線的股票變少，漲勢集中在少數股</div>' : '') +
+      '<div class="spark"><canvas id="spark-' + x[0] + '"></canvas></div>' +
+      '<div class="chips">' + b.bySector.map(function(s) { return '<span class="chip">' + s.name + ' ' + s.above + '/' + s.total + '</span>'; }).join('') + '</div>' +
+    '</div>';
+  });
+
+  var v = rg.vixTerm;
+  var V_STATE = {calm: '🟢 平靜', alert: '🟡 警戒', panic: '🔴 恐慌（短期波動高於長期）'};
+  html += '<div class="gz"><div class="gz-top"><span class="gz-name">恐慌溫度計 · VIX ÷ VIX3M</span>' +
+    '<span class="gz-val">' + (v ? v.ratio.toFixed(2) : '—') + '</span></div>' +
+    (v ? '<div class="gz-note">' + V_STATE[v.state] + ' · VIX ' + v.vix + ' / VIX3M ' + v.vix3m + '</div>' : '<div class="gz-note">今日資料抓取失敗</div>') +
+    '<div class="gz-note" style="color:var(--hi)">平常約 0.85～0.9；超過 1 代表市場怕的是「現在」，常見於恐慌拋售</div></div>';
+
+  var h = rg.hyOas;
+  var H_STATE = {calm: '🟢 穩定', rising: '🟡 升溫', stress: '🔴 快速惡化'};
+  html += '<div class="gz"><div class="gz-top"><span class="gz-name">信用利差 · 美國高收益債</span>' +
+    '<span class="gz-val">' + (h ? h.value.toFixed(2) + '%' : '—') + '</span></div>' +
+    (h ? '<div class="gz-note">' + H_STATE[h.state] + ' · 5 日 ' + sg(h.d5) + h.d5.toFixed(2) + ' · 20 日 ' + sg(h.d20) + h.d20.toFixed(2) + '（' + h.date + '）</div>' +
+      '<div class="spark"><canvas id="spark-hy"></canvas></div>' : '<div class="gz-note">今日資料抓取失敗</div>') +
+    '<div class="gz-note" style="color:var(--hi)">高風險公司借錢要多付的利息；20 日內升 0.5 個百分點以上＝資金在逃離風險</div></div>';
+
+  document.getElementById('gaugeContent').innerHTML = html;
+  if (br.tw) drawSpark('spark-tw', br.tw.series, '%');
+  if (br.sox) drawSpark('spark-sox', br.sox.series, '%');
+  if (h) drawSpark('spark-hy', h.series, '%');
+}
+
+function renderRevenue() {
+  var mr = data.monthly_revenue;
+  var el = document.getElementById('revContent');
+  if (!mr || !mr.companies || !mr.companies.length) { el.innerHTML = '<div class="gz-note">月營收資料待更新</div>'; return; }
+  var mo = function(ym) { return +ym.slice(5) + '月'; };
+  document.getElementById('revSub').textContent = mr.month.replace('-', '/') + ' 營收 · 年增率連 2 個月上升＝加速，由正轉負＝轉弱';
+  var yoyTxt = function(y) { return y === null || y === undefined ? '—' : (sg(y) + y.toFixed(1) + '%'); };
+  var accel = mr.companies.filter(function(c) { return c.accel; });
+  var neg = mr.companies.filter(function(c) { return c.turnedNegative; });
+  var LIST_MAX = 12;
+  var list = function(arr) {
+    return arr.slice(0, LIST_MAX).map(function(c) { return c.name + '（' + yoyTxt(c.yoy[2]) + '→' + yoyTxt(c.yoy[1]) + '→' + yoyTxt(c.yoy[0]) + '）'; }).join('、') +
+      (arr.length > LIST_MAX ? ' 等，完整清單見下方明細' : '');
+  };
+  var html =
+    '<div class="gz"><div class="gz-name">🟢 加速 ' + accel.length + ' 檔</div><div class="gz-note">' + (accel.length ? list(accel) : '無') + '</div></div>' +
+    '<div class="gz"><div class="gz-name">🔴 轉弱 ' + neg.length + ' 檔</div><div class="gz-note">' + (neg.length ? list(neg) : '無') + '</div></div>';
+  var rows = '', lastSec = null;
+  mr.companies.forEach(function(c) {
+    if (c.sector !== lastSec) { rows += '<tr class="sec"><td colspan="5">' + c.sector + '</td></tr>'; lastSec = c.sector; }
+    var tag = c.accel ? '🟢' : c.turnedNegative ? '🔴' : '';
+    rows += '<tr><td>' + c.name + ' ' + tag + '</td><td>' + yoyTxt(c.yoy[2]) + '</td><td>' + yoyTxt(c.yoy[1]) + '</td><td><b>' + yoyTxt(c.yoy[0]) + '</b></td><td>' + yoyTxt(c.mom) + '</td></tr>';
+  });
+  html += '<details><summary>全部 ' + mr.companies.length + ' 檔明細</summary>' +
+    '<table class="rv-tbl"><thead><tr><th>公司</th><th>' + mo(mr.months[2]) + ' 年增</th><th>' + mo(mr.months[1]) + ' 年增</th><th>' + mo(mr.months[0]) + ' 年增</th><th>月增</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></details>' +
+    '<div class="gz-note" style="color:var(--hi);margin-top:6px">資料：證交所、櫃買中心、公開資訊觀測站 · 金控營收含投資損益，年增率波動大僅供參考</div>';
+  el.innerHTML = html;
 }
 
 function renderBanner() {
@@ -816,6 +955,8 @@ function renderAll() {
   renderStrategy();
   renderInstFutures();
   renderResonance();
+  renderGauges();
+  renderRevenue();
   renderHeat();
   var upd = new Date(data.updated);
   var h = upd.getHours(), mi = upd.getMinutes();
