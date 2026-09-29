@@ -1,6 +1,6 @@
 {
   "date": "2026-09-29",
-  "updated": "2026-09-29T16:15:00.482564+08:00",
+  "updated": "2026-09-29T16:21:14.668884+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -72,25 +72,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7743.75,
-      "change": -3.0,
-      "changePercent": -0.04,
+      "price": 7741.25,
+      "change": -5.5,
+      "changePercent": -0.07,
       "prev": 7746.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30586.25,
-      "change": 20.0,
-      "changePercent": 0.07,
+      "price": 30575.25,
+      "change": 9.0,
+      "changePercent": 0.03,
       "prev": 30566.25
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 65830.0,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 65765.0,
+      "change": -65.0,
+      "changePercent": -0.1,
       "prev": 65830.0
     }
   },
@@ -98,17 +98,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4172.3,
-      "change": 3.9,
-      "changePercent": 0.09,
+      "price": 4170.1,
+      "change": 1.7,
+      "changePercent": 0.04,
       "prev": 4168.4
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 61.09,
-      "change": -0.13,
-      "changePercent": -0.21,
+      "price": 60.98,
+      "change": -0.24,
+      "changePercent": -0.39,
       "prev": 61.22
     }
   },
@@ -1630,11 +1630,11 @@
         "yoy": [
           53.320053714712955,
           44.68,
-          67.86
+          null
         ],
         "mom": 10.099818994181083,
         "rev": 514805337.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1644,11 +1644,11 @@
         "yoy": [
           44.0812520934518,
           12.15,
-          2.79
+          null
         ],
         "mom": 32.40526804267691,
         "rev": 64183361.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1658,11 +1658,11 @@
         "yoy": [
           45.65918579706578,
           43.15,
-          32.86
+          null
         ],
         "mom": 11.470924994667861,
         "rev": 82247374.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1672,11 +1672,11 @@
         "yoy": [
           30.71441291503008,
           18.98,
-          22.85
+          null
         ],
         "mom": 5.035202709942881,
         "rev": 25044641.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1686,11 +1686,11 @@
         "yoy": [
           560.8541425724004,
           719.61,
-          621.33
+          null
         ],
         "mom": 1.8753221767796826,
         "rev": 44690268.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1700,11 +1700,11 @@
         "yoy": [
           111.0204372171911,
           158.38,
-          103.71
+          null
         ],
         "mom": 1.2293622826160435,
         "rev": 5840094.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1714,11 +1714,11 @@
         "yoy": [
           91.58397305250298,
           100.82,
-          106.54
+          null
         ],
         "mom": -0.5134678562183252,
         "rev": 5218962.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1728,11 +1728,11 @@
         "yoy": [
           289.42756449599915,
           291.54,
-          189.87
+          null
         ],
         "mom": 2.000277964749722,
         "rev": 27308717.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1742,11 +1742,11 @@
         "yoy": [
           40.57567965225748,
           35.85,
-          32.26
+          null
         ],
         "mom": 5.7332946714025335,
         "rev": 4809631.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1756,11 +1756,11 @@
         "yoy": [
           31.577957840545338,
           36.74,
-          28.63
+          null
         ],
         "mom": 2.239981837781924,
         "rev": 4080093.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1770,11 +1770,11 @@
         "yoy": [
           28.083000681580568,
           32.53,
-          20.6
+          null
         ],
         "mom": -3.381240495941536,
         "rev": 12459133.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1784,11 +1784,11 @@
         "yoy": [
           76.19282844889565,
           70.54,
-          68.75
+          null
         ],
         "mom": 5.097735257913507,
         "rev": 7008845.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1798,11 +1798,11 @@
         "yoy": [
           26.33031651680444,
           26.79,
-          18.95
+          null
         ],
         "mom": 0.30216585867666274,
         "rev": 10327444.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1826,11 +1826,11 @@
         "yoy": [
           218.53271706735816,
           180.47,
-          216.09
+          null
         ],
         "mom": 5.444034937143434,
         "rev": 8145267.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1840,11 +1840,11 @@
         "yoy": [
           24.459768182447533,
           29.37,
-          21.71
+          null
         ],
         "mom": 3.4753008204342057,
         "rev": 8557545.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1854,11 +1854,11 @@
         "yoy": [
           233.36649415222965,
           155.57,
-          287.89
+          null
         ],
         "mom": 6.5805563904418465,
         "rev": 1705663.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1868,11 +1868,11 @@
         "yoy": [
           29.27771748942473,
           28.77,
-          23.71
+          null
         ],
         "mom": 2.2119027720539877,
         "rev": 1331863.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1896,11 +1896,11 @@
         "yoy": [
           150.82441845471112,
           144.57,
-          59.47
+          null
         ],
         "mom": -6.610617208349262,
         "rev": 1030931.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1910,11 +1910,11 @@
         "yoy": [
           34.94854905033159,
           47.74,
-          55.42
+          null
         ],
         "mom": -3.708102933285179,
         "rev": 64586049.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1924,11 +1924,11 @@
         "yoy": [
           51.978131522564816,
           54.18,
-          52.11
+          null
         ],
         "mom": -2.6144946713083335,
         "rev": 921766023.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1938,11 +1938,11 @@
         "yoy": [
           56.25723917867715,
           43.69,
-          36.31
+          null
         ],
         "mom": 9.178757960449099,
         "rev": 17745519.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1952,11 +1952,11 @@
         "yoy": [
           129.84671742960728,
           129.4,
-          120.69
+          null
         ],
         "mom": 4.888351969713899,
         "rev": 20145589.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1966,11 +1966,11 @@
         "yoy": [
           51.799610560411935,
           51.51,
-          38.91
+          null
         ],
         "mom": 1.2460830535233982,
         "rev": 16332196.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1980,11 +1980,11 @@
         "yoy": [
           344.4151275890319,
           355.52,
-          220.52
+          null
         ],
         "mom": 0.9194731722909152,
         "rev": 6466169.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -1994,11 +1994,11 @@
         "yoy": [
           90.90319995881177,
           90.95,
-          57.64
+          null
         ],
         "mom": 0.39577725555222554,
         "rev": 3225888.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2008,11 +2008,11 @@
         "yoy": [
           156.29654201767283,
           175.25,
-          73.02
+          null
         ],
         "mom": 3.6465264692026853,
         "rev": 5632401.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2022,11 +2022,11 @@
         "yoy": [
           40.59000155490278,
           50.24,
-          50.02
+          null
         ],
         "mom": -1.6002754537845574,
         "rev": 5352700.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2036,11 +2036,11 @@
         "yoy": [
           76.38825024031777,
           77.38,
-          78.22
+          null
         ],
         "mom": 3.6890808722169304,
         "rev": 10383971.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2078,11 +2078,11 @@
         "yoy": [
           65.47995924001005,
           56.54,
-          41.97
+          null
         ],
         "mom": 4.097822462615335,
         "rev": 10224358.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2092,11 +2092,11 @@
         "yoy": [
           6.865708582371952,
           16.0,
-          20.96
+          null
         ],
         "mom": 0.8179232272483112,
         "rev": 7012064.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2106,11 +2106,11 @@
         "yoy": [
           59.050412994601615,
           63.77,
-          50.9
+          null
         ],
         "mom": -5.559907124229588,
         "rev": 9392377.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2120,11 +2120,11 @@
         "yoy": [
           97.92882458381861,
           96.87,
-          47.94
+          null
         ],
         "mom": 6.2086586004218836,
         "rev": 5044034.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2134,11 +2134,11 @@
         "yoy": [
           19.58057828451359,
           18.6,
-          17.25
+          null
         ],
         "mom": -5.063084108681875,
         "rev": 3198344.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2148,11 +2148,11 @@
         "yoy": [
           41.68738766970338,
           62.28,
-          49.69
+          null
         ],
         "mom": 0.8238097120440502,
         "rev": 11018647.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2162,11 +2162,11 @@
         "yoy": [
           29.136067855214495,
           17.06,
-          32.66
+          null
         ],
         "mom": 12.37026988276037,
         "rev": 1528275.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2176,11 +2176,11 @@
         "yoy": [
           45.54208446583508,
           41.95,
-          25.84
+          null
         ],
         "mom": 2.8056594288635734,
         "rev": 4568665.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2190,11 +2190,11 @@
         "yoy": [
           -48.01854159471246,
           -79.15,
-          -53.64
+          null
         ],
         "mom": 280.36369008535786,
         "rev": 40550573.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2204,11 +2204,11 @@
         "yoy": [
           -69.46614444389321,
           -69.7,
-          -42.04
+          null
         ],
         "mom": 17.309732141741776,
         "rev": 29486864.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2218,11 +2218,11 @@
         "yoy": [
           -32.01339086205033,
           -18.42,
-          -17.9
+          null
         ],
         "mom": 35.21636522208552,
         "rev": 24401509.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2232,11 +2232,11 @@
         "yoy": [
           -44.54199215009353,
           -15.63,
-          329.5
+          null
         ],
         "mom": -12.579733025338912,
         "rev": 15781347.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2246,11 +2246,11 @@
         "yoy": [
           57.940258843989525,
           78.98,
-          72.83
+          null
         ],
         "mom": 11.532295134693848,
         "rev": 19585535.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2260,11 +2260,11 @@
         "yoy": [
           19.28818447821957,
           4.74,
-          25.3
+          null
         ],
         "mom": 12.303929261760363,
         "rev": 9839301.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2274,11 +2274,11 @@
         "yoy": [
           15.550439685057762,
           4.11,
-          1.52
+          null
         ],
         "mom": -9.811604078190381,
         "rev": 7795912.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2288,11 +2288,11 @@
         "yoy": [
           49.48292252285266,
           51.29,
-          50.94
+          null
         ],
         "mom": 0.975452104876698,
         "rev": 10051148.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2302,11 +2302,11 @@
         "yoy": [
           -51.734690174233705,
           -36.44,
-          -23.3
+          null
         ],
         "mom": 60.64216709067564,
         "rev": 13671344.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2316,11 +2316,11 @@
         "yoy": [
           11.949803192383932,
           6.47,
-          29.2
+          null
         ],
         "mom": -8.332331884197751,
         "rev": 7109220.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2330,11 +2330,11 @@
         "yoy": [
           13.898753138784288,
           2.36,
-          9.72
+          null
         ],
         "mom": -2.3633327251119747,
         "rev": 7582281.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2344,11 +2344,11 @@
         "yoy": [
           23.602041097562417,
           20.43,
-          -8.39
+          null
         ],
         "mom": -10.431685927698695,
         "rev": 6278514.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2358,11 +2358,11 @@
         "yoy": [
           21.134188454548564,
           7.11,
-          9.51
+          null
         ],
         "mom": -3.7911181427636205,
         "rev": 4605752.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2372,11 +2372,11 @@
         "yoy": [
           7.060368875130942,
           19.61,
-          -4.38
+          null
         ],
         "mom": -12.815193387111616,
         "rev": 4547978.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2386,11 +2386,11 @@
         "yoy": [
           8.817960929271047,
           17.99,
-          -7.71
+          null
         ],
         "mom": -5.433134839349536,
         "rev": 3427855.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2400,11 +2400,11 @@
         "yoy": [
           1.760042446658356,
           1.56,
-          16.55
+          null
         ],
         "mom": 7.936272900082451,
         "rev": 1975427.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2414,11 +2414,11 @@
         "yoy": [
           3.881349694132072,
           -22.03,
-          -2.48
+          null
         ],
         "mom": 48.77816899340448,
         "rev": 2026561.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2428,11 +2428,11 @@
         "yoy": [
           109.8769286098819,
           19.6,
-          199.01
+          null
         ],
         "mom": 122.47776672091175,
         "rev": 3758199.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2442,11 +2442,11 @@
         "yoy": [
           45.34586757893414,
           25.09,
-          101.2
+          null
         ],
         "mom": 48.11666933847363,
         "rev": 3030550.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2456,11 +2456,11 @@
         "yoy": [
           5.0653083005513615,
           5.43,
-          20.15
+          null
         ],
         "mom": -10.709758397392266,
         "rev": 1143908.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2470,11 +2470,11 @@
         "yoy": [
           105.4274761466709,
           92.58,
-          94.88
+          null
         ],
         "mom": 4.384664840520659,
         "rev": 2617220.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2498,7 +2498,7 @@
         "yoy": [
           -62.217194570135746,
           null,
-          -100.0
+          null
         ],
         "mom": null,
         "rev": 334.0,
@@ -2512,11 +2512,11 @@
         "yoy": [
           164.71067644661775,
           -22.6,
-          50.22
+          null
         ],
         "mom": 157.77777777777777,
         "rev": 6496.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2526,11 +2526,11 @@
         "yoy": [
           59.21841576870238,
           5.76,
-          39.22
+          null
         ],
         "mom": 14.885070860129273,
         "rev": 2184612.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2540,11 +2540,11 @@
         "yoy": [
           81.67977762526685,
           3.93,
-          225.45
+          null
         ],
         "mom": -15.431117482488856,
         "rev": 2107202.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2554,11 +2554,11 @@
         "yoy": [
           18.878799016501482,
           17.41,
-          33.93
+          null
         ],
         "mom": 0.6425774989236727,
         "rev": 750382.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2582,11 +2582,11 @@
         "yoy": [
           125.90614216701174,
           183.96,
-          94.32
+          null
         ],
         "mom": -22.72437546919485,
         "rev": 163669.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2596,11 +2596,11 @@
         "yoy": [
           4.594724569373681,
           2.71,
-          -21.98
+          null
         ],
         "mom": -12.030467083179863,
         "rev": 632910.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2610,11 +2610,11 @@
         "yoy": [
           64.05265978828889,
           17.2,
-          45.94
+          null
         ],
         "mom": 5.164716467781455,
         "rev": 489730.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2624,11 +2624,11 @@
         "yoy": [
           -42.18344285361997,
           -7.05,
-          -3.91
+          null
         ],
         "mom": 7.509508267472285,
         "rev": 199285.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2638,11 +2638,11 @@
         "yoy": [
           32.2453706621182,
           18.28,
-          16.07
+          null
         ],
         "mom": 11.961354329439047,
         "rev": 944347.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2652,11 +2652,11 @@
         "yoy": [
           -20.139845586222652,
           -5.07,
-          -7.24
+          null
         ],
         "mom": -1.4858233559878724,
         "rev": 706058.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2666,11 +2666,11 @@
         "yoy": [
           70.6377909701609,
           11.68,
-          31.25
+          null
         ],
         "mom": 38.88744071309589,
         "rev": 436901.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2680,11 +2680,11 @@
         "yoy": [
           42.68640953520201,
           -11.91,
-          2.08
+          null
         ],
         "mom": 5.46706353104862,
         "rev": 397209.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2694,11 +2694,11 @@
         "yoy": [
           52.47437428070515,
           63.36,
-          12.61
+          null
         ],
         "mom": -2.5054503689745053,
         "rev": 283520.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2708,11 +2708,11 @@
         "yoy": [
           7.784429068135788,
           6.35,
-          9.1
+          null
         ],
         "mom": 4.444440723207513,
         "rev": 623714.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2722,11 +2722,11 @@
         "yoy": [
           21.796278158667974,
           6.66,
-          4.0
+          null
         ],
         "mom": 0.6572663547619433,
         "rev": 62177.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2736,11 +2736,11 @@
         "yoy": [
           -33.381206058683055,
           22.7,
-          28.62
+          null
         ],
         "mom": -35.90411002924259,
         "rev": 39892.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": true
       },
       {
@@ -2750,11 +2750,11 @@
         "yoy": [
           -16.23206393579812,
           -10.65,
-          -10.46
+          null
         ],
         "mom": 2.7644194788807654,
         "rev": 5011942.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2764,11 +2764,11 @@
         "yoy": [
           0.022929206689571976,
           -1.94,
-          17.24
+          null
         ],
         "mom": -1.0251108918680745,
         "rev": 18696603.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2778,11 +2778,11 @@
         "yoy": [
           -5.8591638763645015,
           -2.64,
-          13.82
+          null
         ],
         "mom": 13.409766711171503,
         "rev": 23101650.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2792,11 +2792,11 @@
         "yoy": [
           0.7211954265149975,
           1.62,
-          4.5
+          null
         ],
         "mom": 12.25767513441393,
         "rev": 2719294.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2806,11 +2806,11 @@
         "yoy": [
           10.869800594642088,
           12.18,
-          9.23
+          null
         ],
         "mom": -0.8486080860806038,
         "rev": 4628384.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2820,11 +2820,11 @@
         "yoy": [
           46.069210459555194,
           42.51,
-          35.04
+          null
         ],
         "mom": 5.069789698213286,
         "rev": 777300.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2834,11 +2834,11 @@
         "yoy": [
           35.677791635986594,
           31.84,
-          15.61
+          null
         ],
         "mom": 0.4167836756483224,
         "rev": 361158.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2848,11 +2848,11 @@
         "yoy": [
           8.002552973034222,
           -3.13,
-          15.98
+          null
         ],
         "mom": 7.123639574756012,
         "rev": 934086.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2862,11 +2862,11 @@
         "yoy": [
           15.288008714183615,
           14.8,
-          13.13
+          null
         ],
         "mom": 15.265439559415158,
         "rev": 2843905.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2876,11 +2876,11 @@
         "yoy": [
           -13.630346581340595,
           -9.47,
-          -15.03
+          null
         ],
         "mom": 1.4776336694875256,
         "rev": 3816244.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2890,11 +2890,11 @@
         "yoy": [
           18.52409047500687,
           11.51,
-          21.77
+          null
         ],
         "mom": 1.2532465500516319,
         "rev": 453005.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2904,11 +2904,11 @@
         "yoy": [
           -13.032185165971418,
           72.74,
-          -9.5
+          null
         ],
         "mom": -20.525184434746468,
         "rev": 244757.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": true
       },
       {
@@ -2918,11 +2918,11 @@
         "yoy": [
           38.57482029343866,
           36.31,
-          19.41
+          null
         ],
         "mom": -0.8342369922056976,
         "rev": 253312.0,
-        "accel": true,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2932,11 +2932,11 @@
         "yoy": [
           14.104232991248065,
           17.43,
-          10.58
+          null
         ],
         "mom": -5.651349826314142,
         "rev": 1862682.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2960,11 +2960,11 @@
         "yoy": [
           14.23365151641082,
           24.91,
-          18.97
+          null
         ],
         "mom": -9.063636660572373,
         "rev": 2171584.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -2988,11 +2988,11 @@
         "yoy": [
           23.58564530251907,
           32.24,
-          23.43
+          null
         ],
         "mom": 1.293526532271822,
         "rev": 2725433.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -3002,11 +3002,11 @@
         "yoy": [
           34.7021226390898,
           64.11,
-          18.96
+          null
         ],
         "mom": 13.218945850766243,
         "rev": 1312982.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       },
       {
@@ -3016,11 +3016,11 @@
         "yoy": [
           59.9166856232939,
           -9.82,
-          53.03
+          null
         ],
         "mom": 15.93621802139809,
         "rev": 224958.0,
-        "accel": false,
+        "accel": null,
         "turnedNegative": false
       }
     ],
