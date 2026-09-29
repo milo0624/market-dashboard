@@ -1242,6 +1242,30 @@ function triggerUpdate() {
     });
 }
 
+// ── 網頁自動換新版：瀏覽器常會拿快取裡的舊網頁，打開時跟伺服器上的版本比對程式碼，不同就重新載入一次 ──
+(function checkNewVersion() {
+  try {
+    var mine = document.scripts[document.scripts.length - 1].text;
+    fetch(location.pathname + '?nocache=' + Date.now(), { cache: 'no-store' })
+      .then(function(r) { return r.ok ? r.text() : null; })
+      .then(function(html) {
+        if (!html) return;
+        var OPEN = '<' + 'script>', CLOSE = '<' + '/script>';
+        var i = html.lastIndexOf(OPEN), j = html.lastIndexOf(CLOSE);
+        if (i < 0 || j < 0) return;
+        var latest = html.slice(i + 8, j);
+        if (latest === mine) return;
+        // 避免無限重載：同一個分頁 5 分鐘內最多自動換一次
+        var last = 0;
+        try { last = +sessionStorage.getItem('verReload') || 0; } catch (e) {}
+        if (Date.now() - last < 5 * 60 * 1000) return;
+        try { sessionStorage.setItem('verReload', Date.now()); } catch (e) {}
+        location.replace(location.pathname + '?v=' + Date.now());
+      })
+      .catch(function() {});
+  } catch (e) {}
+})();
+
 document.getElementById('updBtn').addEventListener('click', function() { triggerUpdate(); });
 document.getElementById('mkt0').addEventListener('click', function() { setMkt(0); });
 document.getElementById('mkt1').addEventListener('click', function() { setMkt(1); });
