@@ -970,6 +970,8 @@ function drawNightChart() {
   var UP = css.getPropertyValue('--Gm').trim() || '#38a169', DN = css.getPropertyValue('--Rm').trim() || '#e53e3e';
   var MA = css.getPropertyValue('--Bm').trim() || '#3182ce', GRID = css.getPropertyValue('--bdr').trim() || '#e2e8f0';
   var MU = css.getPropertyValue('--hi').trim() || '#a0aec0', TX = css.getPropertyValue('--tx').trim() || '#1a202c';
+  // 圖框還沒有寬度（頁面在背景、剛從背景切回、卡片還沒排版好）時先不畫，等有寬度再畫
+  if (!box.clientWidth) { waitNightChartSize(box); return; }
   var W = box.clientWidth, H = 190, PR = 44, PT = 8, PB = 18, dpr = window.devicePixelRatio || 1;
   cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
   var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
@@ -1028,7 +1030,28 @@ function drawNightChart() {
   cv.onmousemove = show; cv.onmouseleave = hide;
   cv.ontouchstart = function(e) { show(e); }; cv.ontouchmove = function(e) { e.preventDefault(); show(e); }; cv.ontouchend = hide;
 }
-window.addEventListener('resize', function() { if (nightBars) drawNightChart(); });
+var nkObserver = null;
+function waitNightChartSize(box) {
+  if (window.ResizeObserver) {
+    if (nkObserver) nkObserver.disconnect();
+    nkObserver = new ResizeObserver(function() {
+      if (box.clientWidth) { nkObserver.disconnect(); nkObserver = null; safeDrawNightChart(); }
+    });
+    nkObserver.observe(box);
+  } else {
+    setTimeout(safeDrawNightChart, 500);
+  }
+}
+// 畫圖失敗只影響圖，不會把整張夜盤卡片變成「尚無判斷」
+function safeDrawNightChart() {
+  try { drawNightChart(); }
+  catch (e) {
+    var box = document.getElementById('nkBox');
+    if (box) box.innerHTML = '<div style="font-size:11px;color:var(--mu);padding:8px 0">K 線圖暫時無法顯示（' + e.message + '），重新整理再試</div>';
+  }
+}
+window.addEventListener('resize', function() { if (nightBars) safeDrawNightChart(); });
+document.addEventListener('visibilitychange', function() { if (!document.hidden && nightBars) safeDrawNightChart(); });
 
 // ── 今晚夜盤：讀 night_signal.json（由「今晚夜盤判斷」排程每個交易日 14:05 產生）──
 function renderNight() {
@@ -1064,7 +1087,7 @@ function renderNight() {
           '<div class="nk-box" id="nkBox"><canvas id="nkCanvas"></canvas><div class="nk-tip" id="nkTip"></div></div></div>' : '') +
         last + paper +
         '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">' + String(s.updated || s.date).replace('T', ' ').slice(0, 16) + ' 更新 · 回測：2017–2026 夏普 1.24、最大回落 −7.3 萬（1 口）· 僅供參考，不構成投資建議</div>';
-      if (s.bars && s.bars.length) { nightBars = s.bars; drawNightChart(); }
+      if (s.bars && s.bars.length) { nightBars = s.bars; safeDrawNightChart(); }
     })
     .catch(function() {
       box.innerHTML = '<div style="font-size:12px;color:var(--mu)">尚無今晚夜盤判斷（排程第一次執行後才會出現）</div>';
