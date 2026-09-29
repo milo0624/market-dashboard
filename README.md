@@ -11,14 +11,6 @@
 
 ## 步驟一：建立 GitHub Repo
 
-1. 登入 github.com
-2. 右上角「+」→「New repository」
-3. Repository name 填：`market-dashboard`
-4. 選「Public」
-5. 不要勾任何東西，直接點「Create repository」
-
----
-
 ## 步驟二：上傳檔案
 
 在剛建立的 repo 頁面：
