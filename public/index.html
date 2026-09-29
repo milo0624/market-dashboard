@@ -1131,65 +1131,82 @@ function loadData() {
     });
 }
 
-function waitForComplete() {
-  return new Promise(function(resolve, reject) {
-    var maxTries = 20;
-    var tried = 0;
-    var lastUpdated = null;
-    fetch(WORKER_URL + '/status')
-      .then(function(r) { return r.json(); })
-      .then(function(s) { lastUpdated = s.updated_at; poll(); })
-      .catch(function() { poll(); });
-    function poll() {
-      setTimeout(function() {
-        tried++;
-        fetch(WORKER_URL + '/status')
-          .then(function(r) { return r.json(); })
-          .then(function(s) {
-            document.getElementById('stxt').textContent = '等待資料更新中...（' + (tried * 3) + '秒）';
-            if (s.updated_at !== lastUpdated && s.status === 'completed' && s.conclusion === 'success') {
-              resolve();
-            } else if (tried >= maxTries) {
-              reject(new Error('等待逾時，請稍後手動重新整理'));
-            } else {
-              poll();
-            }
-          })
-          .catch(function() {
-            if (tried >= maxTries) reject(new Error('無法查詢狀態'));
-            else poll();
-          });
-      }, 3000);
-    }
-  });
+// ── 手動更新 ──
+// GitHub Actions 跑一次約 4～5 分鐘，跑完後 GitHub Pages 還要 0.5～2 分鐘部署，
+// 所以分兩段等：①等這次 Actions 跑完（最多 10 分鐘）②等 data.json 真的換成新資料（最多 4 分鐘）
+function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+function getRunStatus() {
+  return fetch(WORKER_URL + '/status?t=' + Date.now()).then(function(r) { return r.json(); });
+}
+function fmtElapsed(t0) {
+  var s = Math.round((Date.now() - t0) / 1000), m = Math.floor(s / 60);
+  return (m ? m + ' 分 ' : '') + (s % 60) + ' 秒';
+}
+
+function waitForRun(baseRunId, t0) {
+  var MAX = 10 * 60 * 1000;
+  var stxt = document.getElementById('stxt');
+  var sawNew = false;
+  function loop() {
+    return sleep(5000).then(getRunStatus).then(function(s) {
+      // 觸發前記下的 run_id 變了＝這次按的那一輪已經開始
+      if (baseRunId == null ? s.status !== 'completed' : s.run_id !== baseRunId) sawNew = true;
+      if (sawNew && s.status === 'completed') {
+        if (s.conclusion === 'success') return;
+        throw new Error('GitHub 執行失敗（' + s.conclusion + '），請到 Actions 看紀錄');
+      }
+      if (Date.now() - t0 > MAX) throw new Error('等超過 10 分鐘還沒跑完，請稍後重新整理');
+      stxt.textContent = (sawNew ? '抓取資料中' : '等 GitHub 排隊中') + '…已 ' + fmtElapsed(t0) + '（通常 4～6 分鐘）';
+      return loop();
+    }, function() {
+      if (Date.now() - t0 > MAX) throw new Error('無法查詢更新狀態');
+      return loop();
+    });
+  }
+  return loop();
+}
+
+function waitForData(oldUpdated, t0) {
+  var MAX = 4 * 60 * 1000, t1 = Date.now();
+  var stxt = document.getElementById('stxt');
+  function loop() {
+    return fetch(DATA_URL + '?t=' + Date.now())
+      .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(function(json) {
+        if (!oldUpdated || json.updated !== oldUpdated) return {json: json, fresh: true};
+        if (Date.now() - t1 > MAX) return {json: json, fresh: false};
+        stxt.textContent = '資料已抓好，等網頁部署…已 ' + fmtElapsed(t0);
+        return sleep(10000).then(loop);
+      });
+  }
+  return loop();
 }
 
 function triggerUpdate() {
   var dot = document.getElementById('dot');
   var stxt = document.getElementById('stxt');
   var btn = document.getElementById('updBtn');
+  var oldUpdated = data ? data.updated : null;
+  var t0 = Date.now(), baseRunId = null;
   dot.className = 'dot busy';
   stxt.textContent = '觸發更新中...';
   btn.disabled = true;
   btn.textContent = '更新中...';
-  fetch(WORKER_URL + '/trigger', { method: 'POST' })
+  getRunStatus()
+    .then(function(s) { baseRunId = s.run_id; }, function() {})
+    .then(function() { return fetch(WORKER_URL + '/trigger', { method: 'POST' }); })
     .then(function(res) { return res.json(); })
     .then(function(json) {
       if (!json.ok) throw new Error(json.error || '觸發失敗');
-      stxt.textContent = '已觸發，等待資料更新（約30秒）...';
-      return waitForComplete();
+      stxt.textContent = '已觸發，GitHub 跑完約需 4～6 分鐘，可以先滑別的…';
+      return waitForRun(baseRunId, t0);
     })
-    .then(function() {
-      return fetch(DATA_URL + '?t=' + Date.now());
-    })
-    .then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    })
-    .then(function(json) {
-      data = json;
+    .then(function() { return waitForData(oldUpdated, t0); })
+    .then(function(r) {
+      data = r.json;
       dot.className = 'dot';
-      stxt.textContent = '已更新（富邦即時 + Yahoo Finance）';
+      stxt.textContent = r.fresh ? '已更新（富邦即時 + Yahoo Finance，共 ' + fmtElapsed(t0) + '）'
+                                 : '更新已跑完，但網頁快取還沒換新，1～2 分鐘後重新整理即可';
       btn.disabled = false;
       btn.textContent = '↻ 更新';
       renderAll();
