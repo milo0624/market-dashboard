@@ -24,7 +24,7 @@ SIG_FILE, HIST_FILE = "public/night_signal.json", "public/night_history.json"
 
 
 def fetch_bars(rest):
-    """抓近 130 天日盤＋近 10 天夜盤 30 分K；沿用 fetch_futures_kbars 的試探邏輯"""
+    """抓近 200 天日盤＋近 10 天夜盤 30 分K；沿用 fetch_futures_kbars 的試探邏輯"""
     today = date.today()
     product = None
     for p in K.PRODUCTS:
@@ -35,7 +35,7 @@ def fetch_bars(rest):
             print(f"[試探] {p} 失敗：{e}")
     if not product:
         sys.exit("抓不到台指期資料")
-    K.EARLIEST = today - timedelta(days=130)
+    K.EARLIEST = today - timedelta(days=200)   # 約 135 個交易日：畫圖要 60 根 K 棒，每根都要有 60 日均線
     span = K.find_span(rest, product, None, "日盤") or 30
     day = K.fetch_all(rest, product, None, span, "日盤")
     night = {}
@@ -85,13 +85,27 @@ def next_trading_day(d, holidays):
 
 
 def day_table(day_rows):
-    """日盤 30 分K → {日期: (開, 收)}"""
+    """日盤 30 分K → {日期: (開, 收, 高, 低)}"""
     t = {}
     for k in sorted(day_rows):
         r = day_rows[k]; d = date.fromisoformat(k[:10])
-        o, c = t.get(d, (r["open"], r["close"]))
-        t[d] = (o, r["close"])
+        if d in t:
+            o, _, h, l = t[d]
+            t[d] = (o, r["close"], max(h, r["high"]), min(l, r["low"]))
+        else:
+            t[d] = (r["open"], r["close"], r["high"], r["low"])
     return t
+
+
+def chart_bars(days, n=60):
+    """最近 n 個交易日的日K＋60 日均線，給網頁畫 K 線圖"""
+    ds = sorted(days); closes = [days[d][1] for d in ds]
+    out = []
+    for i, d in enumerate(ds):
+        o, c, h, l = days[d]
+        ma = round(sum(closes[i - MA_N + 1:i + 1]) / MA_N, 1) if i >= MA_N - 1 else None
+        out.append({"d": d.isoformat(), "o": o, "h": h, "l": l, "c": c, "ma": ma})
+    return out[-n:]
 
 
 def score(entry_date, night_rows, days):
@@ -179,6 +193,7 @@ def main():
     sig["paper"] = {"trades": len(done), "wins": sum(p > 0 for p in done), "total": sum(done),
                     "since": hist[0]["date"] if hist else None}
     sig["updated"] = datetime.now(TW).isoformat(timespec="minutes")
+    sig["bars"] = chart_bars(days)
     last = next((h for h in reversed(hist) if "result" in h), None)
     if last:
         sig["lastResult"] = {"date": last["date"], **last["result"]}
