@@ -186,7 +186,8 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
     <div id="nightContent"><div style="font-size:12px;color:var(--mu)">載入中...</div></div>
   </div>
 
-  <div class="card" id="stratCard">
+  <!-- 井田＋酒田策略卡片：回測無可靠優勢，先隱藏（訊號與歷史紀錄仍照常計算，要恢復就刪掉 style="display:none"） -->
+  <div class="card" id="stratCard" style="display:none">
     <div class="c-title">策略推薦</div>
     <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
     <div style="background:var(--Rbg);border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:var(--R);line-height:1.6">⚠️ 回測（2003–2026 日K、2010–2026 台指期 30 分K）顯示這套訊號沒有可靠優勢，僅供參考，不建議照著下單。詳見 trading/backtest/README.md</div>
