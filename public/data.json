@@ -1,6 +1,6 @@
 {
   "date": "2026-09-29",
-  "updated": "2026-09-29T15:42:21.194377+08:00",
+  "updated": "2026-09-29T15:52:14.890208+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -46,9 +46,9 @@
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 16.11,
-      "change": 0.04,
-      "changePercent": 0.25,
+      "price": 16.02,
+      "change": -0.05,
+      "changePercent": -0.31,
       "prev": 16.07
     },
     "VIX3M": {
@@ -72,25 +72,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7747.75,
-      "change": 1.0,
-      "changePercent": 0.01,
+      "price": 7749.25,
+      "change": 2.5,
+      "changePercent": 0.03,
       "prev": 7746.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30591.5,
-      "change": 25.25,
-      "changePercent": 0.08,
+      "price": 30600.0,
+      "change": 33.75,
+      "changePercent": 0.11,
       "prev": 30566.25
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 65850.0,
-      "change": 20.0,
-      "changePercent": 0.03,
+      "price": 65875.0,
+      "change": 45.0,
+      "changePercent": 0.07,
       "prev": 65830.0
     }
   },
@@ -98,17 +98,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4174.4,
-      "change": 6.0,
-      "changePercent": 0.14,
+      "price": 4175.6,
+      "change": 7.2,
+      "changePercent": 0.17,
       "prev": 4168.4
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 61.21,
-      "change": -0.01,
-      "changePercent": -0.02,
+      "price": 61.24,
+      "change": 0.02,
+      "changePercent": 0.03,
       "prev": 61.22
     }
   },
@@ -1540,9 +1540,9 @@
   },
   "risk_gauges": {
     "vixTerm": {
-      "vix": 16.11,
+      "vix": 16.02,
       "vix3m": 18.23,
-      "ratio": 0.884,
+      "ratio": 0.879,
       "state": "calm"
     },
     "hyOas": {
