@@ -240,7 +240,9 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
         <span class="trend-pct" id="trendPct"></span>
       </div>
       <div class="trend-sub" id="trendSub">近1個月綜合走勢</div>
-      <div style="position:relative;height:80px;margin-top:8px">
+      <div class="nk-legend" id="skLegend" style="margin-top:8px;display:none"><span><i class="nk-sw-k"></i>板塊日K（等權重）</span><span><i class="nk-sw-ma"></i>20 日均線</span></div>
+      <div class="nk-box" id="skBox" style="display:none"><canvas id="skCanvas"></canvas><div class="nk-tip" id="skTip"></div></div>
+      <div id="trendLineWrap" style="position:relative;height:80px;margin-top:8px">
         <canvas id="trendChart"></canvas>
       </div>
     </div>
@@ -841,6 +843,18 @@ function renderTrend(sec) {
   document.getElementById('trendName').textContent = sec.name + ' 板塊';
   document.getElementById('trendPct').textContent = trend.length ? (sg(last) + last.toFixed(2) + '%') : '—';
   document.getElementById('trendPct').className = 'trend-pct ' + dir;
+  var kb = sec.kbars || [];
+  var useK = kb.length >= 5;
+  document.getElementById('skLegend').style.display = useK ? 'flex' : 'none';
+  document.getElementById('skBox').style.display = useK ? 'block' : 'none';
+  document.getElementById('trendLineWrap').style.display = useK ? 'none' : 'block';
+  if (useK) {
+    document.getElementById('trendSub').textContent = '標題為近 1 個月漲跌 · 下圖近 ' + kb.length + ' 個交易日 K 線（以 ' + kb[0].d.slice(5).replace('-', '/') + ' 收盤為 0%）';
+    sectorBars = kb;
+    safeDrawSectorChart();
+    return;
+  }
+  sectorBars = null;
   document.getElementById('trendSub').textContent = '近1個月綜合走勢（' + trend.length + '個交易日）';
   if (!trend.length) return;
   var color = last >= 0 ? '#38a169' : '#e53e3e';
@@ -961,23 +975,27 @@ function renderMyPicks() {
 
 function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
 
-// ── 今晚夜盤 K 線圖：日盤 K 棒＋60 日均線，滑過／點擊顯示當天數值 ──
-var nightBars = null;
-function drawNightChart() {
-  var bars = nightBars, box = document.getElementById('nkBox'), cv = document.getElementById('nkCanvas'), tip = document.getElementById('nkTip');
-  if (!bars || !box || !cv) return;
+// ── 共用 K 線圖：K 棒＋均線，滑過／點擊顯示當天數值（今晚夜盤、板塊熱力圖共用）──
+// cfg: {bars, boxId, cvId, tipId, H, fmtAxis(v), fmtLast(v), tipHtml(b, i, bars)}
+var kObservers = {};
+function drawKChart(cfg) {
+  var bars = cfg.bars, box = document.getElementById(cfg.boxId), cv = document.getElementById(cfg.cvId), tip = document.getElementById(cfg.tipId);
+  if (!bars || !bars.length || !box || !cv) return;
+  // 圖框還沒有寬度（頁面在背景、剛從背景切回、卡片還沒排版好）時先不畫，等有寬度再畫
+  if (!box.clientWidth) { waitKChartSize(cfg, box); return; }
   var css = getComputedStyle(document.documentElement);
   var UP = css.getPropertyValue('--Gm').trim() || '#38a169', DN = css.getPropertyValue('--Rm').trim() || '#e53e3e';
   var MA = css.getPropertyValue('--Bm').trim() || '#3182ce', GRID = css.getPropertyValue('--bdr').trim() || '#e2e8f0';
   var MU = css.getPropertyValue('--hi').trim() || '#a0aec0', TX = css.getPropertyValue('--tx').trim() || '#1a202c';
-  // 圖框還沒有寬度（頁面在背景、剛從背景切回、卡片還沒排版好）時先不畫，等有寬度再畫
-  if (!box.clientWidth) { waitNightChartSize(box); return; }
-  var W = box.clientWidth, H = 190, PR = 44, PT = 8, PB = 18, dpr = window.devicePixelRatio || 1;
+  var W = box.clientWidth, H = cfg.H || 190, PR = 46, PT = 8, PB = 18, dpr = window.devicePixelRatio || 1;
   cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
   var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
   var lo = Infinity, hi = -Infinity;
-  bars.forEach(function(b) { lo = Math.min(lo, b.l, b.ma || b.l); hi = Math.max(hi, b.h, b.ma || b.h); });
-  var pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+  bars.forEach(function(b) {
+    lo = Math.min(lo, b.l, b.ma == null ? b.l : b.ma);
+    hi = Math.max(hi, b.h, b.ma == null ? b.h : b.ma);
+  });
+  var pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
   var pw = W - PR, ph = H - PT - PB, slot = pw / bars.length, bw = Math.max(2, Math.min(9, slot * 0.62));
   var y = function(v) { return PT + (hi - v) / (hi - lo) * ph; };
   var x = function(i) { return i * slot + slot / 2; };
@@ -986,7 +1004,7 @@ function drawNightChart() {
   for (var g = 0; g <= 3; g++) {
     var v = lo + (hi - lo) * g / 3, yy = Math.round(y(v)) + 0.5;
     ctx.strokeStyle = GRID; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(pw, yy); ctx.stroke();
-    ctx.fillText(Math.round(v).toLocaleString('zh-TW'), pw + 4, yy);
+    ctx.fillText(cfg.fmtAxis(v), pw + 4, yy);
   }
   // 日期（頭、中、尾）
   ctx.textBaseline = 'alphabetic';
@@ -1001,16 +1019,16 @@ function drawNightChart() {
     var top = y(Math.max(b.o, b.c)), bh = Math.max(1, Math.abs(y(b.o) - y(b.c)));
     ctx.fillStyle = col; ctx.fillRect(cx - bw / 2, top, bw, bh);
   });
-  // 60 日均線
+  // 均線
   ctx.strokeStyle = MA; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.beginPath();
   var started = false;
   bars.forEach(function(b, i) { if (b.ma == null) return; if (!started) { ctx.moveTo(x(i), y(b.ma)); started = true; } else ctx.lineTo(x(i), y(b.ma)); });
   ctx.stroke();
-  // 今天收盤標記（右側標籤）
+  // 最新收盤標記（右側標籤）
   var lb = bars[bars.length - 1], ly = y(lb.c);
   ctx.fillStyle = TX; ctx.fillRect(pw + 1, ly - 8, PR - 1, 16);
   ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = 'bold 10px -apple-system,sans-serif';
-  ctx.fillText(Math.round(lb.c).toLocaleString('zh-TW'), pw + 4, ly);
+  ctx.fillText(cfg.fmtLast(lb.c), pw + 4, ly);
   // 互動：十字線＋提示框
   var base = ctx.getImageData(0, 0, cv.width, cv.height);
   function show(ev) {
@@ -1018,10 +1036,7 @@ function drawNightChart() {
     var i = Math.max(0, Math.min(bars.length - 1, Math.floor(px / slot))), b = bars[i];
     ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.strokeStyle = MU; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(Math.round(x(i)) + 0.5, PT); ctx.lineTo(Math.round(x(i)) + 0.5, PT + ph); ctx.stroke(); ctx.setLineDash([]);
-    var chg = i > 0 ? b.c - bars[i - 1].c : 0;
-    tip.innerHTML = '<b>' + b.d + '</b><br>開 ' + fm(b.o, 0) + '　高 ' + fm(b.h, 0) + '<br>低 ' + fm(b.l, 0) + '　收 <b>' + fm(b.c, 0) + '</b>' +
-      (i > 0 ? '（' + (chg >= 0 ? '+' : '') + fm(chg, 0) + '）' : '') + '<br>60 日均線 ' + (b.ma == null ? '—' : fm(b.ma, 0)) +
-      (b.ma == null ? '' : '（收盤' + (b.c > b.ma ? '在上' : '在下') + '）');
+    tip.innerHTML = cfg.tipHtml(b, i, bars);
     tip.style.display = 'block';
     var tx = x(i) + 12; if (tx + tip.offsetWidth > pw) tx = x(i) - tip.offsetWidth - 12;
     tip.style.left = Math.max(0, tx) + 'px'; tip.style.top = '6px';
@@ -1030,28 +1045,63 @@ function drawNightChart() {
   cv.onmousemove = show; cv.onmouseleave = hide;
   cv.ontouchstart = function(e) { show(e); }; cv.ontouchmove = function(e) { e.preventDefault(); show(e); }; cv.ontouchend = hide;
 }
-var nkObserver = null;
-function waitNightChartSize(box) {
+function waitKChartSize(cfg, box) {
   if (window.ResizeObserver) {
-    if (nkObserver) nkObserver.disconnect();
-    nkObserver = new ResizeObserver(function() {
-      if (box.clientWidth) { nkObserver.disconnect(); nkObserver = null; safeDrawNightChart(); }
+    if (kObservers[cfg.boxId]) kObservers[cfg.boxId].disconnect();
+    var ob = new ResizeObserver(function() {
+      if (box.clientWidth) { ob.disconnect(); delete kObservers[cfg.boxId]; safeDrawKChart(cfg); }
     });
-    nkObserver.observe(box);
+    kObservers[cfg.boxId] = ob;
+    ob.observe(box);
   } else {
-    setTimeout(safeDrawNightChart, 500);
+    setTimeout(function() { safeDrawKChart(cfg); }, 500);
   }
 }
-// 畫圖失敗只影響圖，不會把整張夜盤卡片變成「尚無判斷」
-function safeDrawNightChart() {
-  try { drawNightChart(); }
+// 畫圖失敗只影響那張圖，不會拖累整張卡片
+function safeDrawKChart(cfg) {
+  try { drawKChart(cfg); }
   catch (e) {
-    var box = document.getElementById('nkBox');
+    var box = document.getElementById(cfg.boxId);
     if (box) box.innerHTML = '<div style="font-size:11px;color:var(--mu);padding:8px 0">K 線圖暫時無法顯示（' + e.message + '），重新整理再試</div>';
   }
 }
-window.addEventListener('resize', function() { if (nightBars) safeDrawNightChart(); });
-document.addEventListener('visibilitychange', function() { if (!document.hidden && nightBars) safeDrawNightChart(); });
+
+// 今晚夜盤：台指期日盤 K＋60 日均線
+var nightBars = null;
+function nightChartCfg() {
+  return {
+    bars: nightBars, boxId: 'nkBox', cvId: 'nkCanvas', tipId: 'nkTip', H: 190,
+    fmtAxis: function(v) { return Math.round(v).toLocaleString('zh-TW'); },
+    fmtLast: function(v) { return Math.round(v).toLocaleString('zh-TW'); },
+    tipHtml: function(b, i, bars) {
+      var chg = i > 0 ? b.c - bars[i - 1].c : 0;
+      return '<b>' + b.d + '</b><br>開 ' + fm(b.o, 0) + '　高 ' + fm(b.h, 0) + '<br>低 ' + fm(b.l, 0) + '　收 <b>' + fm(b.c, 0) + '</b>' +
+        (i > 0 ? '（' + (chg >= 0 ? '+' : '') + fm(chg, 0) + '）' : '') + '<br>60 日均線 ' + (b.ma == null ? '—' : fm(b.ma, 0)) +
+        (b.ma == null ? '' : '（收盤' + (b.c > b.ma ? '在上' : '在下') + '）');
+    }
+  };
+}
+function safeDrawNightChart() { if (nightBars) safeDrawKChart(nightChartCfg()); }
+
+// 板塊熱力圖：等權重板塊 K＋20 日均線（數值＝相對 60 個交易日前收盤的漲跌 %）
+var sectorBars = null;
+function pct(v) { return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'; }
+function sectorChartCfg() {
+  return {
+    bars: sectorBars, boxId: 'skBox', cvId: 'skCanvas', tipId: 'skTip', H: 170,
+    fmtAxis: pct, fmtLast: pct,
+    tipHtml: function(b, i, bars) {
+      var chg = i > 0 ? b.c - bars[i - 1].c : 0;
+      return '<b>' + b.d + '</b><br>開 ' + pct(b.o) + '　高 ' + pct(b.h) + '<br>低 ' + pct(b.l) + '　收 <b>' + pct(b.c) + '</b>' +
+        (i > 0 ? '（當日 ' + (chg >= 0 ? '+' : '') + chg.toFixed(2) + '）' : '') + '<br>20 日均線 ' + (b.ma == null ? '—' : pct(b.ma)) +
+        (b.ma == null ? '' : '（收盤' + (b.c > b.ma ? '在上' : '在下') + '）');
+    }
+  };
+}
+function safeDrawSectorChart() { if (sectorBars) safeDrawKChart(sectorChartCfg()); }
+
+window.addEventListener('resize', function() { safeDrawNightChart(); safeDrawSectorChart(); });
+document.addEventListener('visibilitychange', function() { if (!document.hidden) { safeDrawNightChart(); safeDrawSectorChart(); } });
 
 // ── 今晚夜盤：讀 night_signal.json（由「今晚夜盤判斷」排程每個交易日 14:05 產生）──
 function renderNight() {
