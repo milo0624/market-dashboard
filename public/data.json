@@ -1,15 +1,15 @@
 {
   "date": "2026-09-29",
-  "updated": "2026-09-29T16:21:14.668884+08:00",
+  "updated": "2026-09-29T23:59:25.498592+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
       "name": "費半 SOX",
       "symbol": "^SOX",
-      "price": 12465.24,
-      "change": -27.3,
-      "changePercent": -0.22,
-      "prev": 12492.54
+      "price": 12681.87,
+      "change": 12.94,
+      "changePercent": 0.1,
+      "prev": 12668.93
     },
     "N225": {
       "name": "日經 225",
@@ -22,10 +22,10 @@
     "TSM_ADR": {
       "name": "TSM ADR",
       "symbol": "TSM",
-      "price": 452.88,
-      "change": 1.73,
-      "changePercent": 0.38,
-      "prev": 451.15
+      "price": 457.47,
+      "change": 6.86,
+      "changePercent": 1.52,
+      "prev": 450.61
     },
     "TWII": {
       "name": "台股 TAIEX",
@@ -38,26 +38,26 @@
     "NVDA": {
       "name": "輝達 NVDA",
       "symbol": "NVDA",
-      "price": 228.86,
-      "change": 4.28,
-      "changePercent": 1.91,
-      "prev": 224.58
+      "price": 230.46,
+      "change": 5.39,
+      "changePercent": 2.39,
+      "prev": 225.07
     },
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 16.13,
-      "change": 0.06,
-      "changePercent": 0.37,
+      "price": 16.18,
+      "change": 0.11,
+      "changePercent": 0.68,
       "prev": 16.07
     },
     "VIX3M": {
       "name": "VIX 三個月",
       "symbol": "^VIX3M",
-      "price": 18.23,
-      "change": -0.2,
-      "changePercent": -1.09,
-      "prev": 18.43
+      "price": 18.12,
+      "change": 0.19,
+      "changePercent": 1.06,
+      "prev": 17.93
     },
     "TSM": {
       "name": "台積電",
@@ -72,25 +72,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7741.25,
-      "change": -5.5,
-      "changePercent": -0.07,
+      "price": 7728.25,
+      "change": -18.5,
+      "changePercent": -0.24,
       "prev": 7746.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30575.25,
-      "change": 9.0,
-      "changePercent": 0.03,
+      "price": 30587.5,
+      "change": 21.25,
+      "changePercent": 0.07,
       "prev": 30566.25
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 65765.0,
-      "change": -65.0,
-      "changePercent": -0.1,
+      "price": 66215.0,
+      "change": 385.0,
+      "changePercent": 0.58,
       "prev": 65830.0
     }
   },
@@ -98,17 +98,17 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4170.1,
-      "change": 1.7,
-      "changePercent": 0.04,
+      "price": 4190.8,
+      "change": 22.4,
+      "changePercent": 0.54,
       "prev": 4168.4
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 60.98,
-      "change": -0.24,
-      "changePercent": -0.39,
+      "price": 61.23,
+      "change": 0.02,
+      "changePercent": 0.03,
       "prev": 61.22
     }
   },
@@ -117,10 +117,6 @@
     "streak": 0,
     "streak_dir": 0,
     "history": [
-      {
-        "date": "2026-09-19",
-        "dir": 0
-      },
       {
         "date": "2026-09-20",
         "dir": 0
@@ -156,19 +152,23 @@
       {
         "date": "2026-09-29",
         "dir": 0
+      },
+      {
+        "date": "2026-09-24",
+        "dir": 0
       }
     ],
     "detail": {
       "symbol": "^TWII",
-      "date": "2026-09-29",
-      "close": 47631.9609375,
-      "open": 47873.890625,
-      "volume": 0,
-      "avgVol": 4288660.0,
+      "date": "2026-09-24",
+      "close": 48024.6015625,
+      "open": 48075.390625,
+      "volume": 3540900,
+      "avgVol": 4542350.0,
       "highestHigh": 48601.53,
       "lowestLow": 45398.43,
-      "ma20": 46820.8,
-      "ma60": 45336.78,
+      "ma20": 46755.77,
+      "ma60": 45321.99,
       "longBreakout": false,
       "shortBreakout": false,
       "bullVol": false,
@@ -979,99 +979,99 @@
         {
           "symbol": "NVDA",
           "name": "輝達",
-          "price": 228.86,
-          "changePercent": 1.91
+          "price": 230.46,
+          "changePercent": 2.39
         },
         {
           "symbol": "AVGO",
           "name": "博通",
-          "price": 349.57,
-          "changePercent": -0.23
+          "price": 357.82,
+          "changePercent": 1.42
         },
         {
           "symbol": "AMD",
           "name": "超微",
-          "price": 607.87,
-          "changePercent": -3.4
+          "price": 613.15,
+          "changePercent": -2.77
         },
         {
           "symbol": "QCOM",
           "name": "高通",
-          "price": 187.48,
-          "changePercent": -3.49
+          "price": 186.74,
+          "changePercent": -7.54
         },
         {
           "symbol": "MRVL",
           "name": "邁威爾",
-          "price": 251.9,
-          "changePercent": -2.72
+          "price": 262.56,
+          "changePercent": 0.24
         },
         {
           "symbol": "ARM",
           "name": "Arm控股",
-          "price": 283.33,
-          "changePercent": -7.51
+          "price": 297.6,
+          "changePercent": -4.1
         },
         {
           "symbol": "LSCC",
           "name": "萊迪思半導體",
-          "price": 124.03,
-          "changePercent": 1.48
+          "price": 124.72,
+          "changePercent": -2.6
         },
         {
           "symbol": "AMBA",
           "name": "安霸",
-          "price": 68.68,
-          "changePercent": -1.69
+          "price": 68.78,
+          "changePercent": -5.37
         },
         {
           "symbol": "CRUS",
           "name": "思睿邏輯",
-          "price": 119.53,
-          "changePercent": 0.61
+          "price": 119.78,
+          "changePercent": -0.12
         },
         {
           "symbol": "SITM",
           "name": "SiTime",
-          "price": 656.65,
-          "changePercent": 2.08
+          "price": 655.78,
+          "changePercent": -0.98
         },
         {
           "symbol": "ALAB",
           "name": "Astera Labs",
-          "price": 351.31,
-          "changePercent": -2.55
+          "price": 365.36,
+          "changePercent": 0.2
         },
         {
           "symbol": "CEVA",
           "name": "CEVA",
-          "price": 34.69,
-          "changePercent": 0.67
+          "price": 34.91,
+          "changePercent": -3.56
         }
       ],
       "trend": [
         0.0,
-        -4.08,
-        -3.31,
-        -5.46,
-        -4.83,
-        -4.74,
-        -1.92,
-        -1.11,
-        0.15,
-        -1.08,
-        1.59,
-        -4.92,
-        -3.94,
-        -3.63,
-        1.34,
-        2.42,
-        9.31,
-        11.33,
-        10.37,
-        10.31,
-        12.74,
-        8.79
+        0.79,
+        -1.46,
+        -0.81,
+        -0.67,
+        2.33,
+        3.15,
+        4.46,
+        3.15,
+        5.98,
+        -0.88,
+        0.11,
+        0.47,
+        5.68,
+        6.86,
+        14.07,
+        16.21,
+        15.2,
+        15.13,
+        17.66,
+        13.53,
+        15.28
       ]
     },
     {
@@ -1080,93 +1080,93 @@
         {
           "symbol": "ASML",
           "name": "艾司摩爾",
-          "price": 1771.41,
-          "changePercent": 2.84
+          "price": 1818.91,
+          "changePercent": 4.3
         },
         {
           "symbol": "AMAT",
           "name": "應用材料",
-          "price": 486.76,
-          "changePercent": 2.64
+          "price": 502.72,
+          "changePercent": 3.65
         },
         {
           "symbol": "LRCX",
           "name": "拉姆研究",
-          "price": 314.47,
-          "changePercent": 2.38
+          "price": 323.51,
+          "changePercent": 2.64
         },
         {
           "symbol": "KLAC",
           "name": "科磊",
-          "price": 189.17,
-          "changePercent": 1.1
+          "price": 195.32,
+          "changePercent": 3.94
         },
         {
           "symbol": "TER",
           "name": "泰瑞達",
-          "price": 401.3,
-          "changePercent": 3.51
+          "price": 406.67,
+          "changePercent": 2.08
         },
         {
           "symbol": "ENTG",
           "name": "英特格",
-          "price": 150.63,
-          "changePercent": 1.35
+          "price": 155.23,
+          "changePercent": 2.2
         },
         {
           "symbol": "ONTO",
           "name": "Onto Innovation",
-          "price": 288.74,
-          "changePercent": 3.22
+          "price": 300.59,
+          "changePercent": 4.5
         },
         {
           "symbol": "UCTT",
           "name": "Ultra Clean",
-          "price": 78.07,
-          "changePercent": 2.03
+          "price": 80.44,
+          "changePercent": 3.54
         },
         {
           "symbol": "FORM",
           "name": "FormFactor",
-          "price": 130.97,
-          "changePercent": 1.5
+          "price": 134.25,
+          "changePercent": 3.52
         },
         {
           "symbol": "COHU",
           "name": "Cohu",
-          "price": 66.07,
-          "changePercent": 3.72
+          "price": 66.14,
+          "changePercent": -1.28
         },
         {
           "symbol": "AEIS",
           "name": "先進能源",
-          "price": 277.84,
-          "changePercent": -0.07
+          "price": 279.53,
+          "changePercent": -0.05
         }
       ],
       "trend": [
         0.0,
-        -5.67,
-        -6.46,
-        -9.94,
-        -9.16,
-        -9.11,
-        -3.56,
-        0.05,
-        0.48,
-        -3.15,
-        -0.63,
-        -10.32,
-        -10.76,
-        -10.06,
-        -7.59,
-        -2.87,
-        0.0,
-        3.98,
-        4.28,
-        3.4,
-        5.53,
-        5.7
+        -0.85,
+        -4.55,
+        -3.73,
+        -3.66,
+        2.24,
+        6.08,
+        6.56,
+        2.72,
+        5.4,
+        -4.9,
+        -5.37,
+        -4.62,
+        -1.97,
+        3.04,
+        6.09,
+        10.32,
+        10.66,
+        9.72,
+        11.98,
+        12.16,
+        14.84
       ]
     },
     {
@@ -1175,99 +1175,99 @@
         {
           "symbol": "TXN",
           "name": "德州儀器",
-          "price": 278.31,
-          "changePercent": 2.83
+          "price": 281.01,
+          "changePercent": 1.06
         },
         {
           "symbol": "ADI",
           "name": "亞德諾",
-          "price": 395.43,
-          "changePercent": 3.35
+          "price": 397.81,
+          "changePercent": 1.07
         },
         {
           "symbol": "MCHP",
           "name": "微芯科技",
-          "price": 77.97,
-          "changePercent": 4.39
+          "price": 79.49,
+          "changePercent": 1.02
         },
         {
           "symbol": "MPWR",
           "name": "單體電源",
-          "price": 1351.2,
-          "changePercent": 1.17
+          "price": 1352.89,
+          "changePercent": -1.06
         },
         {
           "symbol": "SWKS",
           "name": "思佳訊",
-          "price": 87.59,
-          "changePercent": -0.25
+          "price": 88.59,
+          "changePercent": -0.84
         },
         {
           "symbol": "NXPI",
           "name": "恩智浦",
-          "price": 236.32,
-          "changePercent": 2.68
+          "price": 236.87,
+          "changePercent": -0.51
         },
         {
           "symbol": "ON",
           "name": "安森美",
-          "price": 75.65,
-          "changePercent": 3.42
+          "price": 76.06,
+          "changePercent": -1.48
         },
         {
           "symbol": "STM",
           "name": "意法半導",
-          "price": 52.74,
-          "changePercent": 2.25
+          "price": 53.14,
+          "changePercent": 2.33
         },
         {
           "symbol": "QRVO",
           "name": "Qorvo",
-          "price": 116.3,
-          "changePercent": -0.03
+          "price": 117.12,
+          "changePercent": -0.71
         },
         {
           "symbol": "DIOD",
           "name": "二極體公司",
-          "price": 96.37,
-          "changePercent": 1.72
+          "price": 96.45,
+          "changePercent": 0.64
         },
         {
           "symbol": "SLAB",
           "name": "Silicon Labs",
-          "price": 221.03,
-          "changePercent": -0.16
+          "price": 221.47,
+          "changePercent": 0.1
         },
         {
           "symbol": "POWI",
           "name": "Power Integrations",
-          "price": 51.84,
-          "changePercent": 2.09
+          "price": 51.0,
+          "changePercent": -2.34
         }
       ],
       "trend": [
         0.0,
-        -2.98,
-        -1.92,
-        -3.67,
-        -1.81,
-        -1.71,
-        -0.24,
-        -0.71,
-        -0.77,
-        0.35,
-        4.45,
-        -1.46,
-        1.0,
-        -1.31,
-        1.05,
-        2.47,
-        3.63,
-        6.34,
-        6.05,
-        4.43,
-        7.0,
-        6.38
+        1.09,
+        -0.74,
+        1.17,
+        1.28,
+        2.8,
+        2.31,
+        2.24,
+        3.37,
+        7.61,
+        1.5,
+        4.01,
+        1.64,
+        4.07,
+        5.55,
+        6.75,
+        9.56,
+        9.26,
+        7.59,
+        10.24,
+        9.61,
+        10.16
       ]
     },
     {
@@ -1276,57 +1276,57 @@
         {
           "symbol": "MU",
           "name": "美光",
-          "price": 1053.98,
-          "changePercent": -2.46
+          "price": 1067.64,
+          "changePercent": -1.35
         },
         {
           "symbol": "WDC",
           "name": "威騰",
-          "price": 453.23,
-          "changePercent": 0.65
+          "price": 451.51,
+          "changePercent": -1.16
         },
         {
           "symbol": "STX",
           "name": "希捷",
-          "price": 921.51,
-          "changePercent": 1.72
+          "price": 905.9,
+          "changePercent": -1.19
         },
         {
           "symbol": "SNDK",
           "name": "SanDisk",
-          "price": 1712.89,
-          "changePercent": -2.32
+          "price": 1709.53,
+          "changePercent": -3.84
         },
         {
           "symbol": "RMBS",
           "name": "Rambus",
-          "price": 102.12,
-          "changePercent": -2.32
+          "price": 102.53,
+          "changePercent": -2.5
         }
       ],
       "trend": [
         0.0,
-        -1.75,
-        -0.31,
-        -2.04,
-        -1.52,
-        -2.09,
-        4.22,
-        5.88,
-        6.77,
-        2.74,
-        0.9,
-        -4.2,
-        -5.25,
-        -5.31,
-        -1.2,
-        4.46,
-        7.51,
-        13.78,
-        12.41,
-        10.55,
-        11.59,
-        9.4
+        1.45,
+        -0.32,
+        0.21,
+        -0.38,
+        5.98,
+        7.69,
+        8.58,
+        4.51,
+        2.67,
+        -2.54,
+        -3.58,
+        -3.65,
+        0.54,
+        6.25,
+        9.44,
+        15.86,
+        14.46,
+        12.6,
+        13.66,
+        11.42,
+        11.31
       ]
     },
     {
@@ -1335,63 +1335,63 @@
         {
           "symbol": "INTC",
           "name": "英特爾",
-          "price": 116.03,
-          "changePercent": -8.92
+          "price": 116.69,
+          "changePercent": -5.13
         },
         {
           "symbol": "GFS",
           "name": "格芯",
-          "price": 47.78,
-          "changePercent": 1.55
+          "price": 47.95,
+          "changePercent": -2.14
         },
         {
           "symbol": "UMC",
           "name": "聯電ADR",
-          "price": 23.85,
-          "changePercent": -1.04
+          "price": 24.98,
+          "changePercent": 2.76
         },
         {
           "symbol": "TSM",
           "name": "台積電ADR",
-          "price": 452.88,
-          "changePercent": 0.38
+          "price": 457.5,
+          "changePercent": 1.53
         },
         {
           "symbol": "ASX",
           "name": "日月光ADR",
-          "price": 43.79,
-          "changePercent": 0.67
+          "price": 45.6,
+          "changePercent": 2.91
         },
         {
           "symbol": "IFNNY",
           "name": "英飛凌",
-          "price": 65.01,
-          "changePercent": 0.29
+          "price": 67.18,
+          "changePercent": 3.08
         }
       ],
       "trend": [
         0.0,
-        -1.6,
-        -2.02,
-        -2.1,
-        -2.22,
-        -1.62,
-        1.06,
-        5.1,
-        6.68,
-        3.81,
-        5.95,
-        0.07,
-        -0.5,
-        1.56,
-        7.02,
-        9.29,
-        14.54,
-        16.41,
-        13.3,
-        13.43,
-        13.93,
-        11.66
+        -0.45,
+        -0.55,
+        -0.65,
+        -0.03,
+        2.67,
+        6.77,
+        8.35,
+        5.44,
+        7.6,
+        1.6,
+        1.03,
+        3.09,
+        8.61,
+        10.93,
+        16.29,
+        18.18,
+        15.05,
+        15.22,
+        15.73,
+        13.41,
+        16.08
       ]
     }
   ],
@@ -1481,11 +1481,10 @@
       ]
     },
     "sox": {
-      "pct": 76.1,
-      "above": 35,
+      "pct": 80.4,
+      "above": 37,
       "total": 46,
       "series": [
-        10.9,
         8.7,
         10.9,
         10.9,
@@ -1504,9 +1503,10 @@
         67.4,
         63.0,
         73.9,
-        76.1
+        76.1,
+        80.4
       ],
-      "change20": 65.2,
+      "change20": 71.7,
       "state": "strong",
       "divergence": false,
       "bySector": [
@@ -1517,7 +1517,7 @@
         },
         {
           "name": "設備材料",
-          "above": 8,
+          "above": 10,
           "total": 11
         },
         {
@@ -1540,19 +1540,18 @@
   },
   "risk_gauges": {
     "vixTerm": {
-      "vix": 16.13,
-      "vix3m": 18.23,
-      "ratio": 0.885,
+      "vix": 16.18,
+      "vix3m": 18.12,
+      "ratio": 0.893,
       "state": "calm"
     },
     "hyOas": {
-      "value": 2.93,
-      "date": "2026-09-25",
-      "d5": 0.25,
-      "d20": 0.33,
+      "value": 3.02,
+      "date": "2026-09-28",
+      "d5": 0.36,
+      "d20": 0.39,
       "state": "rising",
       "series": [
-        2.72,
         2.67,
         2.7,
         2.7,
@@ -1611,7 +1610,8 @@
         2.68,
         2.73,
         2.8,
-        2.93
+        2.93,
+        3.02
       ]
     }
   },
@@ -1630,11 +1630,11 @@
         "yoy": [
           53.320053714712955,
           44.68,
-          null
+          67.86
         ],
         "mom": 10.099818994181083,
         "rev": 514805337.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1644,11 +1644,11 @@
         "yoy": [
           44.0812520934518,
           12.15,
-          null
+          2.79
         ],
         "mom": 32.40526804267691,
         "rev": 64183361.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1658,11 +1658,11 @@
         "yoy": [
           45.65918579706578,
           43.15,
-          null
+          32.86
         ],
         "mom": 11.470924994667861,
         "rev": 82247374.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1672,11 +1672,11 @@
         "yoy": [
           30.71441291503008,
           18.98,
-          null
+          22.85
         ],
         "mom": 5.035202709942881,
         "rev": 25044641.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1686,11 +1686,11 @@
         "yoy": [
           560.8541425724004,
           719.61,
-          null
+          621.33
         ],
         "mom": 1.8753221767796826,
         "rev": 44690268.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1700,11 +1700,11 @@
         "yoy": [
           111.0204372171911,
           158.38,
-          null
+          103.71
         ],
         "mom": 1.2293622826160435,
         "rev": 5840094.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1714,11 +1714,11 @@
         "yoy": [
           91.58397305250298,
           100.82,
-          null
+          106.54
         ],
         "mom": -0.5134678562183252,
         "rev": 5218962.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1728,11 +1728,11 @@
         "yoy": [
           289.42756449599915,
           291.54,
-          null
+          189.87
         ],
         "mom": 2.000277964749722,
         "rev": 27308717.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1742,11 +1742,11 @@
         "yoy": [
           40.57567965225748,
           35.85,
-          null
+          32.26
         ],
         "mom": 5.7332946714025335,
         "rev": 4809631.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1756,11 +1756,11 @@
         "yoy": [
           31.577957840545338,
           36.74,
-          null
+          28.63
         ],
         "mom": 2.239981837781924,
         "rev": 4080093.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1770,11 +1770,11 @@
         "yoy": [
           28.083000681580568,
           32.53,
-          null
+          20.6
         ],
         "mom": -3.381240495941536,
         "rev": 12459133.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1784,11 +1784,11 @@
         "yoy": [
           76.19282844889565,
           70.54,
-          null
+          68.75
         ],
         "mom": 5.097735257913507,
         "rev": 7008845.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1798,11 +1798,11 @@
         "yoy": [
           26.33031651680444,
           26.79,
-          null
+          18.95
         ],
         "mom": 0.30216585867666274,
         "rev": 10327444.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1826,11 +1826,11 @@
         "yoy": [
           218.53271706735816,
           180.47,
-          null
+          216.09
         ],
         "mom": 5.444034937143434,
         "rev": 8145267.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1840,11 +1840,11 @@
         "yoy": [
           24.459768182447533,
           29.37,
-          null
+          21.71
         ],
         "mom": 3.4753008204342057,
         "rev": 8557545.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1854,11 +1854,11 @@
         "yoy": [
           233.36649415222965,
           155.57,
-          null
+          287.89
         ],
         "mom": 6.5805563904418465,
         "rev": 1705663.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1868,11 +1868,11 @@
         "yoy": [
           29.27771748942473,
           28.77,
-          null
+          23.71
         ],
         "mom": 2.2119027720539877,
         "rev": 1331863.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1896,11 +1896,11 @@
         "yoy": [
           150.82441845471112,
           144.57,
-          null
+          59.47
         ],
         "mom": -6.610617208349262,
         "rev": 1030931.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1910,11 +1910,11 @@
         "yoy": [
           34.94854905033159,
           47.74,
-          null
+          55.42
         ],
         "mom": -3.708102933285179,
         "rev": 64586049.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1924,11 +1924,11 @@
         "yoy": [
           51.978131522564816,
           54.18,
-          null
+          52.11
         ],
         "mom": -2.6144946713083335,
         "rev": 921766023.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1938,11 +1938,11 @@
         "yoy": [
           56.25723917867715,
           43.69,
-          null
+          36.31
         ],
         "mom": 9.178757960449099,
         "rev": 17745519.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1952,11 +1952,11 @@
         "yoy": [
           129.84671742960728,
           129.4,
-          null
+          120.69
         ],
         "mom": 4.888351969713899,
         "rev": 20145589.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1966,11 +1966,11 @@
         "yoy": [
           51.799610560411935,
           51.51,
-          null
+          38.91
         ],
         "mom": 1.2460830535233982,
         "rev": 16332196.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -1980,11 +1980,11 @@
         "yoy": [
           344.4151275890319,
           355.52,
-          null
+          220.52
         ],
         "mom": 0.9194731722909152,
         "rev": 6466169.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -1994,11 +1994,11 @@
         "yoy": [
           90.90319995881177,
           90.95,
-          null
+          57.64
         ],
         "mom": 0.39577725555222554,
         "rev": 3225888.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2008,11 +2008,11 @@
         "yoy": [
           156.29654201767283,
           175.25,
-          null
+          73.02
         ],
         "mom": 3.6465264692026853,
         "rev": 5632401.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2022,11 +2022,11 @@
         "yoy": [
           40.59000155490278,
           50.24,
-          null
+          50.02
         ],
         "mom": -1.6002754537845574,
         "rev": 5352700.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2036,11 +2036,11 @@
         "yoy": [
           76.38825024031777,
           77.38,
-          null
+          78.22
         ],
         "mom": 3.6890808722169304,
         "rev": 10383971.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2078,11 +2078,11 @@
         "yoy": [
           65.47995924001005,
           56.54,
-          null
+          41.97
         ],
         "mom": 4.097822462615335,
         "rev": 10224358.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2092,11 +2092,11 @@
         "yoy": [
           6.865708582371952,
           16.0,
-          null
+          20.96
         ],
         "mom": 0.8179232272483112,
         "rev": 7012064.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2106,11 +2106,11 @@
         "yoy": [
           59.050412994601615,
           63.77,
-          null
+          50.9
         ],
         "mom": -5.559907124229588,
         "rev": 9392377.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2120,11 +2120,11 @@
         "yoy": [
           97.92882458381861,
           96.87,
-          null
+          47.94
         ],
         "mom": 6.2086586004218836,
         "rev": 5044034.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2134,11 +2134,11 @@
         "yoy": [
           19.58057828451359,
           18.6,
-          null
+          17.25
         ],
         "mom": -5.063084108681875,
         "rev": 3198344.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2148,11 +2148,11 @@
         "yoy": [
           41.68738766970338,
           62.28,
-          null
+          49.69
         ],
         "mom": 0.8238097120440502,
         "rev": 11018647.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2162,11 +2162,11 @@
         "yoy": [
           29.136067855214495,
           17.06,
-          null
+          32.66
         ],
         "mom": 12.37026988276037,
         "rev": 1528275.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2176,11 +2176,11 @@
         "yoy": [
           45.54208446583508,
           41.95,
-          null
+          25.84
         ],
         "mom": 2.8056594288635734,
         "rev": 4568665.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2190,11 +2190,11 @@
         "yoy": [
           -48.01854159471246,
           -79.15,
-          null
+          -53.64
         ],
         "mom": 280.36369008535786,
         "rev": 40550573.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2204,11 +2204,11 @@
         "yoy": [
           -69.46614444389321,
           -69.7,
-          null
+          -42.04
         ],
         "mom": 17.309732141741776,
         "rev": 29486864.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2218,11 +2218,11 @@
         "yoy": [
           -32.01339086205033,
           -18.42,
-          null
+          -17.9
         ],
         "mom": 35.21636522208552,
         "rev": 24401509.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2232,11 +2232,11 @@
         "yoy": [
           -44.54199215009353,
           -15.63,
-          null
+          329.5
         ],
         "mom": -12.579733025338912,
         "rev": 15781347.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2246,11 +2246,11 @@
         "yoy": [
           57.940258843989525,
           78.98,
-          null
+          72.83
         ],
         "mom": 11.532295134693848,
         "rev": 19585535.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2260,11 +2260,11 @@
         "yoy": [
           19.28818447821957,
           4.74,
-          null
+          25.3
         ],
         "mom": 12.303929261760363,
         "rev": 9839301.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2274,11 +2274,11 @@
         "yoy": [
           15.550439685057762,
           4.11,
-          null
+          1.52
         ],
         "mom": -9.811604078190381,
         "rev": 7795912.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2288,11 +2288,11 @@
         "yoy": [
           49.48292252285266,
           51.29,
-          null
+          50.94
         ],
         "mom": 0.975452104876698,
         "rev": 10051148.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2302,11 +2302,11 @@
         "yoy": [
           -51.734690174233705,
           -36.44,
-          null
+          -23.3
         ],
         "mom": 60.64216709067564,
         "rev": 13671344.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2316,11 +2316,11 @@
         "yoy": [
           11.949803192383932,
           6.47,
-          null
+          29.2
         ],
         "mom": -8.332331884197751,
         "rev": 7109220.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2330,11 +2330,11 @@
         "yoy": [
           13.898753138784288,
           2.36,
-          null
+          9.72
         ],
         "mom": -2.3633327251119747,
         "rev": 7582281.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2344,11 +2344,11 @@
         "yoy": [
           23.602041097562417,
           20.43,
-          null
+          -8.39
         ],
         "mom": -10.431685927698695,
         "rev": 6278514.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2358,11 +2358,11 @@
         "yoy": [
           21.134188454548564,
           7.11,
-          null
+          9.51
         ],
         "mom": -3.7911181427636205,
         "rev": 4605752.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2372,11 +2372,11 @@
         "yoy": [
           7.060368875130942,
           19.61,
-          null
+          -4.38
         ],
         "mom": -12.815193387111616,
         "rev": 4547978.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2386,11 +2386,11 @@
         "yoy": [
           8.817960929271047,
           17.99,
-          null
+          -7.71
         ],
         "mom": -5.433134839349536,
         "rev": 3427855.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2400,11 +2400,11 @@
         "yoy": [
           1.760042446658356,
           1.56,
-          null
+          16.55
         ],
         "mom": 7.936272900082451,
         "rev": 1975427.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2414,11 +2414,11 @@
         "yoy": [
           3.881349694132072,
           -22.03,
-          null
+          -2.48
         ],
         "mom": 48.77816899340448,
         "rev": 2026561.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2428,11 +2428,11 @@
         "yoy": [
           109.8769286098819,
           19.6,
-          null
+          199.01
         ],
         "mom": 122.47776672091175,
         "rev": 3758199.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2442,11 +2442,11 @@
         "yoy": [
           45.34586757893414,
           25.09,
-          null
+          101.2
         ],
         "mom": 48.11666933847363,
         "rev": 3030550.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2456,11 +2456,11 @@
         "yoy": [
           5.0653083005513615,
           5.43,
-          null
+          20.15
         ],
         "mom": -10.709758397392266,
         "rev": 1143908.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2470,11 +2470,11 @@
         "yoy": [
           105.4274761466709,
           92.58,
-          null
+          94.88
         ],
         "mom": 4.384664840520659,
         "rev": 2617220.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2498,7 +2498,7 @@
         "yoy": [
           -62.217194570135746,
           null,
-          null
+          -100.0
         ],
         "mom": null,
         "rev": 334.0,
@@ -2512,11 +2512,11 @@
         "yoy": [
           164.71067644661775,
           -22.6,
-          null
+          50.22
         ],
         "mom": 157.77777777777777,
         "rev": 6496.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2526,11 +2526,11 @@
         "yoy": [
           59.21841576870238,
           5.76,
-          null
+          39.22
         ],
         "mom": 14.885070860129273,
         "rev": 2184612.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2540,11 +2540,11 @@
         "yoy": [
           81.67977762526685,
           3.93,
-          null
+          225.45
         ],
         "mom": -15.431117482488856,
         "rev": 2107202.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2554,11 +2554,11 @@
         "yoy": [
           18.878799016501482,
           17.41,
-          null
+          33.93
         ],
         "mom": 0.6425774989236727,
         "rev": 750382.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2582,11 +2582,11 @@
         "yoy": [
           125.90614216701174,
           183.96,
-          null
+          94.32
         ],
         "mom": -22.72437546919485,
         "rev": 163669.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2596,11 +2596,11 @@
         "yoy": [
           4.594724569373681,
           2.71,
-          null
+          -21.98
         ],
         "mom": -12.030467083179863,
         "rev": 632910.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2610,11 +2610,11 @@
         "yoy": [
           64.05265978828889,
           17.2,
-          null
+          45.94
         ],
         "mom": 5.164716467781455,
         "rev": 489730.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2624,11 +2624,11 @@
         "yoy": [
           -42.18344285361997,
           -7.05,
-          null
+          -3.91
         ],
         "mom": 7.509508267472285,
         "rev": 199285.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2638,11 +2638,11 @@
         "yoy": [
           32.2453706621182,
           18.28,
-          null
+          16.07
         ],
         "mom": 11.961354329439047,
         "rev": 944347.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2652,11 +2652,11 @@
         "yoy": [
           -20.139845586222652,
           -5.07,
-          null
+          -7.24
         ],
         "mom": -1.4858233559878724,
         "rev": 706058.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2666,11 +2666,11 @@
         "yoy": [
           70.6377909701609,
           11.68,
-          null
+          31.25
         ],
         "mom": 38.88744071309589,
         "rev": 436901.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2680,11 +2680,11 @@
         "yoy": [
           42.68640953520201,
           -11.91,
-          null
+          2.08
         ],
         "mom": 5.46706353104862,
         "rev": 397209.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2694,11 +2694,11 @@
         "yoy": [
           52.47437428070515,
           63.36,
-          null
+          12.61
         ],
         "mom": -2.5054503689745053,
         "rev": 283520.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2708,11 +2708,11 @@
         "yoy": [
           7.784429068135788,
           6.35,
-          null
+          9.1
         ],
         "mom": 4.444440723207513,
         "rev": 623714.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2722,11 +2722,11 @@
         "yoy": [
           21.796278158667974,
           6.66,
-          null
+          4.0
         ],
         "mom": 0.6572663547619433,
         "rev": 62177.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2736,11 +2736,11 @@
         "yoy": [
           -33.381206058683055,
           22.7,
-          null
+          28.62
         ],
         "mom": -35.90411002924259,
         "rev": 39892.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": true
       },
       {
@@ -2750,11 +2750,11 @@
         "yoy": [
           -16.23206393579812,
           -10.65,
-          null
+          -10.46
         ],
         "mom": 2.7644194788807654,
         "rev": 5011942.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2764,11 +2764,11 @@
         "yoy": [
           0.022929206689571976,
           -1.94,
-          null
+          17.24
         ],
         "mom": -1.0251108918680745,
         "rev": 18696603.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2778,11 +2778,11 @@
         "yoy": [
           -5.8591638763645015,
           -2.64,
-          null
+          13.82
         ],
         "mom": 13.409766711171503,
         "rev": 23101650.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2792,11 +2792,11 @@
         "yoy": [
           0.7211954265149975,
           1.62,
-          null
+          4.5
         ],
         "mom": 12.25767513441393,
         "rev": 2719294.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2806,11 +2806,11 @@
         "yoy": [
           10.869800594642088,
           12.18,
-          null
+          9.23
         ],
         "mom": -0.8486080860806038,
         "rev": 4628384.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2820,11 +2820,11 @@
         "yoy": [
           46.069210459555194,
           42.51,
-          null
+          35.04
         ],
         "mom": 5.069789698213286,
         "rev": 777300.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2834,11 +2834,11 @@
         "yoy": [
           35.677791635986594,
           31.84,
-          null
+          15.61
         ],
         "mom": 0.4167836756483224,
         "rev": 361158.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2848,11 +2848,11 @@
         "yoy": [
           8.002552973034222,
           -3.13,
-          null
+          15.98
         ],
         "mom": 7.123639574756012,
         "rev": 934086.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2862,11 +2862,11 @@
         "yoy": [
           15.288008714183615,
           14.8,
-          null
+          13.13
         ],
         "mom": 15.265439559415158,
         "rev": 2843905.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2876,11 +2876,11 @@
         "yoy": [
           -13.630346581340595,
           -9.47,
-          null
+          -15.03
         ],
         "mom": 1.4776336694875256,
         "rev": 3816244.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2890,11 +2890,11 @@
         "yoy": [
           18.52409047500687,
           11.51,
-          null
+          21.77
         ],
         "mom": 1.2532465500516319,
         "rev": 453005.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2904,11 +2904,11 @@
         "yoy": [
           -13.032185165971418,
           72.74,
-          null
+          -9.5
         ],
         "mom": -20.525184434746468,
         "rev": 244757.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": true
       },
       {
@@ -2918,11 +2918,11 @@
         "yoy": [
           38.57482029343866,
           36.31,
-          null
+          19.41
         ],
         "mom": -0.8342369922056976,
         "rev": 253312.0,
-        "accel": null,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -2932,11 +2932,11 @@
         "yoy": [
           14.104232991248065,
           17.43,
-          null
+          10.58
         ],
         "mom": -5.651349826314142,
         "rev": 1862682.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2960,11 +2960,11 @@
         "yoy": [
           14.23365151641082,
           24.91,
-          null
+          18.97
         ],
         "mom": -9.063636660572373,
         "rev": 2171584.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -2988,11 +2988,11 @@
         "yoy": [
           23.58564530251907,
           32.24,
-          null
+          23.43
         ],
         "mom": 1.293526532271822,
         "rev": 2725433.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -3002,11 +3002,11 @@
         "yoy": [
           34.7021226390898,
           64.11,
-          null
+          18.96
         ],
         "mom": 13.218945850766243,
         "rev": 1312982.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -3016,11 +3016,11 @@
         "yoy": [
           59.9166856232939,
           -9.82,
-          null
+          53.03
         ],
         "mom": 15.93621802139809,
         "rev": 224958.0,
-        "accel": null,
+        "accel": false,
         "turnedNegative": false
       }
     ],
