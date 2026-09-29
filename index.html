@@ -87,6 +87,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .reso-tag.hot-dn{color:var(--R)}
 .reso-tag.mid{color:var(--mu);font-weight:500}
 .inst-total{background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:13px;font-weight:700}
+.nk-wrap{margin-bottom:10px}
+.nk-legend{display:flex;gap:12px;font-size:10px;color:var(--mu);margin-bottom:4px;align-items:center}
+.nk-legend i{display:inline-block;vertical-align:middle;margin-right:4px}
+.nk-sw-k{width:6px;height:10px;background:var(--Gm);box-shadow:8px 0 0 var(--Rm);margin-right:12px!important}
+.nk-sw-ma{width:14px;height:2px;background:var(--Bm);border-radius:1px}
+.nk-box{position:relative;width:100%}
+.nk-box canvas{display:block;touch-action:pan-y}
+.nk-tip{display:none;position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:6px 8px;font-size:11px;line-height:1.6;color:var(--tx);box-shadow:var(--shadow);white-space:nowrap;z-index:2}
 .inst-total.up{color:var(--G)}.inst-total.dn{color:var(--R)}.inst-total.fl{color:var(--mu)}
 .inst-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr)}
 .inst-row:last-child{border-bottom:none}
@@ -953,6 +961,75 @@ function renderMyPicks() {
 
 function setMkt(m) { mkt = m; subTab = 0; renderHeat(); }
 
+// ── 今晚夜盤 K 線圖：日盤 K 棒＋60 日均線，滑過／點擊顯示當天數值 ──
+var nightBars = null;
+function drawNightChart() {
+  var bars = nightBars, box = document.getElementById('nkBox'), cv = document.getElementById('nkCanvas'), tip = document.getElementById('nkTip');
+  if (!bars || !box || !cv) return;
+  var css = getComputedStyle(document.documentElement);
+  var UP = css.getPropertyValue('--Gm').trim() || '#38a169', DN = css.getPropertyValue('--Rm').trim() || '#e53e3e';
+  var MA = css.getPropertyValue('--Bm').trim() || '#3182ce', GRID = css.getPropertyValue('--bdr').trim() || '#e2e8f0';
+  var MU = css.getPropertyValue('--hi').trim() || '#a0aec0', TX = css.getPropertyValue('--tx').trim() || '#1a202c';
+  var W = box.clientWidth, H = 190, PR = 44, PT = 8, PB = 18, dpr = window.devicePixelRatio || 1;
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+  var lo = Infinity, hi = -Infinity;
+  bars.forEach(function(b) { lo = Math.min(lo, b.l, b.ma || b.l); hi = Math.max(hi, b.h, b.ma || b.h); });
+  var pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+  var pw = W - PR, ph = H - PT - PB, slot = pw / bars.length, bw = Math.max(2, Math.min(9, slot * 0.62));
+  var y = function(v) { return PT + (hi - v) / (hi - lo) * ph; };
+  var x = function(i) { return i * slot + slot / 2; };
+  // 格線與右側刻度（淡）
+  ctx.font = '10px -apple-system,sans-serif'; ctx.fillStyle = MU; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  for (var g = 0; g <= 3; g++) {
+    var v = lo + (hi - lo) * g / 3, yy = Math.round(y(v)) + 0.5;
+    ctx.strokeStyle = GRID; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(pw, yy); ctx.stroke();
+    ctx.fillText(Math.round(v).toLocaleString('zh-TW'), pw + 4, yy);
+  }
+  // 日期（頭、中、尾）
+  ctx.textBaseline = 'alphabetic';
+  [0, Math.floor(bars.length / 2), bars.length - 1].forEach(function(i, k) {
+    ctx.textAlign = k === 0 ? 'left' : (k === 2 ? 'right' : 'center');
+    ctx.fillText(bars[i].d.slice(5).replace('-', '/'), k === 2 ? pw : (k === 0 ? 0 : x(i)), H - 4);
+  });
+  // K 棒
+  bars.forEach(function(b, i) {
+    var up = b.c >= b.o, col = up ? UP : DN, cx = Math.round(x(i)) + 0.5;
+    ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, y(b.h)); ctx.lineTo(cx, y(b.l)); ctx.stroke();
+    var top = y(Math.max(b.o, b.c)), bh = Math.max(1, Math.abs(y(b.o) - y(b.c)));
+    ctx.fillStyle = col; ctx.fillRect(cx - bw / 2, top, bw, bh);
+  });
+  // 60 日均線
+  ctx.strokeStyle = MA; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.beginPath();
+  var started = false;
+  bars.forEach(function(b, i) { if (b.ma == null) return; if (!started) { ctx.moveTo(x(i), y(b.ma)); started = true; } else ctx.lineTo(x(i), y(b.ma)); });
+  ctx.stroke();
+  // 今天收盤標記（右側標籤）
+  var lb = bars[bars.length - 1], ly = y(lb.c);
+  ctx.fillStyle = TX; ctx.fillRect(pw + 1, ly - 8, PR - 1, 16);
+  ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = 'bold 10px -apple-system,sans-serif';
+  ctx.fillText(Math.round(lb.c).toLocaleString('zh-TW'), pw + 4, ly);
+  // 互動：十字線＋提示框
+  var base = ctx.getImageData(0, 0, cv.width, cv.height);
+  function show(ev) {
+    var r = cv.getBoundingClientRect(), px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    var i = Math.max(0, Math.min(bars.length - 1, Math.floor(px / slot))), b = bars[i];
+    ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.strokeStyle = MU; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(Math.round(x(i)) + 0.5, PT); ctx.lineTo(Math.round(x(i)) + 0.5, PT + ph); ctx.stroke(); ctx.setLineDash([]);
+    var chg = i > 0 ? b.c - bars[i - 1].c : 0;
+    tip.innerHTML = '<b>' + b.d + '</b><br>開 ' + fm(b.o, 0) + '　高 ' + fm(b.h, 0) + '<br>低 ' + fm(b.l, 0) + '　收 <b>' + fm(b.c, 0) + '</b>' +
+      (i > 0 ? '（' + (chg >= 0 ? '+' : '') + fm(chg, 0) + '）' : '') + '<br>60 日均線 ' + (b.ma == null ? '—' : fm(b.ma, 0)) +
+      (b.ma == null ? '' : '（收盤' + (b.c > b.ma ? '在上' : '在下') + '）');
+    tip.style.display = 'block';
+    var tx = x(i) + 12; if (tx + tip.offsetWidth > pw) tx = x(i) - tip.offsetWidth - 12;
+    tip.style.left = Math.max(0, tx) + 'px'; tip.style.top = '6px';
+  }
+  function hide() { ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); tip.style.display = 'none'; }
+  cv.onmousemove = show; cv.onmouseleave = hide;
+  cv.ontouchstart = function(e) { show(e); }; cv.ontouchmove = function(e) { e.preventDefault(); show(e); }; cv.ontouchend = hide;
+}
+window.addEventListener('resize', function() { if (nightBars) drawNightChart(); });
+
 // ── 今晚夜盤：讀 night_signal.json（由「今晚夜盤判斷」排程每個交易日 14:05 產生）──
 function renderNight() {
   var box = document.getElementById('nightContent');
@@ -982,8 +1059,12 @@ function renderNight() {
         '<div style="background:' + color + ';border:1.5px solid ' + border + ';border-radius:10px;padding:12px 14px;margin-bottom:10px">' +
           '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + head + '</div>' +
           '<div style="font-size:12px;color:var(--tx);line-height:1.7">' + reasons + '</div>' + plan +
-        '</div>' + last + paper +
+        '</div>' +
+        (s.bars && s.bars.length ? '<div class="nk-wrap"><div class="nk-legend"><span><i class="nk-sw-k"></i>台指期日K（日盤）</span><span><i class="nk-sw-ma"></i>60 日均線</span><span style="margin-left:auto;color:var(--hi)">近 ' + s.bars.length + ' 個交易日</span></div>' +
+          '<div class="nk-box" id="nkBox"><canvas id="nkCanvas"></canvas><div class="nk-tip" id="nkTip"></div></div></div>' : '') +
+        last + paper +
         '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">' + String(s.updated || s.date).replace('T', ' ').slice(0, 16) + ' 更新 · 回測：2017–2026 夏普 1.24、最大回落 −7.3 萬（1 口）· 僅供參考，不構成投資建議</div>';
+      if (s.bars && s.bars.length) { nightBars = s.bars; drawNightChart(); }
     })
     .catch(function() {
       box.innerHTML = '<div style="font-size:12px;color:var(--mu)">尚無今晚夜盤判斷（排程第一次執行後才會出現）</div>';
