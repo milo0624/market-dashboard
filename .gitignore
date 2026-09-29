@@ -1,0 +1,10 @@
+# Python 暫存
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# 期貨 SDK 下載檔（GitHub Actions 執行時產生）
+sdk.zip
+*.whl
