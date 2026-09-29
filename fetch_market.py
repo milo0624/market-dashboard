@@ -395,24 +395,66 @@ def yahoo_ohlcv(symbol, rng="6mo"):
         bars.append({"date": date_str, "open": o, "high": h, "low": l, "close": c, "volume": v})
     return bars
 
+KBAR_DAYS = 60   # 板塊 K 線顯示近 60 個交易日
+KBAR_MA = 20     # 板塊 K 線搭配 20 日均線
+
+def sector_kbars(ohlc_list):
+    """等權重板塊 K 線：每檔股票的開高低收都換成「相對 60 日前收盤的漲跌 %」，再逐日平均。
+    高低點是各股高低點的平均（各股不一定同時到高點），所以板塊的影線會比實際略長，僅供看趨勢。"""
+    if not ohlc_list: return []
+    count = {}
+    for bars in ohlc_list:
+        for b in bars: count[b["date"]] = count.get(b["date"], 0) + 1
+    need = max(1, int(len(ohlc_list) * 0.8))   # 至少 8 成成分股有交易的日子才算（避開個別停牌）
+    dates = sorted(d for d, n in count.items() if n >= need)
+    if len(dates) < 2: return []
+    show = dates[-KBAR_DAYS:]
+    calc = dates[-(KBAR_DAYS + KBAR_MA - 1):]
+    per = []
+    for bars in ohlc_list:
+        m = {b["date"]: b for b in bars}
+        base_bar = m.get(show[0])
+        if not base_bar or not base_bar["close"]: continue
+        per.append((m, base_bar["close"]))
+    if not per: return []
+    out = []
+    for d in calc:
+        vals = [(b["open"], b["high"], b["low"], b["close"], base) for m, base in per for b in [m.get(d)] if b]
+        if not vals: continue
+        avg = lambda k: sum((v[k] / v[4] - 1) * 100 for v in vals) / len(vals)
+        out.append({"d": d, "o": avg(0), "h": avg(1), "l": avg(2), "c": avg(3)})
+    for i, b in enumerate(out):
+        w = out[max(0, i - KBAR_MA + 1): i + 1]
+        b["ma"] = round(sum(x["c"] for x in w) / len(w), 2) if len(w) == KBAR_MA else None
+        for k in ("o", "h", "l", "c"): b[k] = round(b[k], 2)
+    return out[-KBAR_DAYS:]
+
 def sector_trend(symbols):
-    all_series = []
+    """回傳（近 1 個月綜合走勢, 近 60 日板塊 K 線）；同一次抓取也把各股收盤存進 CLOSES 給市場寬度用"""
+    all_series, ohlc_list = [], []
     for sym in symbols:
         # 上櫃股在 Yahoo 的代號是 .TWO，.TW 抓不到時改試 .TWO
         candidates = [sym, sym[:-3] + ".TWO"] if sym.endswith(".TW") else [sym]
         for cand in candidates:
             try:
-                closes = yahoo_closes(cand)
+                bars = yahoo_ohlcv(cand)
             except Exception:
                 continue
+            closes = [b["close"] for b in bars]
             if closes:
                 CLOSES[sym.split(".")[0]] = closes
                 all_series.append(to_trend(closes))
+                ohlc_list.append(bars)
                 break
-    if not all_series: return []
+    if not all_series: return [], []
     min_len = min(len(s) for s in all_series)
-    return [round(sum(s[i] for s in all_series) / len(all_series), 2)
-            for i in range(min_len)]
+    trend = [round(sum(s[i] for s in all_series) / len(all_series), 2) for i in range(min_len)]
+    try:
+        kbars = sector_kbars(ohlc_list)
+    except Exception as e:
+        print(f"    ⚠️ 板塊 K 線計算失敗: {e}")
+        kbars = []
+    return trend, kbars
 
 def fetch_global():
     # 指數
@@ -503,9 +545,9 @@ def fetch_sectors_with_trend(sector_list, use_yahoo=False, rest=None, tw=False):
         print(f"  計算 {sec['name']} 板塊走勢...")
         trend_syms = [s["symbol"]+".TW" for s in sec["stocks"]] if (tw or not use_yahoo) \
                      else [s["symbol"] for s in sec["stocks"]]
-        trend = sector_trend(trend_syms)
-        result.append({"name":sec["name"],"stocks":stocks,"trend":trend})
-        print(f"  {sec['name']} 完成（走勢{len(trend)}點）")
+        trend, kbars = sector_trend(trend_syms)
+        result.append({"name":sec["name"],"stocks":stocks,"trend":trend,"kbars":kbars})
+        print(f"  {sec['name']} 完成（走勢{len(trend)}點、K線{len(kbars)}根）")
     return result
 
 def fetch_tw(watchlist_tw_symbols=None, sectors=None):
