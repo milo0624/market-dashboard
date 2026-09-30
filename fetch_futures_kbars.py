@@ -51,8 +51,15 @@ NIGHT_PARAM_CANDIDATES = [{"session": "afterhours"}, {"session": "AFTERHOURS"}, 
 
 
 def call(rest, product, frm, to, extra=None):
-    params = {"symbol": product, "from": frm.isoformat(), "to": to.isoformat(), "timeframe": TIMEFRAME, **(extra or {})}
-    return rest.historical.candles(**params)
+    """富邦 SDK 版本不同，商品參數名稱可能是 symbol 或 product；兩種都試，全失敗才丟出最後的錯誤"""
+    base = {"from": frm.isoformat(), "to": to.isoformat(), "timeframe": TIMEFRAME, **(extra or {})}
+    last = None
+    for key in ("symbol", "product"):
+        try:
+            return rest.historical.candles(**{key: product}, **base)
+        except Exception as e:
+            last = e
+    raise last
 
 
 def is_night(dt):

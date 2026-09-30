@@ -35,9 +35,10 @@ def fetch_bars(rest):
             if K.rows_of(K.call(rest, p, today - timedelta(days=7), today)):
                 product = p; break
         except Exception as e:
-            print(f"[試探] {p} 失敗：{e}")
+            print(f"[試探] {p} 失敗：{type(e).__name__}: {e!r}")
     if not product:
-        sys.exit("抓不到台指期資料")
+        print("⚠️ 富邦抓不到台指期資料，改用 Yahoo 加權指數判斷")
+        return None, {}, {}
     K.EARLIEST = today - timedelta(days=200)   # 約 135 個交易日：畫圖要 60 根 K 棒，每根都要有 60 日均線
     span = K.find_span(rest, product, None, "日盤") or 30
     day = K.fetch_all(rest, product, None, span, "日盤")
@@ -50,6 +51,19 @@ def fetch_bars(rest):
         except Exception as e:
             print(f"[夜盤試探] {extra} 失敗：{e}")
     return product, day, night
+
+
+def yahoo_twii_days():
+    """備援：富邦失敗時用 Yahoo 加權指數（^TWII）日K；回傳 {日期: (開, 收, 高, 低)}"""
+    url = "https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1d&range=1y"
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=20) as r:
+        res = json.loads(r.read())["chart"]["result"][0]
+    q, off, out = res["indicators"]["quote"][0], res["meta"].get("gmtoffset", 28800), {}
+    for i, ts in enumerate(res["timestamp"]):
+        o, c, h, l = q["open"][i], q["close"][i], q["high"][i], q["low"][i]
+        if None not in (o, c, h, l):
+            out[datetime.fromtimestamp(ts + off, tz=timezone.utc).date()] = (o, c, h, l)
+    return out
 
 
 def twse_holidays():
@@ -140,19 +154,27 @@ def score(entry_date, night_rows, days):
 def telegram(text):
     tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
     if not tok or not chat:
-        print("（未設定 Telegram Secrets，略過推播）"); return
+        print("（未設定 Telegram Secrets，略過推播）"); return False
     body = urllib.parse.urlencode({"chat_id": chat, "text": text}).encode()
     try:
         urllib.request.urlopen(urllib.request.Request(f"https://api.telegram.org/bot{tok}/sendMessage", data=body), timeout=20)
         print("✅ Telegram 已推播")
+        return True
     except Exception as e:
         print(f"⚠️ Telegram 推播失敗：{e}")
+        return False
 
 
 def main():
     rest = K.login()
     product, day_rows, night_rows = fetch_bars(rest)
-    days = day_table(day_rows)
+    days = day_table(day_rows) if day_rows else {}
+    fallback = False
+    if not days:
+        try:
+            days, fallback = yahoo_twii_days(), True
+        except Exception as e:
+            sys.exit(f"富邦與 Yahoo 都抓不到資料：{e}")
     today = datetime.now(TW).date()
     try:
         hist = json.load(open(HIST_FILE, encoding="utf-8"))
@@ -185,6 +207,8 @@ def main():
         go = close > ma and not long_break and lots >= 1
         if lots < 1:
             reasons.append("依交易計畫算出 0 口")
+        if fallback:
+            reasons.append("⚠️ 富邦台指期資料暫時抓不到，改用加權指數判斷；紙上交易等富邦恢復後自動補結算")
         sig = {"date": today.isoformat(), "decision": "做" if go else "不做", "reasons": reasons,
                "close": close, "ma60": round(ma, 1), "nextTradingDay": nxt.isoformat(), "lots": lots if go else 0,
                "stopPoints": STOP_PTS, "product": product,
@@ -213,8 +237,15 @@ def main():
     if last:
         sig["lastResult"] = {"date": last["date"], **last["result"]}
 
+    # 同一天、同一個判斷已推播過（例如補跑）就不再推一次
+    try:
+        prev = json.load(open(SIG_FILE, encoding="utf-8"))
+    except Exception:
+        prev = {}
+    already = prev.get("date") == sig["date"] and prev.get("decision") == sig["decision"] and prev.get("pushed")
+    sig["pushed"] = bool(already)
+
     os.makedirs("public", exist_ok=True)
-    json.dump(sig, open(SIG_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     json.dump(hist[-400:], open(HIST_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print(json.dumps(sig, ensure_ascii=False, indent=2))
 
@@ -229,7 +260,11 @@ def main():
     if p["trades"]:
         lines.append(f"紙上累計 {p['trades']} 筆，勝 {p['wins']}，合計 {p['total']:+,} 元"
                      f"（回測預期 {p['expTotal']:+,} ± {p['band']:,}）")
-    telegram("\n".join(lines))
+    if already:
+        print("（今天這個判斷已推播過，略過）")
+    else:
+        sig["pushed"] = telegram("\n".join(lines))
+    json.dump(sig, open(SIG_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
 
 if __name__ == "__main__":
