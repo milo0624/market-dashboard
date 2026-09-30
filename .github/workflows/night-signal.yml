@@ -1,7 +1,8 @@
 name: 今晚夜盤判斷
 on:
   schedule:
-    - cron: '5 6 * * 1-5'     # 台灣時間 14:05（日盤 13:45 收盤後、夜盤 15:00 開盤前）
+    - cron: '55 5 * * 1-5'    # 台灣時間 13:55（日盤 13:45 收盤後）
+    - cron: '25 6 * * 1-5'    # 台灣時間 14:25 補跑：第一次被 GitHub 延遲或失敗時補上（同一天只推播一次）
   workflow_dispatch:
 concurrency:
   group: market-update       # 與每日早報共用，避免兩個流程同時推送
