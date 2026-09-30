@@ -94,6 +94,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .nk-sw-ma{width:14px;height:2px;background:var(--Bm);border-radius:1px}
 .nk-box{position:relative;width:100%}
 .nk-box canvas{display:block;touch-action:pan-y}
+.kt-bar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.kt-btn{font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--bdr);background:var(--card);color:var(--mu);cursor:pointer;font-family:inherit;font-weight:600}
+.kt-btn.on{background:#dd6b20;border-color:#dd6b20;color:#fff}
+.kt-hint{font-size:10px;color:#dd6b20;font-weight:600}
 .nk-tip{display:none;position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:6px 8px;font-size:11px;line-height:1.6;color:var(--tx);box-shadow:var(--shadow);white-space:nowrap;z-index:2}
 .inst-total.up{color:var(--G)}.inst-total.dn{color:var(--R)}.inst-total.fl{color:var(--mu)}
 .inst-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr)}
@@ -241,6 +245,7 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
       </div>
       <div class="trend-sub" id="trendSub">近1個月綜合走勢</div>
       <div class="nk-legend" id="skLegend" style="margin-top:8px;display:none"><span><i class="nk-sw-k"></i>板塊日K（等權重）</span><span><i class="nk-sw-ma"></i>20 日均線</span></div>
+      <div id="skTools" style="display:none"></div>
       <div class="nk-box" id="skBox" style="display:none"><canvas id="skCanvas"></canvas><div class="nk-tip" id="skTip"></div></div>
       <div id="trendLineWrap" style="position:relative;height:80px;margin-top:8px">
         <canvas id="trendChart"></canvas>
@@ -847,10 +852,15 @@ function renderTrend(sec) {
   var useK = kb.length >= 5;
   document.getElementById('skLegend').style.display = useK ? 'flex' : 'none';
   document.getElementById('skBox').style.display = useK ? 'block' : 'none';
+  var skTools = document.getElementById('skTools');
+  skTools.style.display = useK ? 'block' : 'none';
+  if (useK && !skTools.innerHTML) skTools.innerHTML = kToolbarHtml('sk');
+  if (useK) { kMode.sk = null; kRefreshToolbar('sk'); }
   document.getElementById('trendLineWrap').style.display = useK ? 'none' : 'block';
   if (useK) {
     document.getElementById('trendSub').textContent = '標題為近 1 個月漲跌 · 下圖近 ' + kb.length + ' 個交易日 K 線（以 ' + kb[0].d.slice(5).replace('-', '/') + ' 收盤為 0%）';
     sectorBars = kb;
+    sectorKey = (mkt === 0 ? 'tw:' : 'sox:') + sec.name;
     safeDrawSectorChart();
     return;
   }
@@ -1024,16 +1034,70 @@ function drawKChart(cfg) {
   var started = false;
   bars.forEach(function(b, i) { if (b.ma == null) return; if (!started) { ctx.moveTo(x(i), y(b.ma)); started = true; } else ctx.lineTo(x(i), y(b.ma)); });
   ctx.stroke();
-  // 最新收盤標記（右側標籤）
+  // 使用者自己畫的線
+  var LN = '#dd6b20';
+  var idxOf = {}; bars.forEach(function(b, i) { idxOf[b.d] = i; });
+  function ptXY(pt) {
+    var i = idxOf[pt.d]; if (i == null) return null;
+    var v = cfg.valOf(pt, bars, i); if (v == null || !isFinite(v)) return null;
+    return {i: i, v: v};
+  }
+  function drawUserLine(L, preview) {
+    ctx.save(); ctx.strokeStyle = LN; ctx.lineWidth = 1.5; if (preview) ctx.setLineDash([4, 3]);
+    if (L.t === 'h') {
+      var a = ptXY(L.a); if (!a) { ctx.restore(); return; }
+      var yy = Math.round(y(a.v)) + 0.5;
+      ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(pw, yy); ctx.stroke();
+      ctx.fillStyle = LN; ctx.fillRect(pw + 1, yy - 8, PR - 1, 16);
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 10px -apple-system,sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(cfg.fmtAxis(a.v), pw + 4, yy);
+    } else {
+      var p1 = ptXY(L.a), p2 = ptXY(L.b); if (!p1 || !p2 || p1.i === p2.i) { ctx.restore(); return; }
+      var k = (p2.v - p1.v) / (p2.i - p1.i), iEnd = (pw / slot) - 0.5;   // 往右延伸到圖的右緣
+      ctx.beginPath(); ctx.moveTo(x(p1.i), y(p1.v)); ctx.lineTo(x(iEnd), y(p1.v + k * (iEnd - p1.i))); ctx.stroke();
+      ctx.fillStyle = LN; [p1, p2].forEach(function(p) { ctx.beginPath(); ctx.arc(x(p.i), y(p.v), 2.5, 0, Math.PI * 2); ctx.fill(); });
+    }
+    ctx.restore();
+  }
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.clip();
+  kLoadLines(cfg.key).forEach(function(L) { drawUserLine(L); });
+  ctx.restore();
+  // 最新收盤標記（右側標籤，畫在自畫線之後，永遠在最上層）
   var lb = bars[bars.length - 1], ly = y(lb.c);
   ctx.fillStyle = TX; ctx.fillRect(pw + 1, ly - 8, PR - 1, 16);
   ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = 'bold 10px -apple-system,sans-serif';
   ctx.fillText(cfg.fmtLast(lb.c), pw + 4, ly);
-  // 互動：十字線＋提示框
+  kLast[cfg.slot] = cfg;
+  cv.style.touchAction = kMode[cfg.slot] ? 'none' : 'pan-y';
+  // 互動：十字線＋提示框；畫線模式時改成畫線
   var base = ctx.getImageData(0, 0, cv.width, cv.height);
+  function evPos(ev) {
+    var r = cv.getBoundingClientRect(), t = ev.touches && ev.touches.length ? ev.touches[0] : (ev.changedTouches ? ev.changedTouches[0] : ev);
+    var px = t.clientX - r.left, py = t.clientY - r.top;
+    var i = Math.max(0, Math.min(bars.length - 1, Math.floor(px / slot)));
+    var v = hi - (Math.max(PT, Math.min(PT + ph, py)) - PT) / ph * (hi - lo);
+    return {i: i, v: v};
+  }
+  var drag = null;
+  function down(ev) {
+    var m = kMode[cfg.slot]; if (!m) return false;
+    var p = evPos(ev);
+    if (m === 'h') { kAddLine(cfg, {t: 'h', a: cfg.store(p.v, bars.length - 1, bars)}); return true; }
+    drag = p; return true;
+  }
+  function moveDraw(ev) {
+    var p = evPos(ev);
+    ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (p.i !== drag.i) drawUserLine({t: 't', a: cfg.store(drag.v, drag.i, bars), b: cfg.store(p.v, p.i, bars)}, true);
+  }
+  function up(ev) {
+    var p = evPos(ev), d0 = drag; drag = null;
+    if (p.i === d0.i) { ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); return; }  // 沒拉開就不算
+    var a = d0.i < p.i ? d0 : p, b = d0.i < p.i ? p : d0;
+    kAddLine(cfg, {t: 't', a: cfg.store(a.v, a.i, bars), b: cfg.store(b.v, b.i, bars)});
+  }
   function show(ev) {
-    var r = cv.getBoundingClientRect(), px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
-    var i = Math.max(0, Math.min(bars.length - 1, Math.floor(px / slot))), b = bars[i];
+    var i = evPos(ev).i, b = bars[i];
     ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.strokeStyle = MU; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(Math.round(x(i)) + 0.5, PT); ctx.lineTo(Math.round(x(i)) + 0.5, PT + ph); ctx.stroke(); ctx.setLineDash([]);
     tip.innerHTML = cfg.tipHtml(b, i, bars);
@@ -1042,9 +1106,54 @@ function drawKChart(cfg) {
     tip.style.left = Math.max(0, tx) + 'px'; tip.style.top = '6px';
   }
   function hide() { ctx.putImageData(base, 0, 0); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); tip.style.display = 'none'; }
-  cv.onmousemove = show; cv.onmouseleave = hide;
-  cv.ontouchstart = function(e) { show(e); }; cv.ontouchmove = function(e) { e.preventDefault(); show(e); }; cv.ontouchend = hide;
+  cv.onmousedown = function(e) { if (down(e)) e.preventDefault(); };
+  cv.onmousemove = function(e) { if (drag) moveDraw(e); else if (!kMode[cfg.slot]) show(e); };
+  cv.onmouseup = function(e) { if (drag) up(e); };
+  cv.onmouseleave = function() { if (!drag) hide(); };
+  cv.ontouchstart = function(e) { if (down(e)) { e.preventDefault(); return; } show(e); };
+  cv.ontouchmove = function(e) { e.preventDefault(); if (drag) moveDraw(e); else if (!kMode[cfg.slot]) show(e); };
+  cv.ontouchend = function(e) { if (drag) up(e); else hide(); };
 }
+
+// ── 畫線：存在這個瀏覽器（localStorage），每張圖、每個板塊各自一組 ──
+var kMode = {}, kLast = {};
+function kLoadLines(key) {
+  try { return JSON.parse(localStorage.getItem('klines:' + key) || '[]'); } catch (e) { return []; }
+}
+function kSaveLines(key, lines) {
+  try { localStorage.setItem('klines:' + key, JSON.stringify(lines)); } catch (e) {}
+}
+function kAddLine(cfg, L) {
+  var lines = kLoadLines(cfg.key); lines.push(L); kSaveLines(cfg.key, lines);
+  kMode[cfg.slot] = null;          // 畫完一條就離開畫線模式，避免滑頁面時誤畫
+  kRefreshToolbar(cfg.slot); safeDrawKChart(cfg);
+}
+function kToolbarHtml(slot) {
+  return '<div class="kt-bar" data-slot="' + slot + '">' +
+    '<button class="kt-btn" data-act="h">― 水平線</button>' +
+    '<button class="kt-btn" data-act="t">╱ 趨勢線</button>' +
+    '<button class="kt-btn" data-act="undo">↶ 復原</button>' +
+    '<button class="kt-btn" data-act="clear">清除</button>' +
+    '<span class="kt-hint"></span></div>';
+}
+function kRefreshToolbar(slot) {
+  var bar = document.querySelector('.kt-bar[data-slot="' + slot + '"]'); if (!bar) return;
+  var m = kMode[slot];
+  bar.querySelectorAll('.kt-btn').forEach(function(b) { b.classList.toggle('on', b.dataset.act === m); });
+  bar.querySelector('.kt-hint').textContent = m === 'h' ? '點圖上任一處放一條水平線' : m === 't' ? '在圖上按住拖曳畫線（會往右延伸）' : '';
+}
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest && e.target.closest('.kt-btn'); if (!btn) return;
+  var slot = btn.parentNode.dataset.slot, act = btn.dataset.act, cfg = kLast[slot];
+  if (act === 'h' || act === 't') kMode[slot] = kMode[slot] === act ? null : act;
+  else if (cfg) {
+    var lines = kLoadLines(cfg.key);
+    if (act === 'undo') lines.pop(); else lines = [];
+    kSaveLines(cfg.key, lines);
+  }
+  kRefreshToolbar(slot);
+  if (cfg) safeDrawKChart(cfg);
+});
 function waitKChartSize(cfg, box) {
   if (window.ResizeObserver) {
     if (kObservers[cfg.boxId]) kObservers[cfg.boxId].disconnect();
@@ -1070,7 +1179,9 @@ function safeDrawKChart(cfg) {
 var nightBars = null;
 function nightChartCfg() {
   return {
-    bars: nightBars, boxId: 'nkBox', cvId: 'nkCanvas', tipId: 'nkTip', H: 190,
+    bars: nightBars, boxId: 'nkBox', cvId: 'nkCanvas', tipId: 'nkTip', H: 190, slot: 'nk', key: 'night',
+    store: function(v, i, bars) { return {d: bars[i].d, v: Math.round(v)}; },
+    valOf: function(pt) { return pt.v; },
     fmtAxis: function(v) { return Math.round(v).toLocaleString('zh-TW'); },
     fmtLast: function(v) { return Math.round(v).toLocaleString('zh-TW'); },
     tipHtml: function(b, i, bars) {
@@ -1084,11 +1195,14 @@ function nightChartCfg() {
 function safeDrawNightChart() { if (nightBars) safeDrawKChart(nightChartCfg()); }
 
 // 板塊熱力圖：等權重板塊 K＋20 日均線（數值＝相對 60 個交易日前收盤的漲跌 %）
-var sectorBars = null;
+var sectorBars = null, sectorKey = '';
 function pct(v) { return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'; }
 function sectorChartCfg() {
   return {
-    bars: sectorBars, boxId: 'skBox', cvId: 'skCanvas', tipId: 'skTip', H: 170,
+    bars: sectorBars, boxId: 'skBox', cvId: 'skCanvas', tipId: 'skTip', H: 170, slot: 'sk', key: 'sector:' + sectorKey,
+    // 板塊數值以 60 日前收盤為 0%，基準每天會換；存「相對當天收盤的比例」，隔天線才不會跑掉
+    store: function(v, i, bars) { return {d: bars[i].d, r: (1 + v / 100) / (1 + bars[i].c / 100)}; },
+    valOf: function(pt, bars, i) { return ((1 + bars[i].c / 100) * pt.r - 1) * 100; },
     fmtAxis: pct, fmtLast: pct,
     tipHtml: function(b, i, bars) {
       var chg = i > 0 ? b.c - bars[i - 1].c : 0;
@@ -1163,7 +1277,7 @@ function renderNight() {
           '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + head + '</div>' +
           '<div style="font-size:12px;color:var(--tx);line-height:1.7">' + reasons + '</div>' + plan +
         '</div>' +
-        (s.bars && s.bars.length ? '<div class="nk-wrap"><div class="nk-legend"><span><i class="nk-sw-k"></i>台指期日K（日盤）</span><span><i class="nk-sw-ma"></i>60 日均線</span><span style="margin-left:auto;color:var(--hi)">近 ' + s.bars.length + ' 個交易日</span></div>' +
+        (s.bars && s.bars.length ? '<div class="nk-wrap"><div class="nk-legend"><span><i class="nk-sw-k"></i>台指期日K（日盤）</span><span><i class="nk-sw-ma"></i>60 日均線</span><span style="margin-left:auto;color:var(--hi)">近 ' + s.bars.length + ' 個交易日</span></div>' + kToolbarHtml('nk') +
           '<div class="nk-box" id="nkBox"><canvas id="nkCanvas"></canvas><div class="nk-tip" id="nkTip"></div></div></div>' : '') +
         last + paper +
         '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">' + String(s.updated || s.date).replace('T', ' ').slice(0, 16) + ' 更新 · 回測：2017–2026 夏普 1.24、最大回落 −7.3 萬（1 口）· 僅供參考，不構成投資建議</div>';
