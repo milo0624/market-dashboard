@@ -1103,6 +1103,37 @@ function safeDrawSectorChart() { if (sectorBars) safeDrawKChart(sectorChartCfg()
 window.addEventListener('resize', function() { safeDrawNightChart(); safeDrawSectorChart(); });
 document.addEventListener('visibilitychange', function() { if (!document.hidden) { safeDrawNightChart(); safeDrawSectorChart(); } });
 
+// ── 今晚夜盤：紙上交易 vs 回測預期 ──
+function nightCompareHtml(p, bt) {
+  var sgn = function(v) { return v == null ? '—' : (v >= 0 ? '+' : '') + Math.round(v).toLocaleString('zh-TW'); };
+  var pct = function(v) { return v == null ? '—' : v.toFixed(1) + '%'; };
+  var head = '<div style="font-size:12px;color:var(--tx);margin-bottom:6px">紙上交易 ' + p.trades + ' 筆（自 ' + p.since + '）· 合計 ' +
+    '<b style="color:' + (p.total >= 0 ? 'var(--G)' : 'var(--R)') + '">' + sgn(p.total) + ' 元</b></div>';
+  if (!bt) return head;
+  var rows = [
+    ['勝率', pct(p.winRate), pct(bt.winRate)],
+    ['平均每筆', sgn(p.avg) + ' 元', sgn(bt.avg) + ' 元'],
+    ['平均賺 / 平均賠', sgn(p.avgWin) + ' / ' + sgn(p.avgLoss), sgn(bt.avgWin) + ' / ' + sgn(bt.avgLoss)],
+    ['停損出場比例', pct(p.stopRate), pct(bt.stopRate)]
+  ];
+  var cell = 'padding:5px 6px;border-bottom:1px solid var(--bdr)';
+  var table = '<table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:6px">' +
+    '<tr style="color:var(--mu)"><td style="' + cell + '"></td><td style="' + cell + ';text-align:right">紙上交易</td><td style="' + cell + ';text-align:right">回測預期</td></tr>' +
+    rows.map(function(r) {
+      return '<tr><td style="' + cell + ';color:var(--mu)">' + r[0] + '</td><td style="' + cell + ';text-align:right;font-weight:600;color:var(--tx)">' + r[1] +
+        '</td><td style="' + cell + ';text-align:right;color:var(--mu)">' + r[2] + '</td></tr>';
+    }).join('') + '</table>';
+  // 合計是否在回測預期的正常範圍（± 2 個標準差 × √筆數）內
+  var lo = p.expTotal - p.band, hi = p.expTotal + p.band, verdict, vcol;
+  if (p.trades < 20) { verdict = '樣本還少（< 20 筆），先不下結論'; vcol = 'var(--mu)'; }
+  else if (p.total < lo) { verdict = '⚠️ 低於回測預期的正常範圍，策略可能失效，建議暫停並檢查'; vcol = 'var(--R)'; }
+  else if (p.total > hi) { verdict = '高於回測預期的正常範圍（運氣偏好，別因此加碼）'; vcol = 'var(--G)'; }
+  else { verdict = '在回測預期的正常範圍內'; vcol = 'var(--G)'; }
+  var band = '<div style="font-size:11px;color:var(--mu);line-height:1.6">合計 ' + sgn(p.total) + ' 元；回測預期 ' + sgn(p.expTotal) +
+    ' 元，正常範圍 ' + sgn(lo) + ' ～ ' + sgn(hi) + ' 元<br><span style="color:' + vcol + ';font-weight:600">' + verdict + '</span></div>';
+  return head + table + band;
+}
+
 // ── 今晚夜盤：讀 night_signal.json（由「今晚夜盤判斷」排程每個交易日 14:05 產生）──
 function renderNight() {
   var box = document.getElementById('nightContent');
@@ -1124,10 +1155,9 @@ function renderNight() {
           '<span style="font-weight:700;color:' + (up ? 'var(--G)' : 'var(--R)') + ';margin-left:6px">' + (up ? '+' : '') + r.pnl.toLocaleString('zh-TW') + ' 元</span></div>';
       }
       var p = s.paper || {};
-      var paper = p.trades ?
-        '<div style="font-size:12px;color:var(--tx)">紙上交易 ' + p.trades + ' 筆（自 ' + p.since + '）· 勝 ' + p.wins + ' 筆 · 合計 ' +
-        '<b style="color:' + (p.total >= 0 ? 'var(--G)' : 'var(--R)') + '">' + (p.total >= 0 ? '+' : '') + p.total.toLocaleString('zh-TW') + ' 元</b></div>' :
-        '<div style="font-size:12px;color:var(--mu)">紙上交易剛開始，還沒有已結算的紀錄</div>';
+      var paper = p.trades ? nightCompareHtml(p, s.backtest) :
+        '<div style="font-size:12px;color:var(--mu)">紙上交易剛開始，還沒有已結算的紀錄' +
+        (s.backtest ? '（回測預期：勝率約 ' + s.backtest.winRate + '%、平均每筆 +' + s.backtest.avg + ' 元）' : '') + '</div>';
       box.innerHTML =
         '<div style="background:' + color + ';border:1.5px solid ' + border + ';border-radius:10px;padding:12px 14px;margin-bottom:10px">' +
           '<div style="font-size:15px;font-weight:800;margin-bottom:6px">' + head + '</div>' +

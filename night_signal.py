@@ -21,6 +21,9 @@ MA_N, STOP_PTS, MULT = 60, 300, 10
 RISK_NTD, NOTIONAL_CAP = 3000, 900_000
 COST = 13 * 2 + 1 * 2 * MULT          # 手續費＋滑價（期交稅另依價格計）
 SIG_FILE, HIST_FILE = "public/night_signal.json", "public/night_history.json"
+# 回測基準（trading/backtest/strategies.py 策略 1f，2017-05～2026-09，1 口 TMF 扣成本，換算到指數 48,123 點水位）
+BACKTEST = {"trades": 1434, "winRate": 51.8, "avg": 286, "std": 3004, "stopRate": 24.9, "avgWin": 2520, "avgLoss": -2115,
+            "period": "2017-05～2026-09"}
 
 
 def fetch_bars(rest):
@@ -189,9 +192,21 @@ def main():
         hist = [h for h in hist if h["date"] != sig["date"]]
         hist.append({k: sig[k] for k in ("date", "decision", "close", "ma60")})
 
-    done = [h["result"]["pnl"] for h in hist if "result" in h]
-    sig["paper"] = {"trades": len(done), "wins": sum(p > 0 for p in done), "total": sum(done),
-                    "since": hist[0]["date"] if hist else None}
+    res = [h["result"] for h in hist if "result" in h]
+    done = [r["pnl"] for r in res]
+    n = len(done)
+    wins = [x for x in done if x > 0]; losses = [x for x in done if x <= 0]
+    sig["paper"] = {"trades": n, "wins": len(wins), "total": sum(done),
+                    "since": hist[0]["date"] if hist else None,
+                    "winRate": round(len(wins) / n * 100, 1) if n else None,
+                    "avg": round(sum(done) / n) if n else None,
+                    "avgWin": round(sum(wins) / len(wins)) if wins else None,
+                    "avgLoss": round(sum(losses) / len(losses)) if losses else None,
+                    "stopRate": round(sum("停損" in r["how"] for r in res) / n * 100, 1) if n else None,
+                    # 回測預期：n 筆合計 ≈ n × 平均，正常波動範圍約 ± 2 × 標準差 × √n
+                    "expTotal": round(BACKTEST["avg"] * n),
+                    "band": round(2 * BACKTEST["std"] * math.sqrt(n)) if n else None}
+    sig["backtest"] = BACKTEST
     sig["updated"] = datetime.now(TW).isoformat(timespec="minutes")
     sig["bars"] = chart_bars(days)
     last = next((h for h in reversed(hist) if "result" in h), None)
@@ -212,7 +227,8 @@ def main():
         lines.append(f"昨晚紙上：{r['entry']:,.0f} → {r['exit']:,.0f}（{r['how']}）{r['pnl']:+,} 元")
     p = sig["paper"]
     if p["trades"]:
-        lines.append(f"紙上累計 {p['trades']} 筆，勝 {p['wins']}，合計 {p['total']:+,} 元")
+        lines.append(f"紙上累計 {p['trades']} 筆，勝 {p['wins']}，合計 {p['total']:+,} 元"
+                     f"（回測預期 {p['expTotal']:+,} ± {p['band']:,}）")
     telegram("\n".join(lines))
 
 
