@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-03",
-  "updated": "2026-10-03T22:53:05.894490+08:00",
+  "date": "2026-10-04",
+  "updated": "2026-10-04T23:59:51.206653+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -73,25 +73,25 @@
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
       "price": 7777.25,
-      "change": 53.25,
-      "changePercent": 0.69,
-      "prev": 7724.0
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 7777.25
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
       "price": 31061.75,
-      "change": 301.25,
-      "changePercent": 0.98,
-      "prev": 30760.5
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 31061.75
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
       "price": 69935.0,
-      "change": 1380.0,
-      "changePercent": 2.01,
-      "prev": 68555.0
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 69935.0
     }
   },
   "metals": {
@@ -99,17 +99,17 @@
       "name": "黃金",
       "symbol": "GC=F",
       "price": 4162.3,
-      "change": -40.0,
-      "changePercent": -0.95,
-      "prev": 4202.3
+      "change": 0.0,
+      "changePercent": 0.0,
+      "prev": 4162.3
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
       "price": 60.41,
-      "change": -0.31,
-      "changePercent": -0.51,
-      "prev": 60.73
+      "change": 0.44,
+      "changePercent": 0.73,
+      "prev": 59.98
     }
   },
   "signal_meta": {
