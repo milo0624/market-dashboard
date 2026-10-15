@@ -1,70 +1,70 @@
 {
-  "date": "2026-10-14",
-  "updated": "2026-10-14T09:19:10.798784+08:00",
+  "date": "2026-10-15",
+  "updated": "2026-10-15T08:43:13.674515+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
       "name": "費半 SOX",
       "symbol": "^SOX",
-      "price": 12208.8,
-      "change": -363.62,
-      "changePercent": -2.89,
-      "prev": 12572.42
+      "price": 11684.38,
+      "change": -552.41,
+      "changePercent": -4.51,
+      "prev": 12236.79
     },
     "N225": {
       "name": "日經 225",
       "symbol": "^N225",
-      "price": 67980.59,
-      "change": 203.07,
-      "changePercent": 0.3,
-      "prev": 67777.52
+      "price": 65417.93,
+      "change": -2326.36,
+      "changePercent": -3.43,
+      "prev": 67744.29
     },
     "TSM_ADR": {
       "name": "TSM ADR",
       "symbol": "TSM",
-      "price": 445.12,
-      "change": -8.19,
-      "changePercent": -1.81,
-      "prev": 453.31
+      "price": 430.0,
+      "change": -14.35,
+      "changePercent": -3.23,
+      "prev": 444.35
     },
     "TWII": {
       "name": "台股 TAIEX",
       "symbol": "^TWII",
-      "price": 48341.31,
-      "change": -972.09,
-      "changePercent": -1.97,
-      "prev": 49313.4
+      "price": 48625.83,
+      "change": 284.52,
+      "changePercent": 0.59,
+      "prev": 48341.31
     },
     "NVDA": {
       "name": "輝達 NVDA",
       "symbol": "NVDA",
-      "price": 228.52,
-      "change": -0.76,
-      "changePercent": -0.33,
-      "prev": 229.28
+      "price": 221.3,
+      "change": -5.02,
+      "changePercent": -2.22,
+      "prev": 226.32
     },
     "VIX": {
       "name": "VIX 恐慌",
       "symbol": "^VIX",
-      "price": 15.27,
-      "change": 0.06,
-      "changePercent": 0.39,
-      "prev": 15.21
+      "price": 16.87,
+      "change": 1.6,
+      "changePercent": 10.48,
+      "prev": 15.27
     },
     "VIX3M": {
       "name": "VIX 三個月",
       "symbol": "^VIX3M",
-      "price": 17.96,
-      "change": 0.19,
-      "changePercent": 1.07,
-      "prev": 17.77
+      "price": 18.79,
+      "change": 0.86,
+      "changePercent": 4.8,
+      "prev": 17.93
     },
     "TSM": {
       "name": "台積電",
       "symbol": "2330",
-      "price": 2525,
-      "change": 35,
-      "changePercent": 1.41,
+      "price": 2400,
+      "change": -90,
+      "changePercent": -3.61,
       "prev": 2490
     }
   },
@@ -72,44 +72,44 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7857.25,
-      "change": -0.75,
-      "changePercent": -0.01,
-      "prev": 7858.0
+      "price": 7752.0,
+      "change": -103.75,
+      "changePercent": -1.32,
+      "prev": 7855.75
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 30799.25,
-      "change": -99.0,
-      "changePercent": -0.32,
-      "prev": 30898.25
+      "price": 29978.25,
+      "change": -813.25,
+      "changePercent": -2.64,
+      "prev": 30791.5
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 68185.0,
-      "change": -300.0,
-      "changePercent": -0.44,
-      "prev": 68485.0
+      "price": 65575.0,
+      "change": -2665.0,
+      "changePercent": -3.91,
+      "prev": 68240.0
     }
   },
   "metals": {
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 4178.7,
-      "change": -11.9,
-      "changePercent": -0.28,
-      "prev": 4190.6
+      "price": 4164.3,
+      "change": -13.0,
+      "changePercent": -0.31,
+      "prev": 4177.3
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 59.19,
-      "change": -0.96,
-      "changePercent": -1.6,
-      "prev": 60.14
+      "price": 56.22,
+      "change": -2.94,
+      "changePercent": -4.97,
+      "prev": 59.16
     }
   },
   "signal_meta": {
@@ -161,14 +161,14 @@
     "detail": {
       "symbol": "^TWII",
       "date": "2026-10-14",
-      "close": 48661.12109375,
+      "close": 48625.828125,
       "open": 48382.640625,
-      "volume": 0,
-      "avgVol": 4257065.0,
+      "volume": 5206300,
+      "avgVol": 4580875.0,
       "highestHigh": 49968.92,
       "lowestLow": 45398.43,
-      "ma20": 47879.81,
-      "ma60": 45838.56,
+      "ma20": 47985.87,
+      "ma60": 45932.47,
       "longBreakout": false,
       "shortBreakout": false,
       "bullVol": false,
@@ -232,122 +232,122 @@
         {
           "symbol": "2330",
           "name": "台積電",
-          "price": 2525,
-          "changePercent": 1.41
+          "price": 2400,
+          "changePercent": -3.61
         },
         {
           "symbol": "2454",
           "name": "聯發科",
-          "price": 4505,
-          "changePercent": -0.44
+          "price": 4275,
+          "changePercent": -4.47
         },
         {
           "symbol": "3711",
           "name": "日月光投控",
-          "price": 746,
-          "changePercent": 0.81
+          "price": 705,
+          "changePercent": -5.62
         },
         {
           "symbol": "2303",
           "name": "聯電",
-          "price": 141,
-          "changePercent": -0.35
+          "price": 135,
+          "changePercent": -4.93
         },
         {
           "symbol": "2408",
           "name": "南亞科",
-          "price": 485,
-          "changePercent": -0.61
-        },
-        {
-          "symbol": "7769",
-          "name": "鴻勁",
-          "price": 6020,
-          "changePercent": -0.82
+          "price": 468.5,
+          "changePercent": -2.5
         },
         {
           "symbol": "3443",
           "name": "創意",
-          "price": 8000,
-          "changePercent": -1.17
+          "price": 7900,
+          "changePercent": -4.18
+        },
+        {
+          "symbol": "7769",
+          "name": "鴻勁",
+          "price": 5760,
+          "changePercent": -0.35
         },
         {
           "symbol": "2344",
           "name": "華邦電",
-          "price": 162,
-          "changePercent": 0.31
+          "price": 160.5,
+          "changePercent": -2.73
         },
         {
           "symbol": "3189",
           "name": "景碩",
-          "price": 1050,
-          "changePercent": 0.96
-        },
-        {
-          "symbol": "2449",
-          "name": "京元電子",
-          "price": 297.5,
-          "changePercent": -2.46
+          "price": 1005,
+          "changePercent": -4.29
         },
         {
           "symbol": "2379",
           "name": "瑞昱",
-          "price": 756,
+          "price": 776,
           "changePercent": -0.26
         },
         {
-          "symbol": "3661",
-          "name": "世芯-KY",
-          "price": 4000,
-          "changePercent": -1.36
+          "symbol": "2449",
+          "name": "京元電子",
+          "price": 292,
+          "changePercent": -1.52
         },
         {
           "symbol": "3034",
           "name": "聯詠",
-          "price": 540,
-          "changePercent": -1.1
+          "price": 559,
+          "changePercent": -0.18
+        },
+        {
+          "symbol": "3661",
+          "name": "世芯-KY",
+          "price": 3745,
+          "changePercent": -4.95
         },
         {
           "symbol": "6770",
           "name": "力積電",
-          "price": 68.1,
-          "changePercent": 0.89
+          "price": 68.6,
+          "changePercent": -3.38
         },
         {
           "symbol": "6239",
           "name": "力成",
-          "price": 300.5,
-          "changePercent": 1.52
+          "price": 281.5,
+          "changePercent": -5.7
         },
         {
           "symbol": "2337",
           "name": "旺宏",
           "price": 107,
-          "changePercent": 0.47
+          "changePercent": -2.73
         },
         {
           "symbol": "6515",
           "name": "穎崴",
-          "price": 5830,
-          "changePercent": 2.28
-        },
-        {
-          "symbol": "3532",
-          "name": "台勝科",
-          "price": 434.5,
-          "changePercent": -2.14
+          "price": 5450,
+          "changePercent": -2.94
         },
         {
           "symbol": "6415",
           "name": "矽力*-KY",
-          "price": 444.5,
-          "changePercent": 3.73
+          "price": 518,
+          "changePercent": 9.98
+        },
+        {
+          "symbol": "3532",
+          "name": "台勝科",
+          "price": 427.5,
+          "changePercent": -1.61
         },
         {
           "symbol": "6531",
           "name": "愛普*",
-          "price": 956,
-          "changePercent": 3.24
+          "price": 926,
+          "changePercent": 0.33
         }
       ],
       "trend": [
@@ -372,7 +372,7 @@
         5.83,
         5.17,
         1.64,
-        2.54
+        2.37
       ],
       "kbars": [
         {
@@ -850,10 +850,10 @@
         {
           "d": "2026-10-14",
           "o": 18.98,
-          "h": 19.79,
-          "l": 18.18,
-          "c": 19.2,
-          "ma": 18.65
+          "h": 21.76,
+          "l": 16.45,
+          "c": 18.96,
+          "ma": 18.64
         }
       ]
     },
@@ -863,122 +863,122 @@
         {
           "symbol": "2308",
           "name": "台達電",
-          "price": 1795,
-          "changePercent": 1.13
+          "price": 1610,
+          "changePercent": -9.8
         },
         {
           "symbol": "2317",
           "name": "鴻海",
-          "price": 244,
-          "changePercent": 1.67
+          "price": 243,
+          "changePercent": 0
         },
         {
           "symbol": "2383",
           "name": "台光電",
-          "price": 5610,
-          "changePercent": 1.17
+          "price": 5245,
+          "changePercent": -4.98
         },
         {
           "symbol": "3037",
           "name": "欣興",
-          "price": 1165,
-          "changePercent": -1.27
+          "price": 1135,
+          "changePercent": -4.22
         },
         {
           "symbol": "2327",
           "name": "國巨*",
-          "price": 599,
-          "changePercent": 0
+          "price": 565,
+          "changePercent": -9.89
         },
         {
           "symbol": "3653",
           "name": "健策",
-          "price": 7225,
-          "changePercent": 3.36
-        },
-        {
-          "symbol": "2059",
-          "name": "川湖",
-          "price": 10040,
-          "changePercent": -0.2
+          "price": 6730,
+          "changePercent": -4.81
         },
         {
           "symbol": "2360",
           "name": "致茂",
-          "price": 2290,
-          "changePercent": 4.09
+          "price": 2050,
+          "changePercent": -8.89
+        },
+        {
+          "symbol": "2059",
+          "name": "川湖",
+          "price": 10200,
+          "changePercent": 1.95
         },
         {
           "symbol": "8046",
           "name": "南電",
-          "price": 1415,
-          "changePercent": -1.74
-        },
-        {
-          "symbol": "4958",
-          "name": "臻鼎-KY",
-          "price": 551,
-          "changePercent": -0.18
+          "price": 1290,
+          "changePercent": -9.79
         },
         {
           "symbol": "2368",
           "name": "金像電",
-          "price": 1195,
-          "changePercent": 2.14
+          "price": 1210,
+          "changePercent": -3.97
+        },
+        {
+          "symbol": "4958",
+          "name": "臻鼎-KY",
+          "price": 536,
+          "changePercent": -5.47
         },
         {
           "symbol": "3665",
           "name": "貿聯-KY",
-          "price": 2265,
-          "changePercent": 0.22
+          "price": 2235,
+          "changePercent": 0
         },
         {
           "symbol": "3044",
           "name": "健鼎",
-          "price": 578,
-          "changePercent": 1.05
-        },
-        {
-          "symbol": "2313",
-          "name": "華通",
-          "price": 243.5,
-          "changePercent": 0
+          "price": 543,
+          "changePercent": -9.95
         },
         {
           "symbol": "6213",
           "name": "聯茂",
-          "price": 824,
-          "changePercent": 3.65
+          "price": 826,
+          "changePercent": -3.5
+        },
+        {
+          "symbol": "2313",
+          "name": "華通",
+          "price": 249,
+          "changePercent": -0.6
         },
         {
           "symbol": "2404",
           "name": "漢唐",
-          "price": 1130,
-          "changePercent": -0.88
+          "price": 1150,
+          "changePercent": -0.43
         },
         {
           "symbol": "3533",
           "name": "嘉澤",
-          "price": 1995,
-          "changePercent": 7.26
+          "price": 1865,
+          "changePercent": -3.62
         },
         {
           "symbol": "2492",
           "name": "華新科",
-          "price": 400,
-          "changePercent": 2.04
+          "price": 390,
+          "changePercent": -8.45
         },
         {
           "symbol": "6139",
           "name": "亞翔",
-          "price": 721,
-          "changePercent": 0.42
+          "price": 705,
+          "changePercent": -2.08
         },
         {
           "symbol": "6805",
           "name": "富世達",
-          "price": 2220,
-          "changePercent": 0.45
+          "price": 2185,
+          "changePercent": -0.46
         }
       ],
       "trend": [
@@ -999,11 +999,11 @@
         12.32,
         17.17,
         18.21,
-        17.88,
+        17.87,
         17.38,
         15.93,
         10.96,
-        11.93
+        13.77
       ],
       "kbars": [
         {
@@ -1481,10 +1481,10 @@
         {
           "d": "2026-10-14",
           "o": 34.88,
-          "h": 35.57,
-          "l": 33.84,
-          "c": 34.47,
-          "ma": 29.16
+          "h": 39.03,
+          "l": 32.83,
+          "c": 36.78,
+          "ma": 29.28
         }
       ]
     },
@@ -1494,121 +1494,121 @@
         {
           "symbol": "2881",
           "name": "富邦金",
-          "price": 157,
-          "changePercent": -1.87
+          "price": 160.5,
+          "changePercent": 0
         },
         {
           "symbol": "2882",
           "name": "國泰金",
-          "price": 112.5,
-          "changePercent": -1.75
+          "price": 114,
+          "changePercent": 0
         },
         {
           "symbol": "2891",
           "name": "中信金",
-          "price": 70.8,
-          "changePercent": -1.12
+          "price": 71.3,
+          "changePercent": -0.14
         },
         {
           "symbol": "2887",
           "name": "台新新光金",
-          "price": 42.05,
-          "changePercent": -2.21
+          "price": 41.9,
+          "changePercent": -1.76
         },
         {
           "symbol": "2885",
           "name": "元大金",
-          "price": 70.5,
-          "changePercent": -0.14
+          "price": 72.5,
+          "changePercent": 0.42
         },
         {
           "symbol": "2884",
           "name": "玉山金",
-          "price": 46.15,
-          "changePercent": -0.75
+          "price": 47.7,
+          "changePercent": 0.85
         },
         {
           "symbol": "2886",
           "name": "兆豐金",
-          "price": 50.6,
-          "changePercent": -0.59
+          "price": 51.1,
+          "changePercent": 0
         },
         {
           "symbol": "2880",
           "name": "華南金",
-          "price": 48.4,
-          "changePercent": -1.93
-        },
-        {
-          "symbol": "2890",
-          "name": "永豐金",
-          "price": 44.2,
-          "changePercent": -1.23
+          "price": 49.1,
+          "changePercent": 0.41
         },
         {
           "symbol": "2883",
           "name": "凱基金",
-          "price": 38.2,
-          "changePercent": -1.42
+          "price": 38.25,
+          "changePercent": -1.03
+        },
+        {
+          "symbol": "2890",
+          "name": "永豐金",
+          "price": 44.4,
+          "changePercent": 0.79
         },
         {
           "symbol": "2892",
           "name": "第一金",
           "price": 40.05,
-          "changePercent": -1.11
+          "changePercent": -1.48
         },
         {
           "symbol": "5880",
           "name": "合庫金",
-          "price": 26.85,
-          "changePercent": -1.29
+          "price": 26.9,
+          "changePercent": -0.92
         },
         {
           "symbol": "2801",
           "name": "彰銀",
-          "price": 28.3,
-          "changePercent": -0.53
+          "price": 28.8,
+          "changePercent": 0
         },
         {
           "symbol": "5876",
           "name": "上海商銀",
-          "price": 51.2,
-          "changePercent": -1.35
+          "price": 51.3,
+          "changePercent": -0.77
         },
         {
           "symbol": "2834",
           "name": "臺企銀",
-          "price": 17.6,
-          "changePercent": -0.85
+          "price": 17.65,
+          "changePercent": -0.28
         },
         {
           "symbol": "2812",
           "name": "台中銀",
           "price": 18.55,
-          "changePercent": -0.27
+          "changePercent": -0.54
         },
         {
           "symbol": "2855",
           "name": "統一證",
-          "price": 59.2,
-          "changePercent": 1.02
+          "price": 59.5,
+          "changePercent": -1.16
         },
         {
           "symbol": "2838",
           "name": "聯邦銀",
-          "price": 20.3,
-          "changePercent": -0.25
+          "price": 20.45,
+          "changePercent": 0.49
         },
         {
           "symbol": "6005",
           "name": "群益證",
-          "price": 32.5,
-          "changePercent": 0.78
+          "price": 32.9,
+          "changePercent": -0.15
         },
         {
           "symbol": "2845",
           "name": "遠東銀",
-          "price": 13.1,
+          "price": 13.15,
           "changePercent": -0.38
         }
       ],
@@ -1634,7 +1634,7 @@
         0.76,
         2.96,
         3.72,
-        3.84
+        4.07
       ],
       "kbars": [
         {
@@ -2112,10 +2112,10 @@
         {
           "d": "2026-10-14",
           "o": 16.5,
-          "h": 17.25,
-          "l": 16.22,
-          "c": 16.69,
-          "ma": 14.65
+          "h": 17.63,
+          "l": 15.1,
+          "c": 16.96,
+          "ma": 14.67
         }
       ]
     },
@@ -2125,147 +2125,147 @@
         {
           "symbol": "6446",
           "name": "藥華藥",
-          "price": 1165,
-          "changePercent": 0
+          "price": 1195,
+          "changePercent": 0.42
         },
         {
           "symbol": "6919",
           "name": "康霈*",
-          "price": 78,
-          "changePercent": 1.96
+          "price": 79,
+          "changePercent": 0.89
         },
         {
           "symbol": "7799",
           "name": "禾榮科",
-          "price": 473,
-          "changePercent": 1.61
-        },
-        {
-          "symbol": "6949",
-          "name": "沛爾生醫*-創",
-          "price": 39.2,
-          "changePercent": -6.78
+          "price": 488,
+          "changePercent": 3.61
         },
         {
           "symbol": "6472",
           "name": "保瑞",
-          "price": 421,
-          "changePercent": 0.24
+          "price": 428,
+          "changePercent": 0.82
+        },
+        {
+          "symbol": "6949",
+          "name": "沛爾生醫*-創",
+          "price": 35.7,
+          "changePercent": -9.39
         },
         {
           "symbol": "1795",
           "name": "美時",
-          "price": 179.5,
-          "changePercent": 0.84
+          "price": 180,
+          "changePercent": 0
         },
         {
           "symbol": "6491",
           "name": "晶碩",
-          "price": 405.5,
-          "changePercent": -1.34
+          "price": 423,
+          "changePercent": 3.17
         },
         {
           "symbol": "7827",
           "name": "漢康-KY創",
-          "price": 164.5,
-          "changePercent": 0.61
+          "price": 0,
+          "changePercent": 0
         },
         {
           "symbol": "3705",
           "name": "永信",
-          "price": 60.9,
-          "changePercent": 0.33
+          "price": 61.4,
+          "changePercent": 1.82
         },
         {
           "symbol": "1789",
           "name": "神隆",
-          "price": 19.45,
-          "changePercent": 0.26
+          "price": 19.85,
+          "changePercent": 0
         },
         {
           "symbol": "6782",
           "name": "視陽",
-          "price": 242,
-          "changePercent": 0.21
+          "price": 268.5,
+          "changePercent": 9.82
         },
         {
           "symbol": "6589",
           "name": "台康生技",
-          "price": 49.5,
-          "changePercent": 0.3
+          "price": 49.9,
+          "changePercent": 0
         },
         {
           "symbol": "4736",
           "name": "泰博",
-          "price": 135,
-          "changePercent": 0.37
+          "price": 136,
+          "changePercent": 1.12
         },
         {
           "symbol": "4104",
           "name": "佳醫",
-          "price": 73.7,
-          "changePercent": 0.96
+          "price": 0,
+          "changePercent": 0
         },
         {
           "symbol": "1707",
           "name": "葡萄王",
-          "price": 86.8,
-          "changePercent": 0.81
+          "price": 86.3,
+          "changePercent": 0
         },
         {
           "symbol": "4771",
           "name": "望隼",
-          "price": 202,
-          "changePercent": 0.5
+          "price": 200.5,
+          "changePercent": -2.43
         },
         {
           "symbol": "1720",
           "name": "生達",
-          "price": 57.3,
-          "changePercent": 0.17
+          "price": 0,
+          "changePercent": 0
         },
         {
           "symbol": "6861",
           "name": "睿生光電",
-          "price": 262.5,
-          "changePercent": 2.54
-        },
-        {
-          "symbol": "4169",
-          "name": "泰宗",
-          "price": 149,
-          "changePercent": 3.11
+          "price": 261,
+          "changePercent": -3.15
         },
         {
           "symbol": "6534",
           "name": "正瀚-創",
-          "price": 93.2,
-          "changePercent": -0.11
+          "price": 96.9,
+          "changePercent": 0.52
+        },
+        {
+          "symbol": "4169",
+          "name": "泰宗",
+          "price": 0,
+          "changePercent": 0
         }
       ],
       "trend": [
         0.0,
-        -1.66,
-        -1.62,
-        -1.4,
-        -0.71,
-        1.06,
-        2.81,
-        3.24,
-        2.99,
-        3.33,
-        2.62,
-        2.23,
-        4.23,
-        4.17,
-        3.37,
-        2.96,
-        1.7,
-        2.41,
-        2.57,
-        3.01,
-        1.51,
-        1.44
+        -1.87,
+        -1.07,
+        -0.99,
+        -0.14,
+        1.88,
+        3.41,
+        3.45,
+        3.02,
+        3.94,
+        2.43,
+        2.53,
+        5.04,
+        4.24,
+        3.59,
+        3.02,
+        2.18,
+        2.72,
+        2.78,
+        3.53,
+        1.45,
+        2.76
       ],
       "kbars": [
         {
@@ -2742,11 +2742,11 @@
         },
         {
           "d": "2026-10-14",
-          "o": -2.17,
-          "h": -2.01,
-          "l": -2.54,
-          "c": -2.35,
-          "ma": -2.41
+          "o": -2.13,
+          "h": -0.58,
+          "l": -2.93,
+          "c": -1.23,
+          "ma": -2.35
         }
       ]
     },
@@ -2756,80 +2756,86 @@
         {
           "symbol": "3008",
           "name": "大立光",
-          "price": 7085,
-          "changePercent": -2.61
+          "price": 6500,
+          "changePercent": -5.52
         },
         {
           "symbol": "3481",
           "name": "群創",
-          "price": 50.9,
-          "changePercent": 1.8
+          "price": 49.3,
+          "changePercent": -3.14
         },
         {
           "symbol": "2409",
           "name": "友達",
-          "price": 35.1,
-          "changePercent": 2.78
+          "price": 33.5,
+          "changePercent": -7.59
         },
         {
           "symbol": "3406",
           "name": "玉晶光",
-          "price": 1105,
-          "changePercent": -5.96
+          "price": 1015,
+          "changePercent": -4.69
         },
         {
           "symbol": "6278",
           "name": "台表科",
-          "price": 290,
-          "changePercent": 9.85
+          "price": 319,
+          "changePercent": 10
         },
         {
           "symbol": "2486",
           "name": "一詮",
-          "price": 224,
-          "changePercent": 2.05
+          "price": 217,
+          "changePercent": -2.47
         },
         {
           "symbol": "3563",
           "name": "牧德",
-          "price": 729,
-          "changePercent": 1.25
+          "price": 688,
+          "changePercent": -4.04
         },
         {
           "symbol": "6116",
           "name": "彩晶",
-          "price": 15.15,
-          "changePercent": 3.06
-        },
-        {
-          "symbol": "2466",
-          "name": "冠西電",
-          "price": 226.5,
-          "changePercent": -4.64
+          "price": 15,
+          "changePercent": -2.28
         },
         {
           "symbol": "3019",
           "name": "亞光",
-          "price": 137.5,
-          "changePercent": 0.36
+          "price": 150,
+          "changePercent": 9.89
         },
         {
-          "symbol": "6456",
-          "name": "GIS-KY",
-          "price": 95.2,
-          "changePercent": -2.26
+          "symbol": "2466",
+          "name": "冠西電",
+          "price": 192.5,
+          "changePercent": -9.84
         },
         {
           "symbol": "6176",
           "name": "瑞儀",
-          "price": 91.3,
-          "changePercent": 1.33
+          "price": 92.5,
+          "changePercent": 0.87
         },
         {
           "symbol": "5234",
           "name": "達興材料",
-          "price": 300,
-          "changePercent": -0.17
+          "price": 297,
+          "changePercent": -1.66
+        },
+        {
+          "symbol": "6456",
+          "name": "GIS-KY",
+          "price": 88,
+          "changePercent": -3.51
+        },
+        {
+          "symbol": "3576",
+          "name": "聯合再生",
+          "price": 18.65,
+          "changePercent": 0
         },
         {
           "symbol": "2393",
@@ -2840,544 +2846,538 @@
         {
           "symbol": "3673",
           "name": "TPK-KY",
-          "price": 72.8,
-          "changePercent": 0.69
-        },
-        {
-          "symbol": "3576",
-          "name": "聯合再生",
-          "price": 18.5,
-          "changePercent": 3.93
+          "price": 73,
+          "changePercent": -0.27
         },
         {
           "symbol": "2426",
           "name": "鼎元",
-          "price": 95.9,
-          "changePercent": 1.8
+          "price": 95,
+          "changePercent": -3.55
         },
         {
           "symbol": "3714",
           "name": "富采",
-          "price": 61.6,
-          "changePercent": 1.32
+          "price": 64.5,
+          "changePercent": 0.47
         },
         {
           "symbol": "2489",
           "name": "瑞軒",
-          "price": 40.75,
-          "changePercent": 2.9
+          "price": 40.25,
+          "changePercent": -2.19
         },
         {
-          "symbol": "3149",
-          "name": "正達",
-          "price": 76.9,
-          "changePercent": 1.72
+          "symbol": "2374",
+          "name": "佳能",
+          "price": 72.4,
+          "changePercent": 9.86
         }
       ],
       "trend": [
         0.0,
-        -1.1,
-        -2.5,
-        -4.53,
-        -0.89,
-        -0.7,
-        1.79,
-        3.15,
-        4.64,
-        3.82,
-        4.62,
-        6.37,
-        10.86,
-        9.56,
-        12.92,
-        14.11,
-        14.44,
-        16.27,
-        15.51,
-        17.12,
-        15.43,
-        16.99
+        -1.18,
+        -2.51,
+        -4.48,
+        -0.93,
+        -0.79,
+        1.61,
+        2.85,
+        4.36,
+        3.59,
+        4.39,
+        5.81,
+        9.83,
+        8.46,
+        11.61,
+        12.58,
+        13.19,
+        14.94,
+        14.19,
+        15.69,
+        14.01,
+        14.21
       ],
       "kbars": [
         {
           "d": "2026-07-20",
-          "o": 3.42,
-          "h": 4.6,
-          "l": -2.8,
+          "o": 3.35,
+          "h": 4.52,
+          "l": -2.76,
           "c": 0.0,
-          "ma": 15.38
+          "ma": 15.19
         },
         {
           "d": "2026-07-21",
-          "o": 1.62,
-          "h": 4.21,
-          "l": -0.28,
-          "c": 2.34,
-          "ma": 14.15
+          "o": 1.59,
+          "h": 4.18,
+          "l": -0.24,
+          "c": 2.48,
+          "ma": 14.02
         },
         {
           "d": "2026-07-22",
-          "o": 4.32,
-          "h": 7.47,
-          "l": 2.69,
-          "c": 4.35,
-          "ma": 13.23
+          "o": 4.44,
+          "h": 7.57,
+          "l": 3.11,
+          "c": 4.77,
+          "ma": 13.14
         },
         {
           "d": "2026-07-23",
-          "o": 5.05,
-          "h": 7.4,
-          "l": 1.7,
-          "c": 3.57,
-          "ma": 12.21
+          "o": 5.53,
+          "h": 7.86,
+          "l": 2.43,
+          "c": 4.29,
+          "ma": 12.2
         },
         {
           "d": "2026-07-24",
-          "o": 1.84,
-          "h": 4.34,
-          "l": -0.74,
-          "c": 0.53,
-          "ma": 11.12
+          "o": 2.54,
+          "h": 4.98,
+          "l": 0.0,
+          "c": 1.14,
+          "ma": 11.16
         },
         {
           "d": "2026-07-27",
-          "o": 0.55,
-          "h": 2.45,
-          "l": -3.15,
-          "c": -0.5,
-          "ma": 10.36
+          "o": 1.32,
+          "h": 3.12,
+          "l": -2.38,
+          "c": 0.24,
+          "ma": 10.47
         },
         {
           "d": "2026-07-28",
-          "o": -4.02,
-          "h": -2.11,
-          "l": -7.33,
-          "c": -5.99,
-          "ma": 9.31
+          "o": -3.38,
+          "h": -1.6,
+          "l": -6.65,
+          "c": -5.56,
+          "ma": 9.47
         },
         {
           "d": "2026-07-29",
-          "o": -5.55,
-          "h": -4.57,
-          "l": -13.36,
-          "c": -10.7,
-          "ma": 7.84
+          "o": -5.04,
+          "h": -4.05,
+          "l": -12.93,
+          "c": -10.15,
+          "ma": 8.07
         },
         {
           "d": "2026-07-30",
-          "o": -12.21,
-          "h": -7.56,
-          "l": -14.89,
-          "c": -13.48,
-          "ma": 6.38
+          "o": -11.67,
+          "h": -7.17,
+          "l": -14.4,
+          "c": -12.96,
+          "ma": 6.67
         },
         {
           "d": "2026-07-31",
-          "o": -7.18,
-          "h": -6.0,
-          "l": -10.08,
-          "c": -8.15,
-          "ma": 5.06
+          "o": -6.74,
+          "h": -5.44,
+          "l": -9.53,
+          "c": -7.57,
+          "ma": 5.37
         },
         {
           "d": "2026-08-03",
-          "o": -8.79,
-          "h": -3.79,
-          "l": -9.73,
-          "c": -5.3,
-          "ma": 3.88
+          "o": -8.17,
+          "h": -3.14,
+          "l": -9.06,
+          "c": -4.49,
+          "ma": 4.22
         },
         {
           "d": "2026-08-04",
-          "o": -5.81,
-          "h": -1.38,
-          "l": -6.99,
-          "c": -2.46,
-          "ma": 2.76
+          "o": -4.99,
+          "h": -0.63,
+          "l": -6.19,
+          "c": -1.61,
+          "ma": 3.14
         },
         {
           "d": "2026-08-05",
-          "o": 0.43,
-          "h": 3.88,
-          "l": -1.34,
-          "c": 1.3,
-          "ma": 2.17
+          "o": 1.32,
+          "h": 4.81,
+          "l": -0.31,
+          "c": 2.32,
+          "ma": 2.58
         },
         {
           "d": "2026-08-06",
-          "o": 0.68,
-          "h": 3.32,
-          "l": -1.95,
-          "c": 1.55,
-          "ma": 1.54
+          "o": 1.74,
+          "h": 4.39,
+          "l": -0.77,
+          "c": 2.75,
+          "ma": 1.98
         },
         {
           "d": "2026-08-07",
-          "o": 1.45,
-          "h": 4.3,
-          "l": -1.57,
-          "c": 0.06,
-          "ma": 0.77
+          "o": 2.74,
+          "h": 5.46,
+          "l": -0.35,
+          "c": 1.31,
+          "ma": 1.26
         },
         {
           "d": "2026-08-10",
-          "o": 1.59,
-          "h": 5.92,
-          "l": -0.0,
-          "c": 4.41,
-          "ma": 0.33
+          "o": 2.84,
+          "h": 6.98,
+          "l": 1.18,
+          "c": 5.44,
+          "ma": 0.87
         },
         {
           "d": "2026-08-11",
-          "o": 4.23,
-          "h": 5.88,
-          "l": 1.25,
-          "c": 2.93,
-          "ma": 0.02
+          "o": 5.23,
+          "h": 6.76,
+          "l": 2.27,
+          "c": 3.95,
+          "ma": 0.6
         },
         {
           "d": "2026-08-12",
-          "o": 3.63,
-          "h": 6.82,
-          "l": 2.49,
-          "c": 4.68,
-          "ma": -0.34
+          "o": 4.65,
+          "h": 7.62,
+          "l": 3.53,
+          "c": 5.68,
+          "ma": 0.29
         },
         {
           "d": "2026-08-13",
-          "o": 5.91,
-          "h": 8.3,
-          "l": 3.68,
-          "c": 4.8,
-          "ma": -0.64
+          "o": 6.91,
+          "h": 9.23,
+          "l": 4.63,
+          "c": 5.75,
+          "ma": 0.05
         },
         {
           "d": "2026-08-14",
-          "o": 5.57,
-          "h": 6.8,
-          "l": 2.68,
-          "c": 3.3,
-          "ma": -0.64
+          "o": 6.55,
+          "h": 7.8,
+          "l": 3.78,
+          "c": 4.3,
+          "ma": 0.1
         },
         {
           "d": "2026-08-17",
-          "o": 3.75,
-          "h": 7.77,
-          "l": 2.42,
-          "c": 6.72,
-          "ma": -0.3
+          "o": 4.73,
+          "h": 8.82,
+          "l": 3.5,
+          "c": 7.72,
+          "ma": 0.49
         },
         {
           "d": "2026-08-18",
-          "o": 6.83,
-          "h": 8.29,
-          "l": 3.39,
-          "c": 4.64,
-          "ma": -0.19
+          "o": 7.88,
+          "h": 9.29,
+          "l": 4.35,
+          "c": 5.6,
+          "ma": 0.65
         },
         {
           "d": "2026-08-19",
-          "o": 2.28,
-          "h": 7.45,
-          "l": 1.39,
-          "c": 4.24,
-          "ma": -0.19
+          "o": 3.07,
+          "h": 8.19,
+          "l": 2.26,
+          "c": 5.12,
+          "ma": 0.66
         },
         {
           "d": "2026-08-20",
-          "o": 6.35,
-          "h": 8.63,
-          "l": 3.69,
-          "c": 6.52,
-          "ma": -0.04
+          "o": 7.19,
+          "h": 9.43,
+          "l": 4.56,
+          "c": 7.33,
+          "ma": 0.82
         },
         {
           "d": "2026-08-21",
-          "o": 7.09,
-          "h": 9.38,
-          "l": 4.89,
-          "c": 7.79,
-          "ma": 0.32
+          "o": 8.01,
+          "h": 10.29,
+          "l": 5.84,
+          "c": 8.78,
+          "ma": 1.2
         },
         {
           "d": "2026-08-24",
-          "o": 8.51,
-          "h": 11.85,
-          "l": 6.17,
-          "c": 6.69,
-          "ma": 0.68
+          "o": 9.52,
+          "h": 12.81,
+          "l": 7.1,
+          "c": 7.63,
+          "ma": 1.57
         },
         {
           "d": "2026-08-25",
-          "o": 5.88,
-          "h": 10.49,
-          "l": 3.66,
-          "c": 9.88,
-          "ma": 1.47
+          "o": 6.76,
+          "h": 11.41,
+          "l": 4.59,
+          "c": 10.78,
+          "ma": 2.38
         },
         {
           "d": "2026-08-26",
-          "o": 10.29,
-          "h": 15.88,
-          "l": 9.4,
-          "c": 14.31,
-          "ma": 2.72
+          "o": 11.2,
+          "h": 16.76,
+          "l": 10.3,
+          "c": 15.22,
+          "ma": 3.65
         },
         {
           "d": "2026-08-27",
-          "o": 15.52,
-          "h": 18.56,
-          "l": 13.53,
-          "c": 15.8,
-          "ma": 4.19
+          "o": 16.38,
+          "h": 19.49,
+          "l": 14.43,
+          "c": 16.69,
+          "ma": 5.13
         },
         {
           "d": "2026-08-28",
-          "o": 16.88,
-          "h": 19.96,
-          "l": 14.43,
-          "c": 17.03,
-          "ma": 5.44
+          "o": 17.83,
+          "h": 20.87,
+          "l": 15.35,
+          "c": 17.96,
+          "ma": 6.41
         },
         {
           "d": "2026-08-31",
-          "o": 16.42,
-          "h": 21.16,
-          "l": 13.96,
-          "c": 18.79,
-          "ma": 6.65
+          "o": 17.37,
+          "h": 22.15,
+          "l": 15.01,
+          "c": 19.85,
+          "ma": 7.63
         },
         {
           "d": "2026-09-01",
-          "o": 18.99,
-          "h": 23.62,
-          "l": 17.58,
-          "c": 20.04,
-          "ma": 7.77
-        },
-        {
-          "d": "2026-09-02",
-          "o": 19.09,
-          "h": 24.04,
-          "l": 17.55,
-          "c": 21.0,
+          "o": 20.09,
+          "h": 24.72,
+          "l": 18.66,
+          "c": 21.1,
           "ma": 8.76
         },
         {
+          "d": "2026-09-02",
+          "o": 20.16,
+          "h": 25.27,
+          "l": 18.66,
+          "c": 22.22,
+          "ma": 9.76
+        },
+        {
           "d": "2026-09-03",
-          "o": 22.42,
-          "h": 24.8,
-          "l": 14.74,
-          "c": 15.08,
-          "ma": 9.44
+          "o": 23.68,
+          "h": 26.16,
+          "l": 16.05,
+          "c": 16.38,
+          "ma": 10.44
         },
         {
           "d": "2026-09-04",
-          "o": 17.25,
-          "h": 20.03,
-          "l": 13.91,
-          "c": 18.5,
-          "ma": 10.36
+          "o": 18.59,
+          "h": 21.33,
+          "l": 15.22,
+          "c": 19.77,
+          "ma": 11.36
         },
         {
           "d": "2026-09-07",
-          "o": 19.07,
-          "h": 20.97,
-          "l": 15.3,
-          "c": 16.88,
-          "ma": 10.98
+          "o": 20.37,
+          "h": 22.22,
+          "l": 16.52,
+          "c": 18.07,
+          "ma": 11.99
         },
         {
           "d": "2026-09-08",
-          "o": 17.07,
-          "h": 19.09,
-          "l": 13.89,
-          "c": 15.12,
-          "ma": 11.59
+          "o": 18.42,
+          "h": 20.49,
+          "l": 15.11,
+          "c": 16.33,
+          "ma": 12.61
         },
         {
           "d": "2026-09-09",
-          "o": 16.54,
-          "h": 20.58,
-          "l": 14.85,
-          "c": 17.92,
-          "ma": 12.25
+          "o": 17.77,
+          "h": 21.7,
+          "l": 16.04,
+          "c": 19.01,
+          "ma": 13.28
         },
         {
           "d": "2026-09-10",
-          "o": 17.32,
-          "h": 18.04,
-          "l": 14.02,
-          "c": 15.39,
-          "ma": 12.78
+          "o": 18.45,
+          "h": 19.19,
+          "l": 15.22,
+          "c": 16.52,
+          "ma": 13.82
         },
         {
           "d": "2026-09-11",
-          "o": 12.61,
-          "h": 16.96,
-          "l": 11.13,
-          "c": 14.05,
-          "ma": 13.32
+          "o": 13.77,
+          "h": 17.97,
+          "l": 12.3,
+          "c": 15.13,
+          "ma": 14.36
         },
         {
           "d": "2026-09-14",
-          "o": 11.96,
-          "h": 14.98,
-          "l": 9.22,
-          "c": 11.55,
-          "ma": 13.56
+          "o": 13.05,
+          "h": 16.08,
+          "l": 10.35,
+          "c": 12.66,
+          "ma": 14.61
         },
         {
           "d": "2026-09-15",
-          "o": 11.3,
-          "h": 12.69,
-          "l": 8.64,
-          "c": 9.15,
-          "ma": 13.79
+          "o": 12.4,
+          "h": 13.8,
+          "l": 9.78,
+          "c": 10.29,
+          "ma": 14.84
         },
         {
           "d": "2026-09-16",
-          "o": 10.49,
-          "h": 15.17,
-          "l": 9.92,
-          "c": 13.96,
-          "ma": 14.27
+          "o": 11.65,
+          "h": 16.23,
+          "l": 11.07,
+          "c": 15.05,
+          "ma": 15.34
         },
         {
           "d": "2026-09-17",
-          "o": 15.52,
-          "h": 18.3,
-          "l": 12.6,
-          "c": 13.75,
-          "ma": 14.63
+          "o": 16.63,
+          "h": 19.27,
+          "l": 13.65,
+          "c": 14.8,
+          "ma": 15.71
         },
         {
           "d": "2026-09-18",
-          "o": 16.03,
-          "h": 18.11,
-          "l": 13.58,
-          "c": 16.81,
-          "ma": 15.08
+          "o": 17.05,
+          "h": 19.1,
+          "l": 14.62,
+          "c": 17.8,
+          "ma": 16.16
         },
         {
           "d": "2026-09-21",
-          "o": 18.01,
-          "h": 20.93,
-          "l": 15.52,
-          "c": 18.02,
-          "ma": 15.65
+          "o": 18.97,
+          "h": 21.8,
+          "l": 16.54,
+          "c": 18.91,
+          "ma": 16.73
         },
         {
           "d": "2026-09-22",
-          "o": 20.07,
-          "h": 23.74,
-          "l": 17.4,
-          "c": 19.54,
-          "ma": 16.13
+          "o": 20.95,
+          "h": 24.49,
+          "l": 18.28,
+          "c": 20.43,
+          "ma": 17.21
         },
         {
           "d": "2026-09-23",
-          "o": 20.42,
-          "h": 22.64,
-          "l": 16.99,
-          "c": 18.39,
-          "ma": 16.34
+          "o": 21.28,
+          "h": 23.46,
+          "l": 17.91,
+          "c": 19.31,
+          "ma": 17.41
         },
         {
           "d": "2026-09-24",
-          "o": 18.39,
-          "h": 21.45,
-          "l": 16.67,
-          "c": 19.12,
-          "ma": 16.5
+          "o": 19.35,
+          "h": 22.33,
+          "l": 17.61,
+          "c": 20.05,
+          "ma": 17.58
         },
         {
           "d": "2026-09-29",
-          "o": 18.84,
-          "h": 22.79,
-          "l": 17.43,
-          "c": 20.83,
-          "ma": 16.69
+          "o": 19.79,
+          "h": 23.46,
+          "l": 18.37,
+          "c": 21.49,
+          "ma": 17.76
         },
         {
           "d": "2026-09-30",
-          "o": 22.37,
-          "h": 27.54,
-          "l": 20.9,
-          "c": 25.5,
-          "ma": 17.03
+          "o": 22.94,
+          "h": 27.84,
+          "l": 21.48,
+          "c": 25.8,
+          "ma": 18.06
         },
         {
           "d": "2026-10-01",
-          "o": 26.33,
-          "h": 29.41,
-          "l": 21.85,
-          "c": 24.52,
-          "ma": 17.25
+          "o": 26.63,
+          "h": 29.59,
+          "l": 22.21,
+          "c": 24.76,
+          "ma": 18.24
         },
         {
           "d": "2026-10-02",
-          "o": 24.93,
-          "h": 29.88,
-          "l": 23.5,
-          "c": 27.98,
-          "ma": 17.6
+          "o": 25.13,
+          "h": 29.8,
+          "l": 23.73,
+          "c": 28.05,
+          "ma": 18.53
         },
         {
           "d": "2026-10-05",
-          "o": 30.29,
-          "h": 34.25,
+          "o": 30.31,
+          "h": 34.21,
           "l": 26.82,
-          "c": 30.11,
-          "ma": 18.35
+          "c": 30.0,
+          "ma": 19.21
         },
         {
           "d": "2026-10-06",
-          "o": 32.68,
-          "h": 34.38,
-          "l": 27.6,
-          "c": 30.0,
-          "ma": 18.93
+          "o": 32.59,
+          "h": 34.34,
+          "l": 27.7,
+          "c": 30.11,
+          "ma": 19.73
         },
         {
           "d": "2026-10-07",
-          "o": 29.69,
-          "h": 34.6,
-          "l": 27.8,
-          "c": 32.02,
-          "ma": 19.69
+          "o": 29.82,
+          "h": 34.63,
+          "l": 27.95,
+          "c": 32.07,
+          "ma": 20.43
         },
         {
           "d": "2026-10-08",
-          "o": 30.9,
-          "h": 33.6,
-          "l": 28.8,
-          "c": 30.78,
-          "ma": 20.47
+          "o": 31.0,
+          "h": 33.67,
+          "l": 28.95,
+          "c": 30.83,
+          "ma": 21.15
         },
         {
           "d": "2026-10-12",
-          "o": 30.19,
-          "h": 35.19,
-          "l": 27.55,
-          "c": 32.64,
-          "ma": 21.21
+          "o": 30.3,
+          "h": 34.94,
+          "l": 27.63,
+          "c": 32.59,
+          "ma": 21.83
         },
         {
           "d": "2026-10-13",
-          "o": 30.64,
-          "h": 34.89,
-          "l": 27.11,
-          "c": 30.91,
-          "ma": 21.98
+          "o": 30.58,
+          "h": 34.74,
+          "l": 27.03,
+          "c": 30.83,
+          "ma": 22.55
         },
         {
           "d": "2026-10-14",
-          "o": 32.68,
-          "h": 33.44,
-          "l": 31.61,
-          "c": 32.3,
-          "ma": 22.89
+          "o": 32.61,
+          "h": 35.28,
+          "l": 28.07,
+          "c": 30.86,
+          "ma": 23.33
         }
       ]
     }
@@ -3389,580 +3389,580 @@
         {
           "symbol": "NVDA",
           "name": "輝達",
-          "price": 228.52,
-          "changePercent": -0.33
+          "price": 221.3,
+          "changePercent": -2.22
         },
         {
           "symbol": "AVGO",
           "name": "博通",
-          "price": 357.31,
-          "changePercent": -1.17
+          "price": 346.25,
+          "changePercent": -2.39
         },
         {
           "symbol": "AMD",
           "name": "超微",
-          "price": 605.53,
-          "changePercent": -0.42
+          "price": 570.82,
+          "changePercent": -3.94
         },
         {
           "symbol": "QCOM",
           "name": "高通",
-          "price": 176.86,
-          "changePercent": 0.77
+          "price": 172.62,
+          "changePercent": -1.04
         },
         {
           "symbol": "MRVL",
           "name": "邁威爾",
-          "price": 268.73,
-          "changePercent": -2.38
+          "price": 245.28,
+          "changePercent": -7.74
         },
         {
           "symbol": "ARM",
           "name": "Arm控股",
-          "price": 255.39,
-          "changePercent": -4.09
+          "price": 238.01,
+          "changePercent": -6.75
         },
         {
           "symbol": "LSCC",
           "name": "萊迪思半導體",
-          "price": 121.15,
-          "changePercent": -3.89
+          "price": 115.0,
+          "changePercent": -6.38
         },
         {
           "symbol": "AMBA",
           "name": "安霸",
-          "price": 64.3,
-          "changePercent": -4.64
+          "price": 61.46,
+          "changePercent": -5.17
         },
         {
           "symbol": "CRUS",
           "name": "思睿邏輯",
-          "price": 107.99,
-          "changePercent": 1.05
+          "price": 108.34,
+          "changePercent": 1.89
         },
         {
           "symbol": "SITM",
           "name": "SiTime",
-          "price": 579.66,
-          "changePercent": -5.34
+          "price": 524.93,
+          "changePercent": -7.92
         },
         {
           "symbol": "ALAB",
           "name": "Astera Labs",
-          "price": 325.41,
-          "changePercent": -4.91
+          "price": 300.28,
+          "changePercent": -7.35
         },
         {
           "symbol": "CEVA",
           "name": "CEVA",
-          "price": 30.86,
-          "changePercent": -7.85
+          "price": 29.23,
+          "changePercent": -7.94
         }
       ],
       "trend": [
         0.0,
-        -6.46,
-        -5.57,
-        -5.22,
-        -0.33,
-        0.8,
-        7.52,
-        9.52,
-        8.59,
-        8.54,
-        10.92,
-        7.07,
-        7.95,
-        8.13,
-        9.0,
-        11.33,
-        11.4,
-        13.12,
-        10.48,
-        5.95,
-        5.02,
-        1.64
+        -0.07,
+        2.79,
+        6.06,
+        10.51,
+        15.47,
+        15.66,
+        15.31,
+        16.81,
+        15.62,
+        14.12,
+        14.88,
+        15.15,
+        17.69,
+        18.17,
+        19.41,
+        18.99,
+        14.93,
+        11.89,
+        9.8,
+        8.12,
+        5.11
       ],
       "kbars": [
         {
-          "d": "2026-07-20",
-          "o": 1.07,
-          "h": 2.96,
-          "l": -0.9,
-          "c": 0.0,
-          "ma": 12.11
-        },
-        {
           "d": "2026-07-21",
-          "o": 4.47,
-          "h": 6.57,
-          "l": 2.06,
-          "c": 5.48,
-          "ma": 11.07
+          "o": -0.92,
+          "h": 1.04,
+          "l": -3.2,
+          "c": 0.0,
+          "ma": 5.3
         },
         {
           "d": "2026-07-22",
-          "o": 3.17,
-          "h": 8.09,
-          "l": 2.53,
-          "c": 6.04,
-          "ma": 10.5
+          "o": -2.18,
+          "h": 2.48,
+          "l": -2.78,
+          "c": 0.56,
+          "ma": 4.77
         },
         {
           "d": "2026-07-23",
-          "o": 3.97,
-          "h": 6.71,
-          "l": 2.06,
-          "c": 4.57,
-          "ma": 9.92
+          "o": -1.39,
+          "h": 1.18,
+          "l": -3.21,
+          "c": -0.85,
+          "ma": 4.22
         },
         {
           "d": "2026-07-24",
-          "o": 3.35,
-          "h": 4.44,
-          "l": -1.56,
-          "c": -0.36,
-          "ma": 9.12
+          "o": -2.01,
+          "h": -0.96,
+          "l": -6.62,
+          "c": -5.49,
+          "ma": 3.46
         },
         {
           "d": "2026-07-27",
-          "o": 0.89,
-          "h": 1.68,
-          "l": -5.86,
-          "c": -2.25,
-          "ma": 8.42
+          "o": -4.31,
+          "h": -3.56,
+          "l": -10.66,
+          "c": -7.26,
+          "ma": 2.8
         },
         {
           "d": "2026-07-28",
-          "o": -6.13,
-          "h": -4.22,
-          "l": -9.44,
-          "c": -6.54,
-          "ma": 7.27
+          "o": -10.91,
+          "h": -9.1,
+          "l": -14.02,
+          "c": -11.29,
+          "ma": 1.71
         },
         {
           "d": "2026-07-29",
-          "o": -7.36,
-          "h": -4.86,
-          "l": -11.67,
-          "c": -10.62,
-          "ma": 5.55
+          "o": -12.06,
+          "h": -9.71,
+          "l": -16.13,
+          "c": -15.14,
+          "ma": 0.09
         },
         {
           "d": "2026-07-30",
-          "o": -6.1,
-          "h": -1.62,
-          "l": -8.17,
-          "c": -3.67,
-          "ma": 4.45
+          "o": -10.91,
+          "h": -6.69,
+          "l": -12.86,
+          "c": -8.62,
+          "ma": -0.94
         },
         {
           "d": "2026-07-31",
-          "o": 0.69,
-          "h": 3.92,
-          "l": -4.46,
-          "c": -1.91,
-          "ma": 3.84
+          "o": -4.52,
+          "h": -1.5,
+          "l": -9.38,
+          "c": -6.99,
+          "ma": -1.52
         },
         {
           "d": "2026-08-03",
-          "o": -4.51,
-          "h": 0.72,
-          "l": -6.45,
-          "c": -0.75,
-          "ma": 3.09
+          "o": -9.44,
+          "h": -4.5,
+          "l": -11.28,
+          "c": -5.87,
+          "ma": -2.23
         },
         {
           "d": "2026-08-04",
-          "o": 3.56,
-          "h": 8.22,
-          "l": 2.3,
-          "c": 6.78,
-          "ma": 3.01
+          "o": -1.81,
+          "h": 2.61,
+          "l": -3.0,
+          "c": 1.25,
+          "ma": -2.3
         },
         {
           "d": "2026-08-05",
-          "o": 4.78,
-          "h": 7.53,
-          "l": 1.5,
-          "c": 2.56,
-          "ma": 2.6
+          "o": -0.61,
+          "h": 1.98,
+          "l": -3.72,
+          "c": -2.72,
+          "ma": -2.69
         },
         {
           "d": "2026-08-06",
-          "o": 3.17,
-          "h": 8.65,
-          "l": 0.88,
-          "c": 5.95,
-          "ma": 2.1
+          "o": -2.16,
+          "h": 3.01,
+          "l": -4.33,
+          "c": 0.45,
+          "ma": -3.16
         },
         {
           "d": "2026-08-07",
-          "o": 8.84,
-          "h": 11.75,
-          "l": 6.16,
-          "c": 8.68,
-          "ma": 1.8
+          "o": 3.17,
+          "h": 5.91,
+          "l": 0.64,
+          "c": 3.03,
+          "ma": -3.45
         },
         {
           "d": "2026-08-10",
-          "o": 8.69,
-          "h": 9.76,
-          "l": 3.33,
-          "c": 3.51,
-          "ma": 1.56
+          "o": 3.05,
+          "h": 4.07,
+          "l": -1.99,
+          "c": -1.82,
+          "ma": -3.68
         },
         {
           "d": "2026-08-11",
-          "o": 4.98,
-          "h": 5.49,
-          "l": 1.61,
-          "c": 2.91,
-          "ma": 1.27
+          "o": -0.42,
+          "h": 0.06,
+          "l": -3.62,
+          "c": -2.39,
+          "ma": -3.94
         },
         {
           "d": "2026-08-12",
-          "o": 6.97,
-          "h": 7.63,
-          "l": 3.26,
-          "c": 4.21,
-          "ma": 1.17
+          "o": 1.45,
+          "h": 2.08,
+          "l": -2.05,
+          "c": -1.15,
+          "ma": -4.04
         },
         {
           "d": "2026-08-13",
-          "o": 3.65,
-          "h": 7.53,
-          "l": 2.82,
-          "c": 4.72,
-          "ma": 1.41
+          "o": -1.68,
+          "h": 1.98,
+          "l": -2.46,
+          "c": -0.66,
+          "ma": -3.81
         },
         {
           "d": "2026-08-14",
-          "o": 4.88,
-          "h": 7.18,
-          "l": 3.01,
-          "c": 5.87,
-          "ma": 1.76
+          "o": -0.52,
+          "h": 1.63,
+          "l": -2.31,
+          "c": 0.37,
+          "ma": -3.49
         },
         {
           "d": "2026-08-17",
-          "o": 7.43,
-          "h": 9.35,
-          "l": 4.83,
-          "c": 5.84,
-          "ma": 2.05
+          "o": 1.85,
+          "h": 3.66,
+          "l": -0.6,
+          "c": 0.34,
+          "ma": -3.21
         },
         {
           "d": "2026-08-18",
-          "o": 1.65,
-          "h": 3.14,
-          "l": -1.31,
-          "c": 0.17,
-          "ma": 1.79
+          "o": -3.6,
+          "h": -2.19,
+          "l": -6.39,
+          "c": -4.99,
+          "ma": -3.46
         },
         {
           "d": "2026-08-19",
-          "o": 1.78,
-          "h": 3.06,
-          "l": -3.54,
-          "c": -1.38,
-          "ma": 1.41
+          "o": -3.48,
+          "h": -2.26,
+          "l": -8.48,
+          "c": -6.46,
+          "ma": -3.81
         },
         {
           "d": "2026-08-20",
-          "o": -1.37,
-          "h": 0.41,
-          "l": -3.43,
-          "c": -1.76,
-          "ma": 1.1
+          "o": -6.44,
+          "h": -4.76,
+          "l": -8.38,
+          "c": -6.81,
+          "ma": -4.11
         },
         {
           "d": "2026-08-21",
-          "o": -0.5,
-          "h": 0.34,
-          "l": -3.91,
-          "c": -2.38,
-          "ma": 1.0
+          "o": -5.62,
+          "h": -4.83,
+          "l": -8.83,
+          "c": -7.4,
+          "ma": -4.21
         },
         {
           "d": "2026-08-24",
-          "o": -4.1,
-          "h": -3.57,
-          "l": -7.1,
-          "c": -5.64,
-          "ma": 0.83
+          "o": -9.02,
+          "h": -8.51,
+          "l": -11.85,
+          "c": -10.47,
+          "ma": -4.37
         },
         {
           "d": "2026-08-25",
-          "o": -3.39,
-          "h": -2.37,
-          "l": -5.15,
-          "c": -3.82,
-          "ma": 0.96
+          "o": -8.35,
+          "h": -7.39,
+          "l": -10.01,
+          "c": -8.76,
+          "ma": -4.24
         },
         {
           "d": "2026-08-26",
-          "o": -3.89,
-          "h": -1.62,
-          "l": -4.98,
-          "c": -2.93,
-          "ma": 1.35
+          "o": -8.83,
+          "h": -6.69,
+          "l": -9.86,
+          "c": -7.93,
+          "ma": -3.88
         },
         {
           "d": "2026-08-27",
-          "o": -0.59,
-          "h": 1.19,
-          "l": -2.73,
-          "c": -0.98,
-          "ma": 1.48
+          "o": -5.71,
+          "h": -4.01,
+          "l": -7.72,
+          "c": -6.05,
+          "ma": -3.75
         },
         {
           "d": "2026-08-28",
-          "o": -2.31,
-          "h": -1.49,
-          "l": -5.92,
-          "c": -5.18,
-          "ma": 1.32
+          "o": -7.3,
+          "h": -6.53,
+          "l": -10.71,
+          "c": -10.01,
+          "ma": -3.9
         },
         {
           "d": "2026-08-31",
-          "o": -4.79,
-          "h": -3.12,
-          "l": -6.0,
-          "c": -4.47,
-          "ma": 1.13
+          "o": -9.64,
+          "h": -8.05,
+          "l": -10.78,
+          "c": -9.32,
+          "ma": -4.07
         },
         {
           "d": "2026-09-01",
-          "o": -6.74,
-          "h": -5.42,
-          "l": -8.62,
-          "c": -6.57,
-          "ma": 0.47
+          "o": -11.47,
+          "h": -10.22,
+          "l": -13.25,
+          "c": -11.3,
+          "ma": -4.7
         },
         {
           "d": "2026-09-02",
-          "o": -6.98,
-          "h": -5.06,
-          "l": -8.29,
-          "c": -5.99,
-          "ma": 0.04
+          "o": -11.69,
+          "h": -9.85,
+          "l": -12.92,
+          "c": -10.73,
+          "ma": -5.1
         },
         {
           "d": "2026-09-03",
-          "o": -7.01,
-          "h": -4.65,
-          "l": -9.24,
-          "c": -5.92,
-          "ma": -0.56
+          "o": -11.7,
+          "h": -9.46,
+          "l": -13.8,
+          "c": -10.66,
+          "ma": -5.66
         },
         {
           "d": "2026-09-04",
-          "o": -4.79,
-          "h": -1.82,
-          "l": -6.31,
-          "c": -3.02,
-          "ma": -1.14
+          "o": -9.59,
+          "h": -6.78,
+          "l": -11.02,
+          "c": -7.92,
+          "ma": -6.21
         },
         {
           "d": "2026-09-08",
-          "o": -1.01,
-          "h": 1.19,
-          "l": -3.91,
-          "c": -2.34,
-          "ma": -1.43
+          "o": -6.02,
+          "h": -3.95,
+          "l": -8.78,
+          "c": -7.31,
+          "ma": -6.48
         },
         {
           "d": "2026-09-09",
-          "o": -2.71,
-          "h": 1.53,
-          "l": -3.41,
-          "c": -0.97,
-          "ma": -1.63
+          "o": -7.66,
+          "h": -3.68,
+          "l": -8.34,
+          "c": -6.03,
+          "ma": -6.66
         },
         {
           "d": "2026-09-10",
-          "o": -3.28,
-          "h": -0.25,
-          "l": -4.73,
-          "c": -2.32,
-          "ma": -1.95
+          "o": -8.22,
+          "h": -5.34,
+          "l": -9.58,
+          "c": -7.29,
+          "ma": -6.97
         },
         {
           "d": "2026-09-11",
-          "o": -0.77,
-          "h": 1.77,
-          "l": -2.18,
-          "c": 0.31,
-          "ma": -2.17
+          "o": -5.83,
+          "h": -3.43,
+          "l": -7.17,
+          "c": -4.82,
+          "ma": -7.18
         },
         {
           "d": "2026-09-14",
-          "o": -5.5,
-          "h": -3.46,
-          "l": -7.64,
-          "c": -6.25,
-          "ma": -2.78
+          "o": -10.31,
+          "h": -8.37,
+          "l": -12.33,
+          "c": -11.01,
+          "ma": -7.75
         },
         {
           "d": "2026-09-15",
-          "o": -5.11,
-          "h": -2.75,
-          "l": -6.81,
-          "c": -5.37,
-          "ma": -3.34
+          "o": -9.93,
+          "h": -7.69,
+          "l": -11.53,
+          "c": -10.16,
+          "ma": -8.27
         },
         {
           "d": "2026-09-16",
-          "o": -3.9,
-          "h": -2.4,
-          "l": -6.66,
-          "c": -4.95,
-          "ma": -3.6
+          "o": -8.78,
+          "h": -7.35,
+          "l": -11.39,
+          "c": -9.77,
+          "ma": -8.51
         },
         {
           "d": "2026-09-17",
-          "o": -1.46,
-          "h": 1.44,
-          "l": -2.56,
-          "c": -0.04,
-          "ma": -3.53
+          "o": -6.47,
+          "h": -3.75,
+          "l": -7.51,
+          "c": -5.14,
+          "ma": -8.44
         },
         {
           "d": "2026-09-18",
-          "o": 1.14,
-          "h": 2.44,
-          "l": -1.36,
-          "c": 1.06,
-          "ma": -3.39
+          "o": -4.02,
+          "h": -2.79,
+          "l": -6.41,
+          "c": -4.12,
+          "ma": -8.31
         },
         {
           "d": "2026-09-21",
-          "o": 3.48,
-          "h": 8.6,
-          "l": 2.31,
-          "c": 7.78,
-          "ma": -2.88
+          "o": -1.85,
+          "h": 2.99,
+          "l": -2.96,
+          "c": 2.22,
+          "ma": -7.83
         },
         {
           "d": "2026-09-22",
-          "o": 6.81,
-          "h": 10.52,
-          "l": 6.25,
-          "c": 9.68,
-          "ma": -2.11
+          "o": 1.3,
+          "h": 4.82,
+          "l": 0.78,
+          "c": 4.03,
+          "ma": -7.1
         },
         {
           "d": "2026-09-23",
-          "o": 9.46,
-          "h": 10.68,
-          "l": 6.42,
-          "c": 8.67,
-          "ma": -1.49
+          "o": 3.82,
+          "h": 4.95,
+          "l": 0.94,
+          "c": 3.06,
+          "ma": -6.51
         },
         {
           "d": "2026-09-24",
-          "o": 6.21,
-          "h": 10.07,
-          "l": 4.7,
-          "c": 8.66,
-          "ma": -0.91
+          "o": 0.75,
+          "h": 4.36,
+          "l": -0.68,
+          "c": 3.03,
+          "ma": -5.97
         },
         {
           "d": "2026-09-25",
-          "o": 10.03,
-          "h": 13.02,
-          "l": 8.45,
-          "c": 10.98,
-          "ma": -0.31
+          "o": 4.31,
+          "h": 7.13,
+          "l": 2.82,
+          "c": 5.21,
+          "ma": -5.4
         },
         {
           "d": "2026-09-28",
-          "o": 10.2,
-          "h": 11.11,
-          "l": 5.45,
-          "c": 7.14,
-          "ma": 0.3
+          "o": 4.47,
+          "h": 5.34,
+          "l": -0.0,
+          "c": 1.6,
+          "ma": -4.82
         },
         {
           "d": "2026-09-29",
-          "o": 9.0,
-          "h": 10.31,
-          "l": 6.66,
-          "c": 8.06,
-          "ma": 0.93
+          "o": 3.35,
+          "h": 4.6,
+          "l": 1.13,
+          "c": 2.46,
+          "ma": -4.23
         },
         {
           "d": "2026-09-30",
-          "o": 8.67,
-          "h": 9.82,
-          "l": 6.31,
-          "c": 8.21,
-          "ma": 1.67
+          "o": 3.03,
+          "h": 4.12,
+          "l": 0.8,
+          "c": 2.59,
+          "ma": -3.54
         },
         {
           "d": "2026-10-01",
-          "o": 8.74,
-          "h": 10.81,
-          "l": 6.79,
-          "c": 9.15,
-          "ma": 2.43
+          "o": 3.09,
+          "h": 5.04,
+          "l": 1.24,
+          "c": 3.46,
+          "ma": -2.83
         },
         {
           "d": "2026-10-02",
-          "o": 11.92,
-          "h": 14.03,
-          "l": 10.15,
-          "c": 11.46,
-          "ma": 3.29
+          "o": 6.06,
+          "h": 8.06,
+          "l": 4.39,
+          "c": 5.63,
+          "ma": -2.01
         },
         {
           "d": "2026-10-05",
-          "o": 11.82,
-          "h": 13.22,
-          "l": 9.78,
-          "c": 11.52,
-          "ma": 4.02
+          "o": 5.98,
+          "h": 7.31,
+          "l": 4.05,
+          "c": 5.71,
+          "ma": -1.33
         },
         {
           "d": "2026-10-06",
-          "o": 13.07,
-          "h": 15.93,
-          "l": 10.82,
-          "c": 13.36,
-          "ma": 4.81
+          "o": 7.17,
+          "h": 9.89,
+          "l": 5.06,
+          "c": 7.45,
+          "ma": -0.59
         },
         {
           "d": "2026-10-07",
-          "o": 10.77,
-          "h": 12.81,
-          "l": 8.85,
-          "c": 10.71,
-          "ma": 5.39
+          "o": 5.02,
+          "h": 6.94,
+          "l": 3.18,
+          "c": 4.95,
+          "ma": -0.05
         },
         {
           "d": "2026-10-08",
-          "o": 8.72,
-          "h": 10.27,
-          "l": 3.96,
-          "c": 6.24,
-          "ma": 5.82
+          "o": 3.07,
+          "h": 4.55,
+          "l": -1.43,
+          "c": 0.73,
+          "ma": 0.36
         },
         {
           "d": "2026-10-09",
-          "o": 7.42,
-          "h": 8.43,
-          "l": 3.05,
-          "c": 5.34,
-          "ma": 6.07
+          "o": 1.83,
+          "h": 2.78,
+          "l": -2.29,
+          "c": -0.14,
+          "ma": 0.59
         },
         {
           "d": "2026-10-12",
-          "o": 4.02,
-          "h": 4.57,
-          "l": 0.93,
-          "c": 1.95,
-          "ma": 6.48
+          "o": -1.38,
+          "h": -0.85,
+          "l": -4.29,
+          "c": -3.33,
+          "ma": 0.97
+        },
+        {
+          "d": "2026-10-13",
+          "o": -5.83,
+          "h": -2.01,
+          "l": -7.13,
+          "c": -2.85,
+          "ma": 1.34
         }
       ]
     },
@@ -3972,574 +3972,574 @@
         {
           "symbol": "ASML",
           "name": "艾司摩爾",
-          "price": 1717.76,
-          "changePercent": -3.52
+          "price": 1650.0,
+          "changePercent": -5.73
         },
         {
           "symbol": "AMAT",
           "name": "應用材料",
-          "price": 464.24,
-          "changePercent": -8.44
+          "price": 446.63,
+          "changePercent": -10.23
         },
         {
           "symbol": "LRCX",
           "name": "拉姆研究",
-          "price": 301.11,
-          "changePercent": -5.56
+          "price": 286.92,
+          "changePercent": -7.31
         },
         {
           "symbol": "KLAC",
           "name": "科磊",
-          "price": 184.0,
-          "changePercent": -5.92
+          "price": 178.81,
+          "changePercent": -5.95
         },
         {
           "symbol": "TER",
           "name": "泰瑞達",
-          "price": 380.29,
-          "changePercent": -5.56
+          "price": 359.44,
+          "changePercent": -6.36
         },
         {
           "symbol": "ENTG",
           "name": "英特格",
-          "price": 161.16,
-          "changePercent": -2.79
+          "price": 153.08,
+          "changePercent": -4.33
         },
         {
           "symbol": "ONTO",
           "name": "Onto Innovation",
-          "price": 263.55,
-          "changePercent": -10.52
+          "price": 241.41,
+          "changePercent": -11.81
         },
         {
           "symbol": "UCTT",
           "name": "Ultra Clean",
-          "price": 61.02,
-          "changePercent": -11.04
+          "price": 56.79,
+          "changePercent": -10.58
         },
         {
           "symbol": "FORM",
           "name": "FormFactor",
-          "price": 128.09,
-          "changePercent": -8.29
+          "price": 119.71,
+          "changePercent": -8.11
         },
         {
           "symbol": "COHU",
           "name": "Cohu",
-          "price": 62.79,
-          "changePercent": -7.92
+          "price": 58.24,
+          "changePercent": -10.69
         },
         {
           "symbol": "AEIS",
           "name": "先進能源",
-          "price": 275.65,
-          "changePercent": -4.51
+          "price": 260.77,
+          "changePercent": -7.12
         }
       ],
       "trend": [
         0.0,
-        -9.68,
-        -10.13,
-        -9.47,
-        -7.07,
-        -2.31,
-        0.58,
-        4.52,
-        4.81,
-        3.94,
-        6.05,
-        6.24,
-        9.43,
-        10.76,
-        12.97,
-        15.93,
-        15.62,
-        13.14,
-        10.8,
-        7.83,
-        8.55,
-        4.06
+        0.55,
+        3.0,
+        8.03,
+        11.27,
+        15.85,
+        16.51,
+        15.59,
+        17.56,
+        18.01,
+        20.99,
+        22.98,
+        25.29,
+        28.37,
+        28.56,
+        26.15,
+        23.43,
+        20.21,
+        20.52,
+        16.31,
+        12.85,
+        7.12
       ],
       "kbars": [
         {
-          "d": "2026-07-20",
-          "o": 3.14,
-          "h": 5.09,
-          "l": -0.77,
-          "c": 0.0,
-          "ma": 15.04
-        },
-        {
-          "d": "2026-07-21",
-          "o": 6.01,
-          "h": 8.84,
-          "l": 3.76,
-          "c": 7.71,
-          "ma": 13.82
-        },
-        {
           "d": "2026-07-22",
-          "o": 4.38,
-          "h": 8.62,
-          "l": 4.09,
-          "c": 6.72,
-          "ma": 13.11
+          "o": -2.19,
+          "h": 1.78,
+          "l": -2.46,
+          "c": 0.0,
+          "ma": 6.04
         },
         {
           "d": "2026-07-23",
-          "o": 5.58,
-          "h": 9.05,
-          "l": 4.63,
-          "c": 6.61,
-          "ma": 12.41
+          "o": -1.07,
+          "h": 2.18,
+          "l": -1.95,
+          "c": -0.1,
+          "ma": 5.38
         },
         {
           "d": "2026-07-24",
-          "o": 5.06,
-          "h": 6.36,
-          "l": -0.25,
-          "c": 0.88,
-          "ma": 10.99
+          "o": -1.56,
+          "h": -0.33,
+          "l": -6.51,
+          "c": -5.45,
+          "ma": 4.06
         },
         {
           "d": "2026-07-27",
-          "o": 1.09,
-          "h": 2.44,
-          "l": -7.5,
-          "c": -3.56,
-          "ma": 9.74
+          "o": -5.26,
+          "h": -4.0,
+          "l": -13.29,
+          "c": -9.6,
+          "ma": 2.89
         },
         {
           "d": "2026-07-28",
-          "o": -8.74,
-          "h": -7.79,
-          "l": -13.87,
-          "c": -10.84,
-          "ma": 7.67
+          "o": -14.46,
+          "h": -13.56,
+          "l": -19.23,
+          "c": -16.42,
+          "ma": 0.95
         },
         {
           "d": "2026-07-29",
-          "o": -11.45,
-          "h": -8.93,
-          "l": -17.67,
-          "c": -17.11,
-          "ma": 4.83
+          "o": -17.05,
+          "h": -14.67,
+          "l": -22.83,
+          "c": -22.31,
+          "ma": -1.72
         },
         {
           "d": "2026-07-30",
-          "o": -7.37,
-          "h": -3.11,
-          "l": -9.52,
-          "c": -5.46,
-          "ma": 3.16
+          "o": -13.15,
+          "h": -9.19,
+          "l": -15.19,
+          "c": -11.43,
+          "ma": -3.27
         },
         {
           "d": "2026-07-31",
-          "o": 0.92,
-          "h": 3.07,
-          "l": -5.46,
-          "c": -4.21,
-          "ma": 2.34
+          "o": -5.47,
+          "h": -3.47,
+          "l": -11.45,
+          "c": -10.28,
+          "ma": -4.05
         },
         {
           "d": "2026-08-03",
-          "o": -6.89,
-          "h": -0.92,
-          "l": -8.51,
-          "c": -2.05,
-          "ma": 1.66
+          "o": -12.79,
+          "h": -7.22,
+          "l": -14.29,
+          "c": -8.26,
+          "ma": -4.69
         },
         {
           "d": "2026-08-04",
-          "o": 4.52,
-          "h": 7.98,
-          "l": 1.53,
-          "c": 5.71,
-          "ma": 1.85
+          "o": -2.16,
+          "h": 1.08,
+          "l": -4.91,
+          "c": -0.99,
+          "ma": -4.53
         },
         {
           "d": "2026-08-05",
-          "o": 5.05,
-          "h": 7.53,
-          "l": 1.71,
-          "c": 2.68,
-          "ma": 1.7
+          "o": -1.61,
+          "h": 0.71,
+          "l": -4.72,
+          "c": -3.8,
+          "ma": -4.67
         },
         {
           "d": "2026-08-06",
-          "o": 0.81,
-          "h": 5.57,
-          "l": -1.56,
-          "c": 2.31,
-          "ma": 1.28
+          "o": -5.55,
+          "h": -1.1,
+          "l": -7.76,
+          "c": -4.15,
+          "ma": -5.07
         },
         {
           "d": "2026-08-07",
-          "o": 6.28,
-          "h": 7.96,
-          "l": 3.01,
-          "c": 5.68,
-          "ma": 1.01
+          "o": -0.43,
+          "h": 1.15,
+          "l": -3.46,
+          "c": -0.95,
+          "ma": -5.32
         },
         {
           "d": "2026-08-10",
-          "o": 8.2,
-          "h": 8.42,
-          "l": 1.5,
-          "c": 1.63,
-          "ma": 0.83
+          "o": 1.4,
+          "h": 1.61,
+          "l": -4.86,
+          "c": -4.74,
+          "ma": -5.49
         },
         {
           "d": "2026-08-11",
-          "o": 4.74,
-          "h": 7.67,
-          "l": 2.79,
-          "c": 6.39,
-          "ma": 0.67
+          "o": -1.81,
+          "h": 0.92,
+          "l": -3.65,
+          "c": -0.29,
+          "ma": -5.65
         },
         {
           "d": "2026-08-12",
-          "o": 11.32,
-          "h": 13.76,
-          "l": 9.86,
-          "c": 11.57,
-          "ma": 0.87
+          "o": 4.33,
+          "h": 6.61,
+          "l": 2.96,
+          "c": 4.57,
+          "ma": -5.46
         },
         {
           "d": "2026-08-13",
-          "o": 11.23,
-          "h": 15.82,
-          "l": 9.98,
-          "c": 12.93,
-          "ma": 1.42
+          "o": 4.26,
+          "h": 8.55,
+          "l": 3.08,
+          "c": 5.86,
+          "ma": -4.95
         },
         {
           "d": "2026-08-14",
-          "o": 10.92,
-          "h": 13.97,
-          "l": 8.83,
-          "c": 11.34,
-          "ma": 1.95
+          "o": 3.98,
+          "h": 6.81,
+          "l": 2.02,
+          "c": 4.35,
+          "ma": -4.46
         },
         {
           "d": "2026-08-17",
-          "o": 13.4,
-          "h": 17.11,
-          "l": 12.07,
-          "c": 15.88,
-          "ma": 2.74
+          "o": 6.29,
+          "h": 9.73,
+          "l": 5.04,
+          "c": 8.58,
+          "ma": -3.72
         },
         {
           "d": "2026-08-18",
-          "o": 9.53,
-          "h": 11.04,
-          "l": 4.84,
-          "c": 7.55,
-          "ma": 2.73
+          "o": 2.63,
+          "h": 4.04,
+          "l": -1.72,
+          "c": 0.81,
+          "ma": -3.73
         },
         {
           "d": "2026-08-19",
-          "o": 8.1,
-          "h": 8.52,
-          "l": 0.25,
-          "c": 1.58,
-          "ma": 2.48
+          "o": 1.32,
+          "h": 1.72,
+          "l": -6.0,
+          "c": -4.75,
+          "ma": -3.97
         },
         {
           "d": "2026-08-20",
-          "o": 0.76,
-          "h": 3.06,
-          "l": -0.59,
-          "c": 1.33,
-          "ma": 2.21
+          "o": -5.51,
+          "h": -3.37,
+          "l": -6.77,
+          "c": -4.98,
+          "ma": -4.21
         },
         {
           "d": "2026-08-21",
-          "o": 2.67,
-          "h": 3.32,
-          "l": -1.55,
-          "c": 0.94,
-          "ma": 2.21
+          "o": -3.72,
+          "h": -3.12,
+          "l": -7.66,
+          "c": -5.34,
+          "ma": -4.21
         },
         {
           "d": "2026-08-24",
-          "o": -1.56,
-          "h": -0.79,
-          "l": -4.9,
-          "c": -2.35,
-          "ma": 2.27
-        },
-        {
-          "d": "2026-08-25",
-          "o": 0.04,
-          "h": 0.66,
-          "l": -3.18,
-          "c": -1.88,
-          "ma": 2.72
-        },
-        {
-          "d": "2026-08-26",
-          "o": -1.78,
-          "h": -0.51,
-          "l": -3.46,
-          "c": -1.41,
-          "ma": 3.51
-        },
-        {
-          "d": "2026-08-27",
-          "o": 0.74,
-          "h": 1.93,
-          "l": -2.01,
-          "c": -0.21,
-          "ma": 3.77
-        },
-        {
-          "d": "2026-08-28",
-          "o": -0.91,
-          "h": -0.47,
-          "l": -6.23,
-          "c": -5.88,
-          "ma": 3.69
-        },
-        {
-          "d": "2026-08-31",
-          "o": -5.16,
-          "h": -4.49,
-          "l": -7.47,
-          "c": -6.64,
-          "ma": 3.46
-        },
-        {
-          "d": "2026-09-01",
-          "o": -8.39,
-          "h": -7.74,
-          "l": -11.24,
-          "c": -10.14,
-          "ma": 2.66
-        },
-        {
-          "d": "2026-09-02",
-          "o": -10.04,
-          "h": -8.44,
-          "l": -11.83,
-          "c": -9.36,
-          "ma": 2.06
-        },
-        {
-          "d": "2026-09-03",
-          "o": -10.92,
-          "h": -8.94,
-          "l": -13.07,
-          "c": -9.32,
-          "ma": 1.48
-        },
-        {
-          "d": "2026-09-04",
-          "o": -6.93,
-          "h": -3.21,
-          "l": -7.87,
-          "c": -3.84,
-          "ma": 1.01
-        },
-        {
-          "d": "2026-09-08",
-          "o": -1.7,
-          "h": 0.87,
-          "l": -2.66,
-          "c": -0.23,
-          "ma": 0.91
-        },
-        {
-          "d": "2026-09-09",
-          "o": -1.08,
-          "h": 1.99,
-          "l": -2.14,
-          "c": 0.31,
-          "ma": 0.61
-        },
-        {
-          "d": "2026-09-10",
-          "o": -3.01,
-          "h": -0.92,
-          "l": -4.26,
-          "c": -3.3,
-          "ma": -0.13
-        },
-        {
-          "d": "2026-09-11",
-          "o": -1.25,
-          "h": 0.67,
-          "l": -2.57,
-          "c": -0.79,
-          "ma": -0.82
-        },
-        {
-          "d": "2026-09-14",
-          "o": -8.63,
-          "h": -6.49,
-          "l": -10.91,
-          "c": -10.54,
-          "ma": -1.92
-        },
-        {
-          "d": "2026-09-15",
-          "o": -8.77,
-          "h": -8.61,
-          "l": -12.59,
-          "c": -10.96,
-          "ma": -3.26
-        },
-        {
-          "d": "2026-09-16",
-          "o": -8.8,
-          "h": -7.97,
-          "l": -11.55,
-          "c": -10.23,
+          "o": -7.67,
+          "h": -6.96,
+          "l": -10.79,
+          "c": -8.4,
           "ma": -4.15
         },
         {
-          "d": "2026-09-17",
-          "o": -7.01,
-          "h": -5.81,
-          "l": -8.94,
-          "c": -7.69,
-          "ma": -4.61
+          "d": "2026-08-25",
+          "o": -6.17,
+          "h": -5.59,
+          "l": -9.18,
+          "c": -7.96,
+          "ma": -3.72
         },
         {
-          "d": "2026-09-18",
-          "o": -6.34,
-          "h": -2.71,
-          "l": -6.8,
-          "c": -2.97,
-          "ma": -4.82
+          "d": "2026-08-26",
+          "o": -7.86,
+          "h": -6.68,
+          "l": -9.43,
+          "c": -7.52,
+          "ma": -2.98
         },
         {
-          "d": "2026-09-21",
-          "o": -0.67,
-          "h": 1.24,
-          "l": -2.67,
-          "c": -0.15,
-          "ma": -4.88
+          "d": "2026-08-27",
+          "o": -5.51,
+          "h": -4.42,
+          "l": -8.09,
+          "c": -6.4,
+          "ma": -2.73
         },
         {
-          "d": "2026-09-22",
-          "o": -1.59,
-          "h": 4.02,
-          "l": -2.05,
-          "c": 3.86,
-          "ma": -4.57
+          "d": "2026-08-28",
+          "o": -7.06,
+          "h": -6.66,
+          "l": -12.05,
+          "c": -11.71,
+          "ma": -2.8
         },
         {
-          "d": "2026-09-23",
-          "o": 3.04,
-          "h": 4.9,
-          "l": 0.44,
-          "c": 4.14,
-          "ma": -4.27
+          "d": "2026-08-31",
+          "o": -11.04,
+          "h": -10.42,
+          "l": -13.2,
+          "c": -12.43,
+          "ma": -3.01
         },
         {
-          "d": "2026-09-24",
-          "o": 1.81,
-          "h": 3.76,
-          "l": 0.27,
-          "c": 3.25,
-          "ma": -4.03
-        },
-        {
-          "d": "2026-09-25",
-          "o": 4.36,
-          "h": 6.55,
-          "l": 3.23,
-          "c": 5.4,
+          "d": "2026-09-01",
+          "o": -14.07,
+          "h": -13.47,
+          "l": -16.74,
+          "c": -15.71,
           "ma": -3.75
         },
         {
+          "d": "2026-09-02",
+          "o": -15.6,
+          "h": -14.12,
+          "l": -17.29,
+          "c": -14.98,
+          "ma": -4.31
+        },
+        {
+          "d": "2026-09-03",
+          "o": -16.44,
+          "h": -14.59,
+          "l": -18.45,
+          "c": -14.96,
+          "ma": -4.85
+        },
+        {
+          "d": "2026-09-04",
+          "o": -12.71,
+          "h": -9.22,
+          "l": -13.6,
+          "c": -9.81,
+          "ma": -5.29
+        },
+        {
+          "d": "2026-09-08",
+          "o": -7.8,
+          "h": -5.4,
+          "l": -8.71,
+          "c": -6.43,
+          "ma": -5.37
+        },
+        {
+          "d": "2026-09-09",
+          "o": -7.23,
+          "h": -4.37,
+          "l": -8.23,
+          "c": -5.95,
+          "ma": -5.66
+        },
+        {
+          "d": "2026-09-10",
+          "o": -9.06,
+          "h": -7.11,
+          "l": -10.22,
+          "c": -9.32,
+          "ma": -6.35
+        },
+        {
+          "d": "2026-09-11",
+          "o": -7.41,
+          "h": -5.63,
+          "l": -8.66,
+          "c": -7.0,
+          "ma": -7.0
+        },
+        {
+          "d": "2026-09-14",
+          "o": -14.34,
+          "h": -12.33,
+          "l": -16.44,
+          "c": -16.1,
+          "ma": -8.02
+        },
+        {
+          "d": "2026-09-15",
+          "o": -14.43,
+          "h": -14.29,
+          "l": -18.01,
+          "c": -16.48,
+          "ma": -9.27
+        },
+        {
+          "d": "2026-09-16",
+          "o": -14.45,
+          "h": -13.69,
+          "l": -17.05,
+          "c": -15.81,
+          "ma": -10.1
+        },
+        {
+          "d": "2026-09-17",
+          "o": -12.8,
+          "h": -11.68,
+          "l": -14.61,
+          "c": -13.44,
+          "ma": -10.54
+        },
+        {
+          "d": "2026-09-18",
+          "o": -12.17,
+          "h": -8.76,
+          "l": -12.6,
+          "c": -9.0,
+          "ma": -10.74
+        },
+        {
+          "d": "2026-09-21",
+          "o": -6.85,
+          "h": -5.05,
+          "l": -8.72,
+          "c": -6.34,
+          "ma": -10.79
+        },
+        {
+          "d": "2026-09-22",
+          "o": -7.7,
+          "h": -2.45,
+          "l": -8.13,
+          "c": -2.6,
+          "ma": -10.5
+        },
+        {
+          "d": "2026-09-23",
+          "o": -3.36,
+          "h": -1.64,
+          "l": -5.79,
+          "c": -2.35,
+          "ma": -10.22
+        },
+        {
+          "d": "2026-09-24",
+          "o": -4.53,
+          "h": -2.7,
+          "l": -5.97,
+          "c": -3.18,
+          "ma": -10.0
+        },
+        {
+          "d": "2026-09-25",
+          "o": -2.15,
+          "h": -0.1,
+          "l": -3.2,
+          "c": -1.16,
+          "ma": -9.74
+        },
+        {
           "d": "2026-09-28",
-          "o": 4.97,
-          "h": 6.56,
-          "l": 1.91,
-          "c": 5.56,
-          "ma": -3.18
+          "o": -1.57,
+          "h": -0.09,
+          "l": -4.42,
+          "c": -1.01,
+          "ma": -9.2
         },
         {
           "d": "2026-09-29",
-          "o": 8.31,
-          "h": 10.03,
-          "l": 6.74,
-          "c": 8.63,
-          "ma": -2.42
+          "o": 1.57,
+          "h": 3.19,
+          "l": 0.11,
+          "c": 1.89,
+          "ma": -8.49
         },
         {
           "d": "2026-09-30",
-          "o": 9.54,
-          "h": 11.23,
-          "l": 7.73,
-          "c": 10.09,
-          "ma": -1.41
+          "o": 2.73,
+          "h": 4.31,
+          "l": 1.05,
+          "c": 3.24,
+          "ma": -7.54
         },
         {
           "d": "2026-10-01",
-          "o": 10.84,
-          "h": 13.49,
-          "l": 9.19,
-          "c": 12.37,
-          "ma": -0.32
+          "o": 3.95,
+          "h": 6.42,
+          "l": 2.41,
+          "c": 5.38,
+          "ma": -6.52
         },
         {
           "d": "2026-10-02",
-          "o": 15.93,
-          "h": 18.02,
-          "l": 13.56,
-          "c": 15.59,
-          "ma": 0.92
+          "o": 8.73,
+          "h": 10.67,
+          "l": 6.53,
+          "c": 8.42,
+          "ma": -5.35
         },
         {
           "d": "2026-10-05",
-          "o": 15.36,
-          "h": 16.97,
-          "l": 12.77,
-          "c": 15.22,
-          "ma": 1.88
+          "o": 8.2,
+          "h": 9.71,
+          "l": 5.79,
+          "c": 8.08,
+          "ma": -4.46
         },
         {
           "d": "2026-10-06",
-          "o": 16.04,
-          "h": 16.44,
-          "l": 11.85,
-          "c": 12.75,
-          "ma": 2.53
+          "o": 8.85,
+          "h": 9.22,
+          "l": 4.91,
+          "c": 5.75,
+          "ma": -3.85
         },
         {
           "d": "2026-10-07",
-          "o": 9.44,
-          "h": 11.42,
-          "l": 7.97,
-          "c": 10.37,
-          "ma": 3.03
+          "o": 2.65,
+          "h": 4.52,
+          "l": 1.3,
+          "c": 3.55,
+          "ma": -3.37
         },
         {
           "d": "2026-10-08",
-          "o": 8.19,
-          "h": 11.71,
-          "l": 5.49,
-          "c": 7.41,
-          "ma": 3.57
+          "o": 1.5,
+          "h": 4.81,
+          "l": -1.01,
+          "c": 0.79,
+          "ma": -2.87
         },
         {
           "d": "2026-10-09",
-          "o": 9.79,
-          "h": 10.73,
-          "l": 6.66,
-          "c": 8.16,
-          "ma": 4.01
+          "o": 3.02,
+          "h": 3.89,
+          "l": 0.09,
+          "c": 1.49,
+          "ma": -2.44
         },
         {
           "d": "2026-10-12",
-          "o": 6.53,
-          "h": 6.72,
-          "l": 2.9,
-          "c": 3.65,
-          "ma": 4.72
+          "o": -0.04,
+          "h": 0.14,
+          "l": -3.43,
+          "c": -2.73,
+          "ma": -1.78
+        },
+        {
+          "d": "2026-10-13",
+          "o": -5.2,
+          "h": -3.82,
+          "l": -8.51,
+          "c": -5.21,
+          "ma": -1.21
+        },
+        {
+          "d": "2026-10-14",
+          "o": -7.26,
+          "h": -5.8,
+          "l": -10.62,
+          "c": -9.64,
+          "ma": -0.9
         }
       ]
     },
@@ -4549,50 +4549,50 @@
         {
           "symbol": "TXN",
           "name": "德州儀器",
-          "price": 287.85,
-          "changePercent": 1.45
+          "price": 280.65,
+          "changePercent": -0.39
         },
         {
           "symbol": "ADI",
           "name": "亞德諾",
-          "price": 414.7,
-          "changePercent": 2.1
+          "price": 403.57,
+          "changePercent": -0.66
         },
         {
           "symbol": "MCHP",
           "name": "微芯科技",
-          "price": 74.16,
-          "changePercent": -1.84
+          "price": 71.25,
+          "changePercent": -3.49
         },
         {
           "symbol": "MPWR",
           "name": "單體電源",
-          "price": 1319.55,
-          "changePercent": -4.81
+          "price": 1243.11,
+          "changePercent": -5.77
         },
         {
           "symbol": "SWKS",
           "name": "思佳訊",
-          "price": 76.56,
-          "changePercent": 0.28
+          "price": 76.89,
+          "changePercent": 2.93
         },
         {
           "symbol": "NXPI",
           "name": "恩智浦",
-          "price": 226.32,
-          "changePercent": -0.53
+          "price": 220.83,
+          "changePercent": -1.94
         },
         {
           "symbol": "ON",
           "name": "安森美",
-          "price": 76.69,
-          "changePercent": -1.08
+          "price": 73.36,
+          "changePercent": -3.47
         },
         {
           "symbol": "STM",
           "name": "意法半導",
-          "price": 49.57,
-          "changePercent": -4.78
+          "price": 46.9,
+          "changePercent": -7.09
         },
         {
           "symbol": "QRVO",
@@ -4603,510 +4603,510 @@
         {
           "symbol": "DIOD",
           "name": "二極體公司",
-          "price": 90.72,
-          "changePercent": -4.44
+          "price": 86.71,
+          "changePercent": -4.31
         },
         {
           "symbol": "SLAB",
           "name": "Silicon Labs",
-          "price": 221.15,
-          "changePercent": -0.4
+          "price": 221.09,
+          "changePercent": -0.28
         },
         {
           "symbol": "POWI",
           "name": "Power Integrations",
-          "price": 46.7,
-          "changePercent": -4.93
+          "price": 44.78,
+          "changePercent": -4.95
         }
       ],
       "trend": [
         0.0,
-        -4.4,
-        -2.76,
-        -4.79,
-        -2.03,
-        0.27
+        -1.34,
+        0.81,
+        2.41,
+        4.7,
+        8.02
       ],
       "kbars": [
         {
-          "d": "2026-07-20",
-          "o": 1.4,
-          "h": 2.48,
-          "l": -0.46,
-          "c": 0.0,
-          "ma": 7.44
-        },
-        {
-          "d": "2026-07-21",
-          "o": 3.78,
-          "h": 4.98,
-          "l": 1.98,
-          "c": 3.95,
-          "ma": 6.39
-        },
-        {
           "d": "2026-07-22",
-          "o": 2.35,
-          "h": 5.85,
-          "l": 1.99,
-          "c": 4.71,
-          "ma": 5.86
+          "o": -2.23,
+          "h": 1.09,
+          "l": -2.58,
+          "c": 0.0,
+          "ma": 1.08
         },
         {
           "d": "2026-07-23",
-          "o": 0.38,
-          "h": 2.91,
-          "l": -1.14,
-          "c": 0.88,
-          "ma": 5.15
+          "o": -4.1,
+          "h": -1.7,
+          "l": -5.54,
+          "c": -3.63,
+          "ma": 0.41
         },
         {
           "d": "2026-07-24",
-          "o": 0.02,
-          "h": 1.01,
-          "l": -3.51,
-          "c": -2.69,
-          "ma": 4.17
+          "o": -4.44,
+          "h": -3.5,
+          "l": -7.8,
+          "c": -7.03,
+          "ma": -0.51
         },
         {
           "d": "2026-07-27",
-          "o": -1.88,
-          "h": -0.13,
-          "l": -5.15,
-          "c": -1.93,
-          "ma": 3.71
+          "o": -6.26,
+          "h": -4.59,
+          "l": -9.37,
+          "c": -6.31,
+          "ma": -0.95
         },
         {
           "d": "2026-07-28",
-          "o": -4.47,
-          "h": -2.81,
-          "l": -6.53,
-          "c": -4.99,
-          "ma": 3.07
+          "o": -8.71,
+          "h": -7.13,
+          "l": -10.67,
+          "c": -9.21,
+          "ma": -1.56
         },
         {
           "d": "2026-07-29",
-          "o": -6.84,
-          "h": -4.31,
-          "l": -10.13,
-          "c": -9.0,
-          "ma": 2.06
+          "o": -10.96,
+          "h": -8.55,
+          "l": -14.08,
+          "c": -13.01,
+          "ma": -2.51
         },
         {
           "d": "2026-07-30",
-          "o": -5.84,
-          "h": -3.7,
-          "l": -7.09,
-          "c": -4.83,
-          "ma": 1.4
+          "o": -10.02,
+          "h": -7.98,
+          "l": -11.2,
+          "c": -9.06,
+          "ma": -3.14
         },
         {
           "d": "2026-07-31",
-          "o": -1.64,
-          "h": -0.51,
-          "l": -5.93,
-          "c": -5.1,
-          "ma": 0.95
+          "o": -6.03,
+          "h": -4.96,
+          "l": -10.11,
+          "c": -9.32,
+          "ma": -3.57
         },
         {
           "d": "2026-08-03",
-          "o": -6.74,
-          "h": -4.69,
-          "l": -8.69,
-          "c": -6.43,
-          "ma": 0.32
+          "o": -10.87,
+          "h": -8.93,
+          "l": -12.74,
+          "c": -10.58,
+          "ma": -4.17
         },
         {
           "d": "2026-08-04",
-          "o": -3.4,
-          "h": -0.6,
-          "l": -4.97,
-          "c": -2.13,
-          "ma": 0.12
+          "o": -7.72,
+          "h": -5.05,
+          "l": -9.2,
+          "c": -6.49,
+          "ma": -4.36
         },
         {
           "d": "2026-08-05",
-          "o": -3.13,
-          "h": -1.72,
-          "l": -5.11,
-          "c": -4.07,
-          "ma": -0.26
+          "o": -7.44,
+          "h": -6.11,
+          "l": -9.32,
+          "c": -8.34,
+          "ma": -4.72
         },
         {
           "d": "2026-08-06",
-          "o": -3.49,
-          "h": -0.01,
-          "l": -5.21,
-          "c": -3.13,
-          "ma": -0.75
+          "o": -7.83,
+          "h": -4.53,
+          "l": -9.46,
+          "c": -7.5,
+          "ma": -5.18
         },
         {
           "d": "2026-08-07",
-          "o": -0.46,
-          "h": 2.35,
-          "l": -1.14,
-          "c": 1.86,
-          "ma": -1.01
+          "o": -4.97,
+          "h": -2.3,
+          "l": -5.61,
+          "c": -2.76,
+          "ma": -5.43
         },
         {
           "d": "2026-08-10",
-          "o": 2.65,
-          "h": 2.95,
-          "l": -0.87,
-          "c": -0.68,
-          "ma": -1.18
+          "o": -2.01,
+          "h": -1.72,
+          "l": -5.36,
+          "c": -5.17,
+          "ma": -5.6
         },
         {
           "d": "2026-08-11",
-          "o": 0.88,
-          "h": 2.23,
-          "l": -0.77,
-          "c": 0.17,
-          "ma": -1.43
+          "o": -3.69,
+          "h": -2.41,
+          "l": -5.25,
+          "c": -4.37,
+          "ma": -5.84
         },
         {
           "d": "2026-08-12",
-          "o": 2.82,
-          "h": 3.42,
-          "l": -0.16,
-          "c": 0.66,
-          "ma": -1.61
+          "o": -1.85,
+          "h": -1.28,
+          "l": -4.69,
+          "c": -3.92,
+          "ma": -6.02
         },
         {
           "d": "2026-08-13",
-          "o": 0.02,
-          "h": 1.48,
-          "l": -2.09,
-          "c": -1.65,
-          "ma": -1.72
+          "o": -4.5,
+          "h": -3.13,
+          "l": -6.5,
+          "c": -6.09,
+          "ma": -6.12
         },
         {
           "d": "2026-08-14",
-          "o": -1.41,
-          "h": 0.66,
-          "l": -2.25,
-          "c": 0.14,
-          "ma": -1.71
+          "o": -5.86,
+          "h": -3.9,
+          "l": -6.66,
+          "c": -4.4,
+          "ma": -6.12
         },
         {
           "d": "2026-08-17",
-          "o": 0.81,
-          "h": 3.02,
-          "l": -0.0,
-          "c": 0.81,
-          "ma": -1.67
+          "o": -3.77,
+          "h": -1.67,
+          "l": -4.54,
+          "c": -3.78,
+          "ma": -6.08
         },
         {
           "d": "2026-08-18",
-          "o": -1.99,
-          "h": -1.07,
-          "l": -4.97,
-          "c": -3.13,
-          "ma": -2.03
+          "o": -6.43,
+          "h": -5.55,
+          "l": -9.25,
+          "c": -7.51,
+          "ma": -6.42
         },
         {
           "d": "2026-08-19",
-          "o": -2.39,
-          "h": -1.49,
-          "l": -5.92,
-          "c": -5.07,
-          "ma": -2.52
+          "o": -6.8,
+          "h": -5.95,
+          "l": -10.15,
+          "c": -9.35,
+          "ma": -6.89
         },
         {
           "d": "2026-08-20",
-          "o": -5.15,
-          "h": -3.81,
-          "l": -6.72,
-          "c": -6.26,
-          "ma": -2.87
+          "o": -9.41,
+          "h": -8.14,
+          "l": -10.91,
+          "c": -10.47,
+          "ma": -7.23
         },
         {
           "d": "2026-08-21",
-          "o": -5.35,
-          "h": -4.58,
-          "l": -7.07,
-          "c": -5.77,
-          "ma": -3.03
+          "o": -9.61,
+          "h": -8.88,
+          "l": -11.24,
+          "c": -10.01,
+          "ma": -7.38
         },
         {
           "d": "2026-08-24",
-          "o": -6.65,
-          "h": -6.37,
-          "l": -9.23,
-          "c": -7.68,
-          "ma": -3.31
+          "o": -10.84,
+          "h": -10.57,
+          "l": -13.29,
+          "c": -11.82,
+          "ma": -7.66
         },
         {
           "d": "2026-08-25",
-          "o": -6.41,
-          "h": -6.09,
-          "l": -8.59,
-          "c": -7.02,
-          "ma": -3.42
+          "o": -10.61,
+          "h": -10.31,
+          "l": -12.68,
+          "c": -11.2,
+          "ma": -7.76
         },
         {
           "d": "2026-08-26",
-          "o": -6.8,
-          "h": -5.84,
-          "l": -7.94,
-          "c": -6.96,
-          "ma": -3.31
+          "o": -10.98,
+          "h": -10.07,
+          "l": -12.06,
+          "c": -11.13,
+          "ma": -7.66
         },
         {
           "d": "2026-08-27",
-          "o": -5.84,
-          "h": -4.94,
-          "l": -7.28,
-          "c": -5.82,
-          "ma": -3.36
+          "o": -10.06,
+          "h": -9.21,
+          "l": -11.43,
+          "c": -10.05,
+          "ma": -7.71
         },
         {
           "d": "2026-08-28",
-          "o": -6.06,
-          "h": -5.79,
-          "l": -9.5,
-          "c": -8.69,
-          "ma": -3.54
+          "o": -10.27,
+          "h": -10.01,
+          "l": -13.55,
+          "c": -12.78,
+          "ma": -7.89
         },
         {
           "d": "2026-08-31",
-          "o": -7.81,
-          "h": -6.81,
-          "l": -8.8,
-          "c": -7.68,
-          "ma": -3.61
+          "o": -11.94,
+          "h": -11.0,
+          "l": -12.89,
+          "c": -11.83,
+          "ma": -7.95
         },
         {
           "d": "2026-09-01",
-          "o": -9.16,
-          "h": -8.53,
-          "l": -10.91,
-          "c": -9.49,
-          "ma": -3.97
+          "o": -13.23,
+          "h": -12.64,
+          "l": -14.9,
+          "c": -13.54,
+          "ma": -8.3
         },
         {
           "d": "2026-09-02",
-          "o": -9.39,
-          "h": -6.85,
-          "l": -10.32,
-          "c": -7.87,
-          "ma": -4.16
+          "o": -13.45,
+          "h": -11.05,
+          "l": -14.33,
+          "c": -12.02,
+          "ma": -8.48
         },
         {
           "d": "2026-09-03",
-          "o": -8.66,
-          "h": -7.15,
-          "l": -9.85,
-          "c": -7.77,
-          "ma": -4.39
+          "o": -12.77,
+          "h": -11.33,
+          "l": -13.9,
+          "c": -11.92,
+          "ma": -8.71
         },
         {
           "d": "2026-09-04",
-          "o": -6.75,
-          "h": -5.51,
-          "l": -7.92,
-          "c": -6.42,
-          "ma": -4.81
+          "o": -10.95,
+          "h": -9.78,
+          "l": -12.07,
+          "c": -10.64,
+          "ma": -9.1
         },
         {
           "d": "2026-09-08",
-          "o": -5.55,
-          "h": -5.08,
-          "l": -7.7,
-          "c": -6.93,
-          "ma": -5.12
+          "o": -9.81,
+          "h": -9.37,
+          "l": -11.86,
+          "c": -11.13,
+          "ma": -9.4
         },
         {
           "d": "2026-09-09",
-          "o": -7.63,
-          "h": -5.8,
-          "l": -8.06,
-          "c": -7.05,
-          "ma": -5.48
+          "o": -11.79,
+          "h": -10.05,
+          "l": -12.2,
+          "c": -11.24,
+          "ma": -9.74
         },
         {
           "d": "2026-09-10",
-          "o": -8.65,
-          "h": -5.41,
-          "l": -9.39,
-          "c": -6.34,
-          "ma": -5.83
+          "o": -12.76,
+          "h": -9.69,
+          "l": -13.47,
+          "c": -10.57,
+          "ma": -10.07
         },
         {
           "d": "2026-09-11",
-          "o": -5.2,
-          "h": -1.23,
-          "l": -5.84,
-          "c": -2.49,
-          "ma": -5.87
+          "o": -9.49,
+          "h": -5.71,
+          "l": -10.1,
+          "c": -6.91,
+          "ma": -10.12
         },
         {
           "d": "2026-09-14",
-          "o": -6.48,
-          "h": -5.18,
-          "l": -8.54,
-          "c": -7.87,
-          "ma": -6.27
+          "o": -10.7,
+          "h": -9.47,
+          "l": -12.65,
+          "c": -12.02,
+          "ma": -10.5
         },
         {
           "d": "2026-09-15",
-          "o": -6.74,
-          "h": -4.62,
-          "l": -8.61,
-          "c": -5.98,
-          "ma": -6.61
+          "o": -10.95,
+          "h": -8.93,
+          "l": -12.71,
+          "c": -10.23,
+          "ma": -10.82
         },
         {
           "d": "2026-09-16",
-          "o": -4.91,
-          "h": -4.54,
-          "l": -8.98,
-          "c": -8.0,
-          "ma": -6.86
+          "o": -9.21,
+          "h": -8.86,
+          "l": -13.08,
+          "c": -12.14,
+          "ma": -11.05
         },
         {
           "d": "2026-09-17",
-          "o": -6.05,
-          "h": -4.55,
-          "l": -7.97,
-          "c": -6.01,
-          "ma": -6.9
+          "o": -10.29,
+          "h": -8.86,
+          "l": -12.11,
+          "c": -10.25,
+          "ma": -11.1
         },
         {
           "d": "2026-09-18",
-          "o": -4.91,
-          "h": -3.57,
-          "l": -6.5,
-          "c": -4.44,
-          "ma": -6.81
+          "o": -9.21,
+          "h": -7.93,
+          "l": -10.71,
+          "c": -8.75,
+          "ma": -11.01
         },
         {
           "d": "2026-09-21",
-          "o": -3.23,
-          "h": -1.84,
-          "l": -5.33,
-          "c": -3.27,
-          "ma": -6.69
+          "o": -7.61,
+          "h": -6.29,
+          "l": -9.61,
+          "c": -7.64,
+          "ma": -10.89
         },
         {
           "d": "2026-09-22",
-          "o": -3.35,
-          "h": -0.07,
-          "l": -3.84,
-          "c": -0.59,
-          "ma": -6.33
+          "o": -7.72,
+          "h": -4.6,
+          "l": -8.18,
+          "c": -5.1,
+          "ma": -10.55
         },
         {
           "d": "2026-09-23",
-          "o": -1.07,
-          "h": -0.21,
-          "l": -3.17,
-          "c": -0.94,
-          "ma": -6.03
+          "o": -5.55,
+          "h": -4.74,
+          "l": -7.55,
+          "c": -5.44,
+          "ma": -10.27
         },
         {
           "d": "2026-09-24",
-          "o": -2.37,
-          "h": -1.33,
-          "l": -3.84,
-          "c": -2.37,
-          "ma": -5.8
+          "o": -6.79,
+          "h": -5.8,
+          "l": -8.19,
+          "c": -6.8,
+          "ma": -10.05
         },
         {
           "d": "2026-09-25",
-          "o": -1.97,
-          "h": 0.91,
-          "l": -2.57,
-          "c": 0.07,
-          "ma": -5.51
+          "o": -6.42,
+          "h": -3.68,
+          "l": -6.99,
+          "c": -4.47,
+          "ma": -9.77
         },
         {
           "d": "2026-09-28",
-          "o": -0.04,
-          "h": 0.5,
-          "l": -2.41,
-          "c": -0.44,
-          "ma": -5.09
+          "o": -4.58,
+          "h": -4.07,
+          "l": -6.83,
+          "c": -4.96,
+          "ma": -9.38
         },
         {
           "d": "2026-09-29",
-          "o": 1.05,
-          "h": 1.71,
-          "l": -0.81,
-          "c": 0.03,
-          "ma": -4.71
+          "o": -3.54,
+          "h": -2.92,
+          "l": -5.31,
+          "c": -4.51,
+          "ma": -9.01
         },
         {
           "d": "2026-09-30",
-          "o": 0.09,
-          "h": 1.04,
-          "l": -1.47,
-          "c": -0.4,
-          "ma": -4.25
+          "o": -4.46,
+          "h": -3.55,
+          "l": -5.94,
+          "c": -4.92,
+          "ma": -8.58
         },
         {
           "d": "2026-10-01",
-          "o": -0.27,
-          "h": 1.23,
-          "l": -1.79,
-          "c": 0.14,
-          "ma": -3.85
+          "o": -4.8,
+          "h": -3.37,
+          "l": -6.24,
+          "c": -4.41,
+          "ma": -8.2
         },
         {
           "d": "2026-10-02",
-          "o": 3.04,
-          "h": 5.81,
-          "l": 2.08,
-          "c": 4.25,
-          "ma": -3.25
+          "o": -1.65,
+          "h": 0.97,
+          "l": -2.57,
+          "c": -0.51,
+          "ma": -7.63
         },
         {
           "d": "2026-10-05",
-          "o": 4.13,
-          "h": 5.06,
-          "l": 2.07,
-          "c": 4.53,
-          "ma": -2.71
+          "o": -0.64,
+          "h": 0.25,
+          "l": -2.59,
+          "c": -0.25,
+          "ma": -7.11
         },
         {
           "d": "2026-10-06",
-          "o": 5.59,
-          "h": 6.49,
-          "l": 3.65,
-          "c": 4.98,
-          "ma": -2.11
+          "o": 0.74,
+          "h": 1.59,
+          "l": -1.1,
+          "c": 0.16,
+          "ma": -6.55
         },
         {
           "d": "2026-10-07",
-          "o": 2.44,
-          "h": 3.89,
-          "l": 0.15,
-          "c": 1.76,
-          "ma": -1.67
+          "o": -2.25,
+          "h": -0.88,
+          "l": -4.41,
+          "c": -2.88,
+          "ma": -6.13
         },
         {
           "d": "2026-10-08",
-          "o": -0.07,
-          "h": 0.82,
-          "l": -2.62,
-          "c": -1.08,
-          "ma": -1.41
+          "o": -4.62,
+          "h": -3.77,
+          "l": -7.04,
+          "c": -5.56,
+          "ma": -5.88
         },
         {
           "d": "2026-10-09",
-          "o": -0.26,
-          "h": 0.07,
-          "l": -3.91,
-          "c": -2.4,
-          "ma": -1.4
+          "o": -4.79,
+          "h": -4.48,
+          "l": -8.25,
+          "c": -6.82,
+          "ma": -5.87
         },
         {
           "d": "2026-10-12",
-          "o": -3.34,
-          "h": -2.59,
-          "l": -5.14,
-          "c": -4.56,
-          "ma": -1.24
+          "o": -7.71,
+          "h": -7.0,
+          "l": -9.42,
+          "c": -8.86,
+          "ma": -5.72
+        },
+        {
+          "d": "2026-10-13",
+          "o": -10.05,
+          "h": -7.83,
+          "l": -10.77,
+          "c": -8.25,
+          "ma": -5.62
+        },
+        {
+          "d": "2026-10-14",
+          "o": -9.79,
+          "h": -8.87,
+          "l": -12.06,
+          "c": -11.0,
+          "ma": -5.56
         }
       ]
     },
@@ -5116,538 +5116,538 @@
         {
           "symbol": "MU",
           "name": "美光",
-          "price": 953.19,
-          "changePercent": -7.37
+          "price": 914.13,
+          "changePercent": -7.57
         },
         {
           "symbol": "WDC",
           "name": "威騰",
-          "price": 380.71,
-          "changePercent": -4.17
+          "price": 364.1,
+          "changePercent": -5.9
         },
         {
           "symbol": "STX",
           "name": "希捷",
-          "price": 747.2,
-          "changePercent": -4.57
+          "price": 713.54,
+          "changePercent": -5.27
         },
         {
           "symbol": "SNDK",
           "name": "SanDisk",
-          "price": 1482.33,
-          "changePercent": -6.29
+          "price": 1403.34,
+          "changePercent": -5.65
         },
         {
           "symbol": "RMBS",
           "name": "Rambus",
-          "price": 98.17,
-          "changePercent": -8.65
+          "price": 92.11,
+          "changePercent": -8.84
         }
       ],
       "trend": [
         0.0,
-        -5.06,
-        -6.1,
-        -6.15,
-        -2.13,
-        3.35,
-        6.52,
-        12.73,
-        11.46,
-        9.64,
-        10.66,
-        8.54,
-        9.02,
-        10.24,
-        12.53,
-        7.88,
-        9.18,
-        5.8,
-        6.26,
-        2.15,
-        1.82,
-        -2.82
+        -0.17,
+        2.72,
+        7.47,
+        13.42,
+        18.12,
+        19.26,
+        17.21,
+        17.18,
+        16.09,
+        15.54,
+        16.91,
+        18.86,
+        15.32,
+        16.08,
+        12.79,
+        12.29,
+        9.42,
+        8.37,
+        4.33,
+        1.19,
+        -2.86
       ],
       "kbars": [
         {
-          "d": "2026-07-20",
-          "o": 1.71,
-          "h": 4.31,
-          "l": -0.65,
-          "c": 0.0,
-          "ma": 18.76
-        },
-        {
-          "d": "2026-07-21",
-          "o": 7.67,
-          "h": 12.42,
-          "l": 5.45,
-          "c": 11.0,
-          "ma": 17.02
-        },
-        {
           "d": "2026-07-22",
-          "o": 7.12,
-          "h": 13.39,
-          "l": 6.61,
-          "c": 11.23,
-          "ma": 16.01
+          "o": -3.64,
+          "h": 1.95,
+          "l": -4.09,
+          "c": 0.0,
+          "ma": 4.34
         },
         {
           "d": "2026-07-23",
-          "o": 10.43,
-          "h": 15.51,
-          "l": 9.85,
-          "c": 12.17,
-          "ma": 15.24
+          "o": -0.74,
+          "h": 3.79,
+          "l": -1.28,
+          "c": 0.83,
+          "ma": 3.64
         },
         {
           "d": "2026-07-24",
-          "o": 8.5,
-          "h": 10.62,
-          "l": 1.81,
-          "c": 3.53,
-          "ma": 13.45
+          "o": -2.45,
+          "h": -0.55,
+          "l": -8.45,
+          "c": -6.91,
+          "ma": 2.04
         },
         {
           "d": "2026-07-27",
-          "o": 4.62,
-          "h": 5.87,
-          "l": -5.73,
-          "c": -0.9,
-          "ma": 12.13
+          "o": -5.93,
+          "h": -4.79,
+          "l": -15.14,
+          "c": -10.8,
+          "ma": 0.86
         },
         {
           "d": "2026-07-28",
-          "o": -7.22,
-          "h": -6.43,
-          "l": -14.84,
-          "c": -10.23,
-          "ma": 10.05
+          "o": -16.46,
+          "h": -15.74,
+          "l": -23.26,
+          "c": -19.17,
+          "ma": -1.01
         },
         {
           "d": "2026-07-29",
-          "o": -8.08,
-          "h": -5.34,
-          "l": -14.82,
-          "c": -13.88,
-          "ma": 7.55
+          "o": -17.29,
+          "h": -14.79,
+          "l": -23.33,
+          "c": -22.5,
+          "ma": -3.25
         },
         {
           "d": "2026-07-30",
-          "o": -5.4,
-          "h": 1.78,
-          "l": -7.04,
-          "c": -0.52,
-          "ma": 6.28
+          "o": -14.97,
+          "h": -8.54,
+          "l": -16.42,
+          "c": -10.6,
+          "ma": -4.4
         },
         {
           "d": "2026-07-31",
-          "o": 5.56,
-          "h": 7.43,
-          "l": -3.71,
-          "c": -1.77,
-          "ma": 5.56
+          "o": -5.16,
+          "h": -3.49,
+          "l": -13.43,
+          "c": -11.69,
+          "ma": -5.05
         },
         {
           "d": "2026-08-03",
-          "o": -5.89,
-          "h": -0.1,
-          "l": -8.87,
-          "c": -1.68,
-          "ma": 4.7
+          "o": -15.39,
+          "h": -10.18,
+          "l": -18.04,
+          "c": -11.59,
+          "ma": -5.83
         },
         {
           "d": "2026-08-04",
-          "o": 3.56,
-          "h": 6.79,
-          "l": 1.13,
-          "c": 4.67,
-          "ma": 4.51
+          "o": -6.89,
+          "h": -3.97,
+          "l": -9.04,
+          "c": -5.84,
+          "ma": -6.0
         },
         {
           "d": "2026-08-05",
-          "o": 4.21,
-          "h": 8.04,
-          "l": 1.03,
-          "c": 1.54,
-          "ma": 3.96
+          "o": -6.24,
+          "h": -2.81,
+          "l": -9.11,
+          "c": -8.65,
+          "ma": -6.49
         },
         {
           "d": "2026-08-06",
-          "o": -7.76,
-          "h": 1.71,
-          "l": -9.71,
-          "c": -2.38,
-          "ma": 2.93
+          "o": -16.87,
+          "h": -8.39,
+          "l": -18.6,
+          "c": -12.06,
+          "ma": -7.41
         },
         {
           "d": "2026-08-07",
-          "o": -0.01,
-          "h": 0.54,
-          "l": -7.2,
-          "c": -4.08,
-          "ma": 1.78
+          "o": -9.92,
+          "h": -9.39,
+          "l": -16.27,
+          "c": -13.49,
+          "ma": -8.43
         },
         {
           "d": "2026-08-10",
-          "o": -4.67,
-          "h": -1.52,
-          "l": -7.09,
-          "c": -5.34,
-          "ma": 0.99
+          "o": -14.01,
+          "h": -11.23,
+          "l": -16.25,
+          "c": -14.71,
+          "ma": -9.13
         },
         {
           "d": "2026-08-11",
-          "o": -3.9,
-          "h": -2.53,
-          "l": -6.3,
-          "c": -4.11,
-          "ma": 0.09
+          "o": -13.39,
+          "h": -12.19,
+          "l": -15.58,
+          "c": -13.62,
+          "ma": -9.93
         },
         {
           "d": "2026-08-12",
-          "o": 0.88,
-          "h": 3.37,
-          "l": -1.11,
-          "c": 0.94,
-          "ma": -0.18
+          "o": -9.14,
+          "h": -6.91,
+          "l": -10.92,
+          "c": -9.08,
+          "ma": -10.16
         },
         {
           "d": "2026-08-13",
-          "o": 0.45,
-          "h": 9.67,
-          "l": -0.27,
-          "c": 6.58,
-          "ma": 0.26
+          "o": -9.54,
+          "h": -1.37,
+          "l": -10.18,
+          "c": -4.16,
+          "ma": -9.77
         },
         {
           "d": "2026-08-14",
-          "o": 10.08,
-          "h": 12.63,
-          "l": 6.9,
-          "c": 11.19,
-          "ma": 0.9
+          "o": -1.09,
+          "h": 1.19,
+          "l": -3.91,
+          "c": -0.08,
+          "ma": -9.21
         },
         {
           "d": "2026-08-17",
-          "o": 14.1,
-          "h": 18.66,
-          "l": 13.04,
-          "c": 15.81,
-          "ma": 1.69
+          "o": 2.52,
+          "h": 6.55,
+          "l": 1.55,
+          "c": 3.98,
+          "ma": -8.52
         },
         {
           "d": "2026-08-18",
-          "o": 8.78,
-          "h": 12.07,
-          "l": 5.15,
-          "c": 6.58,
-          "ma": 1.47
+          "o": -2.31,
+          "h": 0.63,
+          "l": -5.57,
+          "c": -4.28,
+          "ma": -8.72
         },
         {
           "d": "2026-08-19",
-          "o": 8.21,
-          "h": 9.08,
-          "l": 0.57,
-          "c": 1.94,
-          "ma": 1.0
+          "o": -2.82,
+          "h": -2.03,
+          "l": -9.65,
+          "c": -8.41,
+          "ma": -9.14
         },
         {
           "d": "2026-08-20",
-          "o": 2.17,
-          "h": 5.81,
-          "l": 1.1,
-          "c": 4.24,
-          "ma": 0.61
+          "o": -8.19,
+          "h": -4.94,
+          "l": -9.14,
+          "c": -6.35,
+          "ma": -9.5
         },
         {
           "d": "2026-08-21",
-          "o": 5.34,
-          "h": 5.79,
-          "l": 1.97,
-          "c": 3.42,
-          "ma": 0.6
+          "o": -5.37,
+          "h": -4.97,
+          "l": -8.39,
+          "c": -7.09,
+          "ma": -9.51
         },
         {
           "d": "2026-08-24",
-          "o": -0.52,
-          "h": 0.03,
-          "l": -5.53,
-          "c": -2.55,
-          "ma": 0.52
+          "o": -10.59,
+          "h": -10.1,
+          "l": -15.07,
+          "c": -12.43,
+          "ma": -9.59
         },
         {
           "d": "2026-08-25",
-          "o": -0.01,
-          "h": 1.5,
-          "l": -2.65,
-          "c": -0.35,
-          "ma": 1.01
+          "o": -10.14,
+          "h": -8.8,
+          "l": -12.5,
+          "c": -10.43,
+          "ma": -9.15
         },
         {
           "d": "2026-08-26",
-          "o": -0.87,
-          "h": 2.14,
-          "l": -1.36,
-          "c": 1.43,
-          "ma": 1.78
+          "o": -10.9,
+          "h": -8.22,
+          "l": -11.34,
+          "c": -8.86,
+          "ma": -8.47
         },
         {
           "d": "2026-08-27",
-          "o": 4.24,
-          "h": 4.73,
-          "l": -1.86,
-          "c": 1.11,
-          "ma": 1.86
+          "o": -6.35,
+          "h": -5.9,
+          "l": -11.78,
+          "c": -9.12,
+          "ma": -8.4
         },
         {
           "d": "2026-08-28",
-          "o": -0.43,
-          "h": 2.36,
-          "l": -2.3,
-          "c": -0.55,
-          "ma": 1.92
+          "o": -10.5,
+          "h": -8.04,
+          "l": -12.24,
+          "c": -10.68,
+          "ma": -8.35
         },
         {
           "d": "2026-08-31",
-          "o": -0.65,
-          "h": 1.75,
-          "l": -2.24,
-          "c": 1.01,
-          "ma": 2.05
+          "o": -10.77,
+          "h": -8.63,
+          "l": -12.17,
+          "c": -9.29,
+          "ma": -8.23
         },
         {
           "d": "2026-09-01",
-          "o": -1.09,
-          "h": 2.0,
-          "l": -2.46,
-          "c": -0.76,
-          "ma": 1.78
+          "o": -11.17,
+          "h": -8.45,
+          "l": -12.42,
+          "c": -10.9,
+          "ma": -8.49
         },
         {
           "d": "2026-09-02",
-          "o": -1.46,
-          "h": 1.36,
-          "l": -3.06,
-          "c": -0.2,
-          "ma": 1.7
+          "o": -11.52,
+          "h": -9.02,
+          "l": -12.97,
+          "c": -10.39,
+          "ma": -8.57
         },
         {
           "d": "2026-09-03",
-          "o": -1.12,
-          "h": 0.23,
-          "l": -4.58,
-          "c": -0.75,
-          "ma": 1.78
+          "o": -11.22,
+          "h": -10.01,
+          "l": -14.32,
+          "c": -10.88,
+          "ma": -8.51
         },
         {
           "d": "2026-09-04",
-          "o": 1.24,
-          "h": 6.13,
-          "l": -0.05,
-          "c": 5.81,
-          "ma": 2.27
+          "o": -9.1,
+          "h": -4.79,
+          "l": -10.27,
+          "c": -5.09,
+          "ma": -8.09
         },
         {
           "d": "2026-09-08",
-          "o": 8.35,
-          "h": 10.75,
-          "l": 5.53,
-          "c": 7.46,
-          "ma": 2.91
+          "o": -2.81,
+          "h": -0.68,
+          "l": -5.33,
+          "c": -3.61,
+          "ma": -7.54
         },
         {
           "d": "2026-09-09",
-          "o": 7.15,
-          "h": 11.0,
-          "l": 6.3,
-          "c": 8.37,
-          "ma": 3.54
+          "o": -3.9,
+          "h": -0.44,
+          "l": -4.65,
+          "c": -2.79,
+          "ma": -7.0
         },
         {
           "d": "2026-09-10",
-          "o": 5.27,
-          "h": 6.53,
-          "l": 3.14,
-          "c": 4.26,
-          "ma": 3.7
+          "o": -5.57,
+          "h": -4.44,
+          "l": -7.47,
+          "c": -6.47,
+          "ma": -6.87
         },
         {
           "d": "2026-09-11",
-          "o": 5.48,
-          "h": 6.28,
-          "l": 1.17,
-          "c": 2.31,
-          "ma": 3.49
+          "o": -5.36,
+          "h": -4.63,
+          "l": -9.17,
+          "c": -8.14,
+          "ma": -7.07
         },
         {
           "d": "2026-09-14",
-          "o": -4.54,
-          "h": -0.99,
-          "l": -5.4,
-          "c": -2.79,
-          "ma": 2.79
+          "o": -14.29,
+          "h": -11.14,
+          "l": -15.07,
+          "c": -12.76,
+          "ma": -7.7
         },
         {
           "d": "2026-09-15",
-          "o": -1.97,
-          "h": -1.28,
-          "l": -5.41,
-          "c": -3.93,
-          "ma": 1.8
+          "o": -12.01,
+          "h": -11.37,
+          "l": -15.05,
+          "c": -13.71,
+          "ma": -8.58
         },
         {
           "d": "2026-09-16",
-          "o": -2.53,
-          "h": -1.59,
-          "l": -4.97,
-          "c": -3.96,
-          "ma": 1.28
+          "o": -12.46,
+          "h": -11.63,
+          "l": -14.68,
+          "c": -13.77,
+          "ma": -9.06
         },
         {
           "d": "2026-09-17",
-          "o": -1.0,
-          "h": 1.34,
-          "l": -2.26,
-          "c": 0.24,
-          "ma": 1.19
+          "o": -11.1,
+          "h": -9.0,
+          "l": -12.22,
+          "c": -9.98,
+          "ma": -9.14
         },
         {
           "d": "2026-09-18",
-          "o": 1.32,
-          "h": 6.92,
-          "l": 0.19,
-          "c": 6.12,
-          "ma": 1.29
+          "o": -9.0,
+          "h": -4.07,
+          "l": -10.04,
+          "c": -4.77,
+          "ma": -9.06
         },
         {
           "d": "2026-09-21",
-          "o": 9.33,
-          "h": 12.22,
-          "l": 5.74,
-          "c": 9.01,
-          "ma": 1.56
+          "o": -1.89,
+          "h": 0.81,
+          "l": -5.08,
+          "c": -2.05,
+          "ma": -8.81
         },
         {
           "d": "2026-09-22",
-          "o": 7.62,
-          "h": 16.8,
-          "l": 7.36,
-          "c": 15.32,
-          "ma": 2.46
+          "o": -3.29,
+          "h": 5.0,
+          "l": -3.53,
+          "c": 3.67,
+          "ma": -8.0
         },
         {
           "d": "2026-09-23",
-          "o": 15.27,
-          "h": 16.65,
-          "l": 10.76,
-          "c": 13.87,
-          "ma": 3.17
+          "o": 3.62,
+          "h": 4.86,
+          "l": -0.44,
+          "c": 2.36,
+          "ma": -7.36
         },
         {
           "d": "2026-09-24",
-          "o": 11.99,
-          "h": 14.73,
-          "l": 9.84,
-          "c": 11.97,
-          "ma": 3.7
+          "o": 0.66,
+          "h": 3.21,
+          "l": -1.24,
+          "c": 0.72,
+          "ma": -6.88
         },
         {
           "d": "2026-09-25",
-          "o": 13.95,
-          "h": 14.99,
-          "l": 11.25,
-          "c": 13.02,
-          "ma": 4.29
+          "o": 2.5,
+          "h": 3.44,
+          "l": 0.07,
+          "c": 1.65,
+          "ma": -6.34
         },
         {
           "d": "2026-09-28",
-          "o": 11.65,
-          "h": 13.27,
-          "l": 6.82,
-          "c": 10.8,
-          "ma": 4.86
+          "o": 0.44,
+          "h": 1.86,
+          "l": -3.91,
+          "c": -0.36,
+          "ma": -5.83
         },
         {
           "d": "2026-09-29",
-          "o": 13.22,
-          "h": 13.63,
-          "l": 9.72,
-          "c": 11.31,
-          "ma": 5.37
+          "o": 1.82,
+          "h": 2.19,
+          "l": -1.32,
+          "c": 0.11,
+          "ma": -5.36
         },
         {
           "d": "2026-09-30",
-          "o": 11.76,
-          "h": 13.82,
-          "l": 10.32,
-          "c": 12.44,
-          "ma": 6.03
+          "o": 0.51,
+          "h": 2.4,
+          "l": -0.79,
+          "c": 1.17,
+          "ma": -4.75
         },
         {
           "d": "2026-10-01",
-          "o": 11.76,
-          "h": 15.45,
-          "l": 9.46,
-          "c": 14.89,
-          "ma": 6.79
+          "o": 0.57,
+          "h": 3.86,
+          "l": -1.5,
+          "c": 3.34,
+          "ma": -4.07
         },
         {
           "d": "2026-10-02",
-          "o": 10.96,
-          "h": 12.37,
-          "l": 7.27,
-          "c": 9.98,
-          "ma": 7.32
+          "o": -0.05,
+          "h": 1.24,
+          "l": -3.31,
+          "c": -0.9,
+          "ma": -3.57
         },
         {
           "d": "2026-10-05",
-          "o": 11.14,
-          "h": 13.21,
-          "l": 9.57,
-          "c": 11.2,
-          "ma": 7.59
+          "o": 0.12,
+          "h": 1.96,
+          "l": -1.31,
+          "c": 0.14,
+          "ma": -3.31
         },
         {
           "d": "2026-10-06",
-          "o": 10.01,
-          "h": 11.49,
-          "l": 6.25,
-          "c": 7.61,
-          "ma": 7.6
+          "o": -0.88,
+          "h": 0.48,
+          "l": -4.23,
+          "c": -2.95,
+          "ma": -3.27
         },
         {
           "d": "2026-10-07",
-          "o": 4.81,
-          "h": 9.36,
-          "l": 4.05,
-          "c": 8.35,
-          "ma": 7.6
+          "o": -5.48,
+          "h": -1.43,
+          "l": -6.18,
+          "c": -2.33,
+          "ma": -3.25
         },
         {
           "d": "2026-10-08",
-          "o": 6.61,
-          "h": 8.07,
-          "l": 2.93,
-          "c": 4.04,
-          "ma": 7.59
+          "o": -3.92,
+          "h": -2.58,
+          "l": -7.21,
+          "c": -6.19,
+          "ma": -3.24
         },
         {
           "d": "2026-10-09",
-          "o": 5.67,
-          "h": 5.91,
-          "l": 1.82,
-          "c": 3.65,
-          "ma": 7.66
+          "o": -4.71,
+          "h": -4.5,
+          "l": -8.22,
+          "c": -6.55,
+          "ma": -3.16
         },
         {
           "d": "2026-10-12",
-          "o": 1.37,
-          "h": 1.49,
-          "l": -1.8,
-          "c": -1.07,
-          "ma": 7.74
+          "o": -8.61,
+          "h": -8.5,
+          "l": -11.48,
+          "c": -10.83,
+          "ma": -3.06
+        },
+        {
+          "d": "2026-10-13",
+          "o": -15.96,
+          "h": -12.25,
+          "l": -16.5,
+          "c": -12.55,
+          "ma": -3.0
+        },
+        {
+          "d": "2026-10-14",
+          "o": -15.68,
+          "h": -14.1,
+          "l": -18.2,
+          "c": -18.01,
+          "ma": -3.22
         }
       ]
     },
@@ -5657,583 +5657,583 @@
         {
           "symbol": "INTC",
           "name": "英特爾",
-          "price": 102.81,
-          "changePercent": -1.81
+          "price": 98.12,
+          "changePercent": -3.19
         },
         {
           "symbol": "GFS",
           "name": "格芯",
-          "price": 46.7,
-          "changePercent": -3.19
+          "price": 48.94,
+          "changePercent": 1.24
         },
         {
           "symbol": "UMC",
           "name": "聯電ADR",
-          "price": 22.39,
-          "changePercent": -2.48
+          "price": 21.4,
+          "changePercent": -5.1
         },
         {
           "symbol": "TSM",
           "name": "台積電ADR",
-          "price": 445.12,
-          "changePercent": -1.81
+          "price": 430.0,
+          "changePercent": -3.23
         },
         {
           "symbol": "ASX",
           "name": "日月光ADR",
-          "price": 47.6,
-          "changePercent": 2.52
+          "price": 44.33,
+          "changePercent": -6.73
         },
         {
           "symbol": "IFNNY",
           "name": "英飛凌",
-          "price": 63.87,
-          "changePercent": -3.15
+          "price": 60.91,
+          "changePercent": -4.63
         }
       ],
       "trend": [
         0.0,
-        -5.62,
-        -6.14,
-        -4.29,
-        0.73,
-        2.95,
-        7.81,
-        9.57,
-        6.66,
-        6.78,
-        7.33,
-        5.25,
-        7.25,
-        7.45,
-        8.45,
-        12.72,
-        10.06,
-        8.78,
-        6.92,
-        4.45,
-        4.29,
-        3.09
+        1.54,
+        5.89,
+        8.59,
+        14.22,
+        16.61,
+        13.86,
+        13.16,
+        13.24,
+        12.26,
+        13.88,
+        14.1,
+        14.89,
+        19.15,
+        17.52,
+        15.53,
+        13.79,
+        10.46,
+        11.21,
+        9.47,
+        9.59,
+        4.64
       ],
       "kbars": [
         {
-          "d": "2026-07-20",
-          "o": 1.64,
-          "h": 3.32,
-          "l": -0.21,
-          "c": 0.0,
-          "ma": 17.97
-        },
-        {
-          "d": "2026-07-21",
-          "o": 5.64,
-          "h": 7.25,
-          "l": 3.74,
-          "c": 6.44,
-          "ma": 16.54
-        },
-        {
           "d": "2026-07-22",
-          "o": 4.56,
-          "h": 8.1,
-          "l": 4.35,
-          "c": 6.4,
-          "ma": 15.55
+          "o": -1.71,
+          "h": 1.62,
+          "l": -1.91,
+          "c": 0.0,
+          "ma": 8.72
         },
         {
           "d": "2026-07-23",
-          "o": 3.46,
-          "h": 5.56,
-          "l": 1.95,
-          "c": 3.19,
-          "ma": 14.32
+          "o": -2.73,
+          "h": -0.76,
+          "l": -4.15,
+          "c": -2.99,
+          "ma": 7.55
         },
         {
           "d": "2026-07-24",
-          "o": 1.25,
-          "h": 2.14,
-          "l": -3.58,
-          "c": -2.45,
-          "ma": 12.73
+          "o": -4.81,
+          "h": -3.96,
+          "l": -9.37,
+          "c": -8.3,
+          "ma": 6.04
         },
         {
           "d": "2026-07-27",
-          "o": -1.11,
-          "h": -0.16,
-          "l": -6.9,
-          "c": -3.56,
-          "ma": 11.4
+          "o": -7.04,
+          "h": -6.15,
+          "l": -12.49,
+          "c": -9.34,
+          "ma": 4.78
         },
         {
           "d": "2026-07-28",
-          "o": -9.72,
-          "h": -8.01,
-          "l": -12.29,
-          "c": -9.68,
-          "ma": 9.55
+          "o": -15.12,
+          "h": -13.5,
+          "l": -17.54,
+          "c": -15.09,
+          "ma": 3.03
         },
         {
           "d": "2026-07-29",
-          "o": -11.45,
-          "h": -9.03,
-          "l": -14.71,
-          "c": -14.21,
-          "ma": 7.22
+          "o": -16.71,
+          "h": -14.44,
+          "l": -19.79,
+          "c": -19.31,
+          "ma": 0.84
         },
         {
           "d": "2026-07-30",
-          "o": -10.02,
-          "h": -4.61,
-          "l": -10.45,
-          "c": -5.92,
-          "ma": 5.72
+          "o": -15.39,
+          "h": -10.31,
+          "l": -15.79,
+          "c": -11.55,
+          "ma": -0.58
         },
         {
           "d": "2026-07-31",
-          "o": -1.22,
-          "h": -0.04,
-          "l": -6.18,
-          "c": -5.13,
-          "ma": 4.56
+          "o": -7.14,
+          "h": -6.03,
+          "l": -11.81,
+          "c": -10.83,
+          "ma": -1.67
         },
         {
           "d": "2026-08-03",
-          "o": -7.32,
-          "h": -3.99,
-          "l": -8.53,
-          "c": -4.52,
-          "ma": 3.28
+          "o": -12.92,
+          "h": -9.77,
+          "l": -14.05,
+          "c": -10.27,
+          "ma": -2.88
         },
         {
           "d": "2026-08-04",
-          "o": -0.41,
-          "h": 2.28,
-          "l": -1.88,
-          "c": 1.37,
-          "ma": 2.73
+          "o": -6.4,
+          "h": -3.86,
+          "l": -7.79,
+          "c": -4.74,
+          "ma": -3.4
         },
         {
           "d": "2026-08-05",
-          "o": -2.27,
-          "h": 0.67,
-          "l": -3.73,
-          "c": -2.42,
-          "ma": 1.9
+          "o": -8.15,
+          "h": -5.35,
+          "l": -9.51,
+          "c": -8.27,
+          "ma": -4.19
         },
         {
           "d": "2026-08-06",
-          "o": -4.49,
-          "h": -0.02,
-          "l": -5.71,
-          "c": -2.22,
-          "ma": 0.93
+          "o": -10.22,
+          "h": -6.0,
+          "l": -11.37,
+          "c": -8.08,
+          "ma": -5.11
         },
         {
           "d": "2026-08-07",
-          "o": -0.82,
-          "h": 0.75,
-          "l": -3.44,
-          "c": -0.39,
-          "ma": 0.13
+          "o": -6.79,
+          "h": -5.29,
+          "l": -9.25,
+          "c": -6.35,
+          "ma": -5.86
         },
         {
           "d": "2026-08-10",
-          "o": 1.11,
-          "h": 2.0,
-          "l": -2.59,
-          "c": -2.22,
-          "ma": -0.47
+          "o": -4.97,
+          "h": -4.12,
+          "l": -8.47,
+          "c": -8.12,
+          "ma": -6.42
         },
         {
           "d": "2026-08-11",
-          "o": -0.42,
-          "h": 0.52,
-          "l": -2.01,
-          "c": -1.07,
-          "ma": -1.07
+          "o": -6.43,
+          "h": -5.55,
+          "l": -7.93,
+          "c": -7.04,
+          "ma": -7.0
         },
         {
           "d": "2026-08-12",
-          "o": 2.42,
-          "h": 2.96,
-          "l": 0.39,
-          "c": 1.16,
-          "ma": -1.5
+          "o": -3.75,
+          "h": -3.24,
+          "l": -5.65,
+          "c": -4.93,
+          "ma": -7.41
         },
         {
           "d": "2026-08-13",
-          "o": 0.57,
-          "h": 3.45,
-          "l": 0.18,
-          "c": 1.61,
-          "ma": -1.61
+          "o": -5.47,
+          "h": -2.77,
+          "l": -5.83,
+          "c": -4.49,
+          "ma": -7.51
         },
         {
           "d": "2026-08-14",
-          "o": 0.91,
-          "h": 2.76,
-          "l": -0.4,
-          "c": 1.42,
-          "ma": -1.61
+          "o": -5.14,
+          "h": -3.41,
+          "l": -6.38,
+          "c": -4.67,
+          "ma": -7.51
         },
         {
           "d": "2026-08-17",
-          "o": 1.8,
-          "h": 3.67,
-          "l": 0.56,
-          "c": 1.89,
-          "ma": -1.52
+          "o": -4.29,
+          "h": -2.53,
+          "l": -5.46,
+          "c": -4.23,
+          "ma": -7.43
         },
         {
           "d": "2026-08-18",
-          "o": -3.06,
-          "h": -2.49,
-          "l": -5.68,
-          "c": -4.61,
-          "ma": -2.07
+          "o": -8.85,
+          "h": -8.32,
+          "l": -11.32,
+          "c": -10.32,
+          "ma": -7.95
         },
         {
           "d": "2026-08-19",
-          "o": -3.56,
-          "h": -3.1,
-          "l": -7.86,
-          "c": -7.01,
-          "ma": -2.74
+          "o": -9.32,
+          "h": -8.88,
+          "l": -13.36,
+          "c": -12.56,
+          "ma": -8.57
         },
         {
           "d": "2026-08-20",
-          "o": -6.7,
-          "h": -5.61,
-          "l": -7.99,
-          "c": -6.85,
-          "ma": -3.24
+          "o": -12.29,
+          "h": -11.27,
+          "l": -13.52,
+          "c": -12.44,
+          "ma": -9.05
         },
         {
           "d": "2026-08-21",
-          "o": -5.54,
-          "h": -5.12,
-          "l": -7.43,
-          "c": -6.42,
-          "ma": -3.44
+          "o": -11.2,
+          "h": -10.8,
+          "l": -12.97,
+          "c": -12.03,
+          "ma": -9.23
         },
         {
           "d": "2026-08-24",
-          "o": -6.36,
-          "h": -6.19,
-          "l": -9.16,
-          "c": -7.9,
-          "ma": -3.66
+          "o": -11.97,
+          "h": -11.81,
+          "l": -14.61,
+          "c": -13.42,
+          "ma": -9.44
         },
         {
           "d": "2026-08-25",
-          "o": -6.0,
-          "h": -5.13,
-          "l": -7.24,
-          "c": -6.54,
-          "ma": -3.5
+          "o": -11.64,
+          "h": -10.81,
+          "l": -12.81,
+          "c": -12.15,
+          "ma": -9.29
         },
         {
           "d": "2026-08-26",
-          "o": -6.84,
-          "h": -6.08,
-          "l": -8.08,
-          "c": -6.81,
-          "ma": -3.13
+          "o": -12.43,
+          "h": -11.72,
+          "l": -13.61,
+          "c": -12.42,
+          "ma": -8.95
         },
         {
           "d": "2026-08-27",
-          "o": -5.02,
-          "h": -3.52,
-          "l": -6.17,
-          "c": -4.21,
-          "ma": -3.04
+          "o": -10.75,
+          "h": -9.34,
+          "l": -11.84,
+          "c": -10.0,
+          "ma": -8.87
         },
         {
           "d": "2026-08-28",
-          "o": -3.29,
-          "h": -2.34,
-          "l": -6.25,
-          "c": -5.74,
-          "ma": -3.07
+          "o": -9.12,
+          "h": -8.21,
+          "l": -11.9,
+          "c": -11.43,
+          "ma": -8.9
         },
         {
           "d": "2026-08-31",
-          "o": -5.67,
-          "h": -4.27,
-          "l": -6.73,
-          "c": -6.19,
-          "ma": -3.16
+          "o": -11.35,
+          "h": -10.03,
+          "l": -12.34,
+          "c": -11.84,
+          "ma": -8.98
         },
         {
           "d": "2026-09-01",
-          "o": -6.18,
-          "h": -5.04,
-          "l": -7.81,
-          "c": -6.21,
-          "ma": -3.54
+          "o": -11.83,
+          "h": -10.75,
+          "l": -13.35,
+          "c": -11.85,
+          "ma": -9.33
         },
         {
           "d": "2026-09-02",
-          "o": -6.95,
-          "h": -5.65,
-          "l": -8.01,
-          "c": -6.34,
-          "ma": -3.73
+          "o": -12.55,
+          "h": -11.33,
+          "l": -13.55,
+          "c": -11.97,
+          "ma": -9.52
         },
         {
           "d": "2026-09-03",
-          "o": -7.38,
-          "h": -5.53,
-          "l": -8.62,
-          "c": -5.77,
-          "ma": -3.91
+          "o": -12.96,
+          "h": -11.22,
+          "l": -14.12,
+          "c": -11.44,
+          "ma": -9.69
         },
         {
           "d": "2026-09-04",
-          "o": -4.61,
-          "h": -2.37,
-          "l": -5.12,
-          "c": -3.22,
-          "ma": -4.05
+          "o": -10.34,
+          "h": -8.23,
+          "l": -10.82,
+          "c": -9.03,
+          "ma": -9.82
         },
         {
           "d": "2026-09-08",
-          "o": 0.11,
-          "h": 2.53,
-          "l": -0.8,
-          "c": 0.76,
-          "ma": -3.9
+          "o": -5.9,
+          "h": -3.63,
+          "l": -6.76,
+          "c": -5.3,
+          "ma": -9.68
         },
         {
           "d": "2026-09-09",
-          "o": 0.34,
-          "h": 2.89,
-          "l": -0.0,
-          "c": 2.26,
-          "ma": -3.74
+          "o": -5.69,
+          "h": -3.29,
+          "l": -6.01,
+          "c": -3.88,
+          "ma": -9.52
         },
         {
           "d": "2026-09-10",
-          "o": -0.41,
-          "h": 0.83,
-          "l": -1.71,
-          "c": -0.54,
-          "ma": -3.82
+          "o": -6.4,
+          "h": -5.22,
+          "l": -7.61,
+          "c": -6.5,
+          "ma": -9.6
         },
         {
           "d": "2026-09-11",
-          "o": 0.66,
-          "h": 2.33,
-          "l": -0.19,
-          "c": 1.42,
-          "ma": -3.83
+          "o": -5.37,
+          "h": -3.8,
+          "l": -6.17,
+          "c": -4.65,
+          "ma": -9.61
         },
         {
           "d": "2026-09-14",
-          "o": -3.91,
-          "h": -2.23,
-          "l": -5.01,
-          "c": -4.14,
-          "ma": -4.11
+          "o": -9.64,
+          "h": -8.06,
+          "l": -10.68,
+          "c": -9.86,
+          "ma": -9.87
         },
         {
           "d": "2026-09-15",
-          "o": -3.14,
-          "h": -2.35,
-          "l": -5.21,
-          "c": -4.65,
-          "ma": -4.44
+          "o": -8.94,
+          "h": -8.18,
+          "l": -10.89,
+          "c": -10.36,
+          "ma": -10.17
         },
         {
           "d": "2026-09-16",
-          "o": -2.05,
-          "h": -0.81,
-          "l": -3.87,
-          "c": -2.67,
-          "ma": -4.34
+          "o": -7.91,
+          "h": -6.74,
+          "l": -9.61,
+          "c": -8.48,
+          "ma": -10.08
         },
         {
           "d": "2026-09-17",
-          "o": 0.19,
-          "h": 3.8,
-          "l": -0.31,
-          "c": 2.52,
-          "ma": -3.86
+          "o": -5.78,
+          "h": -2.36,
+          "l": -6.25,
+          "c": -3.57,
+          "ma": -9.63
         },
         {
           "d": "2026-09-18",
-          "o": 3.3,
-          "h": 5.08,
-          "l": 1.7,
-          "c": 4.65,
-          "ma": -3.29
+          "o": -2.85,
+          "h": -1.18,
+          "l": -4.37,
+          "c": -1.59,
+          "ma": -9.09
         },
         {
           "d": "2026-09-21",
-          "o": 7.75,
-          "h": 10.8,
-          "l": 6.43,
-          "c": 9.72,
-          "ma": -2.48
+          "o": 1.33,
+          "h": 4.18,
+          "l": 0.08,
+          "c": 3.17,
+          "ma": -8.33
         },
         {
           "d": "2026-09-22",
-          "o": 8.78,
-          "h": 12.17,
-          "l": 8.56,
-          "c": 11.6,
-          "ma": -1.5
+          "o": 2.27,
+          "h": 5.46,
+          "l": 2.07,
+          "c": 4.91,
+          "ma": -7.41
         },
         {
           "d": "2026-09-23",
-          "o": 10.17,
-          "h": 10.77,
-          "l": 7.21,
-          "c": 8.67,
-          "ma": -0.74
+          "o": 3.58,
+          "h": 4.13,
+          "l": 0.79,
+          "c": 2.15,
+          "ma": -6.7
         },
         {
           "d": "2026-09-24",
-          "o": 6.59,
-          "h": 9.37,
-          "l": 5.63,
-          "c": 8.78,
-          "ma": 0.03
+          "o": 0.21,
+          "h": 2.83,
+          "l": -0.69,
+          "c": 2.28,
+          "ma": -5.96
         },
         {
           "d": "2026-09-25",
-          "o": 9.28,
-          "h": 10.61,
-          "l": 8.09,
-          "c": 9.19,
-          "ma": 0.71
+          "o": 2.75,
+          "h": 4.01,
+          "l": 1.62,
+          "c": 2.67,
+          "ma": -5.33
         },
         {
           "d": "2026-09-28",
-          "o": 8.51,
-          "h": 9.31,
-          "l": 5.03,
-          "c": 7.08,
-          "ma": 1.35
+          "o": 2.03,
+          "h": 2.78,
+          "l": -1.25,
+          "c": 0.68,
+          "ma": -4.72
         },
         {
           "d": "2026-09-29",
-          "o": 8.57,
-          "h": 10.69,
-          "l": 6.93,
-          "c": 9.17,
-          "ma": 2.11
+          "o": 2.07,
+          "h": 4.05,
+          "l": 0.52,
+          "c": 2.62,
+          "ma": -4.0
         },
         {
           "d": "2026-09-30",
-          "o": 8.99,
-          "h": 10.36,
-          "l": 8.1,
-          "c": 9.36,
-          "ma": 2.89
+          "o": 2.45,
+          "h": 3.75,
+          "l": 1.62,
+          "c": 2.81,
+          "ma": -3.27
         },
         {
           "d": "2026-10-01",
-          "o": 9.49,
-          "h": 11.2,
-          "l": 8.24,
-          "c": 10.39,
-          "ma": 3.73
+          "o": 2.93,
+          "h": 4.55,
+          "l": 1.76,
+          "c": 3.79,
+          "ma": -2.48
         },
         {
           "d": "2026-10-02",
-          "o": 13.11,
-          "h": 16.46,
-          "l": 11.93,
-          "c": 14.68,
-          "ma": 4.75
+          "o": 6.34,
+          "h": 9.46,
+          "l": 5.22,
+          "c": 7.77,
+          "ma": -1.52
         },
         {
           "d": "2026-10-05",
-          "o": 11.3,
-          "h": 12.89,
-          "l": 10.02,
-          "c": 11.95,
-          "ma": 5.51
+          "o": 4.58,
+          "h": 6.07,
+          "l": 3.36,
+          "c": 5.19,
+          "ma": -0.81
         },
         {
           "d": "2026-10-06",
-          "o": 11.54,
-          "h": 12.58,
-          "l": 9.79,
-          "c": 10.52,
-          "ma": 6.0
+          "o": 4.8,
+          "h": 5.78,
+          "l": 3.15,
+          "c": 3.82,
+          "ma": -0.35
         },
         {
           "d": "2026-10-07",
-          "o": 7.65,
-          "h": 9.49,
-          "l": 7.26,
-          "c": 8.71,
-          "ma": 6.32
+          "o": 1.16,
+          "h": 2.89,
+          "l": 0.8,
+          "c": 2.17,
+          "ma": -0.05
         },
         {
           "d": "2026-10-08",
-          "o": 7.81,
-          "h": 9.42,
-          "l": 4.29,
-          "c": 6.06,
-          "ma": 6.65
+          "o": 1.33,
+          "h": 2.86,
+          "l": -1.98,
+          "c": -0.3,
+          "ma": 0.26
         },
         {
           "d": "2026-10-09",
-          "o": 8.0,
-          "h": 8.65,
-          "l": 4.98,
-          "c": 5.97,
-          "ma": 6.88
+          "o": 1.51,
+          "h": 2.11,
+          "l": -1.35,
+          "c": -0.43,
+          "ma": 0.47
         },
         {
           "d": "2026-10-12",
-          "o": 5.29,
-          "h": 6.14,
-          "l": 3.3,
-          "c": 4.73,
-          "ma": 7.32
+          "o": -1.08,
+          "h": -0.27,
+          "l": -2.95,
+          "c": -1.6,
+          "ma": 0.88
+        },
+        {
+          "d": "2026-10-13",
+          "o": -4.01,
+          "h": -1.43,
+          "l": -5.05,
+          "c": -1.99,
+          "ma": 1.3
+        },
+        {
+          "d": "2026-10-14",
+          "o": -0.68,
+          "h": 0.3,
+          "l": -3.57,
+          "c": -3.17,
+          "ma": 1.57
         }
       ]
     }
   ],
   "watchlist": [],
   "inst_futures": {
-    "date": "2026-10-13",
+    "date": "2026-10-14",
     "contract": "臺股期貨",
     "items": [
       {
         "name": "自營商",
-        "netOi": 1491,
-        "netOiValue": 14448284,
-        "netVol": 1194
+        "netOi": 2314,
+        "netOiValue": 22613539,
+        "netVol": 896
       },
       {
         "name": "投信",
-        "netOi": 77838,
-        "netOiValue": 753428139,
-        "netVol": 990
+        "netOi": 78417,
+        "netOiValue": 765414953,
+        "netVol": 579
       },
       {
         "name": "外資",
-        "netOi": -87239,
-        "netOiValue": -844623509,
-        "netVol": -4367
+        "netOi": -86814,
+        "netOiValue": -847505397,
+        "netVol": 738
       }
     ],
-    "totalNetOi": -7910,
-    "totalNetOiValue": -76747086
+    "totalNetOi": -6083,
+    "totalNetOiValue": -59476905
   },
   "breadth": {
     "tw": {
-      "pct": 74.0,
-      "above": 74,
+      "pct": 75.0,
+      "above": 75,
       "total": 100,
       "series": [
         57.0,
-        51.0,
+        52.0,
         59.0,
         61.0,
         72.0,
@@ -6241,19 +6241,19 @@
         77.0,
         76.0,
         75.0,
-        74.0,
-        80.0,
+        73.0,
         79.0,
+        78.0,
         81.0,
-        85.0,
-        83.0,
         84.0,
         82.0,
-        84.0,
-        73.0,
-        74.0
+        83.0,
+        81.0,
+        83.0,
+        71.0,
+        75.0
       ],
-      "change20": 17.0,
+      "change20": 18.0,
       "state": "strong",
       "divergence": false,
       "bySector": [
@@ -6264,7 +6264,7 @@
         },
         {
           "name": "電子",
-          "above": 15,
+          "above": 16,
           "total": 20
         },
         {
@@ -6274,69 +6274,69 @@
         },
         {
           "name": "生技",
-          "above": 12,
+          "above": 13,
           "total": 20
         },
         {
           "name": "光電",
-          "above": 16,
+          "above": 15,
           "total": 20
         }
       ]
     },
     "sox": {
-      "pct": 53.3,
-      "above": 24,
+      "pct": 20.0,
+      "above": 9,
       "total": 45,
       "series": [
-        17.8,
-        24.4,
-        35.6,
+        31.1,
         46.7,
-        51.1,
+        48.9,
+        64.4,
         66.7,
-        66.7,
-        62.2,
-        73.3,
-        75.6,
+        64.4,
+        68.9,
+        77.8,
         80.0,
         80.0,
-        88.9,
+        86.7,
         86.7,
         88.9,
         86.7,
         86.7,
         77.8,
-        66.7,
-        53.3
+        73.3,
+        55.6,
+        40.0,
+        20.0
       ],
-      "change20": 35.5,
-      "state": "neutral",
+      "change20": -11.1,
+      "state": "weak",
       "divergence": false,
       "bySector": [
         {
           "name": "晶片設計",
-          "above": 7,
+          "above": 3,
           "total": 12
         },
         {
           "name": "設備材料",
-          "above": 7,
+          "above": 2,
           "total": 11
         },
         {
           "name": "類比IC",
-          "above": 4,
+          "above": 3,
           "total": 11
         },
         {
           "name": "記憶體",
-          "above": 2,
+          "above": 0,
           "total": 5
         },
         {
           "name": "晶圓代工",
-          "above": 4,
+          "above": 1,
           "total": 6
         }
       ]
@@ -6344,19 +6344,18 @@
   },
   "risk_gauges": {
     "vixTerm": {
-      "vix": 15.27,
-      "vix3m": 17.96,
-      "ratio": 0.85,
+      "vix": 16.87,
+      "vix3m": 18.79,
+      "ratio": 0.898,
       "state": "calm"
     },
     "hyOas": {
-      "value": 3.11,
-      "date": "2026-10-12",
-      "d5": -0.01,
+      "value": 3.16,
+      "date": "2026-10-13",
+      "d5": 0.13,
       "d20": 0.4,
       "state": "rising",
       "series": [
-        2.69,
         2.68,
         2.77,
         2.79,
@@ -6415,7 +6414,8 @@
         3.09,
         3.15,
         3.11,
-        3.11
+        3.11,
+        3.16
       ]
     }
   },
@@ -6498,20 +6498,6 @@
         "turnedNegative": false
       },
       {
-        "code": "7769",
-        "name": "鴻勁",
-        "sector": "半導體",
-        "yoy": [
-          100.21585999607909,
-          91.58,
-          100.82
-        ],
-        "mom": 9.779128493367072,
-        "rev": 5729331.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "3443",
         "name": "創意",
         "sector": "半導體",
@@ -6522,6 +6508,20 @@
         ],
         "mom": 22.34796220745762,
         "rev": 7145236.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "7769",
+        "name": "鴻勁",
+        "sector": "半導體",
+        "yoy": [
+          100.21585999607909,
+          91.58,
+          100.82
+        ],
+        "mom": 9.779128493367072,
+        "rev": 5729331.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -6554,6 +6554,20 @@
         "turnedNegative": false
       },
       {
+        "code": "2379",
+        "name": "瑞昱",
+        "sector": "半導體",
+        "yoy": [
+          23.353298366288925,
+          28.08,
+          32.53
+        ],
+        "mom": -0.6549733436507982,
+        "rev": 12377529.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
         "code": "2449",
         "name": "京元電子",
         "sector": "半導體",
@@ -6568,16 +6582,16 @@
         "turnedNegative": false
       },
       {
-        "code": "2379",
-        "name": "瑞昱",
+        "code": "3034",
+        "name": "聯詠",
         "sector": "半導體",
         "yoy": [
-          23.353298366288925,
-          28.08,
-          32.53
+          24.993552419404036,
+          26.33,
+          26.79
         ],
-        "mom": -0.6549733436507982,
-        "rev": 12377529.0,
+        "mom": 0.19265173454341655,
+        "rev": 10347340.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -6593,20 +6607,6 @@
         "mom": 13.700727164087406,
         "rev": 9978701.0,
         "accel": true,
-        "turnedNegative": false
-      },
-      {
-        "code": "3034",
-        "name": "聯詠",
-        "sector": "半導體",
-        "yoy": [
-          24.993552419404036,
-          26.33,
-          26.79
-        ],
-        "mom": 0.19265173454341655,
-        "rev": 10347340.0,
-        "accel": false,
         "turnedNegative": false
       },
       {
@@ -6666,20 +6666,6 @@
         "turnedNegative": false
       },
       {
-        "code": "3532",
-        "name": "台勝科",
-        "sector": "半導體",
-        "yoy": [
-          28.97235294342522,
-          29.27,
-          28.77
-        ],
-        "mom": 1.3226585617289466,
-        "rev": 1349479.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "6415",
         "name": "矽力*-KY",
         "sector": "半導體",
@@ -6690,6 +6676,20 @@
         ],
         "mom": 3.909856511282626,
         "rev": 2511123.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "3532",
+        "name": "台勝科",
+        "sector": "半導體",
+        "yoy": [
+          28.97235294342522,
+          29.27,
+          28.77
+        ],
+        "mom": 1.3226585617289466,
+        "rev": 1349479.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -6792,20 +6792,6 @@
         "turnedNegative": false
       },
       {
-        "code": "2059",
-        "name": "川湖",
-        "sector": "電子",
-        "yoy": [
-          196.22466238072266,
-          344.41,
-          355.52
-        ],
-        "mom": -30.957681433937157,
-        "rev": 4464393.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "2360",
         "name": "致茂",
         "sector": "電子",
@@ -6816,6 +6802,20 @@
         ],
         "mom": 21.78823915413693,
         "rev": 6859602.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "2059",
+        "name": "川湖",
+        "sector": "電子",
+        "yoy": [
+          196.22466238072266,
+          344.41,
+          355.52
+        ],
+        "mom": -30.957681433937157,
+        "rev": 4464393.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -6834,20 +6834,6 @@
         "turnedNegative": false
       },
       {
-        "code": "4958",
-        "name": "臻鼎-KY",
-        "sector": "電子",
-        "yoy": [
-          36.12871611479015,
-          41.05,
-          31.81
-        ],
-        "mom": 27.54102282494578,
-        "rev": 26357777.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "2368",
         "name": "金像電",
         "sector": "電子",
@@ -6858,6 +6844,20 @@
         ],
         "mom": -10.248160361772968,
         "rev": 9319805.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "4958",
+        "name": "臻鼎-KY",
+        "sector": "電子",
+        "yoy": [
+          36.12871611479015,
+          41.05,
+          31.81
+        ],
+        "mom": 27.54102282494578,
+        "rev": 26357777.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -6890,20 +6890,6 @@
         "turnedNegative": false
       },
       {
-        "code": "2313",
-        "name": "華通",
-        "sector": "電子",
-        "yoy": [
-          15.018893793137691,
-          6.86,
-          16.0
-        ],
-        "mom": 22.893630177933346,
-        "rev": 8617380.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "6213",
         "name": "聯茂",
         "sector": "電子",
@@ -6915,6 +6901,20 @@
         "mom": 15.467342210619517,
         "rev": 5824212.0,
         "accel": true,
+        "turnedNegative": false
+      },
+      {
+        "code": "2313",
+        "name": "華通",
+        "sector": "電子",
+        "yoy": [
+          15.018893793137691,
+          6.86,
+          16.0
+        ],
+        "mom": 22.893630177933346,
+        "rev": 8617380.0,
+        "accel": false,
         "turnedNegative": false
       },
       {
@@ -7156,20 +7156,6 @@
         "turnedNegative": null
       },
       {
-        "code": "6949",
-        "name": "沛爾生醫*-創",
-        "sector": "生技",
-        "yoy": [
-          2.277542372881356,
-          164.71,
-          -22.6
-        ],
-        "mom": -70.27401477832512,
-        "rev": 1931.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
         "code": "6472",
         "name": "保瑞",
         "sector": "生技",
@@ -7180,6 +7166,20 @@
         ],
         "mom": 6.436657859610769,
         "rev": 2325228.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "6949",
+        "name": "沛爾生醫*-創",
+        "sector": "生技",
+        "yoy": [
+          2.277542372881356,
+          164.71,
+          -22.6
+        ],
+        "mom": -70.27401477832512,
+        "rev": 1931.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -7366,20 +7366,6 @@
         "turnedNegative": false
       },
       {
-        "code": "4169",
-        "name": "泰宗",
-        "sector": "生技",
-        "yoy": [
-          -2.075255482473353,
-          21.79,
-          6.66
-        ],
-        "mom": 0.32809559805072613,
-        "rev": 62381.0,
-        "accel": false,
-        "turnedNegative": true
-      },
-      {
         "code": "6534",
         "name": "正瀚-創",
         "sector": "生技",
@@ -7392,6 +7378,20 @@
         "rev": 118289.0,
         "accel": false,
         "turnedNegative": false
+      },
+      {
+        "code": "4169",
+        "name": "泰宗",
+        "sector": "生技",
+        "yoy": [
+          -2.075255482473353,
+          21.79,
+          6.66
+        ],
+        "mom": 0.32809559805072613,
+        "rev": 62381.0,
+        "accel": false,
+        "turnedNegative": true
       },
       {
         "code": "3008",
@@ -7506,20 +7506,6 @@
         "turnedNegative": true
       },
       {
-        "code": "2466",
-        "name": "冠西電",
-        "sector": "光電",
-        "yoy": [
-          308.1627628894985,
-          59.91,
-          -9.82
-        ],
-        "mom": -48.40948088087554,
-        "rev": 116057.0,
-        "accel": true,
-        "turnedNegative": false
-      },
-      {
         "code": "3019",
         "name": "亞光",
         "sector": "光電",
@@ -7534,17 +7520,17 @@
         "turnedNegative": true
       },
       {
-        "code": "6456",
-        "name": "GIS-KY",
+        "code": "2466",
+        "name": "冠西電",
         "sector": "光電",
         "yoy": [
-          30.83271408446788,
-          -29.98,
-          -24.67
+          308.1627628894985,
+          59.91,
+          -9.82
         ],
-        "mom": 46.37849249405426,
-        "rev": 6163991.0,
-        "accel": false,
+        "mom": -48.40948088087554,
+        "rev": 116057.0,
+        "accel": true,
         "turnedNegative": false
       },
       {
@@ -7576,6 +7562,34 @@
         "turnedNegative": false
       },
       {
+        "code": "6456",
+        "name": "GIS-KY",
+        "sector": "光電",
+        "yoy": [
+          30.83271408446788,
+          -29.98,
+          -24.67
+        ],
+        "mom": 46.37849249405426,
+        "rev": 6163991.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
+        "code": "3576",
+        "name": "聯合再生",
+        "sector": "光電",
+        "yoy": [
+          -8.344332632897936,
+          -13.03,
+          72.74
+        ],
+        "mom": 6.392054159840168,
+        "rev": 260402.0,
+        "accel": false,
+        "turnedNegative": false
+      },
+      {
         "code": "2393",
         "name": "億光",
         "sector": "光電",
@@ -7600,20 +7614,6 @@
         ],
         "mom": 3.5614878244312114,
         "rev": 6590796.0,
-        "accel": false,
-        "turnedNegative": false
-      },
-      {
-        "code": "3576",
-        "name": "聯合再生",
-        "sector": "光電",
-        "yoy": [
-          -8.344332632897936,
-          -13.03,
-          72.74
-        ],
-        "mom": 6.392054159840168,
-        "rev": 260402.0,
         "accel": false,
         "turnedNegative": false
       },
@@ -7660,18 +7660,18 @@
         "turnedNegative": false
       },
       {
-        "code": "3149",
-        "name": "正達",
+        "code": "2374",
+        "name": "佳能",
         "sector": "光電",
         "yoy": [
-          -12.10056537764728,
-          19.27,
-          24.12
+          14.515137565883547,
+          34.7,
+          64.11
         ],
-        "mom": 16.010656937315773,
-        "rev": 225121.0,
+        "mom": -7.349529544197864,
+        "rev": 1216484.0,
         "accel": false,
-        "turnedNegative": true
+        "turnedNegative": false
       }
     ],
     "missing": [
