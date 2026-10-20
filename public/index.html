@@ -126,6 +126,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;ba
 .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .chip{font-size:10px;padding:2px 7px;border-radius:5px;background:#edf2f7;color:#4a5568}
 .spark{position:relative;height:44px;margin-top:6px}
+.sc-row{padding:9px 0;border-bottom:1px solid var(--bdr);cursor:pointer}
+.sc-row:last-child{border-bottom:none}
+.sc-top{display:flex;align-items:center;gap:8px}
+.sc-rk{font-size:10px;color:var(--hi);width:16px;text-align:right;flex-shrink:0}
+.sc-nm{flex:1;min-width:0;font-size:13px;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-nm small{font-size:10px;color:var(--hi);font-weight:500;margin-left:4px}
+.sc-cov{font-size:9px;background:#fefcbf;color:#975a16;padding:1px 5px;border-radius:4px;font-weight:700;flex-shrink:0}
+.sc-rt{font-size:10px;color:var(--mu);flex-shrink:0}
+.sc-v{font-size:19px;font-weight:800;width:34px;text-align:right;flex-shrink:0;letter-spacing:-.02em}
+.sc-v.s4{color:var(--G)}.sc-v.s3{color:var(--Gm)}.sc-v.s2{color:#c05621}.sc-v.s1{color:var(--Rm)}.sc-v.s0{color:var(--hi)}
+.sc-bars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0 0 24px}
+.sc-b{font-size:9px;color:var(--mu)}
+.sc-b i{display:block;height:4px;border-radius:2px;background:#edf2f7;margin-top:2px;overflow:hidden}
+.sc-b i b{display:block;height:100%;border-radius:2px;background:var(--Bm)}
+.sc-b.na{color:var(--hi)}
+.sc-det{display:none;margin:8px 0 2px 24px;font-size:11px;color:var(--mu);line-height:1.6}
+.sc-row.open .sc-det{display:block}
+.sc-det b{color:var(--tx)}
+.sc-risk{color:var(--R)}
 .rv-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
 .rv-tbl th{font-weight:500;color:var(--mu);text-align:right;padding:4px 3px;border-bottom:1px solid var(--bdr)}
 .rv-tbl th:first-child,.rv-tbl td:first-child{text-align:left}
@@ -222,6 +241,13 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
     <div class="c-title">市場溫度計</div>
     <div class="c-sub">漲勢健不健康 · 市場恐不恐慌</div>
     <div id="gaugeContent"></div>
+  </div>
+
+  <div class="card" id="scoreCard">
+    <div class="c-title">📊 研究評分</div>
+    <div class="c-sub" id="scoreSub">技術 30・法人 30・族群 25・營收 15 · 缺資料的因子排除並重新加權 · 點列看理由</div>
+    <div class="seg" id="scoreSeg"></div>
+    <div id="scoreList"></div>
   </div>
 
   <div class="card">
@@ -719,6 +745,45 @@ function renderGauges() {
   if (br.tw) drawSpark('spark-tw', br.tw.series, '%');
   if (br.sox) drawSpark('spark-sox', br.sox.series, '%');
   if (h) drawSpark('spark-hy', h.series, '%');
+}
+
+var scoreSector = '全部', scoreAll = false;
+function renderScores() {
+  var rs = data.research_scores, el = document.getElementById('scoreList'), seg = document.getElementById('scoreSeg');
+  if (!rs || !rs.stocks || !rs.stocks.length) { seg.style.display = 'none'; el.innerHTML = '<div class="gz-note">研究評分待更新</div>'; return; }
+  var secNames = ['全部'].concat(rs.sectors.map(function(x) { return x.name; }));
+  seg.innerHTML = secNames.map(function(n) {
+    var sc = rs.sectors.filter(function(x) { return x.name === n; })[0];
+    return '<button class="sb' + (n === scoreSector ? ' a' : '') + '" data-sec="' + n + '">' + n + (sc && sc.score != null ? ' ' + sc.score : '') + '</button>';
+  }).join('');
+  seg.querySelectorAll('.sb').forEach(function(b) { b.onclick = function() { scoreSector = b.dataset.sec; scoreAll = false; renderScores(); }; });
+  var keys = ['technical', 'chips', 'industry', 'revenue'];
+  var list = rs.stocks.filter(function(s) { return scoreSector === '全部' || s.sector === scoreSector; });
+  var MAX = 15, shown = scoreAll ? list : list.slice(0, MAX);
+  var cls = function(v) { return v == null ? 's0' : v >= 75 ? 's4' : v >= 55 ? 's3' : v >= 40 ? 's2' : 's1'; };
+  var html = shown.map(function(s, i) {
+    var bars = keys.map(function(k) {
+      var v = s[k].score;
+      return '<div class="sc-b' + (v == null ? ' na' : '') + '">' + rs.labels[k] + ' ' + (v == null ? '—' : v) +
+        '<i><b style="width:' + (v || 0) + '%"></b></i></div>';
+    }).join('');
+    var det = keys.map(function(k) {
+      return '<div><b>' + rs.labels[k] + (s[k].score == null ? '（不計入）' : ' ' + s[k].score) + '</b>：' + s[k].reasons.join('；') + '</div>';
+    }).join('') + s.risks.map(function(r) { return '<div class="sc-risk">⚠️ ' + r + '</div>'; }).join('');
+    return '<div class="sc-row"><div class="sc-top">' +
+      '<span class="sc-rk">' + (i + 1) + '</span>' +
+      '<span class="sc-nm">' + s.name + '<small>' + s.code + (scoreSector === '全部' ? '・' + s.sector : '') + '</small></span>' +
+      (s.complete ? '' : '<span class="sc-cov">權重 ' + s.coverage + '%</span>') +
+      '<span class="sc-rt">' + s.rating.replace('暫評・', '') + '</span>' +
+      '<span class="sc-v ' + cls(s.score) + '">' + (s.score == null ? '—' : s.score) + '</span>' +
+      '</div><div class="sc-bars">' + bars + '</div><div class="sc-det">' + det + '</div></div>';
+  }).join('');
+  if (list.length > MAX) html += '<button class="sb" id="scoreMore" style="width:100%;border:1px solid var(--bdr);border-radius:8px;margin-top:8px">' + (scoreAll ? '收合' : '顯示全部 ' + list.length + ' 檔') + '</button>';
+  html += '<div class="gz-note" style="color:var(--hi);margin-top:6px">' + rs.date + ' 收盤 · 研究排序用，不是買賣訊號 · 標「權重 xx%」的為暫評，排在完整評分之後</div>';
+  el.innerHTML = html;
+  el.querySelectorAll('.sc-row').forEach(function(r) { r.onclick = function() { r.classList.toggle('open'); }; });
+  var more = document.getElementById('scoreMore');
+  if (more) more.onclick = function() { scoreAll = !scoreAll; renderScores(); };
 }
 
 function renderRevenue() {
@@ -1300,6 +1365,7 @@ function renderAll() {
   renderInstFutures();
   renderResonance();
   renderGauges();
+  renderScores();
   renderRevenue();
   renderHeat();
   var upd = new Date(data.updated);

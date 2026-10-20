@@ -368,6 +368,7 @@ def yahoo_closes(symbol, rng="6mo"):
 
 # 各股近 6 個月收盤（key 為不含 .TW/.TWO 的代號），板塊走勢與市場寬度共用，避免重複抓取
 CLOSES = {}
+BARS = {}  # 各股近 6 個月 OHLCV（同一次抓取），研究評分用
 TREND_DAYS = 22  # 板塊走勢顯示近 1 個月（約 22 個交易日）
 
 def to_trend(closes):
@@ -443,6 +444,7 @@ def sector_trend(symbols):
             closes = [b["close"] for b in bars]
             if closes:
                 CLOSES[sym.split(".")[0]] = closes
+                BARS[sym.split(".")[0]] = bars
                 all_series.append(to_trend(closes))
                 ohlc_list.append(bars)
                 break
@@ -961,6 +963,16 @@ if risk_gauges["vixTerm"]: print(f"  VIX/VIX3M = {risk_gauges['vixTerm']['ratio'
 if risk_gauges["hyOas"]: print(f"  HY OAS = {risk_gauges['hyOas']['value']}%（20日 {risk_gauges['hyOas']['d20']:+}）")
 if monthly_revenue: print(f"  月營收 {monthly_revenue['month']}：{len(monthly_revenue['companies'])} 檔，缺 {monthly_revenue['missing']}")
 
+print("\n📊 計算研究評分（技術／法人／族群／營收）...")
+research_codes = [st["symbol"] for sec in tw_sectors_def for st in sec["stocks"]]
+inst_history = safe("法人買賣超歷史", lambda: indicators.update_inst_history(
+    [b["date"] for b in twii_bars], research_codes)) or {}
+research_scores = safe("研究評分", lambda: indicators.calc_research_scores(
+    tw_sectors_def, BARS, inst_history, monthly_revenue, twii_bars[-1]["date"] if twii_bars else today))
+if research_scores:
+    full = sum(1 for x in research_scores["stocks"] if x["complete"])
+    print(f"  研究評分：{len(research_scores['stocks'])} 檔，完整評分 {full} 檔")
+
 payload = {
     "date": today, "updated": now.isoformat(), "source": tw_source,
     "indices": indices,
@@ -974,6 +986,7 @@ payload = {
     "breadth": breadth,
     "risk_gauges": risk_gauges,
     "monthly_revenue": monthly_revenue,
+    "research_scores": research_scores,
 }
 
 os.makedirs("public", exist_ok=True)

@@ -272,3 +272,216 @@ def fetch_monthly_revenue(sectors):
             "months": [data_month, _prev_month(data_month, 1), _prev_month(data_month, 2)],
             "companies": companies,
             "missing": sorted(set(names) - {c["code"] for c in companies})}
+
+
+# ── 5. 研究評分（概念參考 wakin61043/tw-trading-dashboard 的 lib/engine.mjs，MIT；改寫為本專案用）──
+# 四個因子各自 0–100 分，缺資料（或資料過舊）的因子直接排除、剩下的權重重新標準化，
+# 並揭露「有效權重」，避免拿不完整的分數跟完整分數直接比。分數是研究排序用，不是買賣訊號。
+SCORE_WEIGHTS = {"technical": 30, "chips": 30, "industry": 25, "revenue": 15}
+SCORE_LABELS = {"technical": "技術", "chips": "法人", "industry": "族群", "revenue": "營收"}
+INST_CACHE_DAYS = 30
+T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86?date={d}&selectType=ALLBUT0999&response=json"
+TPEX_INST_URL = "https://www.tpex.org.tw/www/zh-tw/insti/dailyTrade?type=Daily&sect=EW&date={d}&response=json"
+
+
+def _clamp(v, lo=0.0, hi=100.0):
+    return max(lo, min(hi, v))
+
+
+def _median(xs):
+    xs = sorted(xs)
+    n = len(xs)
+    return None if not n else (xs[n // 2] if n % 2 else (xs[n // 2 - 1] + xs[n // 2]) / 2)
+
+
+def _days_between(a, b):
+    return (datetime.strptime(b, "%Y-%m-%d") - datetime.strptime(a, "%Y-%m-%d")).days
+
+
+def _inst_rows(fields, rows, code_keys, net_keys):
+    """從表頭找出「代號」與「三大法人買賣超合計」兩欄；找不到合計欄就回傳空 dict。
+    直接取官方合計欄，不自己加總外資／投信／自營商，避免自營商（自行買賣＋避險）重複計算。"""
+    fields = [str(f).replace(" ", "") for f in fields]
+    ci = next((i for i, f in enumerate(fields) if any(k in f for k in code_keys)), None)
+    ni = next((i for i, f in enumerate(fields) if any(k in f for k in net_keys)), None)
+    if ci is None or ni is None:
+        return {}
+    out = {}
+    for r in rows:
+        v = _num(str(r[ni]).replace(",", ""))
+        if v is not None:
+            out[str(r[ci]).strip()] = v
+    return out
+
+
+def _fetch_inst_day(date):
+    """單日三大法人買賣超（股數）：上市 T86 + 上櫃 TPEx；任一邊失敗只少那一邊。"""
+    import time
+    d = date.replace("-", "")
+    day = {}
+    try:
+        j = json.loads(http_get(T86_URL.format(d=d)))
+        if j.get("stat") == "OK":
+            day.update(_inst_rows(j.get("fields", []), j.get("data", []), ["證券代號"], ["三大法人買賣超股數"]))
+    except Exception as e:
+        print(f"    ⚠️ T86 {date} 失敗: {e}")
+    time.sleep(2.5)  # 證交所對連續請求會封鎖 IP
+    try:
+        j = json.loads(http_get(TPEX_INST_URL.format(d=date.replace("-", "/")), ctx=_TPEX_CTX))
+        for t in j.get("tables", []):
+            day.update(_inst_rows(t.get("fields", []), t.get("data", []), ["代號"], ["三大法人買賣超股數合計", "三大法人買賣超股數"]))
+    except Exception as e:
+        print(f"    ⚠️ 櫃買法人 {date} 失敗: {e}")
+    time.sleep(1.5)
+    return day
+
+
+def update_inst_history(trade_dates, codes, cache_path="inst_history.json"):
+    """維護近 INST_CACHE_DAYS 個交易日的法人買賣超快取（只存研究名單內的代號）。
+    每天只補抓快取裡沒有的日期，第一次執行約需 1–2 分鐘。回傳 {date: {code: 淨股數}}。"""
+    try:
+        with open(cache_path, encoding="utf-8") as f:
+            cache = json.load(f)
+    except Exception:
+        cache = {}
+    want = trade_dates[-INST_CACHE_DAYS:]
+    codes = set(codes)
+    for date in want:
+        if date in cache and cache[date]:
+            continue
+        day = _fetch_inst_day(date)
+        if day:
+            cache[date] = {c: v for c, v in day.items() if c in codes}
+            print(f"    法人 {date}：{len(cache[date])} 檔")
+    cache = {d: cache[d] for d in sorted(cache) if d in want}
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, separators=(",", ":"))
+    return cache
+
+
+def _missing(reason):
+    return {"score": None, "reasons": [reason]}
+
+
+def score_technical(bars, cutoff):
+    if len(bars) < 80:
+        return _missing(f"K 線不足 80 日（目前 {len(bars)} 日）")
+    if _days_between(bars[-1]["date"], cutoff) > 7:
+        return _missing(f"行情日期過舊：{bars[-1]['date']}")
+    c = [b["close"] for b in bars]
+    ma = lambda n, off=0: sum(c[len(c) - n - off: len(c) - off]) / n
+    last, m20, m60 = c[-1], ma(20), ma(60)
+    m120 = ma(120) if len(c) >= 120 else None
+    r20 = (last / c[-21] - 1) * 100
+    r60 = (last / c[-61] - 1) * 100
+    slope = (m60 / ma(60, 20) - 1) * 100
+    drawdown = (last / max(c[-60:]) - 1) * 100
+    deviation = (last / m20 - 1) * 100
+    checks = [last > m20, m20 > m60] + ([m60 > m120] if m120 else [])
+    trend = sum(checks) / len(checks) * 100
+    momentum = _clamp(50 + r60 * 2)
+    stability = _clamp(100 + drawdown * 4 - max(0, deviation - 15) * 3)
+    score = round(trend * .4 + momentum * .25 + _clamp(50 + slope * 5) * .2 + stability * .15)
+    reasons = [
+        f"均線：收盤{'高於' if last > m20 else '低於'}月線、月線{'高於' if m20 > m60 else '低於'}季線"
+        + ("" if m120 else "（K 線未滿 120 日，不看半年線）"),
+        f"近 60 日 {r60:+.1f}%；季線 20 日變化 {slope:+.1f}%",
+        f"距 60 日高點 {drawdown:.1f}%；月線乖離 {deviation:+.1f}%",
+    ]
+    return {"score": score, "r20": round(r20, 1), "r60": round(r60, 1), "deviation": round(deviation, 1),
+            "above60": last > m60, "date": bars[-1]["date"], "reasons": reasons}
+
+
+def score_chips(code, bars, inst):
+    dates = [b["date"] for b in bars[-20:]]
+    if len(dates) < 20:
+        return _missing("行情不足 20 日，無法標準化法人買賣超")
+    have = [d for d in dates if d in inst and code in inst[d]]
+    if len(have) < 18:
+        return _missing(f"近 20 個交易日法人資料只有 {len(have)} 日（需 ≥18）")
+    if _days_between(have[-1], dates[-1]) > 5:
+        return _missing(f"法人資料落後行情：{have[-1]}")
+    vol = sum(b["volume"] for b in bars[-20:])
+    if vol <= 0:
+        return _missing("無有效成交量")
+    nets = [inst[d][code] for d in have]
+    net20, ratio = sum(nets), sum(nets) / vol * 100
+    positive = sum(1 for n in nets if n > 0) / len(nets)
+    score = round(_clamp(50 + ratio * 5) * .6 + positive * 100 * .4)
+    net5 = sum(nets[-5:])
+    return {"score": score, "net20": round(net20 / 1000), "net5": round(net5 / 1000), "ratio": round(ratio, 2),
+            "reasons": [f"近 20 日法人 {net20 / 1000:+,.0f} 張，占成交量 {ratio:+.2f}%",
+                        f"買超天數 {positive * 100:.0f}%；近 5 日 {net5 / 1000:+,.0f} 張"]}
+
+
+def score_revenue(rev, cutoff):
+    if not rev or rev.get("yoy") is None:
+        return _missing("尚無月營收年增率")
+    if _days_between(rev["ym"] + "-01", cutoff) > 75:
+        return _missing(f"月營收過舊：{rev['ym']}")
+    y = rev["yoy"]
+    score = round(_clamp(50 + y + (10 if rev.get("accel") else 0) - (10 if rev.get("turnedNegative") else 0)))
+    tag = "；年增連 2 月加速 +10" if rev.get("accel") else "；年增由正轉負 −10" if rev.get("turnedNegative") else ""
+    return {"score": score, "yoy": round(y, 1), "reasons": [f"{rev['ym']} 營收年增 {y:+.1f}%{tag}"]}
+
+
+def calc_research_scores(sectors, bars_by_code, inst, monthly_revenue, cutoff):
+    """sectors：[{name, stocks:[{symbol,name}]}]；bars_by_code：{代號: OHLCV}；inst：update_inst_history() 的結果。"""
+    mr = {c["code"]: {"ym": (monthly_revenue or {}).get("month"), "yoy": c["yoy"][0],
+                      "accel": c.get("accel"), "turnedNegative": c.get("turnedNegative")}
+          for c in (monthly_revenue or {}).get("companies", [])}
+    stocks = []
+    for sec in sectors:
+        for s in sec["stocks"]:
+            code, bars = s["symbol"].split(".")[0], bars_by_code.get(s["symbol"].split(".")[0], [])
+            stale = not bars or _days_between(bars[-1]["date"], cutoff) > 7
+            stocks.append({"code": code, "name": s["name"], "sector": sec["name"], "stale": stale,
+                           "price": round(bars[-1]["close"], 2) if bars else None,
+                           "technical": score_technical(bars, cutoff) if bars else _missing("沒有行情資料"),
+                           "chips": score_chips(code, bars, inst) if bars else _missing("沒有行情資料"),
+                           "revenue": score_revenue(mr.get(code), cutoff)})
+
+    # 族群：站上季線比例 40% ＋ 營收年增中位數 40% ＋ 60 日報酬中位數 20%；有效樣本需 ≥5 檔且 ≥50%
+    sector_scores = []
+    for sec in sectors:
+        members = [s for s in stocks if s["sector"] == sec["name"]]
+        ok = [s for s in members if not s["stale"] and s["technical"]["score"] is not None and s["revenue"]["score"] is not None]
+        valid = len(ok) >= min(5, len(members)) and len(ok) >= len(members) * .5
+        if valid:
+            breadth = sum(1 for s in ok if s["technical"]["above60"]) / len(ok) * 100
+            growth = _median([s["revenue"]["yoy"] for s in ok])
+            mom = _median([s["technical"]["r60"] for s in ok])
+            score = round(breadth * .4 + _clamp(50 + growth) * .4 + _clamp(50 + mom * 2) * .2)
+            ind = {"score": score, "reasons": [f"{sec['name']}：站上季線 {breadth:.0f}%、營收年增中位數 {growth:+.1f}%、60 日報酬中位數 {mom:+.1f}%（{len(ok)}/{len(members)} 檔有效）"]}
+        else:
+            score, ind = None, _missing(f"{sec['name']} 有效樣本 {len(ok)}/{len(members)} 檔，未達門檻")
+        sector_scores.append({"name": sec["name"], "score": score, "covered": len(ok), "count": len(members)})
+        for s in members:
+            s["industry"] = ind
+
+    total_w = sum(SCORE_WEIGHTS.values())
+    for s in stocks:
+        avail = [k for k in SCORE_WEIGHTS if s[k]["score"] is not None]
+        w = sum(SCORE_WEIGHTS[k] for k in avail)
+        s["coverage"] = round(w / total_w * 100)
+        s["complete"] = len(avail) == len(SCORE_WEIGHTS)
+        s["score"] = round(sum(s[k]["score"] * SCORE_WEIGHTS[k] for k in avail) / w) if w and not s["stale"] else None
+        sc = s["score"]
+        s["rating"] = "待更新" if sc is None else ("" if s["complete"] else "暫評・") + (
+            "強勢" if sc >= 75 else "中性偏強" if sc >= 55 else "中性偏弱" if sc >= 40 else "弱勢")
+        risks = []
+        if not s["complete"]:
+            risks.append(f"有效權重 {s['coverage']}%，缺漏因子已排除並重新加權，不宜與完整評分直接比較")
+        if s["stale"]:
+            risks.append("行情超過 7 天或未取得，暫停評分")
+        if (s["technical"].get("deviation") or 0) > 15:
+            risks.append("距月線超過 15%，留意回檔")
+        if (s["chips"].get("net20") or 0) < 0:
+            risks.append("法人近 20 日累計賣超")
+        s["risks"] = risks
+        for k in SCORE_WEIGHTS:  # 前端不需要的中間值不輸出，data.json 保持精簡
+            s[k] = {"score": s[k]["score"], "reasons": s[k]["reasons"]}
+    # 完整評分排前面、暫評排後面，避免缺因子的高分擠到最上方
+    stocks.sort(key=lambda s: (s["score"] is None, not s["complete"], -(s["score"] or 0)))
+    return {"date": cutoff, "weights": SCORE_WEIGHTS, "labels": SCORE_LABELS,
+            "sectors": sector_scores, "stocks": stocks}
