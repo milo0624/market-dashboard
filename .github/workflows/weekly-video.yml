@@ -1,0 +1,39 @@
+name: 夜盤週報影片
+on:
+  schedule:
+    - cron: '7 1 * * 6'       # 台灣時間週六 09:07（GitHub 排程可能延遲，週報不趕時間）
+  workflow_dispatch:
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: fonts-and-ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk ffmpeg
+      - name: build-composition
+        run: python3 weekly_video.py
+      - name: render
+        run: |
+          npm i --no-save hyperframes@0.8.198 gsap@3.14.2
+          cp node_modules/gsap/dist/gsap.min.js video/
+          npx hyperframes render video -o weekly.mp4 --quiet
+          ls -la weekly.mp4
+      - name: telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then echo "未設定 Telegram Secrets，略過推播"; exit 0; fi
+          curl -sS -F chat_id="$TELEGRAM_CHAT_ID" -F supports_streaming=true \
+               -F caption="$(cat video/caption.txt)" -F video=@weekly.mp4 \
+               "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendVideo" | head -c 300
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: weekly-video
+          path: weekly.mp4
+          retention-days: 14

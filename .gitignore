@@ -8,3 +8,8 @@ __pycache__/
 # 期貨 SDK 下載檔（GitHub Actions 執行時產生）
 sdk.zip
 *.whl
+
+# 週報影片（GitHub Actions 執行時產生，不進版本庫）
+video/
+node_modules/
+weekly.mp4
