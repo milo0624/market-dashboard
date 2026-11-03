@@ -1,6 +1,6 @@
 {
   "date": "2026-11-03",
-  "updated": "2026-11-03T11:35:11.775415+08:00",
+  "updated": "2026-11-03T15:21:15.407119+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -30,9 +30,9 @@
     "TWII": {
       "name": "台股 TAIEX",
       "symbol": "^TWII",
-      "price": 44060.26,
-      "change": -859.88,
-      "changePercent": -1.91,
+      "price": 43307.54,
+      "change": -1612.6,
+      "changePercent": -3.59,
       "prev": 44920.14
     },
     "NVDA": {
@@ -62,9 +62,9 @@
     "TSM": {
       "name": "台積電",
       "symbol": "2330",
-      "price": 2320,
-      "change": -10,
-      "changePercent": -0.43,
+      "price": 2295,
+      "change": -35,
+      "changePercent": -1.5,
       "prev": 2330
     }
   },
@@ -72,25 +72,25 @@
     "ES": {
       "name": "S&P 500 期貨",
       "symbol": "ES=F",
-      "price": 7575.5,
-      "change": 1.0,
-      "changePercent": 0.01,
+      "price": 7549.0,
+      "change": -25.5,
+      "changePercent": -0.34,
       "prev": 7574.5
     },
     "NQ": {
       "name": "那斯達克期貨",
       "symbol": "NQ=F",
-      "price": 28242.25,
-      "change": 114.75,
-      "changePercent": 0.41,
+      "price": 28057.25,
+      "change": -70.25,
+      "changePercent": -0.25,
       "prev": 28127.5
     },
     "NKD": {
       "name": "日經期貨",
       "symbol": "NKD=F",
-      "price": 62910.0,
-      "change": 100.0,
-      "changePercent": 0.16,
+      "price": 62135.0,
+      "change": -675.0,
+      "changePercent": -1.07,
       "prev": 62810.0
     }
   },
@@ -98,18 +98,18 @@
     "GOLD": {
       "name": "黃金",
       "symbol": "GC=F",
-      "price": 3945.9,
-      "change": -23.7,
-      "changePercent": -0.6,
+      "price": 3922.2,
+      "change": -47.4,
+      "changePercent": -1.19,
       "prev": 3969.6
     },
     "SILVER": {
       "name": "白銀",
       "symbol": "SI=F",
-      "price": 49.98,
-      "change": -0.91,
-      "changePercent": -1.79,
-      "prev": 50.89
+      "price": 49.08,
+      "change": -1.64,
+      "changePercent": -3.23,
+      "prev": 50.72
     }
   },
   "signal_meta": {
@@ -161,14 +161,14 @@
     "detail": {
       "symbol": "^TWII",
       "date": "2026-11-03",
-      "close": 44052.0703125,
+      "close": 43307.5390625,
       "open": 44481.58984375,
       "volume": 0,
       "avgVol": 4222795.0,
       "highestHigh": 49968.92,
       "lowestLow": 44399.1,
-      "ma20": 47360.44,
-      "ma60": 46577.78,
+      "ma20": 47323.21,
+      "ma60": 46565.37,
       "longBreakout": false,
       "shortBreakout": true,
       "bullVol": false,
@@ -232,122 +232,122 @@
         {
           "symbol": "2330",
           "name": "台積電",
-          "price": 2320,
-          "changePercent": -0.43
+          "price": 2295,
+          "changePercent": -1.5
         },
         {
           "symbol": "2454",
           "name": "聯發科",
-          "price": 3745,
-          "changePercent": -5.67
+          "price": 3675,
+          "changePercent": -7.43
         },
         {
           "symbol": "3711",
           "name": "日月光投控",
-          "price": 625,
-          "changePercent": -7.27
+          "price": 616,
+          "changePercent": -8.61
         },
         {
           "symbol": "2408",
           "name": "南亞科",
-          "price": 413.5,
-          "changePercent": -9.42
+          "price": 411,
+          "changePercent": -9.97
         },
         {
           "symbol": "2303",
           "name": "聯電",
-          "price": 104.5,
-          "changePercent": -5
+          "price": 103,
+          "changePercent": -6.36
         },
         {
           "symbol": "3443",
           "name": "創意",
-          "price": 6880,
-          "changePercent": -5.56
+          "price": 6795,
+          "changePercent": -6.73
         },
         {
           "symbol": "7769",
           "name": "鴻勁",
-          "price": 4475,
-          "changePercent": -8.95
+          "price": 4470,
+          "changePercent": -9.05
         },
         {
           "symbol": "2344",
           "name": "華邦電",
-          "price": 146.5,
-          "changePercent": -9.57
+          "price": 146,
+          "changePercent": -9.88
         },
         {
           "symbol": "3189",
           "name": "景碩",
-          "price": 830,
-          "changePercent": -8.79
+          "price": 819,
+          "changePercent": -10
         },
         {
           "symbol": "2379",
           "name": "瑞昱",
-          "price": 765,
-          "changePercent": -2.55
+          "price": 756,
+          "changePercent": -3.69
         },
         {
           "symbol": "3034",
           "name": "聯詠",
-          "price": 557,
-          "changePercent": -2.45
+          "price": 555,
+          "changePercent": -2.8
         },
         {
           "symbol": "2449",
           "name": "京元電子",
-          "price": 252,
-          "changePercent": -4.18
+          "price": 253.5,
+          "changePercent": -3.61
         },
         {
           "symbol": "6770",
           "name": "力積電",
-          "price": 61.5,
-          "changePercent": -5.82
+          "price": 60.2,
+          "changePercent": -7.81
         },
         {
           "symbol": "3661",
           "name": "世芯-KY",
-          "price": 3200,
-          "changePercent": -5.74
+          "price": 3140,
+          "changePercent": -7.51
         },
         {
           "symbol": "6415",
           "name": "矽力*-KY",
-          "price": 488.5,
-          "changePercent": -2.5
+          "price": 472.5,
+          "changePercent": -5.69
         },
         {
           "symbol": "6239",
           "name": "力成",
-          "price": 242.5,
-          "changePercent": -5.83
+          "price": 239.5,
+          "changePercent": -6.99
         },
         {
           "symbol": "2337",
           "name": "旺宏",
-          "price": 89.1,
-          "changePercent": -7.38
+          "price": 88.3,
+          "changePercent": -8.21
         },
         {
           "symbol": "6515",
           "name": "穎崴",
-          "price": 4115,
-          "changePercent": -8.25
+          "price": 4075,
+          "changePercent": -9.14
         },
         {
           "symbol": "3532",
           "name": "台勝科",
-          "price": 318.5,
-          "changePercent": -9.13
+          "price": 316,
+          "changePercent": -9.84
         },
         {
           "symbol": "6789",
           "name": "采鈺",
-          "price": 393.5,
-          "changePercent": -5.07
+          "price": 390,
+          "changePercent": -5.91
         }
       ],
       "trend": [
@@ -372,7 +372,7 @@
         -6.56,
         -10.16,
         -10.76,
-        -14.55
+        -16.93
       ],
       "kbars": [
         {
@@ -851,9 +851,9 @@
           "d": "2026-11-03",
           "o": -2.15,
           "h": -1.02,
-          "l": -4.99,
-          "c": -4.22,
-          "ma": 6.85
+          "l": -7.55,
+          "c": -6.92,
+          "ma": 6.71
         }
       ]
     },
@@ -863,44 +863,44 @@
         {
           "symbol": "2317",
           "name": "鴻海",
-          "price": 246.5,
-          "changePercent": -1.79
+          "price": 245.5,
+          "changePercent": -2.19
         },
         {
           "symbol": "2308",
           "name": "台達電",
-          "price": 1300,
-          "changePercent": -4.06
+          "price": 1270,
+          "changePercent": -6.27
         },
         {
           "symbol": "2383",
           "name": "台光電",
-          "price": 4505,
-          "changePercent": -4.25
+          "price": 4395,
+          "changePercent": -6.59
         },
         {
           "symbol": "3037",
           "name": "欣興",
-          "price": 926,
-          "changePercent": -7.12
+          "price": 902,
+          "changePercent": -9.53
         },
         {
           "symbol": "2327",
           "name": "國巨*",
-          "price": 465,
-          "changePercent": -6.72
+          "price": 453,
+          "changePercent": -9.13
         },
         {
           "symbol": "3653",
           "name": "健策",
-          "price": 6150,
-          "changePercent": -2.69
+          "price": 6035,
+          "changePercent": -4.51
         },
         {
           "symbol": "2059",
           "name": "川湖",
-          "price": 9325,
-          "changePercent": -1.01
+          "price": 9240,
+          "changePercent": -1.91
         },
         {
           "symbol": "8046",
@@ -917,38 +917,38 @@
         {
           "symbol": "2368",
           "name": "金像電",
-          "price": 1000,
-          "changePercent": -5.66
+          "price": 970,
+          "changePercent": -8.49
         },
         {
           "symbol": "4958",
           "name": "臻鼎-KY",
-          "price": 453,
-          "changePercent": -6.98
+          "price": 443,
+          "changePercent": -9.03
         },
         {
           "symbol": "3665",
           "name": "貿聯-KY",
-          "price": 1620,
-          "changePercent": -0.31
+          "price": 1575,
+          "changePercent": -3.08
         },
         {
           "symbol": "3044",
           "name": "健鼎",
-          "price": 498,
-          "changePercent": -5.5
+          "price": 488.5,
+          "changePercent": -7.31
         },
         {
           "symbol": "2313",
           "name": "華通",
-          "price": 191,
-          "changePercent": -6.83
+          "price": 186,
+          "changePercent": -9.27
         },
         {
           "symbol": "6213",
           "name": "聯茂",
-          "price": 617,
-          "changePercent": -5.95
+          "price": 600,
+          "changePercent": -8.54
         },
         {
           "symbol": "3533",
@@ -959,14 +959,14 @@
         {
           "symbol": "2404",
           "name": "漢唐",
-          "price": 1020,
-          "changePercent": -3.77
+          "price": 1000,
+          "changePercent": -5.66
         },
         {
           "symbol": "2492",
           "name": "華新科",
-          "price": 326.5,
-          "changePercent": -8.29
+          "price": 320.5,
+          "changePercent": -9.97
         },
         {
           "symbol": "6805",
@@ -977,8 +977,8 @@
         {
           "symbol": "6139",
           "name": "亞翔",
-          "price": 614,
-          "changePercent": -3.61
+          "price": 608,
+          "changePercent": -4.55
         }
       ],
       "trend": [
@@ -1003,7 +1003,7 @@
         -5.11,
         -10.25,
         -10.72,
-        -14.03
+        -16.98
       ],
       "kbars": [
         {
@@ -1482,9 +1482,9 @@
           "d": "2026-11-03",
           "o": 2.03,
           "h": 4.76,
-          "l": -0.42,
-          "c": 0.77,
-          "ma": 15.47
+          "l": -3.44,
+          "c": -2.82,
+          "ma": 15.29
         }
       ]
     },
@@ -1494,122 +1494,122 @@
         {
           "symbol": "2881",
           "name": "富邦金",
-          "price": 155,
-          "changePercent": -2.82
+          "price": 154,
+          "changePercent": -3.45
         },
         {
           "symbol": "2882",
           "name": "國泰金",
-          "price": 113.5,
-          "changePercent": -2.16
+          "price": 113,
+          "changePercent": -2.59
         },
         {
           "symbol": "2891",
           "name": "中信金",
-          "price": 73.4,
-          "changePercent": -2.13
+          "price": 74.2,
+          "changePercent": -1.07
         },
         {
           "symbol": "2887",
           "name": "台新新光金",
-          "price": 41.05,
-          "changePercent": -1.56
+          "price": 41.25,
+          "changePercent": -1.08
         },
         {
           "symbol": "2885",
           "name": "元大金",
-          "price": 69.5,
-          "changePercent": -2.8
+          "price": 69.2,
+          "changePercent": -3.22
         },
         {
           "symbol": "2884",
           "name": "玉山金",
-          "price": 47.75,
-          "changePercent": -1.95
+          "price": 47.4,
+          "changePercent": -2.67
         },
         {
           "symbol": "2886",
           "name": "兆豐金",
-          "price": 53.1,
-          "changePercent": -1.85
+          "price": 53.2,
+          "changePercent": -1.66
         },
         {
           "symbol": "2880",
           "name": "華南金",
-          "price": 49.7,
-          "changePercent": 0.2
+          "price": 49.05,
+          "changePercent": -1.11
         },
         {
           "symbol": "2890",
           "name": "永豐金",
-          "price": 44.95,
-          "changePercent": -1.86
+          "price": 44.4,
+          "changePercent": -3.06
         },
         {
           "symbol": "2883",
           "name": "凱基金",
-          "price": 35.25,
-          "changePercent": -5.37
+          "price": 34.95,
+          "changePercent": -6.17
         },
         {
           "symbol": "2892",
           "name": "第一金",
-          "price": 43.2,
-          "changePercent": -1.03
+          "price": 42.6,
+          "changePercent": -2.41
         },
         {
           "symbol": "5880",
           "name": "合庫金",
-          "price": 28.6,
-          "changePercent": -1.55
+          "price": 28.45,
+          "changePercent": -2.07
         },
         {
           "symbol": "2801",
           "name": "彰銀",
-          "price": 30,
-          "changePercent": -2.76
+          "price": 29.7,
+          "changePercent": -3.73
         },
         {
           "symbol": "5876",
           "name": "上海商銀",
-          "price": 53.3,
-          "changePercent": -1.84
+          "price": 52.6,
+          "changePercent": -3.13
         },
         {
           "symbol": "2834",
           "name": "臺企銀",
-          "price": 17.85,
-          "changePercent": -1.11
+          "price": 17.7,
+          "changePercent": -1.94
         },
         {
           "symbol": "2812",
           "name": "台中銀",
-          "price": 18.3,
-          "changePercent": -1.35
+          "price": 18.15,
+          "changePercent": -2.16
         },
         {
           "symbol": "2838",
           "name": "聯邦銀",
-          "price": 20.3,
-          "changePercent": -0.49
+          "price": 20.2,
+          "changePercent": -0.98
         },
         {
           "symbol": "2855",
           "name": "統一證",
-          "price": 51.7,
-          "changePercent": -3
+          "price": 50.8,
+          "changePercent": -4.69
         },
         {
           "symbol": "6005",
           "name": "群益證",
-          "price": 29.9,
-          "changePercent": -1.64
+          "price": 29.4,
+          "changePercent": -3.29
         },
         {
           "symbol": "2845",
           "name": "遠東銀",
-          "price": 13.05,
-          "changePercent": -0.76
+          "price": 12.95,
+          "changePercent": -1.52
         }
       ],
       "trend": [
@@ -1634,7 +1634,7 @@
         6.36,
         6.1,
         5.12,
-        3.16
+        2.41
       ],
       "kbars": [
         {
@@ -2113,9 +2113,9 @@
           "d": "2026-11-03",
           "o": 15.01,
           "h": 15.72,
-          "l": 12.83,
-          "c": 13.11,
-          "ma": 14.06
+          "l": 11.73,
+          "c": 12.27,
+          "ma": 14.02
         }
       ]
     },
@@ -2125,44 +2125,44 @@
         {
           "symbol": "6446",
           "name": "藥華藥",
-          "price": 1235,
-          "changePercent": 3.78
+          "price": 1225,
+          "changePercent": 2.94
         },
         {
           "symbol": "6919",
           "name": "康霈*",
-          "price": 63.6,
-          "changePercent": -1.4
+          "price": 63.1,
+          "changePercent": -2.17
         },
         {
           "symbol": "7799",
           "name": "禾榮科",
-          "price": 411.5,
-          "changePercent": -1.67
+          "price": 409.5,
+          "changePercent": -2.15
         },
         {
           "symbol": "6949",
           "name": "沛爾生醫*-創",
-          "price": 40.15,
-          "changePercent": -1.71
+          "price": 39.2,
+          "changePercent": -4.04
         },
         {
           "symbol": "6472",
           "name": "保瑞",
-          "price": 368,
-          "changePercent": 0.68
+          "price": 367.5,
+          "changePercent": 0.55
         },
         {
           "symbol": "1795",
           "name": "美時",
-          "price": 162,
-          "changePercent": -1.82
+          "price": 161,
+          "changePercent": -2.42
         },
         {
           "symbol": "6491",
           "name": "晶碩",
-          "price": 401,
-          "changePercent": -5.65
+          "price": 405,
+          "changePercent": -4.71
         },
         {
           "symbol": "7827",
@@ -2173,38 +2173,38 @@
         {
           "symbol": "6782",
           "name": "視陽",
-          "price": 254.5,
-          "changePercent": -2.68
+          "price": 256,
+          "changePercent": -2.1
         },
         {
           "symbol": "1789",
           "name": "神隆",
-          "price": 19.85,
-          "changePercent": -2.22
+          "price": 19.8,
+          "changePercent": -2.46
         },
         {
           "symbol": "3705",
           "name": "永信",
-          "price": 59.6,
-          "changePercent": -0.17
+          "price": 59.3,
+          "changePercent": -0.67
         },
         {
           "symbol": "6589",
           "name": "台康生技",
-          "price": 48.15,
-          "changePercent": -2.13
+          "price": 47.85,
+          "changePercent": -2.74
         },
         {
           "symbol": "4104",
           "name": "佳醫",
-          "price": 72.5,
-          "changePercent": -0.96
+          "price": 72.7,
+          "changePercent": -0.68
         },
         {
           "symbol": "4736",
           "name": "泰博",
-          "price": 129.5,
-          "changePercent": -1.52
+          "price": 129,
+          "changePercent": -1.9
         },
         {
           "symbol": "6467",
@@ -2215,32 +2215,32 @@
         {
           "symbol": "4771",
           "name": "望隼",
-          "price": 201,
-          "changePercent": -4.74
+          "price": 200,
+          "changePercent": -5.21
         },
         {
           "symbol": "1707",
           "name": "葡萄王",
-          "price": 83.3,
-          "changePercent": -0.24
+          "price": 82.9,
+          "changePercent": -0.72
         },
         {
           "symbol": "1720",
           "name": "生達",
-          "price": 56.2,
-          "changePercent": -0.88
+          "price": 56.1,
+          "changePercent": -1.06
         },
         {
           "symbol": "6534",
           "name": "正瀚-創",
-          "price": 91.2,
-          "changePercent": -1.08
+          "price": 90.2,
+          "changePercent": -2.17
         },
         {
           "symbol": "4169",
           "name": "泰宗",
-          "price": 136.5,
-          "changePercent": -1.44
+          "price": 135.5,
+          "changePercent": -2.17
         }
       ],
       "trend": [
@@ -2265,7 +2265,7 @@
         -3.67,
         -5.09,
         -4.67,
-        -5.24
+        -5.89
       ],
       "kbars": [
         {
@@ -2744,9 +2744,9 @@
           "d": "2026-11-03",
           "o": -0.88,
           "h": 1.02,
-          "l": -1.79,
-          "c": -0.5,
-          "ma": 1.51
+          "l": -2.71,
+          "c": -1.05,
+          "ma": 1.48
         }
       ]
     },
@@ -2756,44 +2756,44 @@
         {
           "symbol": "3008",
           "name": "大立光",
-          "price": 5030,
-          "changePercent": -8.38
+          "price": 4945,
+          "changePercent": -9.93
         },
         {
           "symbol": "3481",
           "name": "群創",
-          "price": 41.85,
-          "changePercent": -6.06
+          "price": 41.2,
+          "changePercent": -7.52
         },
         {
           "symbol": "2409",
           "name": "友達",
-          "price": 29.05,
-          "changePercent": -5.53
+          "price": 28.8,
+          "changePercent": -6.34
         },
         {
           "symbol": "3406",
           "name": "玉晶光",
-          "price": 938,
-          "changePercent": -9.37
+          "price": 936,
+          "changePercent": -9.57
         },
         {
           "symbol": "6278",
           "name": "台表科",
-          "price": 232,
-          "changePercent": -7.39
+          "price": 229,
+          "changePercent": -8.58
         },
         {
           "symbol": "2466",
           "name": "冠西電",
-          "price": 382,
-          "changePercent": 0
+          "price": 342,
+          "changePercent": -10
         },
         {
           "symbol": "2486",
           "name": "一詮",
-          "price": 180,
-          "changePercent": -6.98
+          "price": 175.5,
+          "changePercent": -9.3
         },
         {
           "symbol": "3563",
@@ -2804,74 +2804,74 @@
         {
           "symbol": "6116",
           "name": "彩晶",
-          "price": 12.9,
-          "changePercent": -4.09
+          "price": 12.75,
+          "changePercent": -5.2
         },
         {
           "symbol": "3019",
           "name": "亞光",
-          "price": 117,
-          "changePercent": -5.26
+          "price": 115.5,
+          "changePercent": -6.48
         },
         {
           "symbol": "6456",
           "name": "GIS-KY",
-          "price": 88.6,
-          "changePercent": -8.66
+          "price": 87.7,
+          "changePercent": -9.59
         },
         {
           "symbol": "6176",
           "name": "瑞儀",
-          "price": 84.3,
-          "changePercent": -1.98
+          "price": 83.3,
+          "changePercent": -3.14
         },
         {
           "symbol": "2393",
           "name": "億光",
-          "price": 65.5,
-          "changePercent": -1.5
+          "price": 64.5,
+          "changePercent": -3.01
         },
         {
           "symbol": "3673",
           "name": "TPK-KY",
-          "price": 65.2,
-          "changePercent": -6.86
+          "price": 64.6,
+          "changePercent": -7.71
         },
         {
           "symbol": "5234",
           "name": "達興材料",
-          "price": 262,
-          "changePercent": -3.32
+          "price": 258.5,
+          "changePercent": -4.61
         },
         {
           "symbol": "3576",
           "name": "聯合再生",
-          "price": 15.75,
-          "changePercent": -3.37
+          "price": 15.65,
+          "changePercent": -3.99
         },
         {
           "symbol": "2426",
           "name": "鼎元",
-          "price": 79.4,
-          "changePercent": -8.63
+          "price": 78.3,
+          "changePercent": -9.9
         },
         {
           "symbol": "3714",
           "name": "富采",
-          "price": 58.3,
-          "changePercent": -1.35
+          "price": 57.3,
+          "changePercent": -3.05
         },
         {
           "symbol": "2489",
           "name": "瑞軒",
-          "price": 33.45,
-          "changePercent": -6.69
+          "price": 33.05,
+          "changePercent": -7.81
         },
         {
           "symbol": "2374",
           "name": "佳能",
-          "price": 60.2,
-          "changePercent": -4.14
+          "price": 59.6,
+          "changePercent": -5.1
         }
       ],
       "trend": [
@@ -2896,7 +2896,7 @@
         5.31,
         1.15,
         2.6,
-        -0.8
+        -4.95
       ],
       "kbars": [
         {
@@ -3375,9 +3375,9 @@
           "d": "2026-11-03",
           "o": 23.11,
           "h": 26.06,
-          "l": 20.11,
-          "c": 21.64,
-          "ma": 26.79
+          "l": 15.96,
+          "c": 16.34,
+          "ma": 26.52
         }
       ]
     }
@@ -5713,7 +5713,7 @@
         -14.8,
         -15.78,
         -25.27,
-        -26.52
+        -26.53
       ],
       "kbars": [
         {
@@ -6190,9 +6190,9 @@
         },
         {
           "d": "2026-11-02",
-          "o": -11.64,
+          "o": -11.6,
           "h": -10.75,
-          "l": -15.28,
+          "l": -15.29,
           "c": -14.84,
           "ma": -0.29
         }
@@ -6228,8 +6228,8 @@
   },
   "breadth": {
     "tw": {
-      "pct": 31.0,
-      "above": 31,
+      "pct": 26.0,
+      "above": 26,
       "total": 100,
       "series": [
         84.0,
@@ -6251,10 +6251,10 @@
         50.0,
         40.0,
         43.0,
-        31.0
+        26.0
       ],
-      "change20": -53.0,
-      "state": "neutral",
+      "change20": -58.0,
+      "state": "weak",
       "divergence": false,
       "bySector": [
         {
@@ -6264,7 +6264,7 @@
         },
         {
           "name": "電子",
-          "above": 4,
+          "above": 1,
           "total": 20
         },
         {
@@ -6274,12 +6274,12 @@
         },
         {
           "name": "生技",
-          "above": 7,
+          "above": 6,
           "total": 20
         },
         {
           "name": "光電",
-          "above": 4,
+          "above": 3,
           "total": 20
         }
       ]
@@ -7835,19 +7835,19 @@
     "sectors": [
       {
         "name": "半導體",
-        "score": 56,
+        "score": 54,
         "covered": 20,
         "count": 20
       },
       {
         "name": "電子",
-        "score": 58,
+        "score": 49,
         "covered": 20,
         "count": 20
       },
       {
         "name": "金融",
-        "score": 66,
+        "score": 65,
         "covered": 20,
         "count": 20
       },
@@ -7859,7 +7859,7 @@
       },
       {
         "name": "光電",
-        "score": 49,
+        "score": 46,
         "covered": 20,
         "count": 20
       }
@@ -7870,19 +7870,19 @@
         "name": "彰銀",
         "sector": "金融",
         "stale": false,
-        "price": 30.05,
+        "price": 29.7,
         "technical": {
-          "score": 96,
+          "score": 95,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +27.1%；季線 20 日變化 +7.2%",
-            "距 60 日高點 -2.6%；月線乖離 +2.9%"
+            "近 60 日 +25.6%；季線 20 日變化 +7.2%",
+            "距 60 日高點 -3.7%；月線乖離 +1.7%"
           ]
         },
         "chips": {
           "score": 96,
           "reasons": [
-            "近 20 日法人 +101,012 張，占成交量 +28.31%",
+            "近 20 日法人 +101,012 張，占成交量 +27.12%",
             "買超天數 89%；近 5 日 +29,882 張"
           ]
         },
@@ -7893,48 +7893,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 84,
-        "rating": "強勢",
-        "risks": []
-      },
-      {
-        "code": "5876",
-        "name": "上海商銀",
-        "sector": "金融",
-        "stale": false,
-        "price": 53.1,
-        "technical": {
-          "score": 91,
-          "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +20.3%；季線 20 日變化 +6.1%",
-            "距 60 日高點 -4.2%；月線乖離 +0.7%"
-          ]
-        },
-        "chips": {
-          "score": 100,
-          "reasons": [
-            "近 20 日法人 +53,389 張，占成交量 +37.57%",
-            "買超天數 100%；近 5 日 +13,375 張"
-          ]
-        },
-        "revenue": {
-          "score": 61,
-          "reasons": [
-            "2026-09 營收年增 +10.7%"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -7944,36 +7905,36 @@
         "risks": []
       },
       {
-        "code": "2885",
-        "name": "元大金",
+        "code": "2891",
+        "name": "中信金",
         "sector": "金融",
         "stale": false,
-        "price": 69.7,
+        "price": 74.2,
         "technical": {
-          "score": 67,
+          "score": 87,
           "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +4.4%；季線 20 日變化 +4.1%",
-            "距 60 日高點 -5.0%；月線乖離 -2.2%"
+            "均線：收盤高於月線、月線高於季線",
+            "近 60 日 +12.4%；季線 20 日變化 +4.1%",
+            "距 60 日高點 -2.1%；月線乖離 +2.3%"
           ]
         },
         "chips": {
           "score": 93,
           "reasons": [
-            "近 20 日法人 +138,541 張，占成交量 +32.29%",
-            "買超天數 83%；近 5 日 +22,892 張"
+            "近 20 日法人 +136,467 張，占成交量 +18.33%",
+            "買超天數 83%；近 5 日 +41,781 張"
           ]
         },
         "revenue": {
-          "score": 100,
+          "score": 63,
           "reasons": [
-            "2026-09 營收年增 +67.3%"
+            "2026-09 營收年增 +12.8%"
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -7987,19 +7948,19 @@
         "name": "兆豐金",
         "sector": "金融",
         "stale": false,
-        "price": 53.0,
+        "price": 53.2,
         "technical": {
-          "score": 79,
+          "score": 80,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +3.5%；季線 20 日變化 +2.6%",
-            "距 60 日高點 -4.0%；月線乖離 +0.8%"
+            "近 60 日 +3.9%；季線 20 日變化 +2.6%",
+            "距 60 日高點 -3.6%；月線乖離 +1.1%"
           ]
         },
         "chips": {
           "score": 93,
           "reasons": [
-            "近 20 日法人 +111,033 張，占成交量 +28.60%",
+            "近 20 日法人 +111,033 張，占成交量 +27.20%",
             "買超天數 83%；近 5 日 +8,298 張"
           ]
         },
@@ -8010,9 +7971,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8022,23 +7983,62 @@
         "risks": []
       },
       {
-        "code": "2880",
-        "name": "華南金",
+        "code": "2885",
+        "name": "元大金",
         "sector": "金融",
         "stale": false,
-        "price": 49.45,
+        "price": 69.2,
         "technical": {
-          "score": 90,
+          "score": 67,
           "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +14.0%；季線 20 日變化 +6.3%",
-            "距 60 日高點 -1.9%；月線乖離 +1.6%"
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +3.7%；季線 20 日變化 +4.1%",
+            "距 60 日高點 -5.7%；月線乖離 -2.9%"
           ]
         },
         "chips": {
           "score": 93,
           "reasons": [
-            "近 20 日法人 +45,101 張，占成交量 +17.68%",
+            "近 20 日法人 +138,541 張，占成交量 +31.01%",
+            "買超天數 83%；近 5 日 +22,892 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +67.3%"
+          ]
+        },
+        "industry": {
+          "score": 65,
+          "reasons": [
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 79,
+        "rating": "強勢",
+        "risks": []
+      },
+      {
+        "code": "2880",
+        "name": "華南金",
+        "sector": "金融",
+        "stale": false,
+        "price": 49.05,
+        "technical": {
+          "score": 89,
+          "reasons": [
+            "均線：收盤高於月線、月線高於季線",
+            "近 60 日 +13.1%；季線 20 日變化 +6.3%",
+            "距 60 日高點 -2.7%；月線乖離 +0.8%"
+          ]
+        },
+        "chips": {
+          "score": 93,
+          "reasons": [
+            "近 20 日法人 +45,101 張，占成交量 +16.85%",
             "買超天數 83%；近 5 日 +6,097 張"
           ]
         },
@@ -8049,48 +8049,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 80,
-        "rating": "強勢",
-        "risks": []
-      },
-      {
-        "code": "2891",
-        "name": "中信金",
-        "sector": "金融",
-        "stale": false,
-        "price": 73.4,
-        "technical": {
-          "score": 85,
-          "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +11.2%；季線 20 日變化 +4.1%",
-            "距 60 日高點 -3.2%；月線乖離 +1.3%"
-          ]
-        },
-        "chips": {
-          "score": 93,
-          "reasons": [
-            "近 20 日法人 +136,467 張，占成交量 +19.22%",
-            "買超天數 83%；近 5 日 +41,781 張"
-          ]
-        },
-        "revenue": {
-          "score": 63,
-          "reasons": [
-            "2026-09 營收年增 +12.8%"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8104,19 +8065,19 @@
         "name": "玉山金",
         "sector": "金融",
         "stale": false,
-        "price": 47.85,
+        "price": 47.4,
         "technical": {
-          "score": 84,
+          "score": 83,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +25.6%；季線 20 日變化 +9.8%",
-            "距 60 日高點 -3.8%；月線乖離 -0.1%"
+            "近 60 日 +24.4%；季線 20 日變化 +9.7%",
+            "距 60 日高點 -4.7%；月線乖離 -1.0%"
           ]
         },
         "chips": {
           "score": 93,
           "reasons": [
-            "近 20 日法人 +100,473 張，占成交量 +19.24%",
+            "近 20 日法人 +100,473 張，占成交量 +18.27%",
             "買超天數 83%；近 5 日 +3,847 張"
           ]
         },
@@ -8127,9 +8088,48 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 78,
+        "rating": "強勢",
+        "risks": []
+      },
+      {
+        "code": "5876",
+        "name": "上海商銀",
+        "sector": "金融",
+        "stale": false,
+        "price": 52.6,
+        "technical": {
+          "score": 77,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +19.1%；季線 20 日變化 +6.1%",
+            "距 60 日高點 -5.1%；月線乖離 -0.2%"
+          ]
+        },
+        "chips": {
+          "score": 100,
+          "reasons": [
+            "近 20 日法人 +53,389 張，占成交量 +35.65%",
+            "買超天數 100%；近 5 日 +13,375 張"
+          ]
+        },
+        "revenue": {
+          "score": 61,
+          "reasons": [
+            "2026-09 營收年增 +10.7%"
+          ]
+        },
+        "industry": {
+          "score": 65,
+          "reasons": [
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8143,19 +8143,19 @@
         "name": "統一證",
         "sector": "金融",
         "stale": false,
-        "price": 51.9,
+        "price": 50.8,
         "technical": {
-          "score": 70,
+          "score": 68,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +13.2%；季線 20 日變化 +7.9%",
-            "距 60 日高點 -13.8%；月線乖離 -8.2%"
+            "近 60 日 +10.8%；季線 20 日變化 +7.8%",
+            "距 60 日高點 -15.6%；月線乖離 -10.0%"
           ]
         },
         "chips": {
           "score": 84,
           "reasons": [
-            "近 20 日法人 +9,998 張，占成交量 +14.90%",
+            "近 20 日法人 +9,998 張，占成交量 +14.16%",
             "買超天數 61%；近 5 日 +2,472 張"
           ]
         },
@@ -8166,48 +8166,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 78,
-        "rating": "強勢",
-        "risks": []
-      },
-      {
-        "code": "3443",
-        "name": "創意",
-        "sector": "半導體",
-        "stale": false,
-        "price": 7070.0,
-        "technical": {
-          "score": 76,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +61.0%；季線 20 日變化 +23.3%",
-            "距 60 日高點 -17.8%；月線乖離 -10.1%"
-          ]
-        },
-        "chips": {
-          "score": 83,
-          "reasons": [
-            "近 20 日法人 +1,800 張，占成交量 +5.81%",
-            "買超天數 89%；近 5 日 +376 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +97.8%"
-          ]
-        },
-        "industry": {
-          "score": 56,
-          "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8221,19 +8182,19 @@
         "name": "第一金",
         "sector": "金融",
         "stale": false,
-        "price": 43.2,
+        "price": 42.6,
         "technical": {
-          "score": 92,
+          "score": 90,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +20.3%；季線 20 日變化 +6.4%",
-            "距 60 日高點 -3.1%；月線乖離 +4.4%"
+            "近 60 日 +18.7%；季線 20 日變化 +6.3%",
+            "距 60 日高點 -4.5%；月線乖離 +3.0%"
           ]
         },
         "chips": {
           "score": 91,
           "reasons": [
-            "近 20 日法人 +65,203 張，占成交量 +16.07%",
+            "近 20 日法人 +65,203 張，占成交量 +15.48%",
             "買超天數 78%；近 5 日 +9,863 張"
           ]
         },
@@ -8244,14 +8205,53 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 77,
+        "score": 76,
+        "rating": "強勢",
+        "risks": []
+      },
+      {
+        "code": "3443",
+        "name": "創意",
+        "sector": "半導體",
+        "stale": false,
+        "price": 6795.0,
+        "technical": {
+          "score": 74,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +54.8%；季線 20 日變化 +23.2%",
+            "距 60 日高點 -21.0%；月線乖離 -13.5%"
+          ]
+        },
+        "chips": {
+          "score": 82,
+          "reasons": [
+            "近 20 日法人 +1,800 張，占成交量 +5.57%",
+            "買超天數 89%；近 5 日 +376 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +97.8%"
+          ]
+        },
+        "industry": {
+          "score": 54,
+          "reasons": [
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 75,
         "rating": "強勢",
         "risks": []
       },
@@ -8260,19 +8260,19 @@
         "name": "合庫金",
         "sector": "金融",
         "stale": false,
-        "price": 28.55,
+        "price": 28.45,
         "technical": {
-          "score": 85,
+          "score": 84,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +10.0%；季線 20 日變化 +3.2%",
-            "距 60 日高點 -1.7%；月線乖離 +3.0%"
+            "近 60 日 +9.6%；季線 20 日變化 +3.2%",
+            "距 60 日高點 -2.1%；月線乖離 +2.7%"
           ]
         },
         "chips": {
           "score": 91,
           "reasons": [
-            "近 20 日法人 +138,567 張，占成交量 +39.30%",
+            "近 20 日法人 +138,567 張，占成交量 +37.97%",
             "買超天數 78%；近 5 日 +34,436 張"
           ]
         },
@@ -8283,87 +8283,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 75,
-        "rating": "強勢",
-        "risks": []
-      },
-      {
-        "code": "3705",
-        "name": "永信",
-        "sector": "生技",
-        "stale": false,
-        "price": 59.7,
-        "technical": {
-          "score": 85,
-          "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +13.1%；季線 20 日變化 +3.1%",
-            "距 60 日高點 -3.7%；月線乖離 +0.4%"
-          ]
-        },
-        "chips": {
-          "score": 91,
-          "reasons": [
-            "近 20 日法人 +1,458 張，占成交量 +18.15%",
-            "買超天數 78%；近 5 日 +123 張"
-          ]
-        },
-        "revenue": {
-          "score": 69,
-          "reasons": [
-            "2026-09 營收年增 +8.7%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 48,
-          "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 75,
-        "rating": "強勢",
-        "risks": []
-      },
-      {
-        "code": "3044",
-        "name": "健鼎",
-        "sector": "電子",
-        "stale": false,
-        "price": 505.0,
-        "technical": {
-          "score": 77,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +26.7%；季線 20 日變化 +11.6%",
-            "距 60 日高點 -16.3%；月線乖離 -9.9%"
-          ]
-        },
-        "chips": {
-          "score": 72,
-          "reasons": [
-            "近 20 日法人 +4,268 張，占成交量 +7.49%",
-            "買超天數 50%；近 5 日 -354 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +53.5%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8377,19 +8299,19 @@
         "name": "神隆",
         "sector": "生技",
         "stale": false,
-        "price": 19.95,
+        "price": 19.8,
         "technical": {
-          "score": 64,
+          "score": 63,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +2.8%；季線 20 日變化 -0.5%",
-            "距 60 日高點 -1.7%；月線乖離 +2.2%"
+            "近 60 日 +2.1%；季線 20 日變化 -0.5%",
+            "距 60 日高點 -2.5%；月線乖離 +1.5%"
           ]
         },
         "chips": {
           "score": 91,
           "reasons": [
-            "近 20 日法人 +2,039 張，占成交量 +21.07%",
+            "近 20 日法人 +2,039 張，占成交量 +20.03%",
             "買超天數 78%；近 5 日 +814 張"
           ]
         },
@@ -8402,12 +8324,12 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 74,
+        "score": 73,
         "rating": "中性偏強",
         "risks": []
       },
@@ -8416,19 +8338,19 @@
         "name": "瑞昱",
         "sector": "半導體",
         "stale": false,
-        "price": 770.0,
+        "price": 756.0,
         "technical": {
-          "score": 64,
+          "score": 62,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +2.5%；季線 20 日變化 +1.4%",
-            "距 60 日高點 -4.1%；月線乖離 -0.3%"
+            "近 60 日 +0.7%；季線 20 日變化 +1.4%",
+            "距 60 日高點 -5.9%；月線乖離 -2.0%"
           ]
         },
         "chips": {
           "score": 96,
           "reasons": [
-            "近 20 日法人 +9,630 張，占成交量 +18.96%",
+            "近 20 日法人 +9,630 張，占成交量 +18.35%",
             "買超天數 89%；近 5 日 +3,008 張"
           ]
         },
@@ -8439,14 +8361,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 73,
+        "score": 72,
         "rating": "中性偏強",
         "risks": []
       },
@@ -8455,19 +8377,19 @@
         "name": "永豐金",
         "sector": "金融",
         "stale": false,
-        "price": 45.05,
+        "price": 44.4,
         "technical": {
-          "score": 74,
+          "score": 72,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +13.9%；季線 20 日變化 +4.9%",
-            "距 60 日高點 -3.1%；月線乖離 -0.6%"
+            "近 60 日 +12.3%；季線 20 日變化 +4.8%",
+            "距 60 日高點 -4.5%；月線乖離 -2.0%"
           ]
         },
         "chips": {
-          "score": 74,
+          "score": 73,
           "reasons": [
-            "近 20 日法人 +33,705 張，占成交量 +7.18%",
+            "近 20 日法人 +33,705 張，占成交量 +6.92%",
             "買超天數 56%；近 5 日 +9,571 張"
           ]
         },
@@ -8478,48 +8400,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 73,
-        "rating": "中性偏強",
-        "risks": []
-      },
-      {
-        "code": "3034",
-        "name": "聯詠",
-        "sector": "半導體",
-        "stale": false,
-        "price": 561.0,
-        "technical": {
-          "score": 66,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +2.0%；季線 20 日變化 +4.2%",
-            "距 60 日高點 -6.3%；月線乖離 -0.9%"
-          ]
-        },
-        "chips": {
-          "score": 91,
-          "reasons": [
-            "近 20 日法人 +12,782 張，占成交量 +20.87%",
-            "買超天數 78%；近 5 日 +1,631 張"
-          ]
-        },
-        "revenue": {
-          "score": 75,
-          "reasons": [
-            "2026-09 營收年增 +25.0%"
-          ]
-        },
-        "industry": {
-          "score": 56,
-          "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8533,19 +8416,19 @@
         "name": "視陽",
         "sector": "生技",
         "stale": false,
-        "price": 255.5,
+        "price": 256.0,
         "technical": {
           "score": 96,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +28.4%；季線 20 日變化 +9.6%",
-            "距 60 日高點 -5.7%；月線乖離 +0.6%"
+            "近 60 日 +28.6%；季線 20 日變化 +9.6%",
+            "距 60 日高點 -5.5%；月線乖離 +0.8%"
           ]
         },
         "chips": {
           "score": 72,
           "reasons": [
-            "近 20 日法人 +532 張，占成交量 +5.93%",
+            "近 20 日法人 +532 張，占成交量 +5.78%",
             "買超天數 61%；近 5 日 +133 張"
           ]
         },
@@ -8558,7 +8441,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8568,41 +8451,80 @@
         "risks": []
       },
       {
-        "code": "6278",
-        "name": "台表科",
-        "sector": "光電",
+        "code": "3034",
+        "name": "聯詠",
+        "sector": "半導體",
         "stale": false,
-        "price": 237.0,
+        "price": 555.0,
         "technical": {
-          "score": 72,
+          "score": 64,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +41.1%；季線 20 日變化 +20.0%",
-            "距 60 日高點 -25.1%；月線乖離 -12.8%"
+            "近 60 日 +0.9%；季線 20 日變化 +4.2%",
+            "距 60 日高點 -7.3%；月線乖離 -1.9%"
           ]
         },
         "chips": {
-          "score": 93,
+          "score": 91,
           "reasons": [
-            "近 20 日法人 +48,807 張，占成交量 +12.28%",
-            "買超天數 83%；近 5 日 +4,807 張"
+            "近 20 日法人 +12,782 張，占成交量 +20.33%",
+            "買超天數 78%；近 5 日 +1,631 張"
           ]
         },
         "revenue": {
-          "score": 66,
+          "score": 75,
           "reasons": [
-            "2026-09 營收年增 +15.9%"
+            "2026-09 營收年增 +25.0%"
+          ]
+        },
+        "industry": {
+          "score": 54,
+          "reasons": [
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 71,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
+        "code": "3044",
+        "name": "健鼎",
+        "sector": "電子",
+        "stale": false,
+        "price": 488.5,
+        "technical": {
+          "score": 74,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +22.6%；季線 20 日變化 +11.6%",
+            "距 60 日高點 -19.0%；月線乖離 -12.7%"
+          ]
+        },
+        "chips": {
+          "score": 72,
+          "reasons": [
+            "近 20 日法人 +4,268 張，占成交量 +7.29%",
+            "買超天數 50%；近 5 日 -354 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +53.5%"
           ]
         },
         "industry": {
           "score": 49,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 72,
+        "score": 71,
         "rating": "中性偏強",
         "risks": []
       },
@@ -8611,19 +8533,19 @@
         "name": "晶碩",
         "sector": "生技",
         "stale": false,
-        "price": 404.5,
+        "price": 405.0,
         "technical": {
           "score": 70,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +6.7%；季線 20 日變化 +6.0%",
-            "距 60 日高點 -6.1%；月線乖離 -2.3%"
+            "近 60 日 +6.9%；季線 20 日變化 +6.0%",
+            "距 60 日高點 -6.0%；月線乖離 -2.2%"
           ]
         },
         "chips": {
           "score": 87,
           "reasons": [
-            "近 20 日法人 +1,263 張，占成交量 +16.25%",
+            "近 20 日法人 +1,263 張，占成交量 +15.61%",
             "買超天數 67%；近 5 日 +149 張"
           ]
         },
@@ -8636,7 +8558,85 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 71,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
+        "code": "3705",
+        "name": "永信",
+        "sector": "生技",
+        "stale": false,
+        "price": 59.3,
+        "technical": {
+          "score": 71,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +12.3%；季線 20 日變化 +3.1%",
+            "距 60 日高點 -4.4%；月線乖離 -0.2%"
+          ]
+        },
+        "chips": {
+          "score": 91,
+          "reasons": [
+            "近 20 日法人 +1,458 張，占成交量 +17.71%",
+            "買超天數 78%；近 5 日 +123 張"
+          ]
+        },
+        "revenue": {
+          "score": 69,
+          "reasons": [
+            "2026-09 營收年增 +8.7%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 48,
+          "reasons": [
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 71,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
+        "code": "6278",
+        "name": "台表科",
+        "sector": "光電",
+        "stale": false,
+        "price": 229.0,
+        "technical": {
+          "score": 72,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +36.3%；季線 20 日變化 +19.9%",
+            "距 60 日高點 -27.6%；月線乖離 -15.6%"
+          ]
+        },
+        "chips": {
+          "score": 93,
+          "reasons": [
+            "近 20 日法人 +48,807 張，占成交量 +12.11%",
+            "買超天數 83%；近 5 日 +4,807 張"
+          ]
+        },
+        "revenue": {
+          "score": 66,
+          "reasons": [
+            "2026-09 營收年增 +15.9%"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8650,19 +8650,19 @@
         "name": "佳醫",
         "sector": "生技",
         "stale": false,
-        "price": 72.5,
+        "price": 72.7,
         "technical": {
           "score": 66,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +4.0%；季線 20 日變化 +1.1%",
-            "距 60 日高點 -1.9%；月線乖離 -0.7%"
+            "近 60 日 +4.3%；季線 20 日變化 +1.1%",
+            "距 60 日高點 -1.6%；月線乖離 -0.5%"
           ]
         },
         "chips": {
           "score": 91,
           "reasons": [
-            "近 20 日法人 +616 張，占成交量 +21.42%",
+            "近 20 日法人 +616 張，占成交量 +20.50%",
             "買超天數 78%；近 5 日 +201 張"
           ]
         },
@@ -8675,7 +8675,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8689,19 +8689,19 @@
         "name": "台新新光金",
         "sector": "金融",
         "stale": false,
-        "price": 41.05,
+        "price": 41.25,
         "technical": {
-          "score": 73,
+          "score": 74,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +15.0%；季線 20 日變化 +6.1%",
-            "距 60 日高點 -7.5%；月線乖離 -2.2%"
+            "近 60 日 +15.5%；季線 20 日變化 +6.1%",
+            "距 60 日高點 -7.1%；月線乖離 -1.7%"
           ]
         },
         "chips": {
           "score": 87,
           "reasons": [
-            "近 20 日法人 +112,090 張，占成交量 +13.42%",
+            "近 20 日法人 +112,090 張，占成交量 +12.78%",
             "買超天數 67%；近 5 日 +22,443 張"
           ]
         },
@@ -8712,53 +8712,14 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 69,
-        "rating": "中性偏強",
-        "risks": []
-      },
-      {
-        "code": "2881",
-        "name": "富邦金",
-        "sector": "金融",
-        "stale": false,
-        "price": 155.0,
-        "technical": {
-          "score": 79,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +19.7%；季線 20 日變化 +7.7%",
-            "距 60 日高點 -4.3%；月線乖離 -2.0%"
-          ]
-        },
-        "chips": {
-          "score": 91,
-          "reasons": [
-            "近 20 日法人 +36,192 張，占成交量 +11.74%",
-            "買超天數 78%；近 5 日 +11,908 張"
-          ]
-        },
-        "revenue": {
-          "score": 0,
-          "reasons": [
-            "2026-09 營收年增 -63.8%"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 68,
         "rating": "中性偏強",
         "risks": []
       },
@@ -8779,7 +8740,7 @@
         "chips": {
           "score": 91,
           "reasons": [
-            "近 20 日法人 +51,656 張，占成交量 +13.03%",
+            "近 20 日法人 +51,656 張，占成交量 +12.31%",
             "買超天數 78%；近 5 日 +16,344 張"
           ]
         },
@@ -8790,9 +8751,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8802,23 +8763,62 @@
         "risks": []
       },
       {
+        "code": "2881",
+        "name": "富邦金",
+        "sector": "金融",
+        "stale": false,
+        "price": 154.0,
+        "technical": {
+          "score": 78,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +18.9%；季線 20 日變化 +7.7%",
+            "距 60 日高點 -4.9%；月線乖離 -2.6%"
+          ]
+        },
+        "chips": {
+          "score": 91,
+          "reasons": [
+            "近 20 日法人 +36,192 張，占成交量 +11.11%",
+            "買超天數 78%；近 5 日 +11,908 張"
+          ]
+        },
+        "revenue": {
+          "score": 0,
+          "reasons": [
+            "2026-09 營收年增 -63.8%"
+          ]
+        },
+        "industry": {
+          "score": 65,
+          "reasons": [
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 67,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
         "code": "4736",
         "name": "泰博",
         "sector": "生技",
         "stale": false,
-        "price": 130.0,
+        "price": 129.0,
         "technical": {
-          "score": 72,
+          "score": 71,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +10.6%；季線 20 日變化 +4.1%",
-            "距 60 日高點 -3.3%；月線乖離 -1.5%"
+            "近 60 日 +9.7%；季線 20 日變化 +4.1%",
+            "距 60 日高點 -4.1%；月線乖離 -2.2%"
           ]
         },
         "chips": {
           "score": 84,
           "reasons": [
-            "近 20 日法人 +396 張，占成交量 +12.81%",
+            "近 20 日法人 +396 張，占成交量 +12.00%",
             "買超天數 61%；近 5 日 +211 張"
           ]
         },
@@ -8831,7 +8831,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -8845,19 +8845,19 @@
         "name": "億光",
         "sector": "光電",
         "stale": false,
-        "price": 65.8,
+        "price": 64.5,
         "technical": {
-          "score": 53,
+          "score": 51,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +8.4%；季線 20 日變化 +1.2%",
-            "距 60 日高點 -4.6%；月線乖離 -3.0%"
+            "近 60 日 +6.3%；季線 20 日變化 +1.2%",
+            "距 60 日高點 -6.5%；月線乖離 -4.8%"
           ]
         },
         "chips": {
           "score": 96,
           "reasons": [
-            "近 20 日法人 +9,450 張，占成交量 +30.63%",
+            "近 20 日法人 +9,450 張，占成交量 +29.80%",
             "買超天數 89%；近 5 日 +2,046 張"
           ]
         },
@@ -8868,70 +8868,29 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 67,
-        "rating": "中性偏強",
-        "risks": []
-      },
-      {
-        "code": "6805",
-        "name": "富世達",
-        "sector": "電子",
-        "stale": false,
-        "price": 2205.0,
-        "technical": {
-          "score": 78,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +37.8%；季線 20 日變化 +16.5%",
-            "距 60 日高點 -15.2%；月線乖離 -5.2%"
-          ]
-        },
-        "chips": {
-          "score": 49,
-          "reasons": [
-            "近 20 日法人 -70 張，占成交量 -0.26%",
-            "買超天數 50%；近 5 日 +748 張"
-          ]
-        },
-        "revenue": {
-          "score": 92,
-          "reasons": [
-            "2026-09 營收年增 +32.2%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 66,
         "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
+        "risks": []
       },
       {
         "code": "2466",
         "name": "冠西電",
         "sector": "光電",
         "stale": false,
-        "price": 388.5,
+        "price": 342.0,
         "technical": {
           "score": 85,
           "reasons": [
             "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +303.4%；季線 20 日變化 +48.1%",
-            "距 60 日高點 0.0%；月線乖離 +54.0%"
+            "近 60 日 +255.1%；季線 20 日變化 +47.3%",
+            "距 60 日高點 -10.0%；月線乖離 +36.8%"
           ]
         },
         "chips": {
@@ -8948,14 +8907,14 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 66,
+        "score": 65,
         "rating": "中性偏強",
         "risks": [
           "距月線超過 15%，留意回檔",
@@ -8963,82 +8922,41 @@
         ]
       },
       {
-        "code": "3653",
-        "name": "健策",
+        "code": "6805",
+        "name": "富世達",
         "sector": "電子",
         "stale": false,
-        "price": 6275.0,
+        "price": 2160.0,
         "technical": {
-          "score": 79,
+          "score": 77,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +44.6%；季線 20 日變化 +21.8%",
-            "距 60 日高點 -12.9%；月線乖離 -5.2%"
+            "近 60 日 +35.0%；季線 20 日變化 +16.4%",
+            "距 60 日高點 -16.9%；月線乖離 -7.0%"
           ]
         },
         "chips": {
-          "score": 39,
+          "score": 49,
           "reasons": [
-            "近 20 日法人 -403 張，占成交量 -1.59%",
-            "買超天數 33%；近 5 日 -43 張"
+            "近 20 日法人 -70 張，占成交量 -0.25%",
+            "買超天數 50%；近 5 日 +748 張"
           ]
         },
         "revenue": {
-          "score": 100,
+          "score": 92,
           "reasons": [
-            "2026-09 營收年增 +80.0%"
+            "2026-09 營收年增 +32.2%；年增連 2 月加速 +10"
           ]
         },
         "industry": {
-          "score": 58,
+          "score": 49,
           "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 65,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2834",
-        "name": "臺企銀",
-        "sector": "金融",
-        "stale": false,
-        "price": 17.9,
-        "technical": {
-          "score": 80,
-          "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +6.9%；季線 20 日變化 +1.9%",
-            "距 60 日高點 -4.5%；月線乖離 +0.6%"
-          ]
-        },
-        "chips": {
-          "score": 52,
-          "reasons": [
-            "近 20 日法人 -3,383 張，占成交量 -0.93%",
-            "買超天數 61%；近 5 日 +11,000 張"
-          ]
-        },
-        "revenue": {
-          "score": 57,
-          "reasons": [
-            "2026-09 營收年增 +6.5%"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 65,
+        "score": 64,
         "rating": "中性偏強",
         "risks": [
           "法人近 20 日累計賣超"
@@ -9049,19 +8967,19 @@
         "name": "遠東銀",
         "sector": "金融",
         "stale": false,
-        "price": 13.0,
+        "price": 12.95,
         "technical": {
           "score": 47,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -1.1%；季線 20 日變化 -0.1%",
-            "距 60 日高點 -5.5%；月線乖離 -1.3%"
+            "近 60 日 -1.5%；季線 20 日變化 -0.1%",
+            "距 60 日高點 -5.8%；月線乖離 -1.6%"
           ]
         },
         "chips": {
-          "score": 82,
+          "score": 81,
           "reasons": [
-            "近 20 日法人 +12,013 張，占成交量 +9.96%",
+            "近 20 日法人 +12,013 張，占成交量 +9.55%",
             "買超天數 56%；近 5 日 -803 張"
           ]
         },
@@ -9072,14 +8990,14 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 65,
+        "score": 64,
         "rating": "中性偏強",
         "risks": []
       },
@@ -9088,19 +9006,19 @@
         "name": "台康生技",
         "sector": "生技",
         "stale": false,
-        "price": 48.3,
+        "price": 47.85,
         "technical": {
-          "score": 46,
+          "score": 45,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -0.7%；季線 20 日變化 +2.0%",
-            "距 60 日高點 -10.4%；月線乖離 -2.6%"
+            "近 60 日 -1.6%；季線 20 日變化 +2.0%",
+            "距 60 日高點 -11.2%；月線乖離 -3.5%"
           ]
         },
         "chips": {
-          "score": 78,
+          "score": 77,
           "reasons": [
-            "近 20 日法人 +601 張，占成交量 +7.79%",
+            "近 20 日法人 +601 張，占成交量 +7.54%",
             "買超天數 61%；近 5 日 +184 張"
           ]
         },
@@ -9113,7 +9031,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -9123,75 +9041,36 @@
         "risks": []
       },
       {
-        "code": "2368",
-        "name": "金像電",
+        "code": "3653",
+        "name": "健策",
         "sector": "電子",
         "stale": false,
-        "price": 1015.0,
+        "price": 6035.0,
         "technical": {
-          "score": 50,
+          "score": 77,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +8.0%；季線 20 日變化 +8.0%",
-            "距 60 日高點 -21.0%；月線乖離 -13.4%"
+            "近 60 日 +39.1%；季線 20 日變化 +21.7%",
+            "距 60 日高點 -16.2%；月線乖離 -8.7%"
           ]
         },
         "chips": {
-          "score": 59,
+          "score": 39,
           "reasons": [
-            "近 20 日法人 +4,644 張，占成交量 +2.33%",
-            "買超天數 56%；近 5 日 -340 張"
+            "近 20 日法人 -403 張，占成交量 -1.54%",
+            "買超天數 33%；近 5 日 -43 張"
           ]
         },
         "revenue": {
           "score": 100,
           "reasons": [
-            "2026-09 營收年增 +55.5%"
+            "2026-09 營收年增 +80.0%"
           ]
         },
         "industry": {
-          "score": 58,
+          "score": 49,
           "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 62,
-        "rating": "中性偏強",
-        "risks": []
-      },
-      {
-        "code": "6213",
-        "name": "聯茂",
-        "sector": "電子",
-        "stale": false,
-        "price": 641.0,
-        "technical": {
-          "score": 72,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +88.0%；季線 20 日變化 +32.5%",
-            "距 60 日高點 -25.1%；月線乖離 -16.3%"
-          ]
-        },
-        "chips": {
-          "score": 35,
-          "reasons": [
-            "近 20 日法人 -10,481 張，占成交量 -3.56%",
-            "買超天數 39%；近 5 日 -8,251 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +110.7%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -9201,105 +9080,25 @@
         "risks": [
           "法人近 20 日累計賣超"
         ]
-      },
-      {
-        "code": "2492",
-        "name": "華新科",
-        "sector": "電子",
-        "stale": false,
-        "price": 338.5,
-        "technical": {
-          "score": 60,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +30.4%；季線 20 日變化 +9.3%",
-            "距 60 日高點 -20.9%；月線乖離 -13.0%"
-          ]
-        },
-        "chips": {
-          "score": 48,
-          "reasons": [
-            "近 20 日法人 -4,736 張，占成交量 -0.75%",
-            "買超天數 50%；近 5 日 -3,722 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +53.9%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 62,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2883",
-        "name": "凱基金",
-        "sector": "金融",
-        "stale": false,
-        "price": 35.45,
-        "technical": {
-          "score": 71,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +12.2%；季線 20 日變化 +7.8%",
-            "距 60 日高點 -12.4%；月線乖離 -6.7%"
-          ]
-        },
-        "chips": {
-          "score": 79,
-          "reasons": [
-            "近 20 日法人 +67,541 張，占成交量 +8.97%",
-            "買超天數 56%；近 5 日 +5,824 張"
-          ]
-        },
-        "revenue": {
-          "score": 0,
-          "reasons": [
-            "2026-09 營收年增 -61.2%"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 62,
-        "rating": "中性偏強",
-        "risks": []
       },
       {
         "code": "6446",
         "name": "藥華藥",
         "sector": "生技",
         "stale": false,
-        "price": 1230.0,
+        "price": 1225.0,
         "technical": {
-          "score": 47,
+          "score": 46,
           "reasons": [
             "均線：收盤高於月線、月線低於季線",
-            "近 60 日 -7.9%；季線 20 日變化 -0.1%",
-            "距 60 日高點 -22.4%；月線乖離 +3.3%"
+            "近 60 日 -8.2%；季線 20 日變化 -0.1%",
+            "距 60 日高點 -22.7%；月線乖離 +2.9%"
           ]
         },
         "chips": {
-          "score": 69,
+          "score": 68,
           "reasons": [
-            "近 20 日法人 +1,762 張，占成交量 +5.44%",
+            "近 20 日法人 +1,762 張，占成交量 +5.25%",
             "買超天數 56%；近 5 日 +584 張"
           ]
         },
@@ -9312,12 +9111,12 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 62,
+        "score": 61,
         "rating": "中性偏強",
         "risks": []
       },
@@ -9326,13 +9125,13 @@
         "name": "GIS-KY",
         "sector": "光電",
         "stale": false,
-        "price": 91.1,
+        "price": 87.7,
         "technical": {
-          "score": 78,
+          "score": 76,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +51.1%；季線 20 日變化 +16.1%",
-            "距 60 日高點 -15.3%；月線乖離 -5.3%"
+            "近 60 日 +45.4%；季線 20 日變化 +16.0%",
+            "距 60 日高點 -18.4%；月線乖離 -8.7%"
           ]
         },
         "chips": {
@@ -9349,130 +9148,87 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 62,
+        "score": 61,
         "rating": "中性偏強",
         "risks": []
       },
       {
-        "code": "8046",
-        "name": "南電",
-        "sector": "電子",
+        "code": "2883",
+        "name": "凱基金",
+        "sector": "金融",
         "stale": false,
-        "price": 1090.0,
-        "technical": {
-          "score": 57,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +2.8%；季線 20 日變化 +6.3%",
-            "距 60 日高點 -27.6%；月線乖離 -18.6%"
-          ]
-        },
-        "chips": {
-          "score": 49,
-          "reasons": [
-            "近 20 日法人 -638 張，占成交量 -0.41%",
-            "買超天數 50%；近 5 日 -486 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +57.8%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 61,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2426",
-        "name": "鼎元",
-        "sector": "光電",
-        "stale": false,
-        "price": 81.9,
-        "technical": {
-          "score": 72,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +31.0%；季線 20 日變化 +14.5%",
-            "距 60 日高點 -28.2%；月線乖離 -13.0%"
-          ]
-        },
-        "chips": {
-          "score": 41,
-          "reasons": [
-            "近 20 日法人 -7,990 張，占成交量 -2.31%",
-            "買超天數 44%；近 5 日 -2,555 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +40.9%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 49,
-          "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 61,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "6415",
-        "name": "矽力*-KY",
-        "sector": "半導體",
-        "stale": false,
-        "price": 500.0,
+        "price": 34.95,
         "technical": {
           "score": 69,
           "reasons": [
-            "均線：收盤高於月線、月線高於季線",
-            "近 60 日 +12.4%；季線 20 日變化 +1.4%",
-            "距 60 日高點 -4.8%；月線乖離 +5.2%"
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +10.6%；季線 20 日變化 +7.8%",
+            "距 60 日高點 -13.6%；月線乖離 -8.0%"
           ]
         },
         "chips": {
-          "score": 35,
+          "score": 78,
           "reasons": [
-            "近 20 日法人 -3,228 張，占成交量 -2.80%",
-            "買超天數 33%；近 5 日 -766 張"
+            "近 20 日法人 +67,541 張，占成交量 +8.58%",
+            "買超天數 56%；近 5 日 +5,824 張"
           ]
         },
         "revenue": {
-          "score": 100,
+          "score": 0,
           "reasons": [
-            "2026-09 營收年增 +50.7%"
+            "2026-09 營收年增 -61.2%"
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 65,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 60,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
+        "code": "2834",
+        "name": "臺企銀",
+        "sector": "金融",
+        "stale": false,
+        "price": 17.7,
+        "technical": {
+          "score": 65,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +5.7%；季線 20 日變化 +1.8%",
+            "距 60 日高點 -5.6%；月線乖離 -0.5%"
+          ]
+        },
+        "chips": {
+          "score": 52,
+          "reasons": [
+            "近 20 日法人 -3,383 張，占成交量 -0.88%",
+            "買超天數 61%；近 5 日 +11,000 張"
+          ]
+        },
+        "revenue": {
+          "score": 57,
+          "reasons": [
+            "2026-09 營收年增 +6.5%"
+          ]
+        },
+        "industry": {
+          "score": 65,
+          "reasons": [
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -9484,23 +9240,226 @@
         ]
       },
       {
+        "code": "2426",
+        "name": "鼎元",
+        "sector": "光電",
+        "stale": false,
+        "price": 78.3,
+        "technical": {
+          "score": 72,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +25.3%；季線 20 日變化 +14.4%",
+            "距 60 日高點 -31.3%；月線乖離 -16.7%"
+          ]
+        },
+        "chips": {
+          "score": 41,
+          "reasons": [
+            "近 20 日法人 -7,990 張，占成交量 -2.26%",
+            "買超天數 44%；近 5 日 -2,555 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +40.9%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 60,
+        "rating": "中性偏強",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "8046",
+        "name": "南電",
+        "sector": "電子",
+        "stale": false,
+        "price": 1070.0,
+        "technical": {
+          "score": 56,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +0.9%；季線 20 日變化 +6.3%",
+            "距 60 日高點 -28.9%；月線乖離 -20.1%"
+          ]
+        },
+        "chips": {
+          "score": 49,
+          "reasons": [
+            "近 20 日法人 -638 張，占成交量 -0.40%",
+            "買超天數 50%；近 5 日 -486 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +57.8%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 59,
+        "rating": "中性偏強",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "2368",
+        "name": "金像電",
+        "sector": "電子",
+        "stale": false,
+        "price": 970.0,
+        "technical": {
+          "score": 46,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +3.2%；季線 20 日變化 +7.9%",
+            "距 60 日高點 -24.5%；月線乖離 -17.1%"
+          ]
+        },
+        "chips": {
+          "score": 59,
+          "reasons": [
+            "近 20 日法人 +4,644 張，占成交量 +2.26%",
+            "買超天數 56%；近 5 日 -340 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +55.5%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 59,
+        "rating": "中性偏強",
+        "risks": []
+      },
+      {
+        "code": "6213",
+        "name": "聯茂",
+        "sector": "電子",
+        "stale": false,
+        "price": 600.0,
+        "technical": {
+          "score": 72,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +76.0%；季線 20 日變化 +32.4%",
+            "距 60 日高點 -29.9%；月線乖離 -21.5%"
+          ]
+        },
+        "chips": {
+          "score": 35,
+          "reasons": [
+            "近 20 日法人 -10,481 張，占成交量 -3.41%",
+            "買超天數 39%；近 5 日 -8,251 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +110.7%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 59,
+        "rating": "中性偏強",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "2492",
+        "name": "華新科",
+        "sector": "電子",
+        "stale": false,
+        "price": 320.5,
+        "technical": {
+          "score": 57,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +23.5%；季線 20 日變化 +9.2%",
+            "距 60 日高點 -25.1%；月線乖離 -17.5%"
+          ]
+        },
+        "chips": {
+          "score": 48,
+          "reasons": [
+            "近 20 日法人 -4,736 張，占成交量 -0.74%",
+            "買超天數 50%；近 5 日 -3,722 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +53.9%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 59,
+        "rating": "中性偏強",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
         "code": "6472",
         "name": "保瑞",
         "sector": "生技",
         "stale": false,
-        "price": 368.5,
+        "price": 367.5,
         "technical": {
-          "score": 32,
+          "score": 31,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -13.2%；季線 20 日變化 +0.3%",
-            "距 60 日高點 -21.6%；月線乖離 -9.5%"
+            "近 60 日 -13.4%；季線 20 日變化 +0.3%",
+            "距 60 日高點 -21.8%；月線乖離 -9.8%"
           ]
         },
         "chips": {
           "score": 84,
           "reasons": [
-            "近 20 日法人 +1,083 張，占成交量 +11.72%",
+            "近 20 日法人 +1,083 張，占成交量 +11.40%",
             "買超天數 61%；近 5 日 +351 張"
           ]
         },
@@ -9513,12 +9472,12 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 60,
+        "score": 59,
         "rating": "中性偏強",
         "risks": []
       },
@@ -9527,19 +9486,19 @@
         "name": "景碩",
         "sector": "半導體",
         "stale": false,
-        "price": 855.0,
+        "price": 819.0,
         "technical": {
-          "score": 62,
+          "score": 59,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +3.3%；季線 20 日變化 +11.0%",
-            "距 60 日高點 -22.3%；月線乖離 -14.5%"
+            "近 60 日 -1.1%；季線 20 日變化 +10.9%",
+            "距 60 日高點 -25.5%；月線乖離 -18.0%"
           ]
         },
         "chips": {
-          "score": 37,
+          "score": 38,
           "reasons": [
-            "近 20 日法人 -9,570 張，占成交量 -3.45%",
+            "近 20 日法人 -9,570 張，占成交量 -3.35%",
             "買超天數 44%；近 5 日 -10,755 張"
           ]
         },
@@ -9550,14 +9509,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 59,
+        "score": 58,
         "rating": "中性偏強",
         "risks": [
           "法人近 20 日累計賣超"
@@ -9568,19 +9527,19 @@
         "name": "望隼",
         "sector": "生技",
         "stale": false,
-        "price": 203.0,
+        "price": 200.0,
         "technical": {
-          "score": 51,
+          "score": 49,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 +5.5%；季線 20 日變化 +1.9%",
-            "距 60 日高點 -7.3%；月線乖離 -1.5%"
+            "近 60 日 +3.9%；季線 20 日變化 +1.9%",
+            "距 60 日高點 -8.7%；月線乖離 -2.9%"
           ]
         },
         "chips": {
-          "score": 65,
+          "score": 64,
           "reasons": [
-            "近 20 日法人 +122 張，占成交量 +4.26%",
+            "近 20 日法人 +122 張，占成交量 +3.92%",
             "買超天數 56%；近 5 日 +146 張"
           ]
         },
@@ -9593,74 +9552,33 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 58,
-        "rating": "中性偏強",
-        "risks": []
-      },
-      {
-        "code": "3037",
-        "name": "欣興",
-        "sector": "電子",
-        "stale": false,
-        "price": 953.0,
-        "technical": {
-          "score": 58,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -1.7%；季線 20 日變化 +9.6%",
-            "距 60 日高點 -28.1%；月線乖離 -15.6%"
-          ]
-        },
-        "chips": {
-          "score": 34,
-          "reasons": [
-            "近 20 日法人 -12,519 張，占成交量 -3.87%",
-            "買超天數 39%；近 5 日 -6,523 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +64.7%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 57,
         "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
+        "risks": []
       },
       {
         "code": "2344",
         "name": "華邦電",
         "sector": "半導體",
         "stale": false,
-        "price": 149.0,
+        "price": 146.0,
         "technical": {
-          "score": 34,
+          "score": 32,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -11.8%；季線 20 日變化 +1.6%",
-            "距 60 日高點 -20.7%；月線乖離 -9.4%"
+            "近 60 日 -13.6%；季線 20 日變化 +1.6%",
+            "距 60 日高點 -22.3%；月線乖離 -11.2%"
           ]
         },
         "chips": {
           "score": 57,
           "reasons": [
-            "近 20 日法人 +28,049 張，占成交量 +2.35%",
+            "近 20 日法人 +28,049 張，占成交量 +2.28%",
             "買超天數 50%；近 5 日 +58,363 張"
           ]
         },
@@ -9671,14 +9589,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 56,
+        "score": 55,
         "rating": "中性偏強",
         "risks": []
       },
@@ -9687,19 +9605,19 @@
         "name": "台勝科",
         "sector": "半導體",
         "stale": false,
-        "price": 325.5,
+        "price": 316.0,
         "technical": {
-          "score": 53,
+          "score": 51,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +2.8%；季線 20 日變化 +2.4%",
-            "距 60 日高點 -36.5%；月線乖離 -22.6%"
+            "近 60 日 -0.2%；季線 20 日變化 +2.3%",
+            "距 60 日高點 -38.4%；月線乖離 -24.7%"
           ]
         },
         "chips": {
           "score": 49,
           "reasons": [
-            "近 20 日法人 +354 張，占成交量 +0.32%",
+            "近 20 日法人 +354 張，占成交量 +0.31%",
             "買超天數 44%；近 5 日 +342 張"
           ]
         },
@@ -9710,76 +9628,35 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 56,
+        "score": 55,
         "rating": "中性偏強",
         "risks": []
-      },
-      {
-        "code": "2317",
-        "name": "鴻海",
-        "sector": "電子",
-        "stale": false,
-        "price": 247.5,
-        "technical": {
-          "score": 44,
-          "reasons": [
-            "均線：收盤高於月線、月線低於季線",
-            "近 60 日 -4.3%；季線 20 日變化 +0.4%",
-            "距 60 日高點 -8.3%；月線乖離 +0.3%"
-          ]
-        },
-        "chips": {
-          "score": 51,
-          "reasons": [
-            "近 20 日法人 -3,406 張，占成交量 -0.44%",
-            "買超天數 56%；近 5 日 +48,055 張"
-          ]
-        },
-        "revenue": {
-          "score": 88,
-          "reasons": [
-            "2026-09 營收年增 +38.4%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 56,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
       },
       {
         "code": "3711",
         "name": "日月光投控",
         "sector": "半導體",
         "stale": false,
-        "price": 635.0,
+        "price": 616.0,
         "technical": {
-          "score": 62,
+          "score": 59,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +7.1%；季線 20 日變化 +4.4%",
-            "距 60 日高點 -16.7%；月線乖離 -8.5%"
+            "近 60 日 +3.9%；季線 20 日變化 +4.3%",
+            "距 60 日高點 -19.2%；月線乖離 -11.1%"
           ]
         },
         "chips": {
-          "score": 28,
+          "score": 29,
           "reasons": [
-            "近 20 日法人 -23,891 張，占成交量 -7.36%",
+            "近 20 日法人 -23,891 張，占成交量 -7.05%",
             "買超天數 50%；近 5 日 -1,695 張"
           ]
         },
@@ -9790,76 +9667,119 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 55,
-        "rating": "中性偏強",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "3533",
-        "name": "嘉澤",
-        "sector": "電子",
-        "stale": false,
-        "price": 1755.0,
-        "technical": {
-          "score": 36,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -10.2%；季線 20 日變化 -1.6%",
-            "距 60 日高點 -12.7%；月線乖離 -5.2%"
-          ]
-        },
-        "chips": {
-          "score": 62,
-          "reasons": [
-            "近 20 日法人 +1,337 張，占成交量 +4.65%",
-            "買超天數 44%；近 5 日 +1,201 張"
-          ]
-        },
-        "revenue": {
-          "score": 66,
-          "reasons": [
-            "2026-09 營收年增 +16.1%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 54,
         "rating": "中性偏弱",
-        "risks": []
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "6415",
+        "name": "矽力*-KY",
+        "sector": "半導體",
+        "stale": false,
+        "price": 472.5,
+        "technical": {
+          "score": 49,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +6.2%；季線 20 日變化 +1.3%",
+            "距 60 日高點 -10.0%；月線乖離 -0.3%"
+          ]
+        },
+        "chips": {
+          "score": 35,
+          "reasons": [
+            "近 20 日法人 -3,228 張，占成交量 -2.68%",
+            "買超天數 33%；近 5 日 -766 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +50.7%"
+          ]
+        },
+        "industry": {
+          "score": 54,
+          "reasons": [
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 54,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "3037",
+        "name": "欣興",
+        "sector": "電子",
+        "stale": false,
+        "price": 902.0,
+        "technical": {
+          "score": 55,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -6.9%；季線 20 日變化 +9.6%",
+            "距 60 日高點 -31.9%；月線乖離 -19.9%"
+          ]
+        },
+        "chips": {
+          "score": 34,
+          "reasons": [
+            "近 20 日法人 -12,519 張，占成交量 -3.69%",
+            "買超天數 39%；近 5 日 -6,523 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +64.7%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 54,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
       },
       {
         "code": "2838",
         "name": "聯邦銀",
         "sector": "金融",
         "stale": false,
-        "price": 20.3,
+        "price": 20.2,
         "technical": {
           "score": 45,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -1.7%；季線 20 日變化 -0.8%",
-            "距 60 日高點 -6.9%；月線乖離 -0.6%"
+            "近 60 日 -2.2%；季線 20 日變化 -0.8%",
+            "距 60 日高點 -7.3%；月線乖離 -1.0%"
           ]
         },
         "chips": {
-          "score": 67,
+          "score": 66,
           "reasons": [
-            "近 20 日法人 +1,465 張，占成交量 +5.05%",
+            "近 20 日法人 +1,465 張，占成交量 +4.68%",
             "買超天數 56%；近 5 日 +2,023 張"
           ]
         },
@@ -9870,9 +9790,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -9886,19 +9806,19 @@
         "name": "玉晶光",
         "sector": "光電",
         "stale": false,
-        "price": 952.0,
+        "price": 936.0,
         "technical": {
           "score": 72,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +78.6%；季線 20 日變化 +26.1%",
-            "距 60 日高點 -28.4%；月線乖離 -13.9%"
+            "近 60 日 +75.6%；季線 20 日變化 +26.0%",
+            "距 60 日高點 -29.6%；月線乖離 -15.3%"
           ]
         },
         "chips": {
           "score": 39,
           "reasons": [
-            "近 20 日法人 -3,155 張，占成交量 -2.19%",
+            "近 20 日法人 -3,155 張，占成交量 -2.15%",
             "買超天數 39%；近 5 日 -147 張"
           ]
         },
@@ -9909,31 +9829,109 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 53,
+        "score": 52,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
         ]
       },
       {
+        "code": "3533",
+        "name": "嘉澤",
+        "sector": "電子",
+        "stale": false,
+        "price": 1735.0,
+        "technical": {
+          "score": 35,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -11.3%；季線 20 日變化 -1.6%",
+            "距 60 日高點 -13.7%；月線乖離 -6.2%"
+          ]
+        },
+        "chips": {
+          "score": 61,
+          "reasons": [
+            "近 20 日法人 +1,337 張，占成交量 +4.55%",
+            "買超天數 44%；近 5 日 +1,201 張"
+          ]
+        },
+        "revenue": {
+          "score": 66,
+          "reasons": [
+            "2026-09 營收年增 +16.1%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 51,
+        "rating": "中性偏弱",
+        "risks": []
+      },
+      {
+        "code": "1795",
+        "name": "美時",
+        "sector": "生技",
+        "stale": false,
+        "price": 161.0,
+        "technical": {
+          "score": 18,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -14.2%；季線 20 日變化 -2.1%",
+            "距 60 日高點 -17.0%；月線乖離 -8.1%"
+          ]
+        },
+        "chips": {
+          "score": 63,
+          "reasons": [
+            "近 20 日法人 +536 張，占成交量 +3.44%",
+            "買超天數 56%；近 5 日 -175 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +128.0%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 48,
+          "reasons": [
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 51,
+        "rating": "中性偏弱",
+        "risks": []
+      },
+      {
         "code": "3714",
         "name": "富采",
         "sector": "光電",
         "stale": false,
-        "price": 58.6,
+        "price": 57.3,
         "technical": {
-          "score": 49,
+          "score": 46,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +6.4%；季線 20 日變化 +4.9%",
-            "距 60 日高點 -17.2%；月線乖離 -6.9%"
+            "近 60 日 +4.0%；季線 20 日變化 +4.9%",
+            "距 60 日高點 -19.1%；月線乖離 -8.9%"
           ]
         },
         "chips": {
@@ -9950,208 +9948,9 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 53,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "3661",
-        "name": "世芯-KY",
-        "sector": "半導體",
-        "stale": false,
-        "price": 3255.0,
-        "technical": {
-          "score": 20,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -9.8%；季線 20 日變化 +2.5%",
-            "距 60 日高點 -25.9%；月線乖離 -13.8%"
-          ]
-        },
-        "chips": {
-          "score": 55,
-          "reasons": [
-            "近 20 日法人 +1,655 張，占成交量 +3.99%",
-            "買超天數 33%；近 5 日 -119 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +496.0%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 56,
-          "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 52,
-        "rating": "中性偏弱",
-        "risks": []
-      },
-      {
-        "code": "2313",
-        "name": "華通",
-        "sector": "電子",
-        "stale": false,
-        "price": 195.5,
-        "technical": {
-          "score": 36,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -10.3%；季線 20 日變化 +4.1%",
-            "距 60 日高點 -22.4%；月線乖離 -16.0%"
-          ]
-        },
-        "chips": {
-          "score": 56,
-          "reasons": [
-            "近 20 日法人 +13,681 張，占成交量 +2.06%",
-            "買超天數 50%；近 5 日 -12,271 張"
-          ]
-        },
-        "revenue": {
-          "score": 65,
-          "reasons": [
-            "2026-09 營收年增 +15.0%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 52,
-        "rating": "中性偏弱",
-        "risks": []
-      },
-      {
-        "code": "1795",
-        "name": "美時",
-        "sector": "生技",
-        "stale": false,
-        "price": 163.0,
-        "technical": {
-          "score": 19,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -13.1%；季線 20 日變化 -2.1%",
-            "距 60 日高點 -16.0%；月線乖離 -7.0%"
-          ]
-        },
-        "chips": {
-          "score": 63,
-          "reasons": [
-            "近 20 日法人 +536 張，占成交量 +3.61%",
-            "買超天數 56%；近 5 日 -175 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +128.0%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 48,
-          "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 52,
-        "rating": "中性偏弱",
-        "risks": []
-      },
-      {
-        "code": "2383",
-        "name": "台光電",
-        "sector": "電子",
-        "stale": false,
-        "price": 4615.0,
-        "technical": {
-          "score": 32,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -12.0%；季線 20 日變化 +2.5%",
-            "距 60 日高點 -27.3%；月線乖離 -12.2%"
-          ]
-        },
-        "chips": {
-          "score": 40,
-          "reasons": [
-            "近 20 日法人 -1,507 張，占成交量 -2.72%",
-            "買超天數 44%；近 5 日 -1,554 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +168.9%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 51,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "4958",
-        "name": "臻鼎-KY",
-        "sector": "電子",
-        "stale": false,
-        "price": 463.0,
-        "technical": {
-          "score": 38,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -5.1%；季線 20 日變化 +2.8%",
-            "距 60 日高點 -22.2%；月線乖離 -15.4%"
-          ]
-        },
-        "chips": {
-          "score": 41,
-          "reasons": [
-            "近 20 日法人 -12,750 張，占成交量 -2.30%",
-            "買超天數 44%；近 5 日 -19,922 張"
-          ]
-        },
-        "revenue": {
-          "score": 86,
-          "reasons": [
-            "2026-09 營收年增 +36.1%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10167,19 +9966,19 @@
         "name": "鴻勁",
         "sector": "半導體",
         "stale": false,
-        "price": 4565.0,
+        "price": 4470.0,
         "technical": {
           "score": 6,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -30.1%；季線 20 日變化 -4.2%",
-            "距 60 日高點 -34.5%；月線乖離 -16.3%"
+            "近 60 日 -31.5%；季線 20 日變化 -4.2%",
+            "距 60 日高點 -35.9%；月線乖離 -18.0%"
           ]
         },
         "chips": {
-          "score": 65,
+          "score": 64,
           "reasons": [
-            "近 20 日法人 +470 張，占成交量 +3.50%",
+            "近 20 日法人 +470 張，占成交量 +3.35%",
             "買超天數 61%；近 5 日 +244 張"
           ]
         },
@@ -10190,9 +9989,9 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10202,23 +10001,103 @@
         "risks": []
       },
       {
+        "code": "3661",
+        "name": "世芯-KY",
+        "sector": "半導體",
+        "stale": false,
+        "price": 3140.0,
+        "technical": {
+          "score": 18,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -13.0%；季線 20 日變化 +2.5%",
+            "距 60 日高點 -28.6%；月線乖離 -16.7%"
+          ]
+        },
+        "chips": {
+          "score": 55,
+          "reasons": [
+            "近 20 日法人 +1,655 張，占成交量 +3.89%",
+            "買超天數 33%；近 5 日 -119 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +496.0%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 54,
+          "reasons": [
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 50,
+        "rating": "中性偏弱",
+        "risks": []
+      },
+      {
+        "code": "2317",
+        "name": "鴻海",
+        "sector": "電子",
+        "stale": false,
+        "price": 245.5,
+        "technical": {
+          "score": 30,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -5.0%；季線 20 日變化 +0.4%",
+            "距 60 日高點 -9.1%；月線乖離 -0.4%"
+          ]
+        },
+        "chips": {
+          "score": 51,
+          "reasons": [
+            "近 20 日法人 -3,406 張，占成交量 -0.42%",
+            "買超天數 56%；近 5 日 +48,055 張"
+          ]
+        },
+        "revenue": {
+          "score": 88,
+          "reasons": [
+            "2026-09 營收年增 +38.4%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 50,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
         "code": "1720",
         "name": "生達",
         "sector": "生技",
         "stale": false,
-        "price": 56.2,
+        "price": 56.1,
         "technical": {
           "score": 48,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -0.7%；季線 20 日變化 -0.3%",
-            "距 60 日高點 -2.9%；月線乖離 -1.3%"
+            "近 60 日 -0.9%；季線 20 日變化 -0.3%",
+            "距 60 日高點 -3.1%；月線乖離 -1.4%"
           ]
         },
         "chips": {
           "score": 44,
           "reasons": [
-            "近 20 日法人 -133 張，占成交量 -2.79%",
+            "近 20 日法人 -133 張，占成交量 -2.72%",
             "買超天數 56%；近 5 日 -75 張"
           ]
         },
@@ -10231,7 +10110,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10243,105 +10122,62 @@
         ]
       },
       {
-        "code": "3563",
-        "name": "牧德",
-        "sector": "光電",
+        "code": "2313",
+        "name": "華通",
+        "sector": "電子",
         "stale": false,
-        "price": 632.0,
+        "price": 186.0,
         "technical": {
-          "score": 36,
+          "score": 33,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -7.7%；季線 20 日變化 +1.9%",
-            "距 60 日高點 -21.7%；月線乖離 -9.1%"
+            "近 60 日 -14.7%；季線 20 日變化 +4.1%",
+            "距 60 日高點 -26.2%；月線乖離 -19.9%"
           ]
         },
         "chips": {
-          "score": 41,
+          "score": 56,
           "reasons": [
-            "近 20 日法人 -221 張，占成交量 -2.18%",
-            "買超天數 44%；近 5 日 +88 張"
+            "近 20 日法人 +13,681 張，占成交量 +2.02%",
+            "買超天數 50%；近 5 日 -12,271 張"
           ]
         },
         "revenue": {
-          "score": 100,
+          "score": 65,
           "reasons": [
-            "2026-09 營收年增 +63.2%；年增連 2 月加速 +10"
+            "2026-09 營收年增 +15.0%"
           ]
         },
         "industry": {
           "score": 49,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 50,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2059",
-        "name": "川湖",
-        "sector": "電子",
-        "stale": false,
-        "price": 9520.0,
-        "technical": {
-          "score": 43,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 +0.5%；季線 20 日變化 +6.6%",
-            "距 60 日高點 -34.4%；月線乖離 -8.1%"
-          ]
-        },
-        "chips": {
-          "score": 22,
-          "reasons": [
-            "近 20 日法人 -946 張，占成交量 -8.64%",
-            "買超天數 44%；近 5 日 +287 張"
-          ]
-        },
-        "revenue": {
-          "score": 100,
-          "reasons": [
-            "2026-09 營收年增 +196.2%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 49,
         "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
+        "risks": []
       },
       {
         "code": "6005",
         "name": "群益證",
         "sector": "金融",
         "stale": false,
-        "price": 29.95,
+        "price": 29.4,
         "technical": {
-          "score": 45,
+          "score": 43,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -2.8%；季線 20 日變化 +1.3%",
-            "距 60 日高點 -9.2%；月線乖離 -5.2%"
+            "近 60 日 -4.6%；季線 20 日變化 +1.3%",
+            "距 60 日高點 -10.9%；月線乖離 -6.8%"
           ]
         },
         "chips": {
-          "score": 19,
+          "score": 20,
           "reasons": [
-            "近 20 日法人 -11,685 張，占成交量 -9.64%",
+            "近 20 日法人 -11,685 張，占成交量 -9.25%",
             "買超天數 44%；近 5 日 -3,078 張"
           ]
         },
@@ -10352,9 +10188,9 @@
           ]
         },
         "industry": {
-          "score": 66,
+          "score": 65,
           "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10366,23 +10202,146 @@
         ]
       },
       {
+        "code": "3563",
+        "name": "牧德",
+        "sector": "光電",
+        "stale": false,
+        "price": 614.0,
+        "technical": {
+          "score": 33,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -10.4%；季線 20 日變化 +1.9%",
+            "距 60 日高點 -23.9%；月線乖離 -11.6%"
+          ]
+        },
+        "chips": {
+          "score": 42,
+          "reasons": [
+            "近 20 日法人 -221 張，占成交量 -2.09%",
+            "買超天數 44%；近 5 日 +88 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +63.2%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 49,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "2383",
+        "name": "台光電",
+        "sector": "電子",
+        "stale": false,
+        "price": 4395.0,
+        "technical": {
+          "score": 30,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -16.2%；季線 20 日變化 +2.5%",
+            "距 60 日高點 -30.8%；月線乖離 -16.2%"
+          ]
+        },
+        "chips": {
+          "score": 40,
+          "reasons": [
+            "近 20 日法人 -1,507 張，占成交量 -2.64%",
+            "買超天數 44%；近 5 日 -1,554 張"
+          ]
+        },
+        "revenue": {
+          "score": 100,
+          "reasons": [
+            "2026-09 營收年增 +168.9%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 48,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "4958",
+        "name": "臻鼎-KY",
+        "sector": "電子",
+        "stale": false,
+        "price": 443.0,
+        "technical": {
+          "score": 34,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -9.2%；季線 20 日變化 +2.7%",
+            "距 60 日高點 -25.5%；月線乖離 -18.9%"
+          ]
+        },
+        "chips": {
+          "score": 41,
+          "reasons": [
+            "近 20 日法人 -12,750 張，占成交量 -2.24%",
+            "買超天數 44%；近 5 日 -19,922 張"
+          ]
+        },
+        "revenue": {
+          "score": 86,
+          "reasons": [
+            "2026-09 營收年增 +36.1%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 48,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
         "code": "2330",
         "name": "台積電",
         "sector": "半導體",
         "stale": false,
-        "price": 2325.0,
+        "price": 2295.0,
         "technical": {
-          "score": 58,
+          "score": 56,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -3.3%；季線 20 日變化 +1.1%",
-            "距 60 日高點 -10.1%；月線乖離 -5.0%"
+            "近 60 日 -4.6%；季線 20 日變化 +1.1%",
+            "距 60 日高點 -11.2%；月線乖離 -6.2%"
           ]
         },
         "chips": {
           "score": 7,
           "reasons": [
-            "近 20 日法人 -124,198 張，占成交量 -26.26%",
+            "近 20 日法人 -124,198 張，占成交量 -24.71%",
             "買超天數 17%；近 5 日 -14,501 張"
           ]
         },
@@ -10393,14 +10352,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 48,
+        "score": 47,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10411,19 +10370,19 @@
         "name": "大立光",
         "sector": "光電",
         "stale": false,
-        "price": 5115.0,
+        "price": 4945.0,
         "technical": {
-          "score": 65,
+          "score": 63,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +11.8%；季線 20 日變化 +14.0%",
-            "距 60 日高點 -34.5%；月線乖離 -19.1%"
+            "近 60 日 +8.1%；季線 20 日變化 +14.0%",
+            "距 60 日高點 -36.7%；月線乖離 -21.7%"
           ]
         },
         "chips": {
           "score": 34,
           "reasons": [
-            "近 20 日法人 -1,986 張，占成交量 -3.84%",
+            "近 20 日法人 -1,986 張，占成交量 -3.73%",
             "買超天數 39%；近 5 日 -190 張"
           ]
         },
@@ -10434,14 +10393,14 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 48,
+        "score": 47,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10452,19 +10411,19 @@
         "name": "瑞軒",
         "sector": "光電",
         "stale": false,
-        "price": 34.05,
+        "price": 33.05,
         "technical": {
-          "score": 45,
+          "score": 43,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +2.9%；季線 20 日變化 +7.0%",
-            "距 60 日高點 -22.9%；月線乖離 -13.4%"
+            "近 60 日 -0.2%；季線 20 日變化 +6.9%",
+            "距 60 日高點 -25.1%；月線乖離 -15.8%"
           ]
         },
         "chips": {
           "score": 33,
           "reasons": [
-            "近 20 日法人 -16,181 張，占成交量 -4.87%",
+            "近 20 日法人 -16,181 張，占成交量 -4.78%",
             "買超天數 44%；近 5 日 -2,264 張"
           ]
         },
@@ -10475,14 +10434,14 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 48,
+        "score": 47,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10493,19 +10452,19 @@
         "name": "南亞科",
         "sector": "半導體",
         "stale": false,
-        "price": 420.0,
+        "price": 411.0,
         "technical": {
-          "score": 38,
+          "score": 36,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -5.6%；季線 20 日變化 +3.9%",
-            "距 60 日高點 -22.7%；月線乖離 -10.0%"
+            "近 60 日 -7.6%；季線 20 日變化 +3.9%",
+            "距 60 日高點 -24.3%；月線乖離 -11.8%"
           ]
         },
         "chips": {
-          "score": 21,
+          "score": 22,
           "reasons": [
-            "近 20 日法人 -75,669 張，占成交量 -8.84%",
+            "近 20 日法人 -75,669 張，占成交量 -8.61%",
             "買超天數 44%；近 5 日 +23,218 張"
           ]
         },
@@ -10516,89 +10475,50 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 47,
+        "score": 46,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
         ]
       },
       {
-        "code": "6789",
-        "name": "采鈺",
-        "sector": "半導體",
+        "code": "2059",
+        "name": "川湖",
+        "sector": "電子",
         "stale": false,
-        "price": 400.0,
+        "price": 9240.0,
         "technical": {
-          "score": 19,
+          "score": 41,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -11.8%；季線 20 日變化 -1.6%",
-            "距 60 日高點 -19.0%；月線乖離 -10.6%"
+            "近 60 日 -2.4%；季線 20 日變化 +6.5%",
+            "距 60 日高點 -36.3%；月線乖離 -10.7%"
           ]
         },
         "chips": {
-          "score": 56,
+          "score": 22,
           "reasons": [
-            "近 20 日法人 +93 張，占成交量 +0.56%",
-            "買超天數 61%；近 5 日 -465 張"
+            "近 20 日法人 -946 張，占成交量 -8.45%",
+            "買超天數 44%；近 5 日 +287 張"
           ]
         },
         "revenue": {
-          "score": 68,
+          "score": 100,
           "reasons": [
-            "2026-09 營收年增 +18.0%"
+            "2026-09 營收年增 +196.2%"
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 49,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 47,
-        "rating": "中性偏弱",
-        "risks": []
-      },
-      {
-        "code": "2812",
-        "name": "台中銀",
-        "sector": "金融",
-        "stale": false,
-        "price": 18.35,
-        "technical": {
-          "score": 45,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -2.4%；季線 20 日變化 -1.0%",
-            "距 60 日高點 -5.9%；月線乖離 -1.5%"
-          ]
-        },
-        "chips": {
-          "score": 32,
-          "reasons": [
-            "近 20 日法人 -13,245 張，占成交量 -6.09%",
-            "買超天數 50%；近 5 日 +2,733 張"
-          ]
-        },
-        "revenue": {
-          "score": 40,
-          "reasons": [
-            "2026-09 營收年增 -0.0%；年增由正轉負 −10"
-          ]
-        },
-        "industry": {
-          "score": 66,
-          "reasons": [
-            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +12.3%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10626,7 +10546,7 @@
         "chips": {
           "score": 87,
           "reasons": [
-            "近 20 日法人 +484 張，占成交量 +11.22%",
+            "近 20 日法人 +484 張，占成交量 +10.82%",
             "買超天數 67%；近 5 日 +93 張"
           ]
         },
@@ -10639,7 +10559,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10649,41 +10569,80 @@
         "risks": []
       },
       {
-        "code": "3673",
-        "name": "TPK-KY",
-        "sector": "光電",
+        "code": "6789",
+        "name": "采鈺",
+        "sector": "半導體",
         "stale": false,
-        "price": 66.8,
+        "price": 390.0,
         "technical": {
-          "score": 49,
+          "score": 16,
           "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +8.4%；季線 20 日變化 +4.1%",
-            "距 60 日高點 -17.1%；月線乖離 -8.0%"
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -14.0%；季線 20 日變化 -1.6%",
+            "距 60 日高點 -21.1%；月線乖離 -12.8%"
           ]
         },
         "chips": {
-          "score": 26,
+          "score": 56,
           "reasons": [
-            "近 20 日法人 -14,246 張，占成交量 -6.49%",
-            "買超天數 39%；近 5 日 -800 張"
+            "近 20 日法人 +93 張，占成交量 +0.54%",
+            "買超天數 61%；近 5 日 -465 張"
           ]
         },
         "revenue": {
-          "score": 78,
+          "score": 68,
           "reasons": [
-            "2026-09 營收年增 +27.8%"
+            "2026-09 營收年增 +18.0%"
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 54,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 46,
+        "score": 45,
+        "rating": "中性偏弱",
+        "risks": []
+      },
+      {
+        "code": "2812",
+        "name": "台中銀",
+        "sector": "金融",
+        "stale": false,
+        "price": 18.15,
+        "technical": {
+          "score": 44,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -3.5%；季線 20 日變化 -1.0%",
+            "距 60 日高點 -6.9%；月線乖離 -2.5%"
+          ]
+        },
+        "chips": {
+          "score": 33,
+          "reasons": [
+            "近 20 日法人 -13,245 張，占成交量 -5.78%",
+            "買超天數 50%；近 5 日 +2,733 張"
+          ]
+        },
+        "revenue": {
+          "score": 40,
+          "reasons": [
+            "2026-09 營收年增 -0.0%；年增由正轉負 −10"
+          ]
+        },
+        "industry": {
+          "score": 65,
+          "reasons": [
+            "金融：站上季線 70%、營收年增中位數 +6.8%、60 日報酬中位數 +11.6%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 45,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10694,19 +10653,19 @@
         "name": "禾榮科",
         "sector": "生技",
         "stale": false,
-        "price": 416.0,
+        "price": 409.5,
         "technical": {
-          "score": 62,
+          "score": 61,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +15.1%；季線 20 日變化 +5.4%",
-            "距 60 日高點 -25.0%；月線乖離 -9.2%"
+            "近 60 日 +13.3%；季線 20 日變化 +5.3%",
+            "距 60 日高點 -26.2%；月線乖離 -10.6%"
           ]
         },
         "chips": {
           "score": 37,
           "reasons": [
-            "近 20 日法人 -171 張，占成交量 -2.19%",
+            "近 20 日法人 -171 張，占成交量 -2.13%",
             "買超天數 33%；近 5 日 -49 張"
           ]
         },
@@ -10719,7 +10678,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10735,19 +10694,19 @@
         "name": "一詮",
         "sector": "光電",
         "stale": false,
-        "price": 184.0,
+        "price": 175.5,
         "technical": {
-          "score": 13,
+          "score": 11,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -15.8%；季線 20 日變化 -1.4%",
-            "距 60 日高點 -36.1%；月線乖離 -14.1%"
+            "近 60 日 -19.7%；季線 20 日變化 -1.5%",
+            "距 60 日高點 -39.1%；月線乖離 -17.9%"
           ]
         },
         "chips": {
           "score": 46,
           "reasons": [
-            "近 20 日法人 -245 張，占成交量 -0.46%",
+            "近 20 日法人 -245 張，占成交量 -0.44%",
             "買超天數 44%；近 5 日 +485 張"
           ]
         },
@@ -10758,14 +10717,55 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 45,
+        "score": 44,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "3673",
+        "name": "TPK-KY",
+        "sector": "光電",
+        "stale": false,
+        "price": 64.6,
+        "technical": {
+          "score": 45,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 +4.9%；季線 20 日變化 +4.1%",
+            "距 60 日高點 -19.9%；月線乖離 -10.9%"
+          ]
+        },
+        "chips": {
+          "score": 26,
+          "reasons": [
+            "近 20 日法人 -14,246 張，占成交量 -6.38%",
+            "買超天數 39%；近 5 日 -800 張"
+          ]
+        },
+        "revenue": {
+          "score": 78,
+          "reasons": [
+            "2026-09 營收年增 +27.8%"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 44,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10776,19 +10776,19 @@
         "name": "力積電",
         "sector": "半導體",
         "stale": false,
-        "price": 62.6,
+        "price": 60.2,
         "technical": {
-          "score": 38,
+          "score": 35,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -5.3%；季線 20 日變化 +2.3%",
-            "距 60 日高點 -20.2%；月線乖離 -8.7%"
+            "近 60 日 -8.9%；季線 20 日變化 +2.2%",
+            "距 60 日高點 -23.2%；月線乖離 -12.1%"
           ]
         },
         "chips": {
           "score": 13,
           "reasons": [
-            "近 20 日法人 -302,364 張，占成交量 -15.46%",
+            "近 20 日法人 -302,364 張，占成交量 -15.03%",
             "買超天數 33%；近 5 日 +38,085 張"
           ]
         },
@@ -10799,14 +10799,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 44,
+        "score": 43,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10817,19 +10817,19 @@
         "name": "友達",
         "sector": "光電",
         "stale": false,
-        "price": 29.6,
+        "price": 28.8,
         "technical": {
-          "score": 70,
+          "score": 68,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +21.1%；季線 20 日變化 +10.9%",
-            "距 60 日高點 -26.8%；月線乖離 -15.7%"
+            "近 60 日 +17.8%；季線 20 日變化 +10.9%",
+            "距 60 日高點 -28.8%；月線乖離 -17.9%"
           ]
         },
         "chips": {
           "score": 14,
           "reasons": [
-            "近 20 日法人 -645,281 張，占成交量 -9.86%",
+            "近 20 日法人 -645,281 張，占成交量 -9.71%",
             "買超天數 33%；近 5 日 -99,147 張"
           ]
         },
@@ -10840,50 +10840,9 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 44,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "3665",
-        "name": "貿聯-KY",
-        "sector": "電子",
-        "stale": false,
-        "price": 1635.0,
-        "technical": {
-          "score": 23,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -30.6%；季線 20 日變化 -0.4%",
-            "距 60 日高點 -37.0%；月線乖離 -18.5%"
-          ]
-        },
-        "chips": {
-          "score": 26,
-          "reasons": [
-            "近 20 日法人 -2,682 張，占成交量 -4.90%",
-            "買超天數 28%；近 5 日 +768 張"
-          ]
-        },
-        "revenue": {
-          "score": 89,
-          "reasons": [
-            "2026-09 營收年增 +39.2%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -10899,19 +10858,19 @@
         "name": "力成",
         "sector": "半導體",
         "stale": false,
-        "price": 247.0,
+        "price": 239.5,
         "technical": {
-          "score": 23,
+          "score": 20,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -3.7%；季線 20 日變化 -0.2%",
-            "距 60 日高點 -20.5%；月線乖離 -10.3%"
+            "近 60 日 -6.6%；季線 20 日變化 -0.3%",
+            "距 60 日高點 -22.9%；月線乖離 -12.9%"
           ]
         },
         "chips": {
           "score": 32,
           "reasons": [
-            "近 20 日法人 -12,966 張，占成交量 -5.25%",
+            "近 20 日法人 -12,966 張，占成交量 -5.13%",
             "買超天數 44%；近 5 日 +10,290 張"
           ]
         },
@@ -10922,14 +10881,55 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 42,
+        "score": 41,
+        "rating": "中性偏弱",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "3665",
+        "name": "貿聯-KY",
+        "sector": "電子",
+        "stale": false,
+        "price": 1575.0,
+        "technical": {
+          "score": 23,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -33.1%；季線 20 日變化 -0.5%",
+            "距 60 日高點 -39.3%；月線乖離 -21.3%"
+          ]
+        },
+        "chips": {
+          "score": 27,
+          "reasons": [
+            "近 20 日法人 -2,682 張，占成交量 -4.76%",
+            "買超天數 28%；近 5 日 +768 張"
+          ]
+        },
+        "revenue": {
+          "score": 89,
+          "reasons": [
+            "2026-09 營收年增 +39.2%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 41,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10940,19 +10940,19 @@
         "name": "京元電子",
         "sector": "半導體",
         "stale": false,
-        "price": 255.0,
+        "price": 253.5,
         "technical": {
-          "score": 43,
+          "score": 42,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 +3.2%；季線 20 日變化 +2.1%",
-            "距 60 日高點 -19.6%；月線乖離 -8.2%"
+            "近 60 日 +2.6%；季線 20 日變化 +2.1%",
+            "距 60 日高點 -20.0%；月線乖離 -8.8%"
           ]
         },
         "chips": {
           "score": 11,
           "reasons": [
-            "近 20 日法人 -77,997 張，占成交量 -16.33%",
+            "近 20 日法人 -77,997 張，占成交量 -16.05%",
             "買超天數 28%；近 5 日 +6,118 張"
           ]
         },
@@ -10963,14 +10963,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 41,
+        "score": 40,
         "rating": "中性偏弱",
         "risks": [
           "法人近 20 日累計賣超"
@@ -10991,9 +10991,9 @@
           ]
         },
         "chips": {
-          "score": 24,
+          "score": 25,
           "reasons": [
-            "近 20 日法人 -2,921 張，占成交量 -5.57%",
+            "近 20 日法人 -2,921 張，占成交量 -5.53%",
             "買超天數 28%；近 5 日 -9 張"
           ]
         },
@@ -11004,130 +11004,9 @@
           ]
         },
         "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 41,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2404",
-        "name": "漢唐",
-        "sector": "電子",
-        "stale": false,
-        "price": 1025.0,
-        "technical": {
-          "score": 33,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -8.1%；季線 20 日變化 +0.1%",
-            "距 60 日高點 -23.2%；月線乖離 -10.7%"
-          ]
-        },
-        "chips": {
-          "score": 24,
-          "reasons": [
-            "近 20 日法人 -1,236 張，占成交量 -7.02%",
-            "買超天數 39%；近 5 日 +50 張"
-          ]
-        },
-        "revenue": {
-          "score": 63,
-          "reasons": [
-            "2026-09 營收年增 +12.6%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 41,
-        "rating": "中性偏弱",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "3019",
-        "name": "亞光",
-        "sector": "光電",
-        "stale": false,
-        "price": 119.0,
-        "technical": {
-          "score": 17,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -11.2%；季線 20 日變化 -0.6%",
-            "距 60 日高點 -24.4%；月線乖離 -10.2%"
-          ]
-        },
-        "chips": {
-          "score": 58,
-          "reasons": [
-            "近 20 日法人 +1,140 張，占成交量 +2.71%",
-            "買超天數 50%；近 5 日 -1,030 張"
-          ]
-        },
-        "revenue": {
-          "score": 40,
-          "reasons": [
-            "2026-09 營收年增 -0.1%；年增由正轉負 −10"
-          ]
-        },
-        "industry": {
           "score": 49,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 41,
-        "rating": "中性偏弱",
-        "risks": []
-      },
-      {
-        "code": "3481",
-        "name": "群創",
-        "sector": "光電",
-        "stale": false,
-        "price": 42.65,
-        "technical": {
-          "score": 16,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -10.8%；季線 20 日變化 -2.4%",
-            "距 60 日高點 -22.0%；月線乖離 -11.3%"
-          ]
-        },
-        "chips": {
-          "score": 43,
-          "reasons": [
-            "近 20 日法人 -37,066 張，占成交量 -1.62%",
-            "買超天數 44%；近 5 日 -13,367 張"
-          ]
-        },
-        "revenue": {
-          "score": 61,
-          "reasons": [
-            "2026-09 營收年增 +0.7%；年增連 2 月加速 +10"
-          ]
-        },
-        "industry": {
-          "score": 49,
-          "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11139,23 +11018,62 @@
         ]
       },
       {
+        "code": "3019",
+        "name": "亞光",
+        "sector": "光電",
+        "stale": false,
+        "price": 115.5,
+        "technical": {
+          "score": 15,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -13.8%；季線 20 日變化 -0.6%",
+            "距 60 日高點 -26.7%；月線乖離 -12.7%"
+          ]
+        },
+        "chips": {
+          "score": 58,
+          "reasons": [
+            "近 20 日法人 +1,140 張，占成交量 +2.61%",
+            "買超天數 50%；近 5 日 -1,030 張"
+          ]
+        },
+        "revenue": {
+          "score": 40,
+          "reasons": [
+            "2026-09 營收年增 -0.1%；年增由正轉負 −10"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 39,
+        "rating": "弱勢",
+        "risks": []
+      },
+      {
         "code": "6515",
         "name": "穎崴",
         "sector": "半導體",
         "stale": false,
-        "price": 4200.0,
+        "price": 4075.0,
         "technical": {
           "score": 3,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -39.0%；季線 20 日變化 -7.0%",
-            "距 60 日高點 -45.5%；月線乖離 -18.7%"
+            "近 60 日 -40.8%；季線 20 日變化 -7.0%",
+            "距 60 日高點 -47.1%；月線乖離 -21.0%"
           ]
         },
         "chips": {
-          "score": 27,
+          "score": 28,
           "reasons": [
-            "近 20 日法人 -847 張，占成交量 -7.63%",
+            "近 20 日法人 -847 張，占成交量 -7.33%",
             "買超天數 50%；近 5 日 +472 張"
           ]
         },
@@ -11166,14 +11084,96 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
         "score": 38,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "2404",
+        "name": "漢唐",
+        "sector": "電子",
+        "stale": false,
+        "price": 1000.0,
+        "technical": {
+          "score": 31,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -10.3%；季線 20 日變化 +0.1%",
+            "距 60 日高點 -25.1%；月線乖離 -12.8%"
+          ]
+        },
+        "chips": {
+          "score": 25,
+          "reasons": [
+            "近 20 日法人 -1,236 張，占成交量 -6.82%",
+            "買超天數 39%；近 5 日 +50 張"
+          ]
+        },
+        "revenue": {
+          "score": 63,
+          "reasons": [
+            "2026-09 營收年增 +12.6%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 38,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "3481",
+        "name": "群創",
+        "sector": "光電",
+        "stale": false,
+        "price": 41.2,
+        "technical": {
+          "score": 13,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -13.8%；季線 20 日變化 -2.5%",
+            "距 60 日高點 -24.7%；月線乖離 -14.2%"
+          ]
+        },
+        "chips": {
+          "score": 43,
+          "reasons": [
+            "近 20 日法人 -37,066 張，占成交量 -1.58%",
+            "買超天數 44%；近 5 日 -13,367 張"
+          ]
+        },
+        "revenue": {
+          "score": 61,
+          "reasons": [
+            "2026-09 營收年增 +0.7%；年增連 2 月加速 +10"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 37,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11184,19 +11184,19 @@
         "name": "佳能",
         "sector": "光電",
         "stale": false,
-        "price": 60.9,
+        "price": 59.6,
         "technical": {
-          "score": 20,
+          "score": 18,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -12.1%；季線 20 日變化 -1.9%",
-            "距 60 日高點 -15.9%；月線乖離 -5.7%"
+            "近 60 日 -14.0%；季線 20 日變化 -1.9%",
+            "距 60 日高點 -17.7%；月線乖離 -7.6%"
           ]
         },
         "chips": {
-          "score": 34,
+          "score": 35,
           "reasons": [
-            "近 20 日法人 -1,839 張，占成交量 -5.17%",
+            "近 20 日法人 -1,839 張，占成交量 -4.92%",
             "買超天數 50%；近 5 日 -959 張"
           ]
         },
@@ -11207,55 +11207,14 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 38,
-        "rating": "弱勢",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2327",
-        "name": "國巨*",
-        "sector": "電子",
-        "stale": false,
-        "price": 475.5,
-        "technical": {
-          "score": 8,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -17.7%；季線 20 日變化 -5.9%",
-            "距 60 日高點 -28.2%；月線乖離 -15.4%"
-          ]
-        },
-        "chips": {
-          "score": 13,
-          "reasons": [
-            "近 20 日法人 -81,189 張，占成交量 -10.33%",
-            "買超天數 33%；近 5 日 -6,914 張"
-          ]
-        },
-        "revenue": {
-          "score": 96,
-          "reasons": [
-            "2026-09 營收年增 +46.1%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 35,
+        "score": 37,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11266,19 +11225,19 @@
         "name": "聯發科",
         "sector": "半導體",
         "stale": false,
-        "price": 3825.0,
+        "price": 3675.0,
         "technical": {
-          "score": 39,
+          "score": 37,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -4.4%；季線 20 日變化 +5.1%",
-            "距 60 日高點 -27.6%；月線乖離 -11.2%"
+            "近 60 日 -8.1%；季線 20 日變化 +5.1%",
+            "距 60 日高點 -30.5%；月線乖離 -14.5%"
           ]
         },
         "chips": {
           "score": 2,
           "reasons": [
-            "近 20 日法人 -36,323 張，占成交量 -24.50%",
+            "近 20 日法人 -36,323 張，占成交量 -23.32%",
             "買超天數 6%；近 5 日 -6,266 張"
           ]
         },
@@ -11289,14 +11248,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 34,
+        "score": 33,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11307,19 +11266,19 @@
         "name": "旺宏",
         "sector": "半導體",
         "stale": false,
-        "price": 90.5,
+        "price": 88.3,
         "technical": {
-          "score": 6,
+          "score": 5,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -23.0%；季線 20 日變化 -5.0%",
-            "距 60 日高點 -33.9%；月線乖離 -14.3%"
+            "近 60 日 -24.9%；季線 20 日變化 -5.0%",
+            "距 60 日高點 -35.5%；月線乖離 -16.3%"
           ]
         },
         "chips": {
           "score": 9,
           "reasons": [
-            "近 20 日法人 -100,858 張，占成交量 -15.42%",
+            "近 20 日法人 -100,858 張，占成交量 -14.76%",
             "買超天數 22%；近 5 日 -47,560 張"
           ]
         },
@@ -11330,14 +11289,55 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 34,
+        "score": 33,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "2327",
+        "name": "國巨*",
+        "sector": "電子",
+        "stale": false,
+        "price": 453.0,
+        "technical": {
+          "score": 6,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -21.6%；季線 20 日變化 -5.9%",
+            "距 60 日高點 -31.6%；月線乖離 -19.2%"
+          ]
+        },
+        "chips": {
+          "score": 13,
+          "reasons": [
+            "近 20 日法人 -81,189 張，占成交量 -10.04%",
+            "買超天數 33%；近 5 日 -6,914 張"
+          ]
+        },
+        "revenue": {
+          "score": 96,
+          "reasons": [
+            "2026-09 營收年增 +46.1%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 32,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11348,19 +11348,19 @@
         "name": "葡萄王",
         "sector": "生技",
         "stale": false,
-        "price": 83.3,
+        "price": 82.9,
         "technical": {
-          "score": 27,
+          "score": 26,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -6.1%；季線 20 日變化 -2.2%",
-            "距 60 日高點 -9.3%；月線乖離 -2.0%"
+            "近 60 日 -6.5%；季線 20 日變化 -2.2%",
+            "距 60 日高點 -9.7%；月線乖離 -2.4%"
           ]
         },
         "chips": {
-          "score": 20,
+          "score": 21,
           "reasons": [
-            "近 20 日法人 -408 張，占成交量 -9.10%",
+            "近 20 日法人 -408 張，占成交量 -8.78%",
             "買超天數 44%；近 5 日 -448 張"
           ]
         },
@@ -11373,7 +11373,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11389,19 +11389,19 @@
         "name": "聯電",
         "sector": "半導體",
         "stale": false,
-        "price": 105.5,
+        "price": 103.0,
         "technical": {
-          "score": 15,
+          "score": 14,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -13.5%；季線 20 日變化 -0.9%",
-            "距 60 日高點 -34.7%；月線乖離 -19.5%"
+            "近 60 日 -15.6%；季線 20 日變化 -0.9%",
+            "距 60 日高點 -36.2%；月線乖離 -21.4%"
           ]
         },
         "chips": {
           "score": 2,
           "reasons": [
-            "近 20 日法人 -611,130 張，占成交量 -21.32%",
+            "近 20 日法人 -611,130 張，占成交量 -20.58%",
             "買超天數 6%；近 5 日 -210,357 張"
           ]
         },
@@ -11412,55 +11412,14 @@
           ]
         },
         "industry": {
-          "score": 56,
+          "score": 54,
           "reasons": [
-            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -4.1%（20/20 檔有效）"
+            "半導體：站上季線 20%、營收年增中位數 +48.1%、60 日報酬中位數 -7.1%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 31,
-        "rating": "弱勢",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "3576",
-        "name": "聯合再生",
-        "sector": "光電",
-        "stale": false,
-        "price": 15.9,
-        "technical": {
-          "score": 33,
-          "reasons": [
-            "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -12.9%；季線 20 日變化 +0.2%",
-            "距 60 日高點 -19.3%；月線乖離 -9.0%"
-          ]
-        },
-        "chips": {
-          "score": 7,
-          "reasons": [
-            "近 20 日法人 -29,676 張，占成交量 -14.63%",
-            "買超天數 17%；近 5 日 -4,082 張"
-          ]
-        },
-        "revenue": {
-          "score": 42,
-          "reasons": [
-            "2026-09 營收年增 -8.3%"
-          ]
-        },
-        "industry": {
-          "score": 49,
-          "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 31,
+        "score": 30,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11471,19 +11430,19 @@
         "name": "沛爾生醫*-創",
         "sector": "生技",
         "stale": false,
-        "price": 40.5,
+        "price": 39.2,
         "technical": {
           "score": 0,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -95.8%；季線 20 日變化 -43.8%",
-            "距 60 日高點 -97.3%；月線乖離 -1.3%"
+            "近 60 日 -95.9%；季線 20 日變化 -43.8%",
+            "距 60 日高點 -97.4%；月線乖離 -4.3%"
           ]
         },
         "chips": {
           "score": 34,
           "reasons": [
-            "近 20 日法人 -1,863 張，占成交量 -2.37%",
+            "近 20 日法人 -1,863 張，占成交量 -2.33%",
             "買超天數 28%；近 5 日 -1,283 張"
           ]
         },
@@ -11496,7 +11455,48 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 30,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
+        "code": "3576",
+        "name": "聯合再生",
+        "sector": "光電",
+        "stale": false,
+        "price": 15.65,
+        "technical": {
+          "score": 32,
+          "reasons": [
+            "均線：收盤低於月線、月線高於季線",
+            "近 60 日 -14.2%；季線 20 日變化 +0.1%",
+            "距 60 日高點 -20.6%；月線乖離 -10.4%"
+          ]
+        },
+        "chips": {
+          "score": 7,
+          "reasons": [
+            "近 20 日法人 -29,676 張，占成交量 -14.27%",
+            "買超天數 17%；近 5 日 -4,082 張"
+          ]
+        },
+        "revenue": {
+          "score": 42,
+          "reasons": [
+            "2026-09 營收年增 -8.3%"
+          ]
+        },
+        "industry": {
+          "score": 46,
+          "reasons": [
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11512,19 +11512,19 @@
         "name": "達興材料",
         "sector": "光電",
         "stale": false,
-        "price": 265.0,
+        "price": 258.5,
         "technical": {
-          "score": 10,
+          "score": 8,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -20.9%；季線 20 日變化 -4.5%",
-            "距 60 日高點 -21.5%；月線乖離 -10.6%"
+            "近 60 日 -22.8%；季線 20 日變化 -4.5%",
+            "距 60 日高點 -23.4%；月線乖離 -12.7%"
           ]
         },
         "chips": {
           "score": 9,
           "reasons": [
-            "近 20 日法人 -1,983 張，占成交量 -20.83%",
+            "近 20 日法人 -1,983 張，占成交量 -20.31%",
             "買超天數 22%；近 5 日 -238 張"
           ]
         },
@@ -11535,50 +11535,9 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 30,
-        "rating": "弱勢",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "2308",
-        "name": "台達電",
-        "sector": "電子",
-        "stale": false,
-        "price": 1315.0,
-        "technical": {
-          "score": 11,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -20.3%；季線 20 日變化 -1.6%",
-            "距 60 日高點 -35.9%；月線乖離 -20.9%"
-          ]
-        },
-        "chips": {
-          "score": 4,
-          "reasons": [
-            "近 20 日法人 -47,177 張，占成交量 -21.35%",
-            "買超天數 11%；近 5 日 -20,169 張"
-          ]
-        },
-        "revenue": {
-          "score": 65,
-          "reasons": [
-            "2026-09 營收年增 +14.6%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11594,19 +11553,19 @@
         "name": "彩晶",
         "sector": "光電",
         "stale": false,
-        "price": 13.0,
+        "price": 12.75,
         "technical": {
-          "score": 35,
+          "score": 33,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -8.5%；季線 20 日變化 +0.4%",
-            "距 60 日高點 -20.5%；月線乖離 -10.9%"
+            "近 60 日 -10.2%；季線 20 日變化 +0.4%",
+            "距 60 日高點 -22.0%；月線乖離 -12.5%"
           ]
         },
         "chips": {
           "score": 11,
           "reasons": [
-            "近 20 日法人 -51,805 張，占成交量 -10.63%",
+            "近 20 日法人 -51,805 張，占成交量 -10.40%",
             "買超天數 28%；近 5 日 -4,011 張"
           ]
         },
@@ -11617,50 +11576,9 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
-          ]
-        },
-        "coverage": 100,
-        "complete": true,
-        "score": 28,
-        "rating": "弱勢",
-        "risks": [
-          "法人近 20 日累計賣超"
-        ]
-      },
-      {
-        "code": "6139",
-        "name": "亞翔",
-        "sector": "電子",
-        "stale": false,
-        "price": 621.0,
-        "technical": {
-          "score": 7,
-          "reasons": [
-            "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -22.4%；季線 20 日變化 -4.6%",
-            "距 60 日高點 -25.7%；月線乖離 -10.2%"
-          ]
-        },
-        "chips": {
-          "score": 7,
-          "reasons": [
-            "近 20 日法人 -8,253 張，占成交量 -22.57%",
-            "買超天數 17%；近 5 日 +394 張"
-          ]
-        },
-        "revenue": {
-          "score": 56,
-          "reasons": [
-            "2026-09 營收年增 +6.0%"
-          ]
-        },
-        "industry": {
-          "score": 58,
-          "reasons": [
-            "電子：站上季線 25%、營收年增中位數 +49.8%、60 日報酬中位數 -4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11672,23 +11590,64 @@
         ]
       },
       {
+        "code": "2308",
+        "name": "台達電",
+        "sector": "電子",
+        "stale": false,
+        "price": 1270.0,
+        "technical": {
+          "score": 9,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -23.0%；季線 20 日變化 -1.6%",
+            "距 60 日高點 -38.0%；月線乖離 -23.6%"
+          ]
+        },
+        "chips": {
+          "score": 4,
+          "reasons": [
+            "近 20 日法人 -47,177 張，占成交量 -20.59%",
+            "買超天數 11%；近 5 日 -20,169 張"
+          ]
+        },
+        "revenue": {
+          "score": 65,
+          "reasons": [
+            "2026-09 營收年增 +14.6%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 26,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
         "code": "4169",
         "name": "泰宗",
         "sector": "生技",
         "stale": false,
-        "price": 136.5,
+        "price": 135.5,
         "technical": {
-          "score": 10,
+          "score": 9,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -15.7%；季線 20 日變化 -15.3%",
-            "距 60 日高點 -16.5%；月線乖離 -6.6%"
+            "近 60 日 -16.4%；季線 20 日變化 -15.3%",
+            "距 60 日高點 -17.1%；月線乖離 -7.2%"
           ]
         },
         "chips": {
           "score": 18,
           "reasons": [
-            "近 20 日法人 -273 張，占成交量 -11.07%",
+            "近 20 日法人 -273 張，占成交量 -10.77%",
             "買超天數 44%；近 5 日 -237 張"
           ]
         },
@@ -11701,7 +11660,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 100,
@@ -11713,23 +11672,64 @@
         ]
       },
       {
+        "code": "6139",
+        "name": "亞翔",
+        "sector": "電子",
+        "stale": false,
+        "price": 608.0,
+        "technical": {
+          "score": 6,
+          "reasons": [
+            "均線：收盤低於月線、月線低於季線",
+            "近 60 日 -24.0%；季線 20 日變化 -4.7%",
+            "距 60 日高點 -27.3%；月線乖離 -12.0%"
+          ]
+        },
+        "chips": {
+          "score": 7,
+          "reasons": [
+            "近 20 日法人 -8,253 張，占成交量 -21.60%",
+            "買超天數 17%；近 5 日 +394 張"
+          ]
+        },
+        "revenue": {
+          "score": 56,
+          "reasons": [
+            "2026-09 營收年增 +6.0%"
+          ]
+        },
+        "industry": {
+          "score": 49,
+          "reasons": [
+            "電子：站上季線 5%、營收年增中位數 +49.8%、60 日報酬中位數 -8.1%（20/20 檔有效）"
+          ]
+        },
+        "coverage": 100,
+        "complete": true,
+        "score": 25,
+        "rating": "弱勢",
+        "risks": [
+          "法人近 20 日累計賣超"
+        ]
+      },
+      {
         "code": "6176",
         "name": "瑞儀",
         "sector": "光電",
         "stale": false,
-        "price": 84.8,
+        "price": 83.3,
         "technical": {
           "score": 2,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -24.8%；季線 20 日變化 -8.2%",
-            "距 60 日高點 -24.6%；月線乖離 -5.6%"
+            "近 60 日 -26.2%；季線 20 日變化 -8.3%",
+            "距 60 日高點 -25.9%；月線乖離 -7.2%"
           ]
         },
         "chips": {
           "score": 11,
           "reasons": [
-            "近 20 日法人 -5,444 張，占成交量 -14.55%",
+            "近 20 日法人 -5,444 張，占成交量 -13.80%",
             "買超天數 28%；近 5 日 -3,954 張"
           ]
         },
@@ -11740,14 +11740,14 @@
           ]
         },
         "industry": {
-          "score": 49,
+          "score": 46,
           "reasons": [
-            "光電：站上季線 25%、營收年增中位數 +17.2%、60 日報酬中位數 +4.7%（20/20 檔有效）"
+            "光電：站上季線 20%、營收年增中位數 +17.2%、60 日報酬中位數 +1.9%（20/20 檔有效）"
           ]
         },
         "coverage": 100,
         "complete": true,
-        "score": 23,
+        "score": 22,
         "rating": "弱勢",
         "risks": [
           "法人近 20 日累計賣超"
@@ -11782,7 +11782,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 55,
@@ -11798,13 +11798,13 @@
         "name": "正瀚-創",
         "sector": "生技",
         "stale": false,
-        "price": 91.2,
+        "price": 90.2,
         "technical": {
-          "score": 46,
+          "score": 44,
           "reasons": [
             "均線：收盤低於月線、月線高於季線",
-            "近 60 日 -3.8%；季線 20 日變化 -0.2%",
-            "距 60 日高點 -5.4%；月線乖離 -1.6%"
+            "近 60 日 -4.9%；季線 20 日變化 -0.2%",
+            "距 60 日高點 -6.4%；月線乖離 -2.6%"
           ]
         },
         "chips": {
@@ -11822,12 +11822,12 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 70,
         "complete": false,
-        "score": 50,
+        "score": 49,
         "rating": "暫評・中性偏弱",
         "risks": [
           "有效權重 70%，缺漏因子已排除並重新加權，不宜與完整評分直接比較"
@@ -11838,19 +11838,19 @@
         "name": "康霈*",
         "sector": "生技",
         "stale": false,
-        "price": 64.0,
+        "price": 63.1,
         "technical": {
           "score": 0,
           "reasons": [
             "均線：收盤低於月線、月線低於季線",
-            "近 60 日 -41.0%；季線 20 日變化 -11.0%",
-            "距 60 日高點 -43.6%；月線乖離 -12.8%"
+            "近 60 日 -41.8%；季線 20 日變化 -11.0%",
+            "距 60 日高點 -44.4%；月線乖離 -13.9%"
           ]
         },
         "chips": {
-          "score": 59,
+          "score": 58,
           "reasons": [
-            "近 20 日法人 +3,238 張，占成交量 +4.47%",
+            "近 20 日法人 +3,238 張，占成交量 +4.29%",
             "買超天數 39%；近 5 日 +4,368 張"
           ]
         },
@@ -11863,7 +11863,7 @@
         "industry": {
           "score": 48,
           "reasons": [
-            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -0.7%（18/20 檔有效）"
+            "生技：站上季線 33%、營收年增中位數 +13.2%、60 日報酬中位數 -1.2%（18/20 檔有效）"
           ]
         },
         "coverage": 85,
