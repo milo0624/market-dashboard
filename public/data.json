@@ -1,6 +1,6 @@
 {
   "date": "2026-11-21",
-  "updated": "2026-11-21T13:53:33.372976+08:00",
+  "updated": "2026-11-21T16:24:41.272092+08:00",
   "source": "fubon_neo",
   "indices": {
     "SOX": {
@@ -113,16 +113,16 @@
     }
   },
   "signal_meta": {
-    "today_dir": 0,
-    "streak": 0,
-    "streak_dir": 0,
+    "today_dir": -1,
+    "streak": 1,
+    "streak_dir": -1,
     "history": [
       {
-        "date": "2026-11-10",
+        "date": "2026-11-09",
         "dir": 0
       },
       {
-        "date": "2026-11-09",
+        "date": "2026-11-10",
         "dir": 0
       },
       {
@@ -155,7 +155,9 @@
       },
       {
         "date": "2026-11-20",
-        "dir": 0
+        "dir": -1,
+        "closeAtSignal": 36033.2890625,
+        "regime": "down"
       }
     ],
     "detail": {
@@ -178,7 +180,8 @@
       "bullEngulf": false,
       "bearEngulf": false,
       "morningStar": false,
-      "eveningStar": false
+      "eveningStar": false,
+      "bonusConfirmed": false
     },
     "track_record": {
       "fwd5": {

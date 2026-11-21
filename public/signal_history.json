@@ -261,6 +261,8 @@
   },
   {
     "date": "2026-11-20",
-    "dir": 0
+    "dir": -1,
+    "closeAtSignal": 36033.2890625,
+    "regime": "down"
   }
 ]
