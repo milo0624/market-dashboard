@@ -217,11 +217,13 @@ details summary{font-size:12px;color:var(--B);cursor:pointer;margin-top:8px;font
     <div id="nightContent"><div style="font-size:12px;color:var(--mu)">載入中...</div></div>
   </div>
 
-  <!-- 井田＋酒田策略卡片：回測無可靠優勢，先隱藏（訊號與歷史紀錄仍照常計算，要恢復就刪掉 style="display:none"） -->
-  <div class="card" id="stratCard" style="display:none">
+  <!-- 井田箱體突破＋均線排列（2026/11 優化：拿掉量能/K線型態的必要條件，改為輔助參考；
+       舊版「四項同時成立」的嚴格模式在近10年只觸發4次，等於失效，已停用。
+       是否有效以下方「新策略事後勝率」即時計算的驗證狀態為準，不是寫死的文字。 -->
+  <div class="card" id="stratCard">
     <div class="c-title">策略推薦</div>
-    <div class="c-sub">台指現貨(^TWII) 日K：井田箱體 + 酒田K線 + 成交量確認（嚴格模式）</div>
-    <div style="background:var(--Rbg);border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:var(--R);line-height:1.6">⚠️ 回測（2003–2026 日K、2010–2026 台指期 30 分K）顯示這套訊號沒有可靠優勢，僅供參考，不建議照著下單。詳見 trading/backtest/README.md</div>
+    <div class="c-sub">台指現貨(^TWII) 日K：井田箱體突破 + 均線排列（酒田K線／成交量僅供輔助參考）</div>
+    <div style="background:var(--bg);border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:var(--hi);line-height:1.6">ℹ️ 近10年資料用網站自己的驗證標準回測，目前只到「初步支持」等級（尚未達到「已驗證」門檻），請以下方「新策略事後勝率」的即時數字與狀態為準，不建議只看多空方向就進場。</div>
     <div id="stratContent"></div>
   </div>
 
@@ -530,41 +532,39 @@ function renderStrategy() {
     advice = '尚未取得井田＋酒田策略的完整計算結果，請稍後重新整理。';
     sl = '—'; tp = '—'; entryNote = '';
   } else if (dir > 0) {
-    signal = '🔵 強勢多頭（嚴格確認）';
+    signal = '🔵 箱體突破＋均線多頭排列';
     color = '#ebf8ff'; border = '#90cdf4';
     advice = '台指現貨 收盤 ' + fm(detail.close) + ' 突破 20 日箱頂 ' + fm(detail.highestHigh) +
-      '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.2 倍以上），MA20(' + fm(detail.ma20) + ')>MA60(' + fm(detail.ma60) + ') 多頭排列，並出現' +
-      (detail.bullEngulf ? '多頭吞噬' : '晨星') + 'K線型態，符合嚴格做多條件。';
+      '，MA20(' + fm(detail.ma20) + ')>MA60(' + fm(detail.ma60) + ') 多頭排列' +
+      (detail.bonusConfirmed ? '，且同時出現量能爆量或' + (detail.bullEngulf ? '多頭吞噬' : detail.morningStar ? '晨星' : '') + '型態（加分項，訊號強度更高）' : '（未伴隨爆量或吞噬／晨星型態，訊號強度中等）') + '。';
     sl = '止損：進場價 × 97%（-3%）';
     tp = '止盈：進場價 × 106%（+6%）';
-    entryNote = '依原策略規則，突破／量能／趨勢／K線型態四項需同時成立才算有效訊號。';
+    entryNote = '2026/11起：箱體突破 + 均線排列同時成立即視為有效訊號；成交量與酒田K線型態不再是必要條件，只作為訊號強度的輔助參考。';
   } else if (dir < 0) {
-    signal = '🔴 強勢空頭（嚴格確認）';
+    signal = '🔴 箱體跌破＋均線空頭排列';
     color = '#fff5f5'; border = '#feb2b2';
     advice = '台指現貨 收盤 ' + fm(detail.close) + ' 跌破 20 日箱底 ' + fm(detail.lowestLow) +
-      '，成交量 ' + fm(detail.volume, 0) + '（均量 ' + fm(detail.avgVol, 0) + ' 的 1.2 倍以上），MA20(' + fm(detail.ma20) + ')<MA60(' + fm(detail.ma60) + ') 空頭排列，並出現' +
-      (detail.bearEngulf ? '空頭吞噬' : '夜星') + 'K線型態，符合嚴格做空條件。';
+      '，MA20(' + fm(detail.ma20) + ')<MA60(' + fm(detail.ma60) + ') 空頭排列' +
+      (detail.bonusConfirmed ? '，且同時出現量能爆量或' + (detail.bearEngulf ? '空頭吞噬' : detail.eveningStar ? '夜星' : '') + '型態（加分項，訊號強度更高）' : '（未伴隨爆量或吞噬／夜星型態，訊號強度中等）') + '。';
     sl = '止損：進場價 × 103%（+3%）';
     tp = '止盈：進場價 × 94%（-6%）';
-    entryNote = '依原策略規則，突破／量能／趨勢／K線型態四項需同時成立才算有效訊號。';
+    entryNote = '2026/11起：箱體突破 + 均線排列同時成立即視為有效訊號；成交量與酒田K線型態不再是必要條件，只作為訊號強度的輔助參考。';
   } else {
     signal = '⚪ 訊號不明，觀望';
     color = '#f7fafc'; border = '#e2e8f0';
     var reasons = [];
     if (!detail.longBreakout && !detail.shortBreakout) reasons.push('尚未突破箱體');
-    if (!detail.bullVol && !detail.bearVol) reasons.push('量能未達1.2倍均量');
     if (!detail.bullTrend && !detail.bearTrend) reasons.push('均線未呈多空排列');
-    if (!detail.bullEngulf && !detail.bearEngulf && !detail.morningStar && !detail.eveningStar) reasons.push('未出現吞噬／晨星／夜星型態');
-    advice = '嚴格策略四項條件未同時成立' + (reasons.length ? '（' + reasons.join('、') + '）' : '') + '，未達進場條件。';
+    advice = '箱體突破與均線排列尚未同時成立' + (reasons.length ? '（' + reasons.join('、') + '）' : '') + '，未達進場條件。';
     sl = '—'; tp = '—';
-    entryNote = '依原策略紀律，訊號未確認前不進場。';
+    entryNote = '依策略規則，訊號未確認前不進場。';
   }
 
   var indicators = !detail ? [] : [
     {label: '20日箱體突破', val: detail.longBreakout ? '✓ 突破箱頂 ' + fm(detail.highestHigh) : detail.shortBreakout ? '✓ 跌破箱底 ' + fm(detail.lowestLow) : '箱內盤整（' + fm(detail.lowestLow) + '～' + fm(detail.highestHigh) + '）', ok: detail.longBreakout || detail.shortBreakout},
-    {label: '成交量確認（>1.2倍均量）', val: (detail.bullVol || detail.bearVol) ? '✓ 量能確認' : '量能不足', ok: detail.bullVol || detail.bearVol},
     {label: '均線排列（MA20/MA60）', val: detail.bullTrend ? '多頭排列' : detail.bearTrend ? '空頭排列' : '無明確排列', ok: detail.bullTrend || detail.bearTrend},
-    {label: '酒田K線型態', val: detail.bullEngulf ? '多頭吞噬' : detail.bearEngulf ? '空頭吞噬' : detail.morningStar ? '晨星' : detail.eveningStar ? '夜星' : '無型態訊號', ok: detail.bullEngulf || detail.bearEngulf || detail.morningStar || detail.eveningStar},
+    {label: '成交量確認（輔助參考，非必要）', val: (detail.bullVol || detail.bearVol) ? '✓ 量能確認' : '量能不足', ok: detail.bullVol || detail.bearVol},
+    {label: '酒田K線型態（輔助參考，非必要）', val: detail.bullEngulf ? '多頭吞噬' : detail.bearEngulf ? '空頭吞噬' : detail.morningStar ? '晨星' : detail.eveningStar ? '夜星' : '無型態訊號', ok: detail.bullEngulf || detail.bearEngulf || detail.morningStar || detail.eveningStar},
   ];
 
   var rowHtml = indicators.map(function(r) {
@@ -653,7 +653,7 @@ function renderStrategy() {
     streakHtml +
     trHtml +
     rowHtml +
-    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田戰法 + 酒田戰法 + 成交量確認（台指現貨 ^TWII 日K，嚴格模式）· 僅供參考，不構成投資建議</div>';
+    '<div style="font-size:10px;color:var(--hi);margin-top:8px;text-align:right">井田箱體突破 + 均線排列（台指現貨 ^TWII 日K；酒田K線型態／成交量僅供輔助參考）· 僅供參考，不構成投資建議</div>';
 }
 
 // ── 三大法人期貨未平倉：臺股期貨（大台）自營商／投信／外資未沖銷淨口數 ──
