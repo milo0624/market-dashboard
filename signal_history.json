@@ -263,7 +263,12 @@
     "date": "2026-11-20",
     "dir": -1,
     "closeAtSignal": 36033.2890625,
-    "regime": "down"
+    "regime": "down",
+    "fwd5": {
+      "ret": 3.0,
+      "hit": false,
+      "exit": "stop"
+    }
   },
   {
     "date": "2026-11-23",
@@ -279,6 +284,10 @@
   },
   {
     "date": "2026-11-26",
+    "dir": 0
+  },
+  {
+    "date": "2026-11-27",
     "dir": 0
   }
 ]
